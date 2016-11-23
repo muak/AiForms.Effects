@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+	
+	<style name="MyTheme" parent="MyTheme.Base">
+		
+	</style>
+	
+	<!-- Base theme applied no matter what API -->
+	<style name="MyTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+		<!--If you are using revision 22.1 please use just windowNoTitle. Without android:-->
+		<item name="windowNoTitle">true</item>
+		<!--We will be using the toolbar so no need to show ActionBar-->
+		<item name="windowActionBar">false</item>
+		<!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
+		<!-- colorPrimary is used for the default action bar background -->
+		<item name="colorPrimary">#2196F3</item>
+		<!-- colorPrimaryDark is used for the status bar -->
+		<item name="colorPrimaryDark">#1976D2</item>
+		<!-- colorAccent is used as the default value for colorControlActivated
+         which is used to tint widgets -->
+		<item name="colorAccent">#C0C0C0</item>
+		<!-- You can also set colorControlNormal, colorControlActivated
+         colorControlHighlight and colorSwitchThumbNormal. -->
+		<item name="windowActionModeOverlay">true</item>
+		<item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+
+
+		<!-- ToolBar BackButton 通常時 -->
+		<item name="android:textColorSecondary">#FFFFFF</item>
+
+		
+		<!--<item name="android:windowContentTransitions">true</item>
+	    <item name="android:windowAllowEnterTransitionOverlap">true</item>
+	    <item name="android:windowAllowReturnTransitionOverlap">true</item>
+	    <item name="android:windowSharedElementEnterTransition">@android:transition/fade</item>
+	    <item name="android:windowSharedElementExitTransition">@android:transition/fade</item>
+		<item name="android:windowEnterTransition">@android:transition/fade</item>  
+  		<item name="android:windowExitTransition">@android:transition/fade</item>
+
+		<item name="android:windowAnimationStyle">@style/Animation.Activity</item> -->
+	</style>
+	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+		<item name="colorAccent">#FF4081</item>
+	</style>
+	<!--<style name="Animation" parent="android:Animation" />
+	<style name="Animation.Activity" parent="android:Animation.Activity">
+		<item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+	</style>-->
+
+	
+	<!-- TabText -->
+	<style name="TabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">9sp</item>
+        <item name="textAllCaps">false</item>
+		<!-- 非選択色 -->
+		<item name="android:textColor">#AA0000</item>
+    </style>
+
+	<!-- ToolbarTitle -->
+	<style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+	    <item name="android:textSize">12sp</item>
+	</style>
+
+	<!-- ToolbarStyle -->
+	<style name="ToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- ToolBarの背景色 -->
+        <item name="colorPrimary">#FFFFFF</item>
+        <!-- ToolBarのタイトルテキスト色 -->
+        <item name="android:textColorPrimary">#1976D2</item>
+        <!-- ToolBar BackButtonでアプリ休止後再開した時の色 -->
+		<item name="android:textColorSecondary">#FFFFFF</item>
+		<!-- Menu Textの色 -->
+		<item name="actionMenuTextColor">#CCCCCC</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+</resources>

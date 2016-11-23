@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+		xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+		prism:ViewModelLocator.AutowireViewModel="True" 
+		x:Class="AiEffects.Sample.Views.AddCommandPage">
+	<ScrollView>
+	<StackLayout>
+		<Label Text="Label" 
+			ef:AddCommand.On="{Binding EffectOn}" 
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="Label" />
+		<BoxView Color="Green"  
+			ef:AddCommand.On="{Binding EffectOn}" 
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="BoxView" />
+		<StackLayout Orientation="Horizontal" 
+			ef:AddCommand.On="{Binding EffectOn}"  
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="StackLayout" >
+			<Label Text="StackLayout" />
+		</StackLayout>
+		<Button Text="Button"  
+			ef:AddCommand.On="{Binding EffectOn}"  
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="Button" />
+		<Entry Text="Entry"  
+			ef:AddCommand.On="{Binding EffectOn}"  
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="Entry" />
+		<Picker Title="Picker"  
+			ef:AddCommand.On="{Binding EffectOn}"  
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="Picker" />
+		<Image Source="sample" HeightRequest="30"  
+			ef:AddCommand.On="{Binding EffectOn}"  
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="Image" />
+		<Switch  
+			ef:AddCommand.On="{Binding EffectOn}"  
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="Switch" />
+		<Slider  
+			ef:AddCommand.On="{Binding EffectOn}"  
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="Slider" />
+		<DatePicker  
+			ef:AddCommand.On="{Binding EffectOn}"  
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="DatePicker" />
+		<Editor  Text="Editor"
+			ef:AddCommand.On="{Binding EffectOn}"  
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="Editor" />
+		<Frame  
+			ef:AddCommand.On="{Binding EffectOn}"  
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="Frame" />
+		<TimePicker  
+			ef:AddCommand.On="{Binding EffectOn}"  
+			ef:AddCommand.EffectColor="#50FFFF00"
+			ef:AddCommand.Command="{Binding EffectCommand}"
+			ef:AddCommand.CommandParameter="TimePicker" />
+
+		<Button Text="GoNextPage" Command="{Binding GoNextCommand}" VerticalOptions="End" />
+	</StackLayout>
+	</ScrollView>
+</ContentPage>
