@@ -13,25 +13,25 @@ using Xamarin.Forms.Platform.Android.AppCompat;
 namespace AiForms.Effects.Droid
 {
 
-    public class AddCommandPlatformEffect:PlatformEffect
-	{
-		private ICommand command;
-		private object commandParameter;
-		private Android.Views.View view;
-		private FrameLayout layer;
+    public class AddCommandPlatformEffect : PlatformEffect
+    {
+        private ICommand command;
+        private object commandParameter;
+        private Android.Views.View view;
+        private FrameLayout layer;
 
-		protected override void OnAttached() {
-			
-			view = Control ?? Container;
+        protected override void OnAttached() {
 
-			UpdateCommand();
-			UpdateCommandParameter();
-			UpdateEffectColor();
+            view = Control ?? Container;
 
-			view.Click += OnClick;
-		}
+            UpdateCommand();
+            UpdateCommandParameter();
+            UpdateEffectColor();
 
-		protected override void OnDetached() {
+            view.Click += OnClick;
+        }
+
+        protected override void OnDetached() {
             var renderer = Container as IVisualElementRenderer;
             if (renderer?.Element != null) {    // Disposeされているかの判定
                 view.Click -= OnClick;
@@ -42,10 +42,10 @@ namespace AiForms.Effects.Droid
             view = null;
 
             if (layer != null) {
-				layer.Dispose();
-				layer = null;
-			}
-		}
+                layer.Dispose();
+                layer = null;
+            }
+        }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e) {
             base.OnElementPropertyChanged(e);
@@ -63,37 +63,37 @@ namespace AiForms.Effects.Droid
         }
 
 
-		void OnClick(object sender, EventArgs e) {
-			command?.Execute(commandParameter ?? Element);
-		}
+        void OnClick(object sender, EventArgs e) {
+            command?.Execute(commandParameter ?? Element);
+        }
 
-		void UpdateCommand() {
-			command = AddCommand.GetCommand(Element);
-		}
+        void UpdateCommand() {
+            command = AddCommand.GetCommand(Element);
+        }
 
-		void UpdateCommandParameter() {
-			commandParameter = AddCommand.GetCommandParameter(Element);
-		}
+        void UpdateCommandParameter() {
+            commandParameter = AddCommand.GetCommandParameter(Element);
+        }
 
-		void UpdateEffectColor() {
-			
-			view.Touch -= View_Touch;
-			if (layer != null) {
-				layer.Dispose();
-				layer = null;
-			}
-			var color = AddCommand.GetEffectColor(Element);
-			if (color == Xamarin.Forms.Color.Default) {
-				return;
-			}
+        void UpdateEffectColor() {
 
-			layer = new FrameLayout(Container.Context);
-			layer.LayoutParameters = new ViewGroup.LayoutParams(-1, -1);
-			layer.SetBackgroundColor(color.ToAndroid());
-			view.Touch += View_Touch;
-		}
+            view.Touch -= View_Touch;
+            if (layer != null) {
+                layer.Dispose();
+                layer = null;
+            }
+            var color = AddCommand.GetEffectColor(Element);
+            if (color == Xamarin.Forms.Color.Default) {
+                return;
+            }
 
-		void View_Touch(object sender, Android.Views.View.TouchEventArgs e) {
+            layer = new FrameLayout(Container.Context);
+            layer.LayoutParameters = new ViewGroup.LayoutParams(-1, -1);
+            layer.SetBackgroundColor(color.ToAndroid());
+            view.Touch += View_Touch;
+        }
+
+        void View_Touch(object sender, Android.Views.View.TouchEventArgs e) {
             if (e.Event.Action == MotionEventActions.Down) {
                 Container.AddView(layer);
                 layer.Top = 0;
@@ -108,6 +108,6 @@ namespace AiForms.Effects.Droid
 
             e.Handled = false;
         }
-	}
+    }
 }
 

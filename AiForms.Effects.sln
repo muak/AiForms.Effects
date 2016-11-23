@@ -31,6 +31,26 @@ Global
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
 		$1.ResourceNamePolicy = FileFormatDefault
+		$0.TextStylePolicy = $2
+		$2.inheritsSet = VisualStudio
+		$2.inheritsScope = text/plain
+		$2.scope = text/x-csharp
+		$2.FileWidth = 120
+		$0.CSharpFormattingPolicy = $3
+		$3.IndentSwitchSection = True
+		$3.NewLinesForBracesInMethods = False
+		$3.NewLineForElse = True
+		$3.NewLineForCatch = True
+		$3.NewLineForFinally = True
+		$3.NewLineForMembersInObjectInit = True
+		$3.NewLineForMembersInAnonymousTypes = True
+		$3.NewLineForClausesInQuery = True
+		$3.SpacingAfterMethodDeclarationName = False
+		$3.SpaceAfterMethodCallName = False
+		$3.SpaceBeforeOpenSquareBracket = False
+		$3.inheritsSet = Mono
+		$3.inheritsScope = text/x-csharp
+		$3.scope = text/x-csharp
 		version = 0.0.2-pre1
 	EndGlobalSection
 EndGlobal

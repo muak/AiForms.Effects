@@ -1,7 +1,7 @@
 ﻿using System;
 namespace AiForms.Effects.iOS
 {
-    
+
     public class MyAppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
 
