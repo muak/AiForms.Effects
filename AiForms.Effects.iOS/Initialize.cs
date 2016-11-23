@@ -7,7 +7,7 @@ namespace AiForms.Effects.iOS
 
     }
 
-    public static class Initialize
+    public static class Effects
     {
         public static void Init() {
 #pragma warning disable RECS0026 // Possible unassigned object created by 'new'

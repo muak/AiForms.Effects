@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
-	
 	<style name="MyTheme" parent="MyTheme.Base">
 		
 	</style>
@@ -29,29 +28,11 @@
 		<!-- ToolBar BackButton 通常時 -->
 		<item name="android:textColorSecondary">#FFFFFF</item>
 
-		
-		<!--<item name="android:windowContentTransitions">true</item>
-	    <item name="android:windowAllowEnterTransitionOverlap">true</item>
-	    <item name="android:windowAllowReturnTransitionOverlap">true</item>
-	    <item name="android:windowSharedElementEnterTransition">@android:transition/fade</item>
-	    <item name="android:windowSharedElementExitTransition">@android:transition/fade</item>
-		<item name="android:windowEnterTransition">@android:transition/fade</item>  
-  		<item name="android:windowExitTransition">@android:transition/fade</item>
-
-		<item name="android:windowAnimationStyle">@style/Animation.Activity</item> -->
 	</style>
 	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
 		<item name="colorAccent">#FF4081</item>
 	</style>
-	<!--<style name="Animation" parent="android:Animation" />
-	<style name="Animation.Activity" parent="android:Animation.Activity">
-		<item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
-	</style>-->
 
-	
 	<!-- TabText -->
 	<style name="TabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">9sp</item>

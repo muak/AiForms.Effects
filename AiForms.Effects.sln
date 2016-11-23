@@ -26,4 +26,11 @@ Global
 		{49FC4DB1-A6EB-4670-A3A3-16E877E39D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49FC4DB1-A6EB-4670-A3A3-16E877E39D0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
+		$1.ResourceNamePolicy = FileFormatDefault
+		version = 0.0.2-pre1
+	EndGlobalSection
 EndGlobal

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Foundation;
 using Microsoft.Practices.Unity;
 using Prism;
@@ -26,7 +25,7 @@ namespace AiEffects.Sample.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options) {
             global::Xamarin.Forms.Forms.Init();
 
-            AiForms.Effects.iOS.Initialize.Init();
+            AiForms.Effects.iOS.Effects.Init();
 
             LoadApplication(new App(new iOSInitializer()));
 

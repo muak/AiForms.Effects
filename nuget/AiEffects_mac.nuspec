@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>AiForms.Effects</id>
+        <version>0.0.2-pre1</version>
+        <title>AiForms.Effects</title>
+        <authors>kamu</authors>
+        <owners>kamu</owners>
+        <projectUrl>https://github.com/muak/AiForms.Effects</projectUrl>
+        <licenseUrl>https://github.com/muak/AiForms.Effects/blob/master/LICENSE.txt</licenseUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Xamarin.Forms YuruFuwa Effects for Android/iOS</description>
+        <summary>
+            ## Effects List
+            * AddCommandEffect
+        </summary>
+        <language>en-US</language>
+        <dependencies>
+            <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
+                <dependency id="Xamarin.Forms" version="2.3.2" />
+            </group>
+            <group targetFramework="MonoAndroid">
+                <dependency id="Xamarin.Forms" version="2.3.2" />
+            </group>
+            <group targetFramework="MonoTouch">
+                <dependency id="Xamarin.Forms" version="2.3.2" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <!-- PCL -->
+        <file src="../AiForms.Effects/bin/Release/AiForms.Effects.dll" target="lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10" />
+        <!-- Mono.Android -->
+        <file src="../AiForms.Effects/bin/Release/AiForms.Effects.dll" target="lib/MonoAndroid" />
+        <file src="../AiForms.Effects.Droid/bin/Release/AiForms.Effects.Droid.dll" target="lib/MonoAndroid" />
+        <!-- Mono.Touch -->
+        <file src="../AiForms.Effects/bin/Release/AiForms.Effects.dll" target="lib/MonoTouch" />
+        <file src="../AiForms.Effects.iOS/bin/Release/AiForms.Effects.iOS.dll" target="lib/MonoTouch" />
+        <!-- Xamarin.iOS10 -->
+        <file src="../AiForms.Effects/bin/Release/AiForms.Effects.dll" target="lib/Xamarin.iOS10" />
+        <file src="../AiForms.Effects.iOS/bin/Release/AiForms.Effects.iOS.dll" target="lib/Xamarin.iOS10" />
+    </files>
+</package>
