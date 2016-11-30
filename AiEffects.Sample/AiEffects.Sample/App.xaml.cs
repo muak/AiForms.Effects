@@ -15,10 +15,10 @@ namespace AiEffects.Sample
             InitializeComponent();
 
             if (Device.OS == TargetPlatform.iOS) {
-                NavigationService.NavigateAsync("NaviA/AddCommandPage");
+                NavigationService.NavigateAsync("NaviA/MainPage");
             }
             else if (Device.OS == TargetPlatform.Android) {
-                NavigationService.NavigateAsync("NaviA/MyTabbed");
+                NavigationService.NavigateAsync("NaviA/MainPage");
             }
         }
 
@@ -29,6 +29,7 @@ namespace AiEffects.Sample
             .ForEach(t => {
                 Container.RegisterTypeForNavigation(t.AsType(), t.Name);
             });
+
         }
     }
 }

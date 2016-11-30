@@ -16,13 +16,19 @@ namespace AiEffects.Sample.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        private DelegateCommand _GoCommand;
-        public DelegateCommand GoCommand {
-            get { return _GoCommand = _GoCommand ?? new DelegateCommand(async() => {
+        private DelegateCommand _GoAddCommand;
+        public DelegateCommand GoAddCommand {
+            get { return _GoAddCommand = _GoAddCommand ?? new DelegateCommand(async() => {
                 await Navigation.NavigateAsync("AddCommandPage");
             }); }
         }
 
+        private DelegateCommand _GoLineHeightCommand;
+        public DelegateCommand GoLineHeightCommand {
+            get { return _GoLineHeightCommand = _GoLineHeightCommand ?? new DelegateCommand(async() => {
+                await Navigation.NavigateAsync("AlterLineHeightPage");
+            }); }
+        }
 
         private INavigationService Navigation;
         public MainPageViewModel(INavigationService navigationService) {

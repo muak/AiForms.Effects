@@ -38,7 +38,6 @@ Global
 		$2.FileWidth = 120
 		$0.CSharpFormattingPolicy = $3
 		$3.IndentSwitchSection = True
-		$3.NewLinesForBracesInMethods = False
 		$3.NewLineForElse = True
 		$3.NewLineForCatch = True
 		$3.NewLineForFinally = True
@@ -51,6 +50,9 @@ Global
 		$3.inheritsSet = Mono
 		$3.inheritsScope = text/x-csharp
 		$3.scope = text/x-csharp
+		$0.StandardHeader = $4
+		$4.Text = 
+		$4.IncludeInNewFiles = True
 		version = 0.0.2-pre1
 	EndGlobalSection
 EndGlobal

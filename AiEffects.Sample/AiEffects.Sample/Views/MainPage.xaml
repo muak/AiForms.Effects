@@ -5,9 +5,9 @@
 		prism:ViewModelLocator.AutowireViewModel="True" 
 		xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
 		x:Class="AiEffects.Sample.Views.MainPage" 
-		Title="MainPage">
+		Title="Select">
 	<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-		<Label Text="{Binding Title}"  />
-		<Button Text="GoToNext" Command="{Binding GoCommand}" />
+		<Button Text="AddCommand Sample" Command="{Binding GoAddCommand}" />
+		<Button Text="AlterLineHeight Sample" Command="{Binding GoLineHeightCommand}" />
 	</StackLayout>
 </ContentPage>

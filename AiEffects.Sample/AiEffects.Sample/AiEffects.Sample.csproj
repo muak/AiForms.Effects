@@ -42,6 +42,10 @@
     </Compile>
     <Compile Include="ViewModels\AddCommandPageViewModel.cs" />
     <Compile Include="Views\Navigations.cs" />
+    <Compile Include="ViewModels\AlterLineHeightPageViewModel.cs" />
+    <Compile Include="Views\AlterLineHeightPage.xaml.cs">
+      <DependentUpon>AlterLineHeightPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -51,6 +55,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AddCommandPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AlterLineHeightPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

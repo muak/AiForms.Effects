@@ -18,7 +18,7 @@
 		<item name="colorPrimaryDark">#1976D2</item>
 		<!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-		<item name="colorAccent">#C0C0C0</item>
+		<item name="colorAccent">#C2B96E</item>
 		<!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
 		<item name="windowActionModeOverlay">true</item>
@@ -26,7 +26,7 @@
 
 
 		<!-- ToolBar BackButton 通常時 -->
-		<item name="android:textColorSecondary">#FFFFFF</item>
+		<item name="android:textColorSecondary">#CCCCCC</item>
 
 	</style>
 	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
@@ -53,7 +53,7 @@
         <!-- ToolBarのタイトルテキスト色 -->
         <item name="android:textColorPrimary">#1976D2</item>
         <!-- ToolBar BackButtonでアプリ休止後再開した時の色 -->
-		<item name="android:textColorSecondary">#FFFFFF</item>
+		<item name="android:textColorSecondary">#CCCCCC</item>
 		<!-- Menu Textの色 -->
 		<item name="actionMenuTextColor">#CCCCCC</item>
         <item name="windowActionModeOverlay">true</item>
