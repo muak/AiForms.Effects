@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -16,15 +15,18 @@ namespace AiForms.Effects
                     propertyChanged: OnOffChanged
                 );
 
-        public static void SetOn(BindableObject view, bool value) {
+        public static void SetOn(BindableObject view, bool value)
+        {
             view.SetValue(OnProperty, value);
         }
 
-        public static bool GetOn(BindableObject view) {
+        public static bool GetOn(BindableObject view)
+        {
             return (bool)view.GetValue(OnProperty);
         }
 
-        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue) {
+        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
+        {
             var view = bindable as View;
             if (view == null)
                 return;
@@ -47,11 +49,13 @@ namespace AiForms.Effects
                     default(ICommand)
                 );
 
-        public static void SetCommand(BindableObject view, ICommand value) {
+        public static void SetCommand(BindableObject view, ICommand value)
+        {
             view.SetValue(CommandProperty, value);
         }
 
-        public static ICommand GetCommand(BindableObject view) {
+        public static ICommand GetCommand(BindableObject view)
+        {
             return (ICommand)view.GetValue(CommandProperty);
         }
 
@@ -64,11 +68,13 @@ namespace AiForms.Effects
                     default(object)
                 );
 
-        public static void SetCommandParameter(BindableObject view, object value) {
+        public static void SetCommandParameter(BindableObject view, object value)
+        {
             view.SetValue(CommandParameterProperty, value);
         }
 
-        public static object GetCommandParameter(BindableObject view) {
+        public static object GetCommandParameter(BindableObject view)
+        {
             return (object)view.GetValue(CommandParameterProperty);
         }
 
@@ -80,11 +86,13 @@ namespace AiForms.Effects
                     Color.Default
                 );
 
-        public static void SetEffectColor(BindableObject view, Color value) {
+        public static void SetEffectColor(BindableObject view, Color value)
+        {
             view.SetValue(EffectColorProperty, value);
         }
 
-        public static Color GetEffectColor(BindableObject view) {
+        public static Color GetEffectColor(BindableObject view)
+        {
             return (Color)view.GetValue(EffectColorProperty);
         }
 

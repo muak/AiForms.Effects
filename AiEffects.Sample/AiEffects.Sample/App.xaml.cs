@@ -1,8 +1,7 @@
-﻿using Prism.Unity;
-using AiEffects.Sample.Views;
+﻿using System.Linq;
 using System.Reflection;
-using System.Linq;
 using Microsoft.Practices.ObjectBuilder2;
+using Prism.Unity;
 using Xamarin.Forms;
 
 namespace AiEffects.Sample
@@ -11,7 +10,8 @@ namespace AiEffects.Sample
     {
         public App(IPlatformInitializer initializer = null) : base(initializer) { }
 
-        protected override void OnInitialized() {
+        protected override void OnInitialized()
+        {
             InitializeComponent();
 
             if (Device.OS == TargetPlatform.iOS) {
@@ -22,7 +22,8 @@ namespace AiEffects.Sample
             }
         }
 
-        protected override void RegisterTypes() {
+        protected override void RegisterTypes()
+        {
             this.GetType().GetTypeInfo().Assembly
             .DefinedTypes
             .Where(t => t.Namespace.EndsWith(".Views", System.StringComparison.Ordinal))

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net;
-
-namespace AiForms.Effects
+﻿namespace AiForms.Effects
 {
     public interface ILineHeightEffect
     {

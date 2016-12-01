@@ -9,7 +9,7 @@
     <RootNamespace>AiForms.Effects.iOS</RootNamespace>
     <AssemblyName>AiForms.Effects.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <ReleaseVersion>0.0.2-pre1</ReleaseVersion>
+    <ReleaseVersion>0.0.3-pre</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

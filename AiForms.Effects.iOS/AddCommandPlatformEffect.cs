@@ -13,49 +13,52 @@ namespace AiForms.Effects.iOS
     public class AddCommandPlatformEffect : PlatformEffect
     {
 
-        private ICommand command;
-        private object commandParameter;
-        private UITapGestureRecognizer tapGesture;
-        private UIView view;
-        private UIView layer;
+        private ICommand _command;
+        private object _commandParameter;
+        private UITapGestureRecognizer _tapGesture;
+        private UIView _view;
+        private UIView _layer;
 
-        protected override void OnAttached() {
-            view = Control ?? Container;
+        protected override void OnAttached()
+        {
+            _view = Control ?? Container;
 
-            tapGesture = new UITapGestureRecognizer(async (obj) => {
-                if (layer != null) {
-                    layer.Frame = new CGRect(0, 0, view.Bounds.Width, view.Bounds.Height);
-                    view.AddSubview(layer);
-                    view.BringSubviewToFront(layer);
-                    layer.Alpha = 1;
+            _tapGesture = new UITapGestureRecognizer(async (obj) => {
+                if (_layer != null) {
+                    _layer.Frame = new CGRect(0, 0, _view.Bounds.Width, _view.Bounds.Height);
+                    _view.AddSubview(_layer);
+                    _view.BringSubviewToFront(_layer);
+                    _layer.Alpha = 1;
                     await UIView.AnimateAsync(0.3f, () => {
-                        layer.Alpha = 0;
+                        _layer.Alpha = 0;
                     });
-                    layer.RemoveFromSuperview();
+                    _layer.RemoveFromSuperview();
                 }
 
-                command?.Execute(commandParameter ?? Element);
+                _command?.Execute(_commandParameter ?? Element);
             });
 
-            view.UserInteractionEnabled = true;
-            view.AddGestureRecognizer(tapGesture);
+            _view.UserInteractionEnabled = true;
+            _view.AddGestureRecognizer(_tapGesture);
 
             UpdateCommand();
             UpdateCommandParameter();
             UpdateEffectColor();
         }
 
-        protected override void OnDetached() {
+        protected override void OnDetached()
+        {
 
-            view.RemoveGestureRecognizer(tapGesture);
-            tapGesture.Dispose();
-            if (layer != null) {
-                layer.Dispose();
-                layer = null;
+            _view.RemoveGestureRecognizer(_tapGesture);
+            _tapGesture.Dispose();
+            if (_layer != null) {
+                _layer.Dispose();
+                _layer = null;
             }
         }
 
-        protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e) {
+        protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
+        {
             base.OnElementPropertyChanged(e);
 
             if (e.PropertyName == AddCommand.CommandProperty.PropertyName) {
@@ -70,19 +73,22 @@ namespace AiForms.Effects.iOS
 
         }
 
-        void UpdateCommand() {
-            command = AddCommand.GetCommand(Element);
+        void UpdateCommand()
+        {
+            _command = AddCommand.GetCommand(Element);
         }
 
-        void UpdateCommandParameter() {
-            commandParameter = AddCommand.GetCommandParameter(Element);
+        void UpdateCommandParameter()
+        {
+            _commandParameter = AddCommand.GetCommandParameter(Element);
         }
 
-        void UpdateEffectColor() {
+        void UpdateEffectColor()
+        {
 
-            if (layer != null) {
-                layer.Dispose();
-                layer = null;
+            if (_layer != null) {
+                _layer.Dispose();
+                _layer = null;
             }
 
             var color = AddCommand.GetEffectColor(Element);
@@ -90,8 +96,8 @@ namespace AiForms.Effects.iOS
                 return;
             }
 
-            layer = new UIView();
-            layer.BackgroundColor = color.ToUIColor();
+            _layer = new UIView();
+            _layer.BackgroundColor = color.ToUIColor();
 
         }
     }

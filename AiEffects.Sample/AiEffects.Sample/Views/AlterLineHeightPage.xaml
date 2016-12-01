@@ -9,19 +9,19 @@
 	<StackLayout BackgroundColor="White" Spacing="4">
 		<Button Text="Effect On/Off (Multiple-1.5)" Command="{Binding EffectCommand}"
 			VerticalOptions="End"/>
-		<Label Text="Editor" />
+		<Label Text="Editor" TextColor="#333333" />
 		<Editor Text="{Binding LabelText}" VerticalOptions="Start" 
-			ef:AlterLineHeight.On="{Binding EffectOn}" BackgroundColor="#f9f9f9"
+			ef:AlterLineHeight.On="{Binding EffectOn}" BackgroundColor="#f9f9f9" TextColor="#333333"
 			ef:AlterLineHeight.Multiple="1.5" Margin="10" FontSize="12" HeightRequest="80"
 			/>
-		<Label Text="Label HeightRequest 60" />
+		<Label Text="Label HeightRequest 60" TextColor="#333333" />
 		<Label Text="{Binding LabelText}" VerticalOptions="Start"
-			ef:AlterLineHeight.On="{Binding EffectOn}" BackgroundColor="#f2f2f2"
+			ef:AlterLineHeight.On="{Binding EffectOn}" BackgroundColor="#f2f2f2" TextColor="#333333"
 			ef:AlterLineHeight.Multiple="1.5" HeightRequest="60" Margin="10" FontSize="12" />
-		<Label Text="Label HeightRequest None" />
-		<Label Text="{Binding LabelText}" VerticalOptions="Start"
-			ef:AlterLineHeight.On="{Binding EffectOn}" BackgroundColor="#f2f2f2"
+		<Label Text="Label HeightRequest None" TextColor="#333333" />
+		<Label Text="{Binding LabelText}" VerticalOptions="Start"  
+			ef:AlterLineHeight.On="{Binding EffectOn}" BackgroundColor="#f2f2f2" TextColor="#333333"
 			ef:AlterLineHeight.Multiple="1.5" Margin="10" FontSize="12" />
-	
+		
 	</StackLayout>
 </ContentPage>

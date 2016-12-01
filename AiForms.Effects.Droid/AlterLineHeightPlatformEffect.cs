@@ -1,9 +1,7 @@
-﻿using System;
-using Xamarin.Forms.Platform.Android;
-using Android.Widget;
-using Xamarin.Forms;
-using AiForms.Effects;
+﻿using AiForms.Effects;
 using AiForms.Effects.Droid;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportEffect(typeof(AlterLineHeightPlatformEffect), nameof(AlterLineHeight))]
 namespace AiForms.Effects.Droid
@@ -15,10 +13,10 @@ namespace AiForms.Effects.Droid
         protected override void OnAttached()
         {
             if (Element is Label) {
-                _effect = new LineHeightForTextView(Container,Control, Element);
+                _effect = new LineHeightForTextView(Container, Control, Element);
             }
             else if (Element is Editor) {
-                _effect = new LineHeightForEditText(Container,Control, Element);
+                _effect = new LineHeightForEditText(Container, Control, Element);
             }
 
             _effect?.Update();

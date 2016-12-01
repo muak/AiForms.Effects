@@ -1,8 +1,5 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace AiEffects.Sample.ViewModels
 {
@@ -22,9 +19,11 @@ namespace AiEffects.Sample.ViewModels
 
         private DelegateCommand _EffectCommand;
         public DelegateCommand EffectCommand {
-            get { return _EffectCommand = _EffectCommand ?? new DelegateCommand(() => {
-                EffectOn = !EffectOn;
-            }); }
+            get {
+                return _EffectCommand = _EffectCommand ?? new DelegateCommand(() => {
+                    EffectOn = !EffectOn;
+                });
+            }
         }
 
         public AlterLineHeightPageViewModel()

@@ -1,11 +1,7 @@
-﻿using System;
-using Xamarin.Forms.Platform.iOS;
-using Xamarin.Forms;
-using UIKit;
-using Foundation;
-using AiForms.Effects;
+﻿using AiForms.Effects;
 using AiForms.Effects.iOS;
-using CoreGraphics;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportEffect(typeof(AlterLineHeightPlatformEffect), nameof(AlterLineHeight))]
 namespace AiForms.Effects.iOS

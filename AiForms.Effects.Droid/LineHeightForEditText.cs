@@ -1,14 +1,12 @@
-﻿using System;
-using AiForms.Effects;
-using AView = Android.Views.View;
-using Xamarin.Forms;
+﻿using Android.Text;
 using Android.Widget;
-using Android.Text;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using AView = Android.Views.View;
 
 namespace AiForms.Effects.Droid
 {
-    public class LineHeightForEditText:ILineHeightEffect
+    public class LineHeightForEditText : ILineHeightEffect
     {
         private Android.Views.ViewGroup _container;
         private EditText _editText;
@@ -16,7 +14,7 @@ namespace AiForms.Effects.Droid
         private VisualElement _formsElement;
         private float _multiple;
 
-        public LineHeightForEditText(Android.Views.ViewGroup container,AView control,Element element)
+        public LineHeightForEditText(Android.Views.ViewGroup container, AView control, Element element)
         {
             _container = container;
             _editText = control as EditText;
@@ -47,7 +45,7 @@ namespace AiForms.Effects.Droid
         void _editText_AfterTextChanged(object sender, AfterTextChangedEventArgs e)
         {
             //入力した瞬間に次の行との間隔だけが詰まってしまう問題の対策
-            _editText.SetLineSpacing(1.01f,_multiple);
+            _editText.SetLineSpacing(1.01f, _multiple);
             _editText.SetLineSpacing(1f, _multiple);
         }
     }

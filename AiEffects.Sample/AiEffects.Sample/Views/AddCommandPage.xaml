@@ -4,7 +4,8 @@
 		xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
 		xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
 		prism:ViewModelLocator.AutowireViewModel="True" 
-		x:Class="AiEffects.Sample.Views.AddCommandPage">
+		x:Class="AiEffects.Sample.Views.AddCommandPage"
+		Title="AddCommand">
 	<ScrollView>
 	<StackLayout>
 		<Label Text="Label" 

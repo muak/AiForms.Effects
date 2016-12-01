@@ -1,12 +1,11 @@
-﻿using System;
-using Android.Widget;
-using AView = Android.Views.View;
+﻿using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using AView = Android.Views.View;
 
 namespace AiForms.Effects.Droid
 {
-    public class LineHeightForTextView:ILineHeightEffect
+    public class LineHeightForTextView : ILineHeightEffect
     {
         private Android.Views.ViewGroup _container;
         private TextView _textView;
@@ -16,7 +15,7 @@ namespace AiForms.Effects.Droid
         private float _multiple;
         private bool _isFixedHeight;
 
-        public LineHeightForTextView(Android.Views.ViewGroup container,AView control,Element element)
+        public LineHeightForTextView(Android.Views.ViewGroup container, AView control, Element element)
         {
             _container = container;
             _textView = control as TextView;
@@ -39,7 +38,7 @@ namespace AiForms.Effects.Droid
                     _formsElement.HeightRequest = -1;   //再Attacheされた時の為に初期値に戻しておく
                 }
             }
-          
+
             _textView = null;
             _formsElement = null;
         }

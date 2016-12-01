@@ -6,7 +6,6 @@ using Android.Views;
 using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Xamarin.Forms.Platform.Android.AppCompat;
 
 [assembly: ResolutionGroupName("AiForms")]
 [assembly: ExportEffect(typeof(AddCommandPlatformEffect), nameof(AddCommand))]
@@ -15,39 +14,42 @@ namespace AiForms.Effects.Droid
 
     public class AddCommandPlatformEffect : PlatformEffect
     {
-        private ICommand command;
-        private object commandParameter;
-        private Android.Views.View view;
-        private FrameLayout layer;
+        private ICommand _command;
+        private object _commandParameter;
+        private Android.Views.View _view;
+        private FrameLayout _layer;
 
-        protected override void OnAttached() {
+        protected override void OnAttached()
+        {
 
-            view = Control ?? Container;
+            _view = Control ?? Container;
 
             UpdateCommand();
             UpdateCommandParameter();
             UpdateEffectColor();
 
-            view.Click += OnClick;
+            _view.Click += OnClick;
         }
 
-        protected override void OnDetached() {
+        protected override void OnDetached()
+        {
             var renderer = Container as IVisualElementRenderer;
             if (renderer?.Element != null) {    // Disposeされているかの判定
-                view.Click -= OnClick;
-                view.Touch -= View_Touch;
+                _view.Click -= OnClick;
+                _view.Touch -= View_Touch;
             }
-            command = null;
-            commandParameter = null;
-            view = null;
+            _command = null;
+            _commandParameter = null;
+            _view = null;
 
-            if (layer != null) {
-                layer.Dispose();
-                layer = null;
+            if (_layer != null) {
+                _layer.Dispose();
+                _layer = null;
             }
         }
 
-        protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e) {
+        protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
+        {
             base.OnElementPropertyChanged(e);
 
             if (e.PropertyName == AddCommand.CommandProperty.PropertyName) {
@@ -63,47 +65,52 @@ namespace AiForms.Effects.Droid
         }
 
 
-        void OnClick(object sender, EventArgs e) {
-            command?.Execute(commandParameter ?? Element);
+        void OnClick(object sender, EventArgs e)
+        {
+            _command?.Execute(_commandParameter ?? Element);
         }
 
-        void UpdateCommand() {
-            command = AddCommand.GetCommand(Element);
+        void UpdateCommand()
+        {
+            _command = AddCommand.GetCommand(Element);
         }
 
-        void UpdateCommandParameter() {
-            commandParameter = AddCommand.GetCommandParameter(Element);
+        void UpdateCommandParameter()
+        {
+            _commandParameter = AddCommand.GetCommandParameter(Element);
         }
 
-        void UpdateEffectColor() {
+        void UpdateEffectColor()
+        {
 
-            view.Touch -= View_Touch;
-            if (layer != null) {
-                layer.Dispose();
-                layer = null;
+            _view.Touch -= View_Touch;
+            if (_layer != null) {
+                _layer.Dispose();
+                _layer = null;
             }
             var color = AddCommand.GetEffectColor(Element);
             if (color == Xamarin.Forms.Color.Default) {
                 return;
             }
 
-            layer = new FrameLayout(Container.Context);
-            layer.LayoutParameters = new ViewGroup.LayoutParams(-1, -1);
-            layer.SetBackgroundColor(color.ToAndroid());
-            view.Touch += View_Touch;
+            _layer = new FrameLayout(Container.Context);
+            _layer.LayoutParameters = new ViewGroup.LayoutParams(-1, -1);
+            _layer.SetBackgroundColor(color.ToAndroid());
+            _view.Touch += View_Touch;
         }
 
-        void View_Touch(object sender, Android.Views.View.TouchEventArgs e) {
+        void View_Touch(object sender, Android.Views.View.TouchEventArgs e)
+        {
             if (e.Event.Action == MotionEventActions.Down) {
-                Container.AddView(layer);
-                layer.Top = 0;
-                layer.Left = 0;
-                layer.Right = view.Width;
-                layer.Bottom = view.Height;
-                layer.BringToFront();
+                Container.AddView(_layer);
+                _layer.Top = 0;
+                _layer.Left = 0;
+                _layer.Right = _view.Width;
+                _layer.Bottom = _view.Height;
+                _layer.BringToFront();
             }
             if (e.Event.Action == MotionEventActions.Up || e.Event.Action == MotionEventActions.Cancel) {
-                Container.RemoveView(layer);
+                Container.RemoveView(_layer);
             }
 
             e.Handled = false;

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Effects</id>
-        <version>0.0.2-pre1</version>
+        <version>0.0.3-pre</version>
         <title>AiForms.Effects</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
@@ -13,6 +13,7 @@
         <summary>
             ## Effects List
             * AddCommandEffect
+            * AlterLineHeight
         </summary>
         <language>en-US</language>
         <dependencies>

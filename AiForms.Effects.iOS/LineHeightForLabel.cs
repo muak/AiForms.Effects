@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Foundation;
 using UIKit;
 using Xamarin.Forms;
-using System.ComponentModel;
-using Foundation;
+using Xamarin.Forms.Platform.iOS;
 
 namespace AiForms.Effects.iOS
 {
@@ -20,17 +19,16 @@ namespace AiForms.Effects.iOS
             _formsLabel = element as Label;
             //最初からHeightRequestが設定されているか
             _isFixedHeight = _formsLabel.HeightRequest >= 0d;
+
         }
 
         public void OnDetached()
         {
             _nativeLabel.AttributedText = null;
             _nativeLabel.Text = _formsLabel.Text;
-            if (!_isFixedHeight) {
-                var size = _nativeLabel.SizeThatFits(_container.Frame.Size);
-                _formsLabel.HeightRequest = size.Height;
-                _formsLabel.HeightRequest = -1;   //再Attacheされた時の為に初期値に戻しておく
-            }
+
+            ChangeSize();
+
             _container = null;
             _nativeLabel = null;
             _formsLabel = null;
@@ -39,8 +37,9 @@ namespace AiForms.Effects.iOS
         public void Update()
         {
             var text = _formsLabel.Text;
-            if (text == null)
+            if (text == null) {
                 return;
+            }
 
             var multiple = (float)AlterLineHeight.GetMultiple(_formsLabel);
             var fontSize = (float)(_formsLabel).FontSize;
@@ -54,11 +53,33 @@ namespace AiForms.Effects.iOS
 
             _nativeLabel.AttributedText = attrString;
 
-            if (!_isFixedHeight && _formsLabel.Height >= 0) {
-                var size = _nativeLabel.SizeThatFits(_container.Frame.Size);
-                _formsLabel.HeightRequest = size.Height;
+            ChangeSize();
+
+        }
+
+        void ChangeSize()
+        {
+            if (_formsLabel.Height < 0) {
+                return;
             }
 
+            if (NeedToChangeSize()) {
+                var size = _nativeLabel.SizeThatFits(_container.Frame.Size);
+                _formsLabel.HeightRequest = size.Height;
+                _formsLabel.HeightRequest = -1; //再Attacheされた時の為に初期値に戻しておく
+            }
+            else {
+                var render = Platform.GetRenderer(_formsLabel) as LabelRenderer;
+                render.LayoutSubviews();
+            }
+        }
+
+        bool NeedToChangeSize()
+        {
+            //FillAndExpandじゃなくてかつHeightRequestが未指定の時はサイズ変更
+            return !_isFixedHeight &&
+                    !(_formsLabel.VerticalOptions.Alignment == LayoutAlignment.Fill &&
+                      _formsLabel.VerticalOptions.Expands);
         }
     }
 }

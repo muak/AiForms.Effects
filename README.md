@@ -2,11 +2,38 @@
 
 Xamarin.Forms Effects for Android / iOS only.
 
+## AlterLineHeight
+
+This Effect alter LineHeight of Label and Editor.
+
+### Supported View
+
+* Label
+* Editor
+
+### How to Xaml
+
+```xml
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+		xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+		prism:ViewModelLocator.AutowireViewModel="True"
+		x:Class="AiEffects.Sample.Views.AlterLineHeightPage"
+		Title="AlterLineHeight">
+	<StackLayout BackgroundColor="White" Spacing="4">
+		<Label Text="{Binding LabelText}" VerticalOptions="Start" FontSize="12"
+			ef:AlterLineHeight.On="{Binding EffectOn}"
+			ef:AlterLineHeight.Multiple="1.5"  />
+	</StackLayout>
+</ContentPage>
+```
+
 ## AddCommand
 
 This Effect add Command function to a view.
 
-### Suportted View
+### Supported View
 
 * Label
 * BoxView
