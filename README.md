@@ -23,7 +23,7 @@ This Effect alter LineHeight of Label and Editor.
 		Title="AlterLineHeight">
 	<StackLayout BackgroundColor="White" Spacing="4">
 		<Label Text="{Binding LabelText}" VerticalOptions="Start" FontSize="12"
-			ef:AlterLineHeight.On="{Binding EffectOn}"
+			ef:AlterLineHeight.On="true"
 			ef:AlterLineHeight.Multiple="1.5"  />
 	</StackLayout>
 </ContentPage>
