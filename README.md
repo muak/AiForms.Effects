@@ -61,7 +61,13 @@ This Effect add Command function to a view.
 </ContentPage>
 ```
 
-## for iOS project
+## Installation instructions
+
+```bash
+Install-Package AiForms.Effects -Pre
+```
+
+### for iOS project
 
 AppDelegate.cs
 
