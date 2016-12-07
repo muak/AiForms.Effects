@@ -4,7 +4,7 @@ Xamarin.Forms Effects for Android / iOS only.
 
 ## AddNumberPicker
 
-This Effect add NumberPicker function to a view.
+This Effect add NumberPicker function to a view.  
 When you tap the view ,Picker is shown.And when you select a number,it reflects to Number property.If you set Command property,it executes.
 
 ### Supported View
