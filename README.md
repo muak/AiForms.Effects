@@ -2,6 +2,43 @@
 
 Xamarin.Forms Effects for Android / iOS only.
 
+## AddNumberPicker
+
+This Effect add NumberPicker function to a view.
+When you tap the view ,Picker is shown.
+And when you select a number,it reflect to Number property.
+
+### Supported View
+
+* Label
+* BoxView
+* Button
+* Image
+* StackLayout
+* AbsoluteLayout
+
+### How to Xaml
+
+```xml
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+		xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+		prism:ViewModelLocator.AutowireViewModel="True"
+		x:Class="AiEffects.Sample.Views.AddNumberPickerPage"
+		Title="AddNumberPicker">
+	<StackLayout>
+		<Label Text="Text"
+			ef:AddNumberPicker.On="true"
+			ef:AddNumberPicker.Min="10"
+			ef:AddNumberPicker.Max="999"
+			ef:AddNumberPicker.Number="{Binding Number}"
+			ef:AddNumberPicker.Title="Select your number" />
+    </StackLayout>
+</ContentPage>
+```
+
+
 ## AlterLineHeight
 
 This Effect alter LineHeight of Label and Editor.

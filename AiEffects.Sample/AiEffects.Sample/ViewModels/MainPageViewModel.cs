@@ -30,6 +30,13 @@ namespace AiEffects.Sample.ViewModels
             }
         }
 
+        private DelegateCommand _AddNumberPickerCommand;
+        public DelegateCommand AddNumberPickerCommand {
+            get { return _AddNumberPickerCommand = _AddNumberPickerCommand ?? new DelegateCommand(async() => {
+                 await Navigation.NavigateAsync("AddNumberPickerPage");
+            }); }
+        }
+
         private INavigationService Navigation;
         public MainPageViewModel(INavigationService navigationService)
         {

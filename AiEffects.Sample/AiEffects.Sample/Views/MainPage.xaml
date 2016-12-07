@@ -9,5 +9,6 @@
 	<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
 		<Button Text="AddCommand Sample" Command="{Binding GoAddCommand}" />
 		<Button Text="AlterLineHeight Sample" Command="{Binding GoLineHeightCommand}" />
+		<Button Text="AddNumberPicker Sample" Command="{Binding AddNumberPickerCommand}" />
 	</StackLayout>
 </ContentPage>

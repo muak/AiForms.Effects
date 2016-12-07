@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Effects</id>
-        <version>0.0.3-pre</version>
+        <version>0.0.4-pre</version>
         <title>AiForms.Effects</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
@@ -12,19 +12,20 @@
         <description>Xamarin.Forms YuruFuwa Effects for Android/iOS</description>
         <summary>
             ## Effects List
-            * AddCommandEffect
+            * AddNumberPicker
+            * AddCommand
             * AlterLineHeight
         </summary>
         <language>en-US</language>
         <dependencies>
             <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
-                <dependency id="Xamarin.Forms" version="2.3.2" />
+                <dependency id="Xamarin.Forms" version="2.3.3" />
             </group>
             <group targetFramework="MonoAndroid">
-                <dependency id="Xamarin.Forms" version="2.3.2" />
+                <dependency id="Xamarin.Forms" version="2.3.3" />
             </group>
             <group targetFramework="MonoTouch">
-                <dependency id="Xamarin.Forms" version="2.3.2" />
+                <dependency id="Xamarin.Forms" version="2.3.3" />
             </group>
         </dependencies>
     </metadata>

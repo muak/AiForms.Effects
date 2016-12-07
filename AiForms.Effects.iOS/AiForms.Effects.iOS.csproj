@@ -9,7 +9,7 @@
     <RootNamespace>AiForms.Effects.iOS</RootNamespace>
     <AssemblyName>AiForms.Effects.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <ReleaseVersion>0.0.3-pre</ReleaseVersion>
+    <ReleaseVersion>0.0.4-pre</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,6 +72,8 @@
     <Compile Include="AlterLineHeightPlatformEffect.cs" />
     <Compile Include="LineHeightForLabel.cs" />
     <Compile Include="LineHeightForTextView.cs" />
+    <Compile Include="AddNumberPickerPlatform.cs" />
+    <Compile Include="NumberPickerSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AiForms.Effects\AiForms.Effects.csproj">

@@ -46,6 +46,10 @@
     <Compile Include="Views\AlterLineHeightPage.xaml.cs">
       <DependentUpon>AlterLineHeightPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddNumberPickerPage.xaml.cs">
+      <DependentUpon>AddNumberPickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddNumberPickerPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -58,6 +62,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AlterLineHeightPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddNumberPickerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
