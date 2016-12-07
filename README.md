@@ -5,8 +5,7 @@ Xamarin.Forms Effects for Android / iOS only.
 ## AddNumberPicker
 
 This Effect add NumberPicker function to a view.
-When you tap the view ,Picker is shown.
-And when you select a number,it reflect to Number property.
+When you tap the view ,Picker is shown.And when you select a number,it reflects to Number property.If you set Command property,it executes.
 
 ### Supported View
 
@@ -33,7 +32,8 @@ And when you select a number,it reflect to Number property.
 			ef:AddNumberPicker.Min="10"
 			ef:AddNumberPicker.Max="999"
 			ef:AddNumberPicker.Number="{Binding Number}"
-			ef:AddNumberPicker.Title="Select your number" />
+			ef:AddNumberPicker.Title="Select your number"
+            ef:AddNumberPicker.Command="{Binding SomeCommand}" />
     </StackLayout>
 </ContentPage>
 ```
