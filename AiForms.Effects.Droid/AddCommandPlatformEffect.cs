@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using AiForms.Effects;
 using AiForms.Effects.Droid;
@@ -21,13 +22,16 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
-
             _view = Control ?? Container;
 
             UpdateCommand();
             UpdateCommandParameter();
             UpdateEffectColor();
 
+            if (Control is Android.Widget.ListView) {
+                //ListViewはOnClickで例外を出すので除外
+                return;
+            }
             _view.Click += OnClick;
         }
 

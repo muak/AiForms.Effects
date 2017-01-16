@@ -1,14 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
 		prism:ViewModelLocator.AutowireViewModel="True" 
 		xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
-		x:Class="AiEffects.Sample.Views.MainPage" 
+		x:Class="AiEffects.TestApp.Views.MainPage" 
 		Title="Select">
 	<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-		<Button AutomationId="1" Text="AddCommand Sample" Command="{Binding GoAddCommand}" />
-		<Button AutomationId="2" Text="AlterLineHeight Sample" Command="{Binding GoLineHeightCommand}" />
-		<Button AutomationId="3" Text="AddNumberPicker Sample" Command="{Binding AddNumberPickerCommand}" />
+		<Button AutomationId="AddCommand" Text="AddCommand Sample" Command="{Binding GoAddCommand}" />
+		<Button AutomationId="AlterLineHeight" Text="AlterLineHeight Sample" Command="{Binding GoLineHeightCommand}" />
+		<Button AutomationId="AddNumberPicker" Text="AddNumberPicker Sample" Command="{Binding AddNumberPickerCommand}" />
 	</StackLayout>
 </ContentPage> 

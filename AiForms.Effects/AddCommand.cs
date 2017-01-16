@@ -96,11 +96,11 @@ namespace AiForms.Effects
             return (Color)view.GetValue(EffectColorProperty);
         }
 
-
         class AddCommandRoutingEffect : RoutingEffect
         {
             public AddCommandRoutingEffect() : base("AiForms." + nameof(AddCommand)) { }
         }
     }
+
 }
 
