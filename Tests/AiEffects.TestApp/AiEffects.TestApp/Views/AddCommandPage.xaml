@@ -9,8 +9,8 @@
 		AutomationId="AddCommandTapTest">
 	<StackLayout>
 		<StackLayout Orientation="Horizontal" VerticalOptions="Start" >
-			<Label  AutomationId="ResultText" Text="{Binding CommandParameterText}" HorizontalOptions="FillAndExpand" />
-			<Switch AutomationId="ResultExecute" IsEnabled="{Binding IsExecutedCommand}" IsToggled="{Binding IsExecutedCommand}" HorizontalOptions="End" />
+			<Label  AutomationId="ResultText" IsEnabled="{Binding IsExecutedCommand}" Text="{Binding CommandParameterText}" HorizontalOptions="FillAndExpand" />
+			<Switch AutomationId="ResultExecute" IsToggled="{Binding IsExecutedCommand}" HorizontalOptions="End" />
 			<Button AutomationId="ResetResult" Text="Reset" Command="{Binding ResetCommand}" HorizontalOptions="End" />
 			<Button AutomationId="DummyButton" WidthRequest="1" />
 		</StackLayout>

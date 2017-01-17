@@ -216,15 +216,15 @@ namespace AiForms.Effects.UITests
             app.Tap(view);
 
             await Task.Delay(250);
-            var ret = app.Query("ResultExecute")[0].Enabled;
-            Assert.AreEqual(expected, ret, $"{view} command error");
+            var ret = app.Query("ResultText")[0];
 
-            var text = app.Query("ResultText")[0];
+            Assert.AreEqual(expected, ret.Enabled, $"{view} command error");
+
             if (expected) {
-                text.Text.Is(view, $"{view} parameter error");
+                ret.Text.Is(view, $"{view} parameter error");
             }
             else {
-                string.IsNullOrEmpty(text.Text).IsTrue();
+                string.IsNullOrEmpty(ret.Text).IsTrue();
             }
 
             app.Tap("ResetResult");
