@@ -40,7 +40,9 @@
     <Compile Include="Tests.cs" />
     <Compile Include="AppInitializer.cs" />
     <Compile Include="ChainingAssertion.NUnit.cs" />
-    <Compile Include="AddCommandFixture.cs" />
+    <Compile Include="AddCommand\TapFixture.cs" />
+    <Compile Include="TestFixtureBase.cs" />
+    <Compile Include="AddCommand\PropertyChangedFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -62,6 +64,9 @@
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AddCommand\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

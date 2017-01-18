@@ -12,30 +12,19 @@ namespace AiEffects.TestApp.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        private DelegateCommand _GoAddCommand;
-        public DelegateCommand GoAddCommand {
-            get {
-                return _GoAddCommand = _GoAddCommand ?? new DelegateCommand(async () => {
-                    await Navigation.NavigateAsync("AddCommandPage");
-                });
-            }
+        private string _InputTestPageText;
+        public string InputTestPageText {
+            get { return _InputTestPageText; }
+            set { SetProperty(ref _InputTestPageText, value); }
         }
 
-        private DelegateCommand _GoLineHeightCommand;
-        public DelegateCommand GoLineHeightCommand {
-            get {
-                return _GoLineHeightCommand = _GoLineHeightCommand ?? new DelegateCommand(async () => {
-                    await Navigation.NavigateAsync("AlterLineHeightPage");
-                });
-            }
-        }
-
-        private DelegateCommand _AddNumberPickerCommand;
-        public DelegateCommand AddNumberPickerCommand {
-            get { return _AddNumberPickerCommand = _AddNumberPickerCommand ?? new DelegateCommand(async() => {
-                 await Navigation.NavigateAsync("AddNumberPickerPage");
+        private DelegateCommand<object> _GotoTestCommand;
+        public DelegateCommand<object> GotoTestCommand {
+            get { return _GotoTestCommand = _GotoTestCommand ?? new DelegateCommand<object>(async (p) => {
+                await Navigation.NavigateAsync(p.ToString()); 
             }); }
-        }
+        } 
+
 
         private INavigationService Navigation;
         public MainPageViewModel(INavigationService navigationService)

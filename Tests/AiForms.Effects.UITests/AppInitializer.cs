@@ -27,6 +27,7 @@ namespace AiForms.Effects.UITests
                     // TODO: Update this path to point to your Android app and uncomment the
                     // code if the app is not included in the solution.
                     //.ApkFile ("../../../Droid/bin/Debug/xamarinforms.apk")
+                    .EnableLocalScreenshots()
                     .StartApp();
             }
 

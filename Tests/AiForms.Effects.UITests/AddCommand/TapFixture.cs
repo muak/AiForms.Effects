@@ -4,16 +4,14 @@ using NUnit.Framework;
 using Xamarin.UITest;
 using System.IO.IsolatedStorage;
 
-namespace AiForms.Effects.UITests
+namespace AiForms.Effects.UITests.AddCommand
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
-    public class AddCommandFixture
+    public class TapFixture:TestFixtureBase
     {
-        IApp app;
-        Platform platform;
 
-        public AddCommandFixture(Platform platform)
+        public TapFixture(Platform platform)
         {
             this.platform = platform;
         }
@@ -23,7 +21,7 @@ namespace AiForms.Effects.UITests
         {
             app = AppInitializer.StartApp(platform);
             //menu -> AddCommandPage
-            app.Tap("AddCommand");
+            app.Tap("AddCommandTapTest");
             app.WaitForElement("AddCommandTapTest", "Timeout", TimeSpan.FromSeconds(10));
         }
 
@@ -200,31 +198,22 @@ namespace AiForms.Effects.UITests
             await ExecutedAssert("StackLayout", true);
         }
 
-        bool OnPlatform(bool ios, bool android)
-        {
-            if (platform == Platform.iOS) {
-                return ios;
-            }
-            else {
-                return android;
-            }
-        }
-
         async Task ExecutedAssert(string view, bool expected)
         {
             app.ScrollDownTo(view);
             app.Tap(view);
 
             await Task.Delay(250);
-            var ret = app.Query("ResultText")[0];
+            var ret = app.Query("ResultExecute")[0];
+            var label = app.Query("ResultText")[0];
 
             Assert.AreEqual(expected, ret.Enabled, $"{view} command error");
 
             if (expected) {
-                ret.Text.Is(view, $"{view} parameter error");
+                label.Text.Is(view, $"{view} parameter error");
             }
             else {
-                string.IsNullOrEmpty(ret.Text).IsTrue();
+                string.IsNullOrEmpty(label.Text).IsTrue();
             }
 
             app.Tap("ResetResult");

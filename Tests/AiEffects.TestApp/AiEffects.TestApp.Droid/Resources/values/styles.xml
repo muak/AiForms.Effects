@@ -27,12 +27,17 @@
 
 		<!-- ToolBar BackButton 通常時 -->
 		<item name="android:textColorSecondary">#CCCCCC</item>
+		<item name="android:buttonStyle">@style/ButtonFix</item>
 
 	</style>
 	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
 		<item name="colorAccent">#FF4081</item>
 	</style>
 
+	<style name="ButtonFix" parent="Base.Widget.AppCompat.Button">
+        <item name="textAllCaps">false</item>
+	</style>
+	
 	<!-- TabText -->
 	<style name="TabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">9sp</item>
