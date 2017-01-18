@@ -39,6 +39,12 @@ namespace AiEffects.TestApp.ViewModels
             set { SetProperty(ref _CommandParameterText, value); }
         }
 
+        private string _LongParameterText;
+        public string LongParameterText {
+            get { return _LongParameterText; }
+            set { SetProperty(ref _LongParameterText, value); }
+        }
+
         private DelegateCommand _ToggleEffectCommand;
         public DelegateCommand ToggleEffectCommand {
             get { return _ToggleEffectCommand = _ToggleEffectCommand ?? new DelegateCommand(() => {
@@ -61,6 +67,7 @@ namespace AiEffects.TestApp.ViewModels
             get {
                 return _ResetCommand = _ResetCommand ?? new DelegateCommand(() => {
                     IsExecutedCommand = false;
+                    IsExecutedLong = false;
                     ParameterText = "";
                 });
             }
@@ -80,11 +87,50 @@ namespace AiEffects.TestApp.ViewModels
             }); }
         }
 
+        private DelegateCommand _ChangeLongParamCommand;
+        public DelegateCommand ChangeLongParamCommand {
+            get { return _ChangeLongParamCommand = _ChangeLongParamCommand ?? new DelegateCommand(() => {
+                LongParameterText = "LongFuga";
+            }); }
+        }
+
+        private DelegateCommand _ChangeRippleCommand;
+        public DelegateCommand ChangeRippleCommand {
+            get { return _ChangeRippleCommand = _ChangeRippleCommand ?? new DelegateCommand(() => {
+                EnableRipple = !EnableRipple;       
+            }); }
+        }
+
+        private bool _EnableRipple;
+        public bool EnableRipple {
+            get { return _EnableRipple; }
+            set { SetProperty(ref _EnableRipple, value); }
+        }
+
+        private bool _IsExecutedLong;
+        public bool IsExecutedLong {
+            get { return _IsExecutedLong; }
+            set { SetProperty(ref _IsExecutedLong, value); }
+        }
+
+        private DelegateCommand<object> _LongCommand;
+        public DelegateCommand<object> LongCommand {
+            get {
+                return _LongCommand = _LongCommand ?? new DelegateCommand<object>((p) => {
+                    IsExecutedLong = true;
+                    ParameterText = p.ToString();
+                });
+            }
+        }
+
         public AddCommandPropPageViewModel()
         {
             EffectOn = false;
             CommandParameterText = "Hoge";
+            LongParameterText = "LongHoge";
             EffectColor = Color.FromHex("#50FFFF00");
+            EnableRipple = false;
+
         }
     }
 }

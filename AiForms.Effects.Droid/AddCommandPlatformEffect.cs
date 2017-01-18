@@ -7,6 +7,8 @@ using Android.Views;
 using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Android.Graphics.Drawables;
+using Android.Content.Res;
 
 [assembly: ResolutionGroupName("AiForms")]
 [assembly: ExportEffect(typeof(AddCommandPlatformEffect), nameof(AddCommand))]
@@ -17,21 +19,27 @@ namespace AiForms.Effects.Droid
     {
         private ICommand _command;
         private object _commandParameter;
+        private ICommand _longCommand;
+        private object _longCommandParameter;
         private Android.Views.View _view;
         private FrameLayout _layer;
+
 
         protected override void OnAttached()
         {
             _view = Control ?? Container;
 
-            UpdateCommand();
-            UpdateCommandParameter();
-            UpdateEffectColor();
-
             if (Control is Android.Widget.ListView) {
                 //ListViewはOnClickで例外を出すので除外
                 return;
             }
+
+            UpdateCommand();
+            UpdateCommandParameter();
+            UpdateLongCommand();
+            UpdateLongCommandParameter();
+            UpdateEffectColor();
+
             _view.Click += OnClick;
         }
 
@@ -41,9 +49,12 @@ namespace AiForms.Effects.Droid
             if (renderer?.Element != null) {    // Disposeされているかの判定
                 _view.Click -= OnClick;
                 _view.Touch -= View_Touch;
+                _view.LongClick -= OnLongClick;
             }
             _command = null;
             _commandParameter = null;
+            _longCommand = null;
+            _longCommandParameter = null;
             _view = null;
 
             if (_layer != null) {
@@ -62,16 +73,16 @@ namespace AiForms.Effects.Droid
             else if (e.PropertyName == AddCommand.CommandParameterProperty.PropertyName) {
                 UpdateCommandParameter();
             }
-            else if (e.PropertyName == AddCommand.EffectColorProperty.PropertyName) {
+            else if (e.PropertyName == AddCommand.EffectColorProperty.PropertyName ||
+                     e.PropertyName == AddCommand.EnableRippleProperty.PropertyName) {
                 UpdateEffectColor();
             }
-
-        }
-
-
-        void OnClick(object sender, EventArgs e)
-        {
-            _command?.Execute(_commandParameter ?? Element);
+            else if (e.PropertyName == AddCommand.LongCommandProperty.PropertyName) {
+                UpdateLongCommand();
+            }
+            else if (e.PropertyName == AddCommand.LongCommandParameterProperty.PropertyName) {
+                UpdateLongCommandParameter();
+            }
         }
 
         void UpdateCommand()
@@ -82,6 +93,41 @@ namespace AiForms.Effects.Droid
         void UpdateCommandParameter()
         {
             _commandParameter = AddCommand.GetCommandParameter(Element);
+        }
+
+        void UpdateLongCommand()
+        {
+            if (_longCommand != null) {
+                _view.LongClick -= OnLongClick;
+            }
+            _longCommand = AddCommand.GetLongCommand(Element);
+            if (_longCommand == null) {
+                return;
+            }
+
+            _view.LongClick += OnLongClick;
+
+        }
+        void UpdateLongCommandParameter()
+        {
+            _longCommandParameter = AddCommand.GetLongCommandParameter(Element);
+        }
+
+        void OnClick(object sender, EventArgs e)
+        {
+            _command?.Execute(_commandParameter ?? Element);
+        }
+
+        void OnLongClick(object sender, Android.Views.View.LongClickEventArgs e)
+        {
+            if (_longCommand == null) {
+                e.Handled = false;
+                return;
+            }
+
+            _longCommand?.Execute(_longCommandParameter ?? Element);
+
+            e.Handled = true;
         }
 
         void UpdateEffectColor()
@@ -96,11 +142,48 @@ namespace AiForms.Effects.Droid
             if (color == Xamarin.Forms.Color.Default) {
                 return;
             }
+            var useRipple = AddCommand.GetEnableRipple(Element);
 
-            _layer = new FrameLayout(Container.Context);
-            _layer.LayoutParameters = new ViewGroup.LayoutParams(-1, -1);
-            _layer.SetBackgroundColor(color.ToAndroid());
-            _view.Touch += View_Touch;
+            if (useRipple) {
+                _view.Background = CreateRipple(color.ToAndroid());
+            }
+            else {
+                _layer = new FrameLayout(Container.Context);
+                _layer.LayoutParameters = new ViewGroup.LayoutParams(-1, -1);
+                _layer.SetBackgroundColor(color.ToAndroid());
+                _view.Touch += View_Touch;
+            }
+        }
+
+        RippleDrawable CreateRipple(Android.Graphics.Color color)
+        {
+            var back = _view.Background;
+            if (back == null) {
+                var mask = new ColorDrawable(Android.Graphics.Color.White);
+                return new RippleDrawable(getPressedColorSelector(color), null, mask);
+            }
+            else if (back is RippleDrawable) {
+                var ripple = back as RippleDrawable;
+                ripple.SetColor(getPressedColorSelector(color));
+
+                return ripple;
+            }
+            else {
+                return new RippleDrawable(getPressedColorSelector(color), back, null);
+            }
+        }
+
+        ColorStateList getPressedColorSelector(int pressedColor)
+        {
+            return new ColorStateList(
+                new int[][]
+                {
+                    new int[]{}
+                },
+                new int[]
+                {
+                    pressedColor,
+                });
         }
 
         void View_Touch(object sender, Android.Views.View.TouchEventArgs e)

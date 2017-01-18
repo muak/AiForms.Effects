@@ -46,8 +46,23 @@ namespace AiEffects.TestApp.ViewModels
         public DelegateCommand ResetCommand {
             get { return _ResetCommand = _ResetCommand ?? new DelegateCommand(() => {
                 IsExecutedCommand = false;
+                IsExecutedLong = false;
                 CommandParameterText = "";
             }); } 
+        }
+
+        private bool _IsExecutedLong;
+        public bool IsExecutedLong {
+            get { return _IsExecutedLong; }
+            set { SetProperty(ref _IsExecutedLong, value); }
+        }
+
+        private DelegateCommand<object> _LongCommand;
+        public DelegateCommand<object> LongCommand {
+            get { return _LongCommand = _LongCommand ?? new DelegateCommand<object>((p) => {
+                IsExecutedLong = true;
+                CommandParameterText = p.ToString();
+            }); }
         }
 
         private INavigationService Navigation;
@@ -58,6 +73,7 @@ namespace AiEffects.TestApp.ViewModels
             EffectOn = true;
             EffectColor = Color.FromHex("#50FFFF00");
             IsExecutedCommand = false;
+            IsExecutedLong = false;
         }
 
         public void Destroy()

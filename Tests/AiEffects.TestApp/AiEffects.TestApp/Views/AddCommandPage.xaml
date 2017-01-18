@@ -11,16 +11,18 @@
 		<StackLayout Orientation="Horizontal" VerticalOptions="Start" >
 			<Label  AutomationId="ResultText" Text="{Binding CommandParameterText}" HorizontalOptions="FillAndExpand" />
 			<Switch AutomationId="ResultExecute" IsEnabled="{Binding IsExecutedCommand}" IsToggled="{Binding IsExecutedCommand}" HorizontalOptions="End" />
-			<Button AutomationId="ResetResult" Text="Reset" Command="{Binding ResetCommand}" HorizontalOptions="End" />
-			<Button AutomationId="DummyButton" WidthRequest="1" />
-		</StackLayout> 
+			<Switch AutomationId="ResultLong" IsEnabled="{Binding IsExecutedLong}" IsToggled="{Binding IsExecutedLong}" HorizontalOptions="End" />
+			<Button AutomationId="ResetResult" Text="R" Command="{Binding ResetCommand}" HorizontalOptions="End" />
+		</StackLayout>
 		<ScrollView VerticalOptions="FillAndExpand">
 		<StackLayout>
 			<ActivityIndicator AutomationId="ActivityIndicator" IsVisible="true" IsRunning="true" 
 				ef:AddCommand.On="{Binding EffectOn}" 
-				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.EffectColor="{Binding EffectColor}" ef:AddCommand.EnableRipple="false"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="ActivityIndicator" /> 
+				ef:AddCommand.CommandParameter="ActivityIndicator"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongActivetyIndicator"  /> 
 				
 			<BoxView Color="Green"  AutomationId="BoxView"
 				ef:AddCommand.On="{Binding EffectOn}" 
