@@ -6,7 +6,7 @@ namespace AiForms.Effects.UITests.AddCommand
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
-    public class PropertyChangedFixture:TestFixtureBase
+    public class PropertyChangedFixture : TestFixtureBase
     {
         public PropertyChangedFixture(Platform platform)
         {
@@ -40,7 +40,7 @@ namespace AiForms.Effects.UITests.AddCommand
             await Task.Delay(250);
 
             Assert.IsTrue(app.Query("ResultExecute")[0].Enabled);
-            Assert.AreEqual("Hoge",app.Query("ParamText")[0].Text);
+            Assert.AreEqual("Hoge", app.Query("ParamText")[0].Text);
 
             app.Tap("ResetResult");
             await Task.Delay(250);

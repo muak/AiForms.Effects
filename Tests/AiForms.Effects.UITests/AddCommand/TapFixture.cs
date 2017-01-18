@@ -8,7 +8,7 @@ namespace AiForms.Effects.UITests.AddCommand
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
-    public class TapFixture:TestFixtureBase
+    public class TapFixture : TestFixtureBase
     {
 
         public TapFixture(Platform platform)
@@ -48,14 +48,14 @@ namespace AiForms.Effects.UITests.AddCommand
         {
             //iOS : DatePicker is not supported 
             //Android:Default DatePicker function overwritten 
-            await ExecutedAssert("DatePicker", OnPlatform(false,true));   
+            await ExecutedAssert("DatePicker", OnPlatform(false, true));
         }
 
         [Test]
         public async Task T05_Editor()
         {
             //Android: not supported
-            await ExecutedAssert("Editor", OnPlatform(true,false));
+            await ExecutedAssert("Editor", OnPlatform(true, false));
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace AiForms.Effects.UITests.AddCommand
         public async Task T09_ListView()
         {
             //Android:not supported
-            await ExecutedAssert("ListView", OnPlatform(true,false));
+            await ExecutedAssert("ListView", OnPlatform(true, false));
         }
 
         [Test]
@@ -88,7 +88,7 @@ namespace AiForms.Effects.UITests.AddCommand
         {
             //iOS:Picker is not supported
             //Android:Default DatePicker function overwritten 
-            await ExecutedAssert("Picker", OnPlatform(false,true));      
+            await ExecutedAssert("Picker", OnPlatform(false, true));
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace AiForms.Effects.UITests.AddCommand
         public async Task T13_Slider()
         {
             //Android:not supported
-            await ExecutedAssert("Slider", OnPlatform(true,false));
+            await ExecutedAssert("Slider", OnPlatform(true, false));
         }
 
         [Test]
@@ -120,7 +120,7 @@ namespace AiForms.Effects.UITests.AddCommand
         public async Task T15_Switch()
         {
             //iOS:Switch is not supported
-            await ExecutedAssert("Switch", OnPlatform(false,true));      
+            await ExecutedAssert("Switch", OnPlatform(false, true));
         }
 
         [Test]
@@ -134,7 +134,7 @@ namespace AiForms.Effects.UITests.AddCommand
         {
             //iOS:TimePicker is not supported
             //Android:Default DatePicker function overwritten 
-            await ExecutedAssert("TimePicker",OnPlatform(false,true));    
+            await ExecutedAssert("TimePicker", OnPlatform(false, true));
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace AiForms.Effects.UITests.AddCommand
         public async Task T21_Frame()
         {
             //Android:not supported
-            await ExecutedAssert("Frame", OnPlatform(true,false));
+            await ExecutedAssert("Frame", OnPlatform(true, false));
         }
 
         [Test]
