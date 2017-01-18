@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6DBE8B7C-587D-4423-A780-AA4E4DAF4BC4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AiForms.Effects.UITests</RootNamespace>
+    <AssemblyName>AiForms.Effects.UITests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.0.4-pre</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.UITest">
+      <HintPath>..\..\packages\Xamarin.UITest.2.0.5\lib\Xamarin.UITest.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tests.cs" />
+    <Compile Include="AppInitializer.cs" />
+    <Compile Include="ChainingAssertion.NUnit.cs" />
+    <Compile Include="AddCommand\TapFixture.cs" />
+    <Compile Include="TestFixtureBase.cs" />
+    <Compile Include="AddCommand\PropertyChangedFixture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AiEffects.Sample\AiEffects.Sample.iOS\AiEffects.Sample.iOS.csproj">
+      <Project>{6AC1725D-A7EE-426B-AF69-C42E61F59D39}</Project>
+      <Name>AiEffects.TestApp.iOS</Name>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\AiEffects.TestApp\AiEffects.TestApp\AiEffects.TestApp.csproj">
+      <Project>{02E2C54E-9A67-4255-BACC-C035A5529716}</Project>
+      <Name>AiEffects.TestApp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AiEffects.TestApp\AiEffects.TestApp.Droid\AiEffects.TestApp.Droid.csproj">
+      <Project>{8F6AF907-6204-46C5-8ABB-F2BDD40FFC66}</Project>
+      <Name>AiEffects.TestApp.Droid</Name>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AddCommand\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

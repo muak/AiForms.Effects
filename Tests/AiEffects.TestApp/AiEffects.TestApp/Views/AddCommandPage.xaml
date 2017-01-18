@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+		xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+		prism:ViewModelLocator.AutowireViewModel="True" 
+		x:Class="AiEffects.TestApp.Views.AddCommandPage"
+		Title="AddCommand TapTest"
+		AutomationId="AddCommandTapTest">
+	<StackLayout> 
+		<StackLayout Orientation="Horizontal" VerticalOptions="Start" >
+			<Label  AutomationId="ResultText" Text="{Binding CommandParameterText}" HorizontalOptions="FillAndExpand" />
+			<Switch AutomationId="ResultExecute" IsEnabled="{Binding IsExecutedCommand}" IsToggled="{Binding IsExecutedCommand}" HorizontalOptions="End" />
+			<Button AutomationId="ResetResult" Text="Reset" Command="{Binding ResetCommand}" HorizontalOptions="End" />
+			<Button AutomationId="DummyButton" WidthRequest="1" />
+		</StackLayout> 
+		<ScrollView VerticalOptions="FillAndExpand">
+		<StackLayout>
+			<ActivityIndicator AutomationId="ActivityIndicator" IsVisible="true" IsRunning="true" 
+				ef:AddCommand.On="{Binding EffectOn}" 
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="ActivityIndicator" /> 
+				
+			<BoxView Color="Green"  AutomationId="BoxView"
+				ef:AddCommand.On="{Binding EffectOn}" 
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="BoxView" />
+				 
+			<Button Text="Button"  AutomationId="Button"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="Button" />
+
+			<DatePicker  AutomationId="DatePicker"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="DatePicker" />
+
+			<Editor  Text="Editor" AutomationId="Editor"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="Editor" />
+
+			<Entry Text="Entry"  AutomationId="Entry"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="Entry" />
+
+			<Image Source="sample" HeightRequest="30"  AutomationId="Image"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="Image" />
+				
+			<Label Text="Label" AutomationId="Label"
+				ef:AddCommand.On="{Binding EffectOn}" 
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="Label" />
+
+			<ListView HeightRequest="20" BackgroundColor="Green" AutomationId="ListView"
+				ef:AddCommand.On="{Binding EffectOn}" 
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="ListView"/>
+
+			<Picker Title="Picker"  AutomationId="Picker"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="Picker" />
+
+			<ProgressBar Progress="0.5" AutomationId="ProgressBar"
+				ef:AddCommand.On="{Binding EffectOn}" 
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="ProgressBar"/>
+
+			<SearchBar AutomationId="SearchBar" HeightRequest="25"
+				ef:AddCommand.On="{Binding EffectOn}" 
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="SearchBar"/>
+
+			<Slider  AutomationId="Slider"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="Slider" />
+				
+			<Stepper AutomationId="Stepper"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="Stepper"/>
+
+			<Switch AutomationId="Switch"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="Switch" />
+
+			<TableView HeightRequest="20" BackgroundColor="Green" AutomationId="TableView"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="TableView" />
+
+			<TimePicker  AutomationId="TimePicker"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="TimePicker" />
+
+			<WebView Source="https://www.google.co.jp/" HeightRequest="60" BackgroundColor="Green" AutomationId="WebView"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="WebView"/>
+				 
+			<ContentPresenter HeightRequest="20" BackgroundColor="Blue" AutomationId="ContentPresenter"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="ContentPresenter" />
+
+			<ContentView HeightRequest="20" BackgroundColor="Navy" AutomationId="ContentView"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="ContentView" />
+
+			<Frame  AutomationId="Frame"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="Frame" />
+
+			<ScrollView HeightRequest="20" BackgroundColor="Green" AutomationId="ScrollView"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="ScrollView" />
+
+			<TemplatedView HeightRequest="20" BackgroundColor="Blue" AutomationId="TemplatedView"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="TemplatedView" />
+
+			<AbsoluteLayout HeightRequest="20" BackgroundColor="Fuchsia" AutomationId="AbsoluteLayout"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="AbsoluteLayout"/>
+
+			<Grid HeightRequest="20" BackgroundColor="Maroon" AutomationId="Grid"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="Grid" />
+
+			<RelativeLayout HeightRequest="20" BackgroundColor="Olive" AutomationId="RelativeLayout"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="RelativeLayout" />
+
+			<StackLayout Orientation="Horizontal" AutomationId="StackLayout"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="StackLayout" >
+				<Label Text="StackLayout" />
+			</StackLayout>
+
+		</StackLayout>
+		</ScrollView>
+	</StackLayout>
+
+</ContentPage>

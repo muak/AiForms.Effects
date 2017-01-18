@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Foundation;
@@ -7,7 +7,7 @@ using Prism;
 using Prism.Unity;
 using UIKit;
 
-namespace AiEffects.Sample.iOS
+namespace AiEffects.TestApp.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
     // User Interface of the application, as well as listening (and optionally responding) to 
