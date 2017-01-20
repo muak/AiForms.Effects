@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using AiForms.Effects;
 using AiForms.Effects.iOS;
@@ -6,7 +6,6 @@ using CoreGraphics;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using System.Threading.Tasks;
 
 [assembly: ResolutionGroupName("AiForms")]
 [assembly: ExportEffect(typeof(AddCommandPlatformEffect), nameof(AddCommand))]
@@ -23,14 +22,14 @@ namespace AiForms.Effects.iOS
         private UILongPressGestureRecognizer _longTapGesture;
         private UIView _view;
         private UIView _layer;
+        private double _alpha;
 
         protected override void OnAttached()
         {
             _view = Control ?? Container;
 
             _tapGesture = new UITapGestureRecognizer(async (obj) => {
-
-                await TapAnimation(0.3);
+                await TapAnimation(0.3,_alpha,0);
                 _command?.Execute(_commandParameter ?? Element);
             });
 
@@ -108,13 +107,13 @@ namespace AiForms.Effects.iOS
 
                     _longCommand?.Execute(_longCommandParameter ?? Element);
 
-                    await TapAnimation(0.5, 0, 1, false);
+                    await TapAnimation(0.5, 0, _alpha, false);
                 }
                 else if (obj.State == UIGestureRecognizerState.Ended ||
                          obj.State == UIGestureRecognizerState.Cancelled ||
                          obj.State == UIGestureRecognizerState.Failed) {
 
-                    await TapAnimation(0.5);
+                    await TapAnimation(0.5,_alpha,0);
                 }
             });
             _view.AddGestureRecognizer(_longTapGesture);
@@ -137,21 +136,22 @@ namespace AiForms.Effects.iOS
             if (color == Xamarin.Forms.Color.Default) {
                 return;
             }
+            _alpha = color.A < 1.0 ? 1 : 0.3;
 
             _layer = new UIView();
             _layer.BackgroundColor = color.ToUIColor();
 
         }
 
-        async Task TapAnimation(double duration, float start = 1, float end = 0, bool remove = true)
+        async Task TapAnimation(double duration, double start = 1, double end = 0, bool remove = true)
         {
             if (_layer != null) {
                 _layer.Frame = new CGRect(0, 0, Container.Bounds.Width, Container.Bounds.Height);
                 Container.AddSubview(_layer);
                 Container.BringSubviewToFront(_layer);
-                _layer.Alpha = start;
+                _layer.Alpha = (float)start;
                 await UIView.AnimateAsync(duration, () => {
-                    _layer.Alpha = end;
+                    _layer.Alpha = (float)end;
                 });
                 if (remove) {
                     _layer.RemoveFromSuperview();

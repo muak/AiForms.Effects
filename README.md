@@ -1,11 +1,104 @@
-# AiForms.Effects
+# AiForms.Effects　for Xamarin.Forms
 
 Xamarin.Forms Effects for Android / iOS only.
 
+## Introductions
+
+* [AddCommand](#AddCommand)
+    * add Command function to a view.
+* [AddNumberPicker](#AddNumberPicker)
+    * add NumberPicker function to a view.
+* [AlterLineHeight](#AlterLineHeight)
+    * alter LineHeight of Label and Editor.
+
+
+
+## Minimum Device and Version etc
+
+iOS:iPhone5s,iPod touch6,iOS9.3
+Android:version 5.0〜7.0 (FormsAppcompatActivity only)
+
+## Nuget Installation
+
+```bash
+Install-Package AiForms.Effects -Pre
+```
+
+You need to install this nuget package to PCL project and each platform project.
+
+### for iOS project
+
+To use by iOS, you need to write some code in AppDelegate.cs.
+
+```csharp
+public override bool FinishedLaunching(UIApplication app, NSDictionary options) {
+    global::Xamarin.Forms.Forms.Init();
+
+    AiForms.Effects.iOS.Effects.Init();  //need to write here
+
+    LoadApplication(new App(new iOSInitializer()));
+
+    return base.FinishedLaunching(app, options);
+}
+```
+
+## AddCommand
+
+This Effect add Command function to a view.
+There are properties of Command and Parameter for tap and long tap.
+
+### Supported View
+
+* Label
+* BoxView
+* Button
+* StackLayout
+* AbsoluteLayout
+* Image
+* Editor
+
+### Parameters
+
+* On
+    * Effect On/Off (true is On)
+* Command
+    * Tap Command
+* CommandParameter
+    * Tap Command Parameter
+* LongCommand
+    * Long Tap Command
+* LongCommandParameter
+    * Long Tap Command
+* EffectColor
+    * background color when to tap.if it doesn't setting,nothing will occur.
+* EnableRipple
+    * Ripple Effect On/Off (default true,android only)
+      If you don't need to ripple effect,it make EnableRipple false .
+
+### How to Xaml
+
+```xml
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+		x:Class="AiEffects.Sample.Views.AddCommandPage">
+
+        <StackLayout>
+    		<Label Text="Label"
+    			ef:AddCommand.On="true"
+    			ef:AddCommand.EffectColor="#50FFFF00"
+    			ef:AddCommand.Command="{Binding EffectCommand}"
+    			ef:AddCommand.CommandParameter="Label"
+                ef:AddCommand.LongCommand="{Binding LongTapCommand}"
+                ef:AddCommand.LongCommandParameter="LongTap" />
+        </StackLayout>
+</ContentPage>
+```
+
 ## AddNumberPicker
 
-This Effect add NumberPicker function to a view.  
-When you tap the view ,Picker is shown.And when you select a number,it reflects to Number property.If you set Command property,it executes.
+This Effect add NumberPicker function to a view.
+When you tap the view ,Picker is shown. And when you select a number,it reflects to Number property.If you set Command property,it executes.
 
 ### Supported View
 
@@ -64,58 +157,4 @@ This Effect alter LineHeight of Label and Editor.
 			ef:AlterLineHeight.Multiple="1.5"  />
 	</StackLayout>
 </ContentPage>
-```
-
-## AddCommand
-
-This Effect add Command function to a view.
-
-### Supported View
-
-* Label
-* BoxView
-* Button
-* StackLayout
-* AbsoluteLayout
-* Image
-* Editor
-
-### How to Xaml
-
-```xml
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-		xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
-		x:Class="AiEffects.Sample.Views.AddCommandPage">
-
-        <StackLayout>
-    		<Label Text="Label"
-    			ef:AddCommand.On="true"
-    			ef:AddCommand.EffectColor="#50FFFF00"
-    			ef:AddCommand.Command="{Binding EffectCommand}"
-    			ef:AddCommand.CommandParameter="Label" />
-        </StackLayout>
-</ContentPage>
-```
-
-## Installation instructions
-
-```bash
-Install-Package AiForms.Effects -Pre
-```
-
-### for iOS project
-
-AppDelegate.cs
-
-```csharp
-public override bool FinishedLaunching(UIApplication app, NSDictionary options) {
-    global::Xamarin.Forms.Forms.Init();
-
-    AiForms.Effects.iOS.Effects.Init();  //need to write here
-
-    LoadApplication(new App(new iOSInitializer()));
-
-    return base.FinishedLaunching(app, options);
-}
 ```

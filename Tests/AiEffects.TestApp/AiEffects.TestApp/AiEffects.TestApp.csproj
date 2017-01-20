@@ -50,10 +50,6 @@
       <DependentUpon>AddNumberPickerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddNumberPickerPageViewModel.cs" />
-    <Compile Include="Views\AddCommandPropPage.xaml.cs">
-      <DependentUpon>AddCommandPropPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\AddCommandPropPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -69,9 +65,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AddNumberPickerPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\AddCommandPropPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

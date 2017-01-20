@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Graphics.Drawables;
 using Android.Content.Res;
+using System.Diagnostics;
 
 [assembly: ResolutionGroupName("AiForms")]
 [assembly: ExportEffect(typeof(AddCommandPlatformEffect), nameof(AddCommand))]
@@ -23,6 +24,9 @@ namespace AiForms.Effects.Droid
         private object _longCommandParameter;
         private Android.Views.View _view;
         private FrameLayout _layer;
+        private RippleDrawable _ripple;
+        private Drawable _orgBackground;
+        private bool _useRipple;
 
 
         protected override void OnAttached()
@@ -38,6 +42,7 @@ namespace AiForms.Effects.Droid
             UpdateCommandParameter();
             UpdateLongCommand();
             UpdateLongCommandParameter();
+            UpdateEnableRipple();
             UpdateEffectColor();
 
             _view.Click += OnClick;
@@ -50,17 +55,19 @@ namespace AiForms.Effects.Droid
                 _view.Click -= OnClick;
                 _view.Touch -= View_Touch;
                 _view.LongClick -= OnLongClick;
+                _view.Background = _orgBackground;
             }
             _command = null;
             _commandParameter = null;
             _longCommand = null;
             _longCommandParameter = null;
+            _orgBackground = null;
             _view = null;
 
-            if (_layer != null) {
-                _layer.Dispose();
-                _layer = null;
-            }
+            _layer?.Dispose();
+            _layer = null;
+            _ripple?.Dispose();
+            _ripple = null;
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
@@ -73,8 +80,7 @@ namespace AiForms.Effects.Droid
             else if (e.PropertyName == AddCommand.CommandParameterProperty.PropertyName) {
                 UpdateCommandParameter();
             }
-            else if (e.PropertyName == AddCommand.EffectColorProperty.PropertyName ||
-                     e.PropertyName == AddCommand.EnableRippleProperty.PropertyName) {
+            else if (e.PropertyName == AddCommand.EffectColorProperty.PropertyName) {
                 UpdateEffectColor();
             }
             else if (e.PropertyName == AddCommand.LongCommandProperty.PropertyName) {
@@ -82,6 +88,9 @@ namespace AiForms.Effects.Droid
             }
             else if (e.PropertyName == AddCommand.LongCommandParameterProperty.PropertyName) {
                 UpdateLongCommandParameter();
+            }
+            else if (e.PropertyName == AddCommand.EnableRippleProperty.PropertyName) {
+                UpdateEnableRipple();
             }
         }
 
@@ -142,10 +151,10 @@ namespace AiForms.Effects.Droid
             if (color == Xamarin.Forms.Color.Default) {
                 return;
             }
-            var useRipple = AddCommand.GetEnableRipple(Element);
+            //var useRipple = AddCommand.GetEnableRipple(Element);
 
-            if (useRipple) {
-                _view.Background = CreateRipple(color.ToAndroid());
+            if (_useRipple) {
+                _ripple.SetColor(getPressedColorSelector(color.ToAndroid()));
             }
             else {
                 _layer = new FrameLayout(Container.Context);
@@ -155,21 +164,46 @@ namespace AiForms.Effects.Droid
             }
         }
 
+        void UpdateEnableRipple()
+        {
+            var newValue = AddCommand.GetEnableRipple(Element);
+            if (newValue == _useRipple) {
+                return;
+            }
+
+            var color = AddCommand.GetEffectColor(Element);
+            if (color == Xamarin.Forms.Color.Default) {
+                return;
+            }
+
+            if (!_useRipple && newValue) {
+                _orgBackground = _view.Background;
+                _view.Background = CreateRipple(Color.Accent.ToAndroid());
+            }
+            if (_useRipple && !newValue) {
+                var ripple = _view.Background;
+                _view.Background = _orgBackground;
+                ripple?.Dispose();
+            }
+
+            _useRipple = newValue;
+        }
+
         RippleDrawable CreateRipple(Android.Graphics.Color color)
         {
             var back = _view.Background;
             if (back == null) {
                 var mask = new ColorDrawable(Android.Graphics.Color.White);
-                return new RippleDrawable(getPressedColorSelector(color), null, mask);
+                return _ripple = new RippleDrawable(getPressedColorSelector(color), null, mask);
             }
             else if (back is RippleDrawable) {
-                var ripple = back as RippleDrawable;
-                ripple.SetColor(getPressedColorSelector(color));
+                _ripple = back.GetConstantState().NewDrawable() as RippleDrawable;
+                _ripple.SetColor(getPressedColorSelector(color));
 
-                return ripple;
+                return _ripple;
             }
             else {
-                return new RippleDrawable(getPressedColorSelector(color), back, null);
+                return _ripple = new RippleDrawable(getPressedColorSelector(color), back, null);
             }
         }
 

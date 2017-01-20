@@ -42,7 +42,7 @@
     <Compile Include="ChainingAssertion.NUnit.cs" />
     <Compile Include="AddCommand\TapFixture.cs" />
     <Compile Include="TestFixtureBase.cs" />
-    <Compile Include="AddCommand\PropertyChangedFixture.cs" />
+    <Compile Include="AddCommand\Id.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
