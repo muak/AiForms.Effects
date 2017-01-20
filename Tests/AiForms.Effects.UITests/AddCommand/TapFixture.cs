@@ -119,6 +119,7 @@ namespace AiForms.Effects.UITests.AddCommand
         [Test]
         public async Task T14_Stepper()
         {
+            //AndroidはStepperそのものをタップしても反応せず、余白タップで反応するので実質機能しない
             await ExecutedAssert(Id.Stepper, true,true);
         }
 

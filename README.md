@@ -4,11 +4,11 @@ Xamarin.Forms Effects for Android / iOS only.
 
 ## Introductions
 
-* [AddCommand](#AddCommand)
+* [AddCommand](#addcommand)
     * add Command function to a view.
-* [AddNumberPicker](#AddNumberPicker)
+* [AddNumberPicker](#addNumberpicker)
     * add NumberPicker function to a view.
-* [AlterLineHeight](#AlterLineHeight)
+* [AlterLineHeight](#alterlineheight)
     * alter LineHeight of Label and Editor.
 
 
@@ -97,7 +97,7 @@ There are properties of Command and Parameter for tap and long tap.
 
 ## AddNumberPicker
 
-This Effect add NumberPicker function to a view.
+This Effect add NumberPicker function to a view.<br>
 When you tap the view ,Picker is shown. And when you select a number,it reflects to Number property.If you set Command property,it executes.
 
 ### Supported View
