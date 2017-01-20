@@ -6,12 +6,10 @@ Xamarin.Forms Effects for Android / iOS only.
 
 * [AddCommand](#addcommand)
     * add Command function to a view.
-* [AddNumberPicker](#addNumberpicker)
+* [AddNumberPicker](#addnumberpicker)
     * add NumberPicker function to a view.
 * [AlterLineHeight](#alterlineheight)
     * alter LineHeight of Label and Editor.
-
-
 
 ## Minimum Device and Version etc
 
