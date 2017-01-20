@@ -15,7 +15,7 @@ Xamarin.Forms Effects for Android / iOS only.
 
 ## Minimum Device and Version etc
 
-iOS:iPhone5s,iPod touch6,iOS9.3
+iOS:iPhone5s,iPod touch6,iOS9.3<br>
 Android:version 5.0〜7.0 (FormsAppcompatActivity only)
 
 ## Nuget Installation
@@ -44,7 +44,7 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 
 ## AddCommand
 
-This Effect add Command function to a view.
+This Effect add Command function to a view.<br>
 There are properties of Command and Parameter for tap and long tap.
 
 ### Supported View
@@ -72,7 +72,7 @@ There are properties of Command and Parameter for tap and long tap.
 * EffectColor
     * background color when to tap.if it doesn't setting,nothing will occur.
 * EnableRipple
-    * Ripple Effect On/Off (default true,android only)
+    * Ripple Effect On/Off (default true,android only)<br>
       If you don't need to ripple effect,it make EnableRipple false .
 
 ### How to Xaml
