@@ -29,7 +29,7 @@ namespace AiForms.Effects.iOS
             _view = Control ?? Container;
 
             _tapGesture = new UITapGestureRecognizer(async (obj) => {
-                await TapAnimation(0.3,_alpha,0);
+                await TapAnimation(0.3, _alpha, 0);
                 _command?.Execute(_commandParameter ?? Element);
             });
 
@@ -113,7 +113,7 @@ namespace AiForms.Effects.iOS
                          obj.State == UIGestureRecognizerState.Cancelled ||
                          obj.State == UIGestureRecognizerState.Failed) {
 
-                    await TapAnimation(0.5,_alpha,0);
+                    await TapAnimation(0.5, _alpha, 0);
                 }
             });
             _view.AddGestureRecognizer(_longTapGesture);

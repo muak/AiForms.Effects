@@ -282,7 +282,8 @@
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongStackLayout"
 				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  > 
-				<Label Text="StackLayout" />
+				<Label Text="StackLayout" InputTransparent="true" />
+				<Image Source="sample" />
 			</StackLayout>
 
 			<Label AutomationId="PropTestView" Text="PropertyChangedTest" HeightRequest="30"
@@ -293,7 +294,7 @@
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="{Binding TestLongParam}"
 				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
-
+			
 					/>
 		</StackLayout>
 		</ScrollView>

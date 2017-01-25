@@ -76,11 +76,13 @@ namespace AiEffects.TestApp.ViewModels
 
         private DelegateCommand _ResetCommand;
         public DelegateCommand ResetCommand {
-            get { return _ResetCommand = _ResetCommand ?? new DelegateCommand(() => {
-                IsExecutedCommand = false;
-                IsExecutedLong = false;
-                CommandParameterText = "";
-            }); } 
+            get {
+                return _ResetCommand = _ResetCommand ?? new DelegateCommand(() => {
+                    IsExecutedCommand = false;
+                    IsExecutedLong = false;
+                    CommandParameterText = "";
+                });
+            }
         }
 
         private DelegateCommand _ChangeEffectColorCommand;
@@ -130,27 +132,31 @@ namespace AiEffects.TestApp.ViewModels
 
         private DelegateCommand _ChangeCommand;
         public DelegateCommand ChangeCommand {
-            get { return _ChangeCommand = _ChangeCommand ?? new DelegateCommand(() => {
-                if (EffectCommand != null) {
-                    EffectCommand = null;
-                }
-                else {
-                    EffectCommand = new DelegateCommand<object>(ExecCommand);
-                }
+            get {
+                return _ChangeCommand = _ChangeCommand ?? new DelegateCommand(() => {
+                    if (EffectCommand != null) {
+                        EffectCommand = null;
+                    }
+                    else {
+                        EffectCommand = new DelegateCommand<object>(ExecCommand);
+                    }
 
-            }); }
+                });
+            }
         }
 
         private DelegateCommand _ChangeLongCommand;
         public DelegateCommand ChangeLongCommand {
-            get { return _ChangeLongCommand = _ChangeLongCommand ?? new DelegateCommand(() => {
-                if (LongCommand != null) {
-                    LongCommand = null;
-                }
-                else {
-                    LongCommand = new DelegateCommand<object>(ExecLongCommand);
-                }
-            }); }
+            get {
+                return _ChangeLongCommand = _ChangeLongCommand ?? new DelegateCommand(() => {
+                    if (LongCommand != null) {
+                        LongCommand = null;
+                    }
+                    else {
+                        LongCommand = new DelegateCommand<object>(ExecLongCommand);
+                    }
+                });
+            }
         }
 
         private INavigationService Navigation;

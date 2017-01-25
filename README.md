@@ -2,7 +2,7 @@
 
 Xamarin.Forms Effects for Android / iOS only.
 
-## Introductions
+## Features
 
 * [AddCommand](#addcommand)
     * add Command function to a view.
@@ -88,12 +88,12 @@ There are properties of Command and Parameter for tap and long tap.
 * LongCommand
     * Long Tap Command
 * LongCommandParameter
-    * Long Tap Command
+    * Long Tap Command Parameter
 * EffectColor
     * background color when to tap.if it doesn't setting,nothing will occur.
 * EnableRipple
     * Ripple Effect On/Off (default true,android only)<br>
-      If you don't need to ripple effect,it make EnableRipple false .
+      If you don't have to use ripple effect,it make EnableRipple false.
 
 ### How to Xaml
 
@@ -113,6 +113,19 @@ There are properties of Command and Parameter for tap and long tap.
                 ef:AddCommand.LongCommandParameter="LongTap" />
         </StackLayout>
 </ContentPage>
+```
+
+### Tips
+
+#### When using Image
+
+Ripple Effect will not occur foreground.In that case wrap by a layout view.
+
+```xml
+<StackLayout ef:AddCommand.On="{Binding EffectOn}"
+			 ef:AddCommand.EffectColor="{Binding EffectColor}">
+    <Image Source="image" />
+</StackLayout>
 ```
 
 ## AddNumberPicker

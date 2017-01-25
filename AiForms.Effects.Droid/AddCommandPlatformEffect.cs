@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Input;
 using AiForms.Effects;
 using AiForms.Effects.Droid;
+using Android.Content.Res;
+using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Android.Graphics.Drawables;
-using Android.Content.Res;
-using System.Diagnostics;
 
 [assembly: ResolutionGroupName("AiForms")]
 [assembly: ExportEffect(typeof(AddCommandPlatformEffect), nameof(AddCommand))]
@@ -25,8 +23,10 @@ namespace AiForms.Effects.Droid
         private Android.Views.View _view;
         private FrameLayout _layer;
         private RippleDrawable _ripple;
-        private Drawable _orgBackground;
+        private Drawable _orgDrawable;
         private bool _useRipple;
+        private FrameLayout _rippleOverlay;
+        private ContainerOnLayoutChangeListener _rippleListener;
 
 
         protected override void OnAttached()
@@ -43,7 +43,7 @@ namespace AiForms.Effects.Droid
             UpdateLongCommand();
             UpdateLongCommandParameter();
             UpdateEnableRipple();
-            UpdateEffectColor();
+            //UpdateEffectColor();
 
             _view.Click += OnClick;
         }
@@ -55,15 +55,21 @@ namespace AiForms.Effects.Droid
                 _view.Click -= OnClick;
                 _view.Touch -= View_Touch;
                 _view.LongClick -= OnLongClick;
-                _view.Background = _orgBackground;
+                if (_useRipple) {
+                    RemoveRipple();
+                }
             }
             _command = null;
             _commandParameter = null;
             _longCommand = null;
             _longCommandParameter = null;
-            _orgBackground = null;
+            _orgDrawable = null;
             _view = null;
 
+            _rippleListener?.Dispose();
+            _rippleListener = null;
+            _rippleOverlay?.Dispose();
+            _rippleOverlay = null;
             _layer?.Dispose();
             _layer = null;
             _ripple?.Dispose();
@@ -151,7 +157,6 @@ namespace AiForms.Effects.Droid
             if (color == Xamarin.Forms.Color.Default) {
                 return;
             }
-            //var useRipple = AddCommand.GetEnableRipple(Element);
 
             if (_useRipple) {
                 _ripple.SetColor(getPressedColorSelector(color.ToAndroid()));
@@ -166,8 +171,10 @@ namespace AiForms.Effects.Droid
 
         void UpdateEnableRipple()
         {
+            var oldValue = _useRipple;
             var newValue = AddCommand.GetEnableRipple(Element);
-            if (newValue == _useRipple) {
+            _useRipple = newValue;
+            if (newValue == oldValue) {
                 return;
             }
 
@@ -176,21 +183,65 @@ namespace AiForms.Effects.Droid
                 return;
             }
 
-            if (!_useRipple && newValue) {
-                _orgBackground = _view.Background;
+            if (!oldValue && newValue) {
+                AddRipple();
+            }
+            if (oldValue && !newValue) {
+                RemoveRipple();
+            }
+            UpdateEffectColor();
+        }
+
+        void AddRipple()
+        {
+            if (Element is Layout) {
+                _rippleOverlay = new FrameLayout(Container.Context);
+                _rippleOverlay.LayoutParameters = new ViewGroup.LayoutParams(-1, -1);
+
+                _rippleListener = new ContainerOnLayoutChangeListener(_rippleOverlay);
+                _view.AddOnLayoutChangeListener(_rippleListener);
+
+                (_view as ViewGroup).AddView(_rippleOverlay);
+
+                _rippleOverlay.BringToFront();
+
+                _rippleOverlay.Foreground = CreateRipple(Color.Accent.ToAndroid());
+            }
+            else {
+                _orgDrawable = _view.Background;
                 _view.Background = CreateRipple(Color.Accent.ToAndroid());
             }
-            if (_useRipple && !newValue) {
-                var ripple = _view.Background;
-                _view.Background = _orgBackground;
-                ripple?.Dispose();
-            }
-
-            _useRipple = newValue;
         }
+
+        void RemoveRipple()
+        {
+            if (Element is Layout) {
+                var viewgrp = _view as ViewGroup;
+
+                viewgrp.RemoveOnLayoutChangeListener(_rippleListener);
+                _rippleListener.Dispose();
+
+                viewgrp.RemoveView(_rippleOverlay);
+                _rippleOverlay.Dispose();
+
+                _rippleOverlay = null;
+            }
+            else {
+                _view.Background = _orgDrawable;
+                _orgDrawable = null;
+            }
+            _ripple?.Dispose();
+            _ripple = null;
+        }
+
 
         RippleDrawable CreateRipple(Android.Graphics.Color color)
         {
+            if (Element is Layout) {
+                var mask = new ColorDrawable(Android.Graphics.Color.White);
+                return _ripple = new RippleDrawable(getPressedColorSelector(color), null, mask);
+            }
+
             var back = _view.Background;
             if (back == null) {
                 var mask = new ColorDrawable(Android.Graphics.Color.White);
@@ -235,6 +286,24 @@ namespace AiForms.Effects.Droid
             }
 
             e.Handled = false;
+        }
+    }
+
+    internal class ContainerOnLayoutChangeListener : Java.Lang.Object, Android.Views.View.IOnLayoutChangeListener
+    {
+        private Android.Widget.FrameLayout _layout;
+
+        public ContainerOnLayoutChangeListener(Android.Widget.FrameLayout layout)
+        {
+            _layout = layout;
+        }
+
+        //ContainerにAddViewした子要素のサイズを確定する必要があるため
+        //ContainerのOnLayoutChangeのタイミングでセットする
+        public void OnLayoutChange(Android.Views.View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
+        {
+            _layout.Right = v.Width;
+            _layout.Bottom = v.Height;
         }
     }
 }

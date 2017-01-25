@@ -2,20 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Effects</id>
-        <version>0.0.4-pre</version>
-        <title>AiForms.Effects</title>
+        <version>0.0.5-pre</version>
+        <title>AiForms.Effects for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
         <projectUrl>https://github.com/muak/AiForms.Effects</projectUrl>
         <licenseUrl>https://github.com/muak/AiForms.Effects/blob/master/LICENSE.txt</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Xamarin.Forms YuruFuwa Effects for Android/iOS</description>
-        <summary>
-            ## Effects List
-            * AddNumberPicker
-            * AddCommand
-            * AlterLineHeight
-        </summary>
+        <description>Xamarin.Forms Effects(add Command/NumberPicker to a view,alter LineHeight of Label and Editor) for iOS/Android</description>
+        <summary></summary>
         <language>en-US</language>
         <dependencies>
             <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
