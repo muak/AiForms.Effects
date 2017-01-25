@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using AiForms.Effects;
 using AiForms.Effects.iOS;
@@ -16,26 +16,20 @@ namespace AiForms.Effects.iOS
 
         private ICommand _command;
         private object _commandParameter;
+        private ICommand _longCommand;
+        private object _longCommandParameter;
         private UITapGestureRecognizer _tapGesture;
+        private UILongPressGestureRecognizer _longTapGesture;
         private UIView _view;
         private UIView _layer;
+        private double _alpha;
 
         protected override void OnAttached()
         {
             _view = Control ?? Container;
 
             _tapGesture = new UITapGestureRecognizer(async (obj) => {
-                if (_layer != null) {
-                    _layer.Frame = new CGRect(0, 0, _view.Bounds.Width, _view.Bounds.Height);
-                    _view.AddSubview(_layer);
-                    _view.BringSubviewToFront(_layer);
-                    _layer.Alpha = 1;
-                    await UIView.AnimateAsync(0.3f, () => {
-                        _layer.Alpha = 0;
-                    });
-                    _layer.RemoveFromSuperview();
-                }
-
+                await TapAnimation(0.3, _alpha, 0);
                 _command?.Execute(_commandParameter ?? Element);
             });
 
@@ -44,6 +38,8 @@ namespace AiForms.Effects.iOS
 
             UpdateCommand();
             UpdateCommandParameter();
+            UpdateLongCommand();
+            UpdateLongCommandParameter();
             UpdateEffectColor();
         }
 
@@ -52,6 +48,12 @@ namespace AiForms.Effects.iOS
 
             _view.RemoveGestureRecognizer(_tapGesture);
             _tapGesture.Dispose();
+
+            if (_longTapGesture != null) {
+                _view.RemoveGestureRecognizer(_longTapGesture);
+                _longTapGesture.Dispose();
+            }
+
             if (_layer != null) {
                 _layer.Dispose();
                 _layer = null;
@@ -71,6 +73,12 @@ namespace AiForms.Effects.iOS
             else if (e.PropertyName == AddCommand.EffectColorProperty.PropertyName) {
                 UpdateEffectColor();
             }
+            else if (e.PropertyName == AddCommand.LongCommandProperty.PropertyName) {
+                UpdateLongCommand();
+            }
+            else if (e.PropertyName == AddCommand.LongCommandParameterProperty.PropertyName) {
+                UpdateLongCommandParameter();
+            }
 
         }
 
@@ -82,6 +90,38 @@ namespace AiForms.Effects.iOS
         void UpdateCommandParameter()
         {
             _commandParameter = AddCommand.GetCommandParameter(Element);
+        }
+
+        void UpdateLongCommand()
+        {
+            _longCommand = AddCommand.GetLongCommand(Element);
+            if (_longTapGesture != null) {
+                _view.RemoveGestureRecognizer(_longTapGesture);
+                _longTapGesture.Dispose();
+            }
+            if (_longCommand == null) {
+                return;
+            }
+            _longTapGesture = new UILongPressGestureRecognizer(async (obj) => {
+                if (obj.State == UIGestureRecognizerState.Began) {
+
+                    _longCommand?.Execute(_longCommandParameter ?? Element);
+
+                    await TapAnimation(0.5, 0, _alpha, false);
+                }
+                else if (obj.State == UIGestureRecognizerState.Ended ||
+                         obj.State == UIGestureRecognizerState.Cancelled ||
+                         obj.State == UIGestureRecognizerState.Failed) {
+
+                    await TapAnimation(0.5, _alpha, 0);
+                }
+            });
+            _view.AddGestureRecognizer(_longTapGesture);
+
+        }
+        void UpdateLongCommandParameter()
+        {
+            _longCommandParameter = AddCommand.GetLongCommandParameter(Element);
         }
 
         void UpdateEffectColor()
@@ -96,10 +136,27 @@ namespace AiForms.Effects.iOS
             if (color == Xamarin.Forms.Color.Default) {
                 return;
             }
+            _alpha = color.A < 1.0 ? 1 : 0.3;
 
             _layer = new UIView();
             _layer.BackgroundColor = color.ToUIColor();
 
+        }
+
+        async Task TapAnimation(double duration, double start = 1, double end = 0, bool remove = true)
+        {
+            if (_layer != null) {
+                _layer.Frame = new CGRect(0, 0, Container.Bounds.Width, Container.Bounds.Height);
+                Container.AddSubview(_layer);
+                Container.BringSubviewToFront(_layer);
+                _layer.Alpha = (float)start;
+                await UIView.AnimateAsync(duration, () => {
+                    _layer.Alpha = (float)end;
+                });
+                if (remove) {
+                    _layer.RemoveFromSuperview();
+                }
+            }
         }
     }
 }

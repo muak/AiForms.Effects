@@ -78,6 +78,42 @@ namespace AiForms.Effects
             return (object)view.GetValue(CommandParameterProperty);
         }
 
+        public static readonly BindableProperty LongCommandProperty =
+            BindableProperty.CreateAttached(
+                    "LongCommand",
+                    typeof(ICommand),
+                    typeof(AddCommand),
+                    default(ICommand)
+                );
+
+        public static void SetLongCommand(BindableObject view, ICommand value)
+        {
+            view.SetValue(LongCommandProperty, value);
+        }
+
+        public static ICommand GetLongCommand(BindableObject view)
+        {
+            return (ICommand)view.GetValue(LongCommandProperty);
+        }
+
+        public static readonly BindableProperty LongCommandParameterProperty =
+            BindableProperty.CreateAttached(
+                    "LongCommandParameter",
+                    typeof(object),
+                    typeof(AddCommand),
+                    default(object)
+                );
+
+        public static void SetLongCommandParameter(BindableObject view, object value)
+        {
+            view.SetValue(LongCommandParameterProperty, value);
+        }
+
+        public static object GetLongCommandParameter(BindableObject view)
+        {
+            return (object)view.GetValue(LongCommandParameterProperty);
+        }
+
         public static readonly BindableProperty EffectColorProperty =
             BindableProperty.CreateAttached(
                     "EffectColor",
@@ -94,6 +130,24 @@ namespace AiForms.Effects
         public static Color GetEffectColor(BindableObject view)
         {
             return (Color)view.GetValue(EffectColorProperty);
+        }
+
+        public static readonly BindableProperty EnableRippleProperty =
+            BindableProperty.CreateAttached(
+                    "EnableRipple",
+                    typeof(bool),
+                    typeof(AddCommand),
+                    true
+                );
+
+        public static void SetEnableRipple(BindableObject view, bool value)
+        {
+            view.SetValue(EnableRippleProperty, value);
+        }
+
+        public static bool GetEnableRipple(BindableObject view)
+        {
+            return (bool)view.GetValue(EnableRippleProperty);
         }
 
         class AddCommandRoutingEffect : RoutingEffect

@@ -26,8 +26,6 @@
 		<StackLayout Orientation="Horizontal">
 			<Button AutomationId="AddCommandTapTest" Text="Tap" 
 				Command="{Binding GotoTestCommand}" CommandParameter="AddCommandPage" />
-			<Button AutomationId="AddCommandPropTest" Text="Prop" 
-				Command="{Binding GotoTestCommand}" CommandParameter="AddCommandPropPage" />
 		</StackLayout>
 		<Label Text="AddNumberPicker" HorizontalOptions="Center"  />
 		<StackLayout Orientation="Horizontal">

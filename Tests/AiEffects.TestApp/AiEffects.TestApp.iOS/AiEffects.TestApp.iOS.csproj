@@ -9,7 +9,7 @@
     <RootNamespace>AiEffects.TestApp.iOS</RootNamespace>
     <AssemblyName>AiEffects.Sample.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <ReleaseVersion>0.0.4-pre</ReleaseVersion>
+    <ReleaseVersion>0.0.5-pre</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -147,10 +147,10 @@
       <HintPath>..\packages\Xamarin.TestCloud.Agent.0.20.3\lib\Xamarin.iOS10\Calabash.dll</HintPath>
     </Reference>
     <Reference Include="AiForms.Effects">
-      <HintPath>..\packages\AiForms.Effects.0.0.4-pre\lib\Xamarin.iOS10\AiForms.Effects.dll</HintPath>
+      <HintPath>..\..\..\packages\AiForms.Effects.0.0.5-pre\lib\Xamarin.iOS10\AiForms.Effects.dll</HintPath>
     </Reference>
     <Reference Include="AiForms.Effects.iOS">
-      <HintPath>..\packages\AiForms.Effects.0.0.4-pre\lib\Xamarin.iOS10\AiForms.Effects.iOS.dll</HintPath>
+      <HintPath>..\..\..\packages\AiForms.Effects.0.0.5-pre\lib\Xamarin.iOS10\AiForms.Effects.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

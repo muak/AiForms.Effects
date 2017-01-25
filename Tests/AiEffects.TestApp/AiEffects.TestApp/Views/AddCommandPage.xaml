@@ -7,179 +7,295 @@
 		x:Class="AiEffects.TestApp.Views.AddCommandPage"
 		Title="AddCommand TapTest"
 		AutomationId="AddCommandTapTest">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<Style TargetType="Button">
+				<Setter Property="FontSize" Value="9" />
+				<Setter Property="WidthRequest" Value="60" />
+				<Setter Property="HeightRequest">
+					<Setter.Value>
+						<OnPlatform x:TypeArguments="x:Double" iOS="25" Android="34" />
+					</Setter.Value>
+				</Setter>
+				<Setter Property="BackgroundColor" Value="#95C25A" />
+				<Setter Property="TextColor" Value="#FFFFFF" />
+			</Style>
+		</ResourceDictionary>
+	</ContentPage.Resources>
 	<StackLayout> 
+		<Label  AutomationId="ResultText" Text="{Binding CommandParameterText}" MinimumHeightRequest="30" HeightRequest="30" HorizontalOptions="FillAndExpand" VerticalOptions="Start" />
 		<StackLayout Orientation="Horizontal" VerticalOptions="Start" >
-			<Label  AutomationId="ResultText" Text="{Binding CommandParameterText}" HorizontalOptions="FillAndExpand" />
 			<Switch AutomationId="ResultExecute" IsEnabled="{Binding IsExecutedCommand}" IsToggled="{Binding IsExecutedCommand}" HorizontalOptions="End" />
-			<Button AutomationId="ResetResult" Text="Reset" Command="{Binding ResetCommand}" HorizontalOptions="End" />
-			<Button AutomationId="DummyButton" WidthRequest="1" />
-		</StackLayout> 
+			<Switch AutomationId="ResultLong" IsEnabled="{Binding IsExecutedLong}" IsToggled="{Binding IsExecutedLong}" HorizontalOptions="End" />
+			<Button AutomationId="ResetResult" Text="R" Command="{Binding ResetCommand}" HorizontalOptions="End" />
+			<Button AutomationId="ChCommand" Text="ChCmd" HorizontalOptions="End" Command="{Binding ChangeCommand}" />
+			<Button AutomationId="ChLongCommand" Text="ChLCmd" HorizontalOptions="End" Command="{Binding ChangeLongCommand}" />
+		</StackLayout>
+		<StackLayout Orientation="Horizontal" VerticalOptions="Start" >
+			<Button WidthRequest="50" AutomationId="ToggleEffect" Text="ON/OFF" Command="{Binding ToggleEffectCommand}"  />
+			<Button WidthRequest="50" AutomationId="ChColor" Text="ChC" Command="{Binding ChangeEffectColorCommand}" />
+			<Button WidthRequest="50" AutomationId="ChParam" Text="ChP" Command="{Binding ChangeParameterCommand}" />
+			<Button WidthRequest="50" AutomationId="ChLongParam" Text="ChLP" Command="{Binding ChangeLongParamCommand}" />
+			<Button WidthRequest="50" AutomationId="ChRipple" Text="ChR" Command="{Binding ChangeRippleCommand}" />
+		</StackLayout>
 		<ScrollView VerticalOptions="FillAndExpand">
 		<StackLayout>
 			<ActivityIndicator AutomationId="ActivityIndicator" IsVisible="true" IsRunning="true" 
 				ef:AddCommand.On="{Binding EffectOn}" 
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="ActivityIndicator" /> 
+				ef:AddCommand.CommandParameter="ActivityIndicator"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongActivityIndicator"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 				
 			<BoxView Color="Green"  AutomationId="BoxView"
 				ef:AddCommand.On="{Binding EffectOn}" 
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="BoxView" />
+				ef:AddCommand.CommandParameter="BoxView" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongBoxView"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 				 
 			<Button Text="Button"  AutomationId="Button"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="Button" />
+				ef:AddCommand.CommandParameter="Button" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongButton"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<DatePicker  AutomationId="DatePicker"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="DatePicker" />
+				ef:AddCommand.CommandParameter="DatePicker"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongDatePicker"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<Editor  Text="Editor" AutomationId="Editor"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="Editor" />
+				ef:AddCommand.CommandParameter="Editor"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongEditor"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<Entry Text="Entry"  AutomationId="Entry"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="Entry" />
+				ef:AddCommand.CommandParameter="Entry" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongEntry"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<Image Source="sample" HeightRequest="30"  AutomationId="Image"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="Image" />
+				ef:AddCommand.CommandParameter="Image" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongImage"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 				
 			<Label Text="Label" AutomationId="Label"
 				ef:AddCommand.On="{Binding EffectOn}" 
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="Label" />
+				ef:AddCommand.CommandParameter="Label"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongLabel"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<ListView HeightRequest="20" BackgroundColor="Green" AutomationId="ListView"
 				ef:AddCommand.On="{Binding EffectOn}" 
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="ListView"/>
+				ef:AddCommand.CommandParameter="ListView"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongListView"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<Picker Title="Picker"  AutomationId="Picker"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="Picker" />
+				ef:AddCommand.CommandParameter="Picker" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongPicker"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<ProgressBar Progress="0.5" AutomationId="ProgressBar"
 				ef:AddCommand.On="{Binding EffectOn}" 
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="ProgressBar"/>
+				ef:AddCommand.CommandParameter="ProgressBar"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongProgressBar"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<SearchBar AutomationId="SearchBar" HeightRequest="25"
 				ef:AddCommand.On="{Binding EffectOn}" 
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="SearchBar"/>
+				ef:AddCommand.CommandParameter="SearchBar"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongSearchBar"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<Slider  AutomationId="Slider"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="Slider" />
+				ef:AddCommand.CommandParameter="Slider"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongSlider"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 				
 			<Stepper AutomationId="Stepper"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="Stepper"/>
+				ef:AddCommand.CommandParameter="Stepper"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongStepper"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<Switch AutomationId="Switch"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="Switch" />
+				ef:AddCommand.CommandParameter="Switch" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongSwitch"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<TableView HeightRequest="20" BackgroundColor="Green" AutomationId="TableView"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="TableView" />
+				ef:AddCommand.CommandParameter="TableView" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongTableView"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<TimePicker  AutomationId="TimePicker"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="TimePicker" />
+				ef:AddCommand.CommandParameter="TimePicker"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongTimePicker"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<WebView Source="https://www.google.co.jp/" HeightRequest="60" BackgroundColor="Green" AutomationId="WebView"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="WebView"/>
+				ef:AddCommand.CommandParameter="WebView"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongWebView"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 				 
 			<ContentPresenter HeightRequest="20" BackgroundColor="Blue" AutomationId="ContentPresenter"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="ContentPresenter" />
+				ef:AddCommand.CommandParameter="ContentPresenter" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongContentPresenter"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<ContentView HeightRequest="20" BackgroundColor="Navy" AutomationId="ContentView"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="ContentView" />
+				ef:AddCommand.CommandParameter="ContentView" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongContentView"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<Frame  AutomationId="Frame"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="Frame" />
+				ef:AddCommand.CommandParameter="Frame" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongFrame"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<ScrollView HeightRequest="20" BackgroundColor="Green" AutomationId="ScrollView"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="ScrollView" />
+				ef:AddCommand.CommandParameter="ScrollView" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongScrollView"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<TemplatedView HeightRequest="20" BackgroundColor="Blue" AutomationId="TemplatedView"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="TemplatedView" />
+				ef:AddCommand.CommandParameter="TemplatedView" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongTemplatedView"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<AbsoluteLayout HeightRequest="20" BackgroundColor="Fuchsia" AutomationId="AbsoluteLayout"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="AbsoluteLayout"/>
+				ef:AddCommand.CommandParameter="AbsoluteLayout"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongAbsoluteLayout"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<Grid HeightRequest="20" BackgroundColor="Maroon" AutomationId="Grid"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="Grid" />
+				ef:AddCommand.CommandParameter="Grid" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongGrid"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<RelativeLayout HeightRequest="20" BackgroundColor="Olive" AutomationId="RelativeLayout"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="RelativeLayout" />
+				ef:AddCommand.CommandParameter="RelativeLayout" 
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongRelativeLayout"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
 
 			<StackLayout Orientation="Horizontal" AutomationId="StackLayout"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
 				ef:AddCommand.Command="{Binding EffectCommand}"
-				ef:AddCommand.CommandParameter="StackLayout" >
-				<Label Text="StackLayout" />
+				ef:AddCommand.CommandParameter="StackLayout"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="LongStackLayout"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  > 
+				<Label Text="StackLayout" InputTransparent="true" />
+				<Image Source="sample" />
 			</StackLayout>
 
+			<Label AutomationId="PropTestView" Text="PropertyChangedTest" HeightRequest="30"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding EffectCommand}"
+				ef:AddCommand.CommandParameter="{Binding TestParam}"
+				ef:AddCommand.LongCommand="{Binding LongCommand}"
+				ef:AddCommand.LongCommandParameter="{Binding TestLongParam}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+			
+					/>
 		</StackLayout>
 		</ScrollView>
 	</StackLayout>

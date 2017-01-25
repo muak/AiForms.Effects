@@ -8,7 +8,7 @@
     <RootNamespace>AiForms.Effects.UITests</RootNamespace>
     <AssemblyName>AiForms.Effects.UITests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>0.0.4-pre</ReleaseVersion>
+    <ReleaseVersion>0.0.5-pre</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,7 +42,7 @@
     <Compile Include="ChainingAssertion.NUnit.cs" />
     <Compile Include="AddCommand\TapFixture.cs" />
     <Compile Include="TestFixtureBase.cs" />
-    <Compile Include="AddCommand\PropertyChangedFixture.cs" />
+    <Compile Include="AddCommand\Id.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
