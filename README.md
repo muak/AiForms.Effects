@@ -47,13 +47,35 @@ There are properties of Command and Parameter for tap and long tap.
 
 ### Supported View
 
-* Label
-* BoxView
-* Button
-* StackLayout
-* AbsoluteLayout
-* Image
-* Editor
+|                 |iOS |Android|
+|-----------------|----|-------|
+|ActivityIndicator|✅   |✅      |
+|BoxView          |✅   |✅      |
+|Button           |✅   |✅      |
+|DatePicker       |❎   |✅      |
+|Editor           |❌   |❌      |
+|Entry            |❌   |❌      |
+|Image            |✅   |✅      |
+|Label            |✅   |✅      |
+|ListView         |✅   |❌      |
+|Picker           |❌   |✅      |
+|ProgressBar      |✅   |✅      |
+|SearchBar        |❌   |❌      |
+|Slider           |✅   |❌      |
+|Stepper          |✅   |❌      |
+|Switch           |❌   |✅      |
+|TableView        |❌   |❌      |
+|TimePicker       |❌   |✅      |
+|WebView          |❌   |❌      |
+|ContentPresenter |✅   |✅      |
+|ContentView      |✅   |✅      |
+|Frame            |✅   |❌      |
+|ScrollView       |❌   |❌      |
+|TemplatedView    |✅   |✅      |
+|AbsoluteLayout   |✅   |✅      |
+|Grid             |✅   |✅      |
+|RelativeLayout   |✅   |✅      |
+|StackLayout      |✅   |✅      |
 
 ### Parameters
 
