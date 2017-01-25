@@ -1,4 +1,4 @@
-# AiForms.Effects　for Xamarin.Forms
+# AiForms.Effects for Xamarin.Forms
 
 Xamarin.Forms Effects for Android / iOS only.
 
