@@ -52,7 +52,7 @@ There are properties of Command and Parameter for tap and long tap.
 |ActivityIndicator|✅   |✅      |
 |BoxView          |✅   |✅      |
 |Button           |✅   |✅      |
-|DatePicker       |❎   |✅      |
+|DatePicker       |❌   |✅      |
 |Editor           |❌   |❌      |
 |Entry            |❌   |❌      |
 |Image            |✅   |✅      |
