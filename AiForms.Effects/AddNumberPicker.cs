@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace AiForms.Effects
 {
-    public class AddNumberPicker
+    public static class AddNumberPicker
     {
         public static readonly BindableProperty OnProperty =
             BindableProperty.CreateAttached(
