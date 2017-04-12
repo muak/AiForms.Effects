@@ -190,7 +190,8 @@ namespace AiForms.Effects.UITests.AddCommand
         [Test]
         public async Task T22_ScrollView()
         {
-            await ExecutedAssert(Id.ScrollView, false, false);  //ScrollView is not supported
+            // XF2.3.4 iOS supported
+            await ExecutedAssert(Id.ScrollView, OnPlatform(true, false),OnPlatform(true, false));  //ScrollView is not supported
         }
 
         [Test]

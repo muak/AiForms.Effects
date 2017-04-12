@@ -19,7 +19,7 @@ Android:version 5.0〜7.0 (FormsAppcompatActivity only)
 ## Nuget Installation
 
 ```bash
-Install-Package AiForms.Effects -Pre
+Install-Package AiForms.Effects
 ```
 
 You need to install this nuget package to PCL project and each platform project.
@@ -45,7 +45,7 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 This Effect add Command function to a view.<br>
 There are properties of Command and Parameter for tap and long tap.
 
-### Supported View
+### Supported View (in case Xamarin.Forms 2.3.4)
 
 |                 |iOS |Android|
 |-----------------|----|-------|
@@ -70,7 +70,7 @@ There are properties of Command and Parameter for tap and long tap.
 |ContentPresenter |✅   |✅      |
 |ContentView      |✅   |✅      |
 |Frame            |✅   |❌      |
-|ScrollView       |❌   |❌      |
+|ScrollView       |✅   |❌      |
 |TemplatedView    |✅   |✅      |
 |AbsoluteLayout   |✅   |✅      |
 |Grid             |✅   |✅      |
@@ -95,7 +95,7 @@ There are properties of Command and Parameter for tap and long tap.
     * Ripple Effect On/Off (default true,android only)<br>
       If you don't have to use ripple effect,it make EnableRipple false.
 
-### How to Xaml
+### How to write by Xaml
 
 ```xml
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -133,6 +133,8 @@ Ripple Effect will not occur foreground.In that case wrap by a layout view.
 This Effect add NumberPicker function to a view.<br>
 When you tap the view ,Picker is shown. And when you select a number,it reflects to Number property.If you set Command property,it executes.
 
+<img src="images/numberpicker1.gif" height=400 /> <img src="images/numberpicker2.gif" height=400 />
+
 ### Supported View
 
 * Label
@@ -142,7 +144,26 @@ When you tap the view ,Picker is shown. And when you select a number,it reflects
 * StackLayout
 * AbsoluteLayout
 
-### How to Xaml
+and more. same with AddCommand.
+
+### Parameters
+
+* On
+    * Effect On/Off (true is On)
+* Min
+	* minimum number(positive integer)
+* Max
+	* maximum number(positive integer)
+* Number
+	* current number(default twoway binding)
+* Title
+	* Picker Title(optional)
+	* In case iOS,if this is so long,it will be not beautiful.
+* Command
+    * command invoked when number had picked(optional)
+
+
+### How to write by Xaml
 
 ```xml
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -169,12 +190,22 @@ When you tap the view ,Picker is shown. And when you select a number,it reflects
 
 This Effect alter LineHeight of Label and Editor.
 
+<img src="images/lineheight1.gif" width=250 /> <img src="images/lineheight2.jpg" width=250 />
+
 ### Supported View
 
 * Label
 * Editor
 
-### How to Xaml
+### Parameters
+
+* On
+    * Effect On/Off (true is On)
+* Multiple
+	* Multiple to the font height.
+	* The font height * this multiple will become line height.
+
+### How to write by Xaml
 
 ```xml
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -191,3 +222,7 @@ This Effect alter LineHeight of Label and Editor.
 	</StackLayout>
 </ContentPage>
 ```
+
+## License
+
+MIT Licensed.

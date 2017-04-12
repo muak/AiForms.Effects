@@ -30,11 +30,11 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.UITest">
-      <HintPath>..\..\packages\Xamarin.UITest.2.0.5\lib\Xamarin.UITest.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
+    <Reference Include="Xamarin.UITest">
+      <HintPath>..\..\packages\Xamarin.UITest.2.0.7\lib\Xamarin.UITest.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests.cs" />

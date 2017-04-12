@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Effects</id>
-        <version>0.0.5-pre</version>
+        <version>0.0.5</version>
         <title>AiForms.Effects for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
