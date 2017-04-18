@@ -50,6 +50,9 @@
       <DependentUpon>AddNumberPickerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddNumberPickerPageViewModel.cs" />
+    <Compile Include="Views\ToFlatButtonPage.xaml.cs">
+      <DependentUpon>ToFlatButtonPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -65,6 +68,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AddNumberPickerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ToFlatButtonPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

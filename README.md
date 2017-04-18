@@ -10,6 +10,8 @@ Xamarin.Forms Effects for Android / iOS only.
     * add NumberPicker function to a view.
 * [AlterLineHeight](#alterlineheight)
     * alter LineHeight of Label and Editor.
+* [ToFlatButton](#toflatbutton) (pre)
+	* alter Button to flat (for Android)
 
 ## Minimum Device and Version etc
 
