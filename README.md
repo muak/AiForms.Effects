@@ -46,7 +46,7 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 ## ToFlatButton
 
 This is the effect that alter Button to flat(only Android).  
-If this effect use, you will be able to design like iOS's Button.  
+If this effect is used, you will be able to design like iOS's Button.  
 And also this effect will enable BorderRadius, BorderWidth and BorderColor of default button properties to use by Android.
 
 <img src="images/toflat1.png" height="400" /> <img src="images/toflat2.png" height="400" />
