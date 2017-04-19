@@ -5,6 +5,7 @@
 	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
 	prism:ViewModelLocator.AutowireViewModel="True" 
 	x:Class="AiEffects.TestApp.Views.ToFlatButtonPage"
+	BackgroundColor="White"
 	Title="ToFlatButton for Android">
 
 	<ContentPage.Resources>
@@ -16,22 +17,25 @@
 		</ResourceDictionary>
 	</ContentPage.Resources>
 	
-	<StackLayout Spacing="10" Margin="10,0,10,0">
-		<Button ef:ToFlatButton.On="false" ef:ToFlatButton.RippleColor="Red"
-			Text="Default" BorderWidth="2" BorderColor="Green" BorderRadius="8" 
-			HeightRequest="50"/>
+	<StackLayout Spacing="10" Margin="10,10,10,0">
+		<Button ef:ToFlatButton.On="false" ef:ToFlatButton.RippleColor="Red" Text="Default" />
 
 		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
-			Text="Radius Only"  BorderRadius="10" HeightRequest="30"/>
+			Text="Radius Only"  BorderRadius="10" />
 		
 		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
-			Text="Radius + Border" BorderWidth="4" BorderColor="Green" BorderRadius="10" 
-			HeightRequest="30"/>
-		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
-			Text="Full Flat"  BorderRadius="0" BorderWidth="0" HeightRequest="30"/>
+			Text="Radius + Border" BorderWidth="3" BorderColor="Green" BorderRadius="10" />
+
+		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red" BackgroundColor="Transparent"
+			Text="Border Only" TextColor="Green" BorderWidth="3" BorderColor="Green" BorderRadius="0" />
+		
+		<Button ef:ToFlatButton.On="true"
+			Text="Flat"  BorderRadius="0" BorderWidth="0" />
+
+		<Button ef:ToFlatButton.On="true" BackgroundColor="Transparent"
+			Text="Full Flat" TextColor="Green"  BorderRadius="0" BorderWidth="0" />
 
 		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
-			Text="Disabled" BorderWidth="2" BorderColor="Green" BorderRadius="8" 
-			HeightRequest="30" IsEnabled="false" />
+			Text="Disabled" BorderWidth="2" BorderColor="Green" BorderRadius="8" IsEnabled="false" />
 	</StackLayout> 
 </ContentPage>
