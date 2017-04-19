@@ -35,5 +35,9 @@
 		<StackLayout Orientation="Horizontal">
 			<Button AutomationId="AlterLineHeight" Text="AlterLineHeight" Command="{Binding GotoTestCommand}" CommandParameter="AlterLineHeightPage" />
 		</StackLayout>
+		<Label Text="ToFlatButton" HorizontalOptions="Center" />
+		<StackLayout Orientation="Horizontal">
+			<Button AutomationId="ToFlatButton" Text="ToFlatButton" Command="{Binding GotoTestCommand}" CommandParameter="ToFlatButtonPage" />
+		</StackLayout>
 	</StackLayout>
 </ContentPage> 

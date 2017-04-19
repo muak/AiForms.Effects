@@ -4,6 +4,8 @@ Xamarin.Forms Effects for Android / iOS only.
 
 ## Features
 
+* [ToFlatButton](#toflatbutton) (from 0.1.0-pre)
+	* alter Button to flat (for Android)
 * [AddCommand](#addcommand)
     * add Command function to a view.
 * [AddNumberPicker](#addnumberpicker)
@@ -11,9 +13,10 @@ Xamarin.Forms Effects for Android / iOS only.
 * [AlterLineHeight](#alterlineheight)
     * alter LineHeight of Label and Editor.
 
+
 ## Minimum Device and Version etc
 
-iOS:iPhone5s,iPod touch6,iOS9.3<br>
+iOS:iPhone5s,iPod touch6,iOS9.3  
 Android:version 5.0〜7.0 (FormsAppcompatActivity only)
 
 ## Nuget Installation
@@ -40,9 +43,39 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 }
 ```
 
+## ToFlatButton
+
+This is the effect that alter Button to flat(only Android).  
+If this effect use, you will be able to design like iOS's Button.  
+And also this effect will enable BorderRadius, BorderWidth and BorderColor of default button properties to use by Android.
+
+<img src="images/toflat1.png" height="400" /> <img src="images/toflat2.png" height="400" />
+
+### Supported View
+
+* Button (Android)
+
+### Parameters
+
+* On
+    * Effect On/Off (true is On)
+* RippleColor
+	* Ripple effect color.(default none)
+
+
+### How to write by Xaml
+
+```xml
+<Button Text="ButtonText" 
+	ef:ToFlatButton.On="true" 
+	ef:ToFlatButton.RippleColor="Red"
+	BorderWidth="4" BorderColor="Green" BorderRadius="10" 
+/>
+```
+
 ## AddCommand
 
-This Effect add Command function to a view.<br>
+This Effect add Command function to a view.  
 There are properties of Command and Parameter for tap and long tap.
 
 ### Supported View (in case Xamarin.Forms 2.3.4)

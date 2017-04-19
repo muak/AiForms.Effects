@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+	prism:ViewModelLocator.AutowireViewModel="True" 
+	x:Class="AiEffects.TestApp.Views.ToFlatButtonPage"
+	BackgroundColor="White"
+	Title="ToFlatButton for Android">
+
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<Style TargetType="Button">
+				<Setter Property="BackgroundColor" Value="#95C25A" />
+				<Setter Property="TextColor" Value="#FFFFFF" />
+			</Style>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	
+	<StackLayout Spacing="10" Margin="10,10,10,0">
+		<Button ef:ToFlatButton.On="false" ef:ToFlatButton.RippleColor="Red" Text="Default" />
+
+		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
+			Text="Radius Only"  BorderRadius="10" />
+		
+		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
+			Text="Radius + Border" BorderWidth="3" BorderColor="Green" BorderRadius="10" />
+
+		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red" BackgroundColor="Transparent"
+			Text="Border Only" TextColor="Green" BorderWidth="3" BorderColor="Green" BorderRadius="0" />
+		
+		<Button ef:ToFlatButton.On="true"
+			Text="Flat"  BorderRadius="0" BorderWidth="0" />
+
+		<Button ef:ToFlatButton.On="true" BackgroundColor="Transparent"
+			Text="Full Flat" TextColor="Green"  BorderRadius="0" BorderWidth="0" />
+
+		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
+			Text="Disabled" BorderWidth="2" BorderColor="Green" BorderRadius="8" IsEnabled="false" />
+	</StackLayout> 
+</ContentPage>
