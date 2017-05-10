@@ -9,10 +9,10 @@
 			<Button Text="HAlign" Command="{Binding ChangeHAlign}" />
 			<Button Text="VAlign" Command="{Binding ChangeVAlign}" />
 		</StackLayout>
-		<Label HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="Silver" 
+		<Label HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="Silver" Margin="4"
 			ef:AddText.On="true" ef:AddText.TextColor="Green" ef:AddText.FontSize="8" 
 			ef:AddText.Margin="0" ef:AddText.HorizontalAlign="{Binding HAlign.Value}" ef:AddText.VerticalAlign="{Binding VAlign.Value}" 
-			ef:AddText.Text="あいうえaaああああああああああああああああああああああああ"
+			ef:AddText.Text="あいうえaあｄふぁｓｆｄｓｆｓｄふぁｓｄふぁｓｆｓだふぁふぁあああああああああああああああああああああｆさふぁっさｄふぇふぇれえらｗ"
 		/>
 	</StackLayout>
 </ContentPage>
