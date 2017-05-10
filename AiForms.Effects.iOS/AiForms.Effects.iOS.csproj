@@ -70,6 +70,7 @@
     <Compile Include="LineHeightForTextView.cs" />
     <Compile Include="AddNumberPickerPlatform.cs" />
     <Compile Include="NumberPickerSource.cs" />
+    <Compile Include="AddTextPlatformEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AiForms.Effects\AiForms.Effects.csproj">

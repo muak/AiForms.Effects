@@ -92,6 +92,7 @@
     <Compile Include="LineHeightForEditText.cs" />
     <Compile Include="AddNumberPickerPlatform.cs" />
     <Compile Include="ToFlatButtonPlatformEffect.cs" />
+    <Compile Include="AddTextPlatformEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

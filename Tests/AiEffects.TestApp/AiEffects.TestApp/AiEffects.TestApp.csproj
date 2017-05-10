@@ -53,6 +53,10 @@
     <Compile Include="Views\ToFlatButtonPage.xaml.cs">
       <DependentUpon>ToFlatButtonPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddTextPage.xaml.cs">
+      <DependentUpon>AddTextPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddTextPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -71,6 +75,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ToFlatButtonPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddTextPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

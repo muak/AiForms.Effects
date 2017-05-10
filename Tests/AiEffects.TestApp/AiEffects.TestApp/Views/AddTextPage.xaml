@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	x:Class="AiEffects.TestApp.Views.AddTextPage">
+	<StackLayout>
+		<StackLayout Orientation="Horizontal">
+			<Button Text="HAlign" Command="{Binding ChangeHAlign}" />
+			<Button Text="VAlign" Command="{Binding ChangeVAlign}" />
+		</StackLayout>
+		<Label HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="Silver" 
+			ef:AddText.On="true" ef:AddText.TextColor="Green" ef:AddText.FontSize="8" 
+			ef:AddText.Margin="0" ef:AddText.HorizontalAlign="{Binding HAlign.Value}" ef:AddText.VerticalAlign="{Binding VAlign.Value}" 
+			ef:AddText.Text="あいうえaaああああああああああああああああああああああああ"
+		/>
+	</StackLayout>
+</ContentPage>
