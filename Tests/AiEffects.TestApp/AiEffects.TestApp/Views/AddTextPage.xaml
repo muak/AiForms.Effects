@@ -3,16 +3,39 @@
 	xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	BackgroundColor="#EEEEEE"
 	x:Class="AiEffects.TestApp.Views.AddTextPage">
-	<StackLayout>
+	<StackLayout ef:AddText.On="true" ef:AddText.TextColor="Green" ef:AddText.FontSize="8" 
+			ef:AddText.Margin="6,0,6,0" ef:AddText.HorizontalAlign="{Binding HAlign.Value}" ef:AddText.VerticalAlign="{Binding VAlign.Value}" 
+			ef:AddText.Text="あいうえaあｄふぁｓｆｄｓｆｓｄふぁｓｄふぁ">
 		<StackLayout Orientation="Horizontal">
 			<Button Text="HAlign" Command="{Binding ChangeHAlign}" />
 			<Button Text="VAlign" Command="{Binding ChangeVAlign}" />
 		</StackLayout>
 		<Label HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="Silver" Margin="4"
 			ef:AddText.On="true" ef:AddText.TextColor="Green" ef:AddText.FontSize="8" 
-			ef:AddText.Margin="0" ef:AddText.HorizontalAlign="{Binding HAlign.Value}" ef:AddText.VerticalAlign="{Binding VAlign.Value}" 
-			ef:AddText.Text="あいうえaあｄふぁｓｆｄｓｆｓｄふぁｓｄふぁｓｆｓだふぁふぁあああああああああああああああああああああｆさふぁっさｄふぇふぇれえらｗ"
+			ef:AddText.Margin="6,0,6,0" ef:AddText.HorizontalAlign="{Binding HAlign.Value}" ef:AddText.VerticalAlign="{Binding VAlign.Value}" 
+			ef:AddText.Text="あいうえaあｄふぁｓｆｄｓｆｓｄふぁｓｄふぁ"
+		/>
+		<Entry HorizontalOptions="FillAndExpand" BackgroundColor="White"
+			ef:AddText.On="true" ef:AddText.TextColor="Red" ef:AddText.FontSize="10" 
+			ef:AddText.Margin="2" ef:AddText.HorizontalAlign="{Binding HAlign.Value}" ef:AddText.VerticalAlign="{Binding VAlign.Value}" 
+			ef:AddText.Text="必須"
+		/>
+		<Editor HeightRequest="200" HorizontalOptions="FillAndExpand" BackgroundColor="White"
+			ef:AddText.On="true" ef:AddText.TextColor="Red" ef:AddText.FontSize="10" 
+			ef:AddText.Margin="2,2,2,10" ef:AddText.HorizontalAlign="{Binding HAlign.Value}" ef:AddText.VerticalAlign="{Binding VAlign.Value}" 
+			ef:AddText.Text="必須"
+		/>
+		<Switch HorizontalOptions="End" IsToggled="true" 
+			ef:AddText.On="true" ef:AddText.TextColor="Red" ef:AddText.FontSize="10" 
+			ef:AddText.Margin="2" ef:AddText.HorizontalAlign="{Binding HAlign.Value}" ef:AddText.VerticalAlign="{Binding VAlign.Value}" 
+			ef:AddText.Text="必須"
+		/>
+		<DatePicker 
+			ef:AddText.On="true" ef:AddText.TextColor="Red" ef:AddText.FontSize="10" 
+			ef:AddText.Margin="2" ef:AddText.HorizontalAlign="{Binding HAlign.Value}" ef:AddText.VerticalAlign="{Binding VAlign.Value}" 
+			ef:AddText.Text="必須"
 		/>
 	</StackLayout>
 </ContentPage>

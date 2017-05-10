@@ -30,7 +30,7 @@ namespace AiEffects.TestApp.ViewModels
                     HAlign.Value = TextAlignment.Start;
                 }
                 else{
-                    HAlign.Value += 1;
+                    HAlign.Value = TextAlignment.End;
                 }
             });
 

@@ -24,7 +24,7 @@ namespace AiForms.Effects
         {
             return (bool)view.GetValue(OnProperty);
         }
-      
+
         private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var view = bindable as View;
@@ -41,19 +41,13 @@ namespace AiForms.Effects
             }
         }
 
-
-        class AddTextRoutingEffect : RoutingEffect
-        {
-            public AddTextRoutingEffect() : base("AiForms." + nameof(AddText)) { }
-        }
-
         public static readonly BindableProperty TextProperty =
             BindableProperty.CreateAttached(
-                    "Text",
-                    typeof(string),
-                    typeof(AddText),
-                    default(string)
-                );
+                "Text",
+                typeof(string),
+                typeof(AddText),
+                default(string)
+            );
 
         public static void SetText(BindableObject view, string value)
         {
@@ -67,18 +61,18 @@ namespace AiForms.Effects
 
         public static readonly BindableProperty FontSizeProperty =
             BindableProperty.CreateAttached(
-                    "FontSize",
-                    typeof(double),
-                    typeof(AddTextRoutingEffect),
-                    8.0d
-                );
+                "FontSize",
+                typeof(double),
+                typeof(AddTextRoutingEffect),
+                8.0d
+            );
 
 
         public static void SetFontSize(BindableObject view, double value)
         {
             view.SetValue(FontSizeProperty, value);
         }
-       
+
         public static double GetFontSize(BindableObject view)
         {
             return (double)view.GetValue(FontSizeProperty);
@@ -86,11 +80,11 @@ namespace AiForms.Effects
 
         public static readonly BindableProperty TextColorProperty =
             BindableProperty.CreateAttached(
-                    "TextColor",
-                    typeof(Color),
-                    typeof(AddText),
-                    default(Color)
-                );
+                "TextColor",
+                typeof(Color),
+                typeof(AddText),
+                Color.Red
+            );
 
         public static void SetTextColor(BindableObject view, Color value)
         {
@@ -104,29 +98,29 @@ namespace AiForms.Effects
 
         public static readonly BindableProperty MarginProperty =
             BindableProperty.CreateAttached(
-                    "Margin",
-                    typeof(int),
-                    typeof(AddText),
-                    0
-                );
+                "Margin",
+                typeof(Thickness),
+                typeof(AddText),
+                default(Thickness)
+            );
 
-        public static void SetMargin(BindableObject view, int value)
+        public static void SetMargin(BindableObject view, Thickness value)
         {
             view.SetValue(MarginProperty, value);
         }
 
-        public static int GetMargin(BindableObject view)
+        public static Thickness GetMargin(BindableObject view)
         {
-            return (int)view.GetValue(MarginProperty);
+            return (Thickness)view.GetValue(MarginProperty);
         }
 
         public static readonly BindableProperty HorizontalAlignProperty =
             BindableProperty.CreateAttached(
-                    "HorizontalAlign",
-                    typeof(TextAlignment),
-                    typeof(AddText),
-                    default(TextAlignment)
-                );
+                "HorizontalAlign",
+                typeof(TextAlignment),
+                typeof(AddText),
+                TextAlignment.End
+            );
 
         public static void SetHorizontalAlign(BindableObject view, TextAlignment value)
         {
@@ -140,11 +134,11 @@ namespace AiForms.Effects
 
         public static readonly BindableProperty VerticalAlignProperty =
             BindableProperty.CreateAttached(
-                    "VerticalAlign",
-                    typeof(TextAlignment),
-                    typeof(AddText),
-                    default(TextAlignment)
-                );
+                "VerticalAlign",
+                typeof(TextAlignment),
+                typeof(AddText),
+                TextAlignment.Start
+            );
 
         public static void SetVerticalAlign(BindableObject view, TextAlignment value)
         {
@@ -154,6 +148,12 @@ namespace AiForms.Effects
         public static TextAlignment GetVerticalAlign(BindableObject view)
         {
             return (TextAlignment)view.GetValue(VerticalAlignProperty);
+        }
+
+
+        class AddTextRoutingEffect : RoutingEffect
+        {
+            public AddTextRoutingEffect() : base("AiForms." + nameof(AddText)) { }
         }
     }
 }

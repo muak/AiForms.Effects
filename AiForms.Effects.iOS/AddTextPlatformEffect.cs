@@ -13,7 +13,7 @@ namespace AiForms.Effects.iOS
     {
         private UILabel _textLabel;
         private NSLayoutConstraint[] _constraint;
-        private int _margin = 0;
+        private Thickness _margin = 0;
 
         protected override void OnAttached()
         {
@@ -100,7 +100,7 @@ namespace AiForms.Effects.iOS
             Container.AddConstraints(_constraint);
         }
 
-        NSLayoutConstraint[] CreateConstraint(float margin,bool isTop=true){
+        NSLayoutConstraint[] CreateConstraint(Thickness margin,bool isTop=true){
             var constraint = new NSLayoutConstraint[]{
                 NSLayoutConstraint.Create(
                     _textLabel,
@@ -109,7 +109,7 @@ namespace AiForms.Effects.iOS
                     Container,
                     NSLayoutAttribute.Left,
                     1,
-                    margin
+                    (nfloat)margin.Left
                 ),
                 NSLayoutConstraint.Create(
                     _textLabel,
@@ -118,7 +118,7 @@ namespace AiForms.Effects.iOS
                     Container,
                     NSLayoutAttribute.Right,
                     1,
-                    -margin
+                    -(nfloat)margin.Right
                 ),
                 NSLayoutConstraint.Create(
                     _textLabel,
@@ -136,7 +136,7 @@ namespace AiForms.Effects.iOS
                     Container,
                     isTop ? NSLayoutAttribute.Top : NSLayoutAttribute.Bottom,
                     1,
-                    isTop ? margin : -margin
+                    isTop ? (nfloat)margin.Top : -(nfloat)margin.Bottom
                 )
             };
 
