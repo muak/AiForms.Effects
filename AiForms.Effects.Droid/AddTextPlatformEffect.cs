@@ -12,29 +12,18 @@ namespace AiForms.Effects.Droid
     public class AddTextPlatformEffect : PlatformEffect
     {
         private TextView _textView;
-        private LinearLayout _layout;
         private ContainerOnLayoutChangeListener _listener;
 
         protected override void OnAttached()
         {
-            _layout = new LinearLayout(Container.Context);
-            _layout.Orientation = Orientation.Vertical;
+            _textView = new TextView(Container.Context);
+            _textView.SetMaxLines(1);
+            _textView.SetMinLines(1);
+            _textView.Ellipsize = Android.Text.TextUtils.TruncateAt.End;
 
-            using (var lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent)) {
+            Container.AddView(_textView);
 
-                _textView = new TextView(Container.Context);
-                _textView.SetMaxLines(1);
-                _textView.SetMinLines(1);
-                _textView.Ellipsize = Android.Text.TextUtils.TruncateAt.End;
-
-                _layout.AddView(_textView, lparam);
-            }
-
-            using (var param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent)) {
-                Container.AddView(_layout, param);
-            }
-
-            _listener = new ContainerOnLayoutChangeListener(_layout, _textView, Element);
+            _listener = new ContainerOnLayoutChangeListener(_textView, Element);
             Container.AddOnLayoutChangeListener(_listener);
 
             UpdateText();
@@ -58,8 +47,6 @@ namespace AiForms.Effects.Droid
             _textView.Dispose();
             _textView = null;
 
-            _layout.Dispose();
-            _layout = null;
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
@@ -128,13 +115,11 @@ namespace AiForms.Effects.Droid
 
         internal class ContainerOnLayoutChangeListener : Java.Lang.Object, Android.Views.View.IOnLayoutChangeListener
         {
-            private ViewGroup _layout;
             private TextView _textview;
             private Element _element;
 
-            public ContainerOnLayoutChangeListener(ViewGroup layout, TextView textview, Element element)
+            public ContainerOnLayoutChangeListener(TextView textview, Element element)
             {
-                _layout = layout;
                 _textview = textview;
                 _element = element;
             }
@@ -143,9 +128,6 @@ namespace AiForms.Effects.Droid
             // For some reason, in layout that was added to container, it does not work all gravity options and all layout options.
             public void OnLayoutChange(Android.Views.View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
             {
-                _layout.Right = v.Width;
-                _layout.Bottom = v.Height;
-
                 _textview.Right = v.Width;
 
                 var margin = AddText.GetMargin(_element);

@@ -9,7 +9,7 @@ using System.Linq;
 [assembly: ExportEffect(typeof(AddTextPlatformEffect), nameof(AddText))]
 namespace AiForms.Effects.iOS
 {
-    public class AddTextPlatformEffect:PlatformEffect
+    public class AddTextPlatformEffect : PlatformEffect
     {
         private UILabel _textLabel;
         private NSLayoutConstraint[] _constraint;
@@ -28,7 +28,7 @@ namespace AiForms.Effects.iOS
             Container.AddSubview(_textLabel);
 
             _textLabel.TranslatesAutoresizingMaskIntoConstraints = false;
-           
+
             UpdateText();
             UpdateFontSize();
             UpdateTextColor();
@@ -48,59 +48,66 @@ namespace AiForms.Effects.iOS
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
         {
             base.OnElementPropertyChanged(args);
-            if(args.PropertyName == AddText.TextProperty.PropertyName){
+            if (args.PropertyName == AddText.TextProperty.PropertyName) {
                 UpdateText();
             }
-            else if(args.PropertyName == AddText.FontSizeProperty.PropertyName){
+            else if (args.PropertyName == AddText.FontSizeProperty.PropertyName) {
                 UpdateFontSize();
             }
-            else if(args.PropertyName == AddText.TextColorProperty.PropertyName){
+            else if (args.PropertyName == AddText.TextColorProperty.PropertyName) {
                 UpdateTextColor();
             }
-            else if(args.PropertyName == AddText.MarginProperty.PropertyName){
+            else if (args.PropertyName == AddText.MarginProperty.PropertyName) {
                 UpdateMargin();
             }
-            else if(args.PropertyName == AddText.HorizontalAlignProperty.PropertyName){
+            else if (args.PropertyName == AddText.HorizontalAlignProperty.PropertyName) {
                 UpdateHorizontalAlign();
             }
-            else if(args.PropertyName == AddText.VerticalAlignProperty.PropertyName){
+            else if (args.PropertyName == AddText.VerticalAlignProperty.PropertyName) {
                 UpdateVerticalAlign();
             }
         }
 
-        void UpdateText() {
+        void UpdateText()
+        {
             var text = AddText.GetText(Element);
             _textLabel.Text = text;
             _textLabel.Hidden = string.IsNullOrEmpty(text);
 
         }
 
-        void UpdateFontSize(){
+        void UpdateFontSize()
+        {
             _textLabel.Font = _textLabel.Font.WithSize((float)AddText.GetFontSize(Element));
         }
 
-        void UpdateTextColor(){
+        void UpdateTextColor()
+        {
             _textLabel.TextColor = AddText.GetTextColor(Element).ToUIColor();
         }
 
-        void UpdateMargin(){
+        void UpdateMargin()
+        {
             _margin = AddText.GetMargin(Element);
         }
 
-        void UpdateHorizontalAlign(){
+        void UpdateHorizontalAlign()
+        {
             _textLabel.TextAlignment = AddText.GetHorizontalAlign(Element).ToNativeTextAlignment();
         }
 
-        void UpdateVerticalAlign(){
+        void UpdateVerticalAlign()
+        {
             var align = AddText.GetVerticalAlign(Element);
-            if(_constraint != null){
+            if (_constraint != null) {
                 Container.RemoveConstraints(_constraint);
             }
-            _constraint = CreateConstraint(_margin,align == TextAlignment.Start);
+            _constraint = CreateConstraint(_margin, align == TextAlignment.Start);
             Container.AddConstraints(_constraint);
         }
 
-        NSLayoutConstraint[] CreateConstraint(Thickness margin,bool isTop=true){
+        NSLayoutConstraint[] CreateConstraint(Thickness margin, bool isTop = true)
+        {
             var constraint = new NSLayoutConstraint[]{
                 NSLayoutConstraint.Create(
                     _textLabel,
@@ -148,8 +155,7 @@ namespace AiForms.Effects.iOS
     {
         internal static UITextAlignment ToNativeTextAlignment(this TextAlignment alignment)
         {
-            switch (alignment)
-            {
+            switch (alignment) {
                 case TextAlignment.Center:
                     return UITextAlignment.Center;
                 case TextAlignment.End:

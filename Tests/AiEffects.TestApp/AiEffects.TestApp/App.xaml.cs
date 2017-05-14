@@ -4,6 +4,7 @@ using Microsoft.Practices.ObjectBuilder2;
 using Prism.Unity;
 using Xamarin.Forms;
 
+[assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
 namespace AiEffects.TestApp
 {
     public partial class App : PrismApplication
