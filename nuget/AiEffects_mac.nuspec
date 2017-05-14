@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Effects</id>
-        <version>0.1.0</version>
+        <version>0.1.1-pre</version>
         <title>AiForms.Effects for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
         <projectUrl>https://github.com/muak/AiForms.Effects</projectUrl>
         <licenseUrl>https://github.com/muak/AiForms.Effects/blob/master/LICENSE.txt</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Xamarin.Forms Effects(add Command/NumberPicker to a view,alter LineHeight of Label and Editor/Button to flat) for iOS/Android</description>
+        <description>Xamarin.Forms Effects(add Text/add Command/NumberPicker to a view,alter LineHeight of Label and Editor/Button to flat) for iOS/Android</description>
         <summary></summary>
         <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton</tags>
         <language>en-US</language>

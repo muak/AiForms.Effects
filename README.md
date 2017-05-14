@@ -3,8 +3,9 @@
 Xamarin.Forms Effects for Android / iOS only.
 
 ## Features
-
-* [ToFlatButton](#toflatbutton) (from 0.1.0-pre)
+* [AddText](#addtext)(from 0.1.1-pre)
+	* add one line Text to a view.
+* [ToFlatButton](#toflatbutton)
 	* alter Button to flat (for Android)
 * [AddCommand](#addcommand)
     * add Command function to a view.
@@ -42,6 +43,62 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
     return base.FinishedLaunching(app, options);
 }
 ```
+
+## AddText
+
+This is the effect that add one line text into a view.  
+If you use this effect, for example you will be able to show a information that validations or character count etc.  
+You will be able to change text position(top-left,top-right,bottom-left,bottom-right), text color,font size and margin by specifying property.
+
+### Supported View
+
+* Label
+* Entry
+* Editor
+* StackLayout
+* AbsoluteLayout
+
+and more.
+
+### Parameters
+
+* On
+	* Effect On/Off (true is On)
+* Text
+	* added text
+* TextColor
+	* Default Red
+* FontSize
+	* Default 8
+* Margin
+	* Default 0,0,0,0
+* HorizontalAlign
+	* horizontal text position(Start or End). Default End.
+* VerticalAlign
+	* vertical text position(Start or End). Default Start.
+
+### How to write by Xaml
+
+```xml
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	x:Class="AiEffects.TestApp.Views.AddTextPage">
+	<StackLayout Margin="4">
+		<Entry HorizontalOptions="FillAndExpand" Text="{Binding Title}"
+			ef:AddText.On="true" ef:AddText.TextColor="Red" 
+			ef:AddText.FontSize="10" ef:AddText.Margin="4,8,4,8" 
+			ef:AddText.HorizontalAlign="End"
+      ef:AddText.VerticalAlign="Start" 
+			ef:AddText.Text="{Binding TitleMessage}" />
+	</StackLayout>
+</ContentPage>
+```
+
+### Limitations
+
+When device rotates, text position will not be right in case android.
 
 ## ToFlatButton
 

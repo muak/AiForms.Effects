@@ -35,6 +35,7 @@
     <Compile Include="ILineHeightEffect.cs" />
     <Compile Include="AddNumberPicker.cs" />
     <Compile Include="ToFlatButton.cs" />
+    <Compile Include="AddText.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

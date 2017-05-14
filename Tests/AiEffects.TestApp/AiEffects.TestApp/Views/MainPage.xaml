@@ -39,5 +39,9 @@
 		<StackLayout Orientation="Horizontal">
 			<Button AutomationId="ToFlatButton" Text="ToFlatButton" Command="{Binding GotoTestCommand}" CommandParameter="ToFlatButtonPage" />
 		</StackLayout>
+		<Label Text="AddText" HorizontalOptions="Center" />
+		<StackLayout Orientation="Horizontal">
+			<Button AutomationId="AddText" Text="AddText" Command="{Binding GotoTestCommand}" CommandParameter="AddTextPage" />
+		</StackLayout>
 	</StackLayout>
 </ContentPage> 
