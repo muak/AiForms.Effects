@@ -50,6 +50,8 @@ This is the effect that add one line text into a view.
 If you use this effect, for example you will be able to show a information that validations or character count etc.  
 You will be able to change text position(top-left,top-right,bottom-left,bottom-right), text color,font size and margin by specifying property.
 
+<img src="images/addtext_ios.gif" /> <img src="images/addtext_droid.gif" />
+
 ### Supported View
 
 * Label
