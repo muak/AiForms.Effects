@@ -44,7 +44,10 @@ namespace AiForms.Effects.iOS
             var multiple = (float)AlterLineHeight.GetMultiple(_formsLabel);
             var fontSize = (float)(_formsLabel).FontSize;
             var lineSpacing = (fontSize * multiple) - fontSize;
-            var pStyle = new NSMutableParagraphStyle() { LineSpacing = lineSpacing };
+            var pStyle = new NSMutableParagraphStyle() { 
+                LineSpacing = lineSpacing,
+                Alignment=_formsLabel.HorizontalTextAlignment.ToNativeTextAlignment() 
+            };
             var attrString = new NSMutableAttributedString(text);
 
             attrString.AddAttribute(UIStringAttributeKey.ParagraphStyle,

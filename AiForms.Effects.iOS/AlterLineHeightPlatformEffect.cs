@@ -43,6 +43,9 @@ namespace AiForms.Effects.iOS
             else if (e.PropertyName == Label.TextProperty.PropertyName && _effect is LineHeightForLabel) {
                 _effect?.Update();
             }
+            else if( e.PropertyName == Label.HorizontalTextAlignmentProperty.PropertyName && _effect is LineHeightForLabel){
+                _effect?.Update();
+            }
 
         }
 
