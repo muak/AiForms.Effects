@@ -20,6 +20,7 @@ namespace AiForms.Effects.Droid
             _textView.SetMaxLines(1);
             _textView.SetMinLines(1);
             _textView.Ellipsize = Android.Text.TextUtils.TruncateAt.End;
+            _textView.SetBackgroundColor(Android.Graphics.Color.Argb(128, 0, 0, 0));
 
             Container.AddView(_textView);
 
@@ -54,6 +55,7 @@ namespace AiForms.Effects.Droid
             base.OnElementPropertyChanged(args);
             if (args.PropertyName == AddText.TextProperty.PropertyName) {
                 UpdateText();
+                Container.RequestLayout();
             }
             else if (args.PropertyName == AddText.FontSizeProperty.PropertyName) {
                 UpdateFontSize();
@@ -105,7 +107,8 @@ namespace AiForms.Effects.Droid
 
         void UpdateHorizontalAlign()
         {
-            _textView.Gravity = AddText.GetHorizontalAlign(Element).ToHorizontalGravityFlags();
+            Container.RequestLayout();
+            //_textView.Gravity = AddText.GetHorizontalAlign(Element).ToHorizontalGravityFlags();
         }
 
         void UpdateVerticalAlign()
@@ -128,11 +131,42 @@ namespace AiForms.Effects.Droid
             // For some reason, in layout that was added to container, it does not work all gravity options and all layout options.
             public void OnLayoutChange(Android.Views.View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
             {
-                _textview.Right = v.Width;
+                if(string.IsNullOrEmpty(_textview.Text)){
+                    return;
+                }
 
                 var margin = AddText.GetMargin(_element);
-                var height = (int)Forms.Context.ToPixels(margin.Top) + (int)Forms.Context.ToPixels(margin.Bottom) + _textview.LineHeight;
-                var yPos = AddText.GetVerticalAlign(_element) == Xamarin.Forms.TextAlignment.Start ? 0 : v.Height - height;
+                margin.Left = (int)Forms.Context.ToPixels(margin.Left);
+                margin.Top = (int)Forms.Context.ToPixels(margin.Top);
+                margin.Right = (int)Forms.Context.ToPixels(margin.Right);
+                margin.Bottom = (int)Forms.Context.ToPixels(margin.Bottom);
+
+                var textpaint = _textview.Paint;
+                var rect = new Android.Graphics.Rect();
+                textpaint.GetTextBounds(_textview.Text, 0, _textview.Text.Length, rect);
+
+                var xPos = 0;
+                if(AddText.GetHorizontalAlign(_element) == Xamarin.Forms.TextAlignment.End){
+                    xPos = v.Width - rect.Width() - _textview.PaddingLeft - _textview.PaddingRight;
+                    if (xPos < 0) {
+                        xPos = 0;
+                    }
+                    _textview.Right = v.Right - (int)margin.Right;
+                }
+                else{
+                    xPos = (int)margin.Left;
+                    _textview.Right = (int)margin.Left + rect.Width() + _textview.PaddingLeft + _textview.PaddingRight + 2;
+                    if(_textview.Right >= v.Width){
+                        _textview.Right = v.Width - (int)margin.Right;
+                    }
+                }
+
+                _textview.Left = xPos;
+
+
+                var fm = textpaint.GetFontMetrics();
+                var height = (int)(Math.Abs(fm.Top) + fm.Bottom + _textview.PaddingTop + _textview.PaddingEnd);
+                var yPos = AddText.GetVerticalAlign(_element) == Xamarin.Forms.TextAlignment.Start ? 0 + (int)margin.Top : v.Height - height - (int)margin.Bottom;
 
                 _textview.Top = yPos;
                 _textview.Bottom = yPos + height;
