@@ -20,7 +20,6 @@ namespace AiForms.Effects.Droid
             _textView.SetMaxLines(1);
             _textView.SetMinLines(1);
             _textView.Ellipsize = Android.Text.TextUtils.TruncateAt.End;
-            _textView.SetBackgroundColor(Android.Graphics.Color.Argb(128, 0, 0, 0));
 
             Container.AddView(_textView);
 
@@ -30,9 +29,9 @@ namespace AiForms.Effects.Droid
             UpdateText();
             UpdateFontSize();
             UpdateTextColor();
-            UpdateMargin();
-            UpdateHorizontalAlign();
-            UpdateVerticalAlign();
+            UpdateBackgroundColor();
+            UpdatePadding();
+            Container.RequestLayout();
         }
 
         protected override void OnDetached()
@@ -47,7 +46,6 @@ namespace AiForms.Effects.Droid
 
             _textView.Dispose();
             _textView = null;
-
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
@@ -59,20 +57,26 @@ namespace AiForms.Effects.Droid
             }
             else if (args.PropertyName == AddText.FontSizeProperty.PropertyName) {
                 UpdateFontSize();
-                Container.RequestFocus();
+                Container.RequestLayout();
             }
             else if (args.PropertyName == AddText.TextColorProperty.PropertyName) {
                 UpdateTextColor();
             }
+            else if (args.PropertyName == AddText.BackgroundColorProperty.PropertyName) {
+                UpdateBackgroundColor();
+            }
+            else if (args.PropertyName == AddText.PaddingProperty.PropertyName) {
+                UpdatePadding();
+                Container.RequestLayout();
+            }
             else if (args.PropertyName == AddText.MarginProperty.PropertyName) {
-                UpdateMargin();
-                Container.RequestFocus();
+                Container.RequestLayout();
             }
             else if (args.PropertyName == AddText.HorizontalAlignProperty.PropertyName) {
-                UpdateHorizontalAlign();
+                Container.RequestLayout();
             }
             else if (args.PropertyName == AddText.VerticalAlignProperty.PropertyName) {
-                UpdateVerticalAlign();
+                Container.RequestLayout();
             }
         }
 
@@ -94,27 +98,22 @@ namespace AiForms.Effects.Droid
             _textView.SetTextColor(AddText.GetTextColor(Element).ToAndroid());
         }
 
-        void UpdateMargin()
+        void UpdateBackgroundColor()
         {
-            var margin = AddText.GetMargin(Element);
+            _textView.SetBackgroundColor(AddText.GetBackgroundColor(Element).ToAndroid());
+        }
+
+        void UpdatePadding()
+        {
+            var padding = AddText.GetPadding(Element);
             _textView.SetPadding(
-                (int)Container.Context.ToPixels(margin.Left),
-                (int)Container.Context.ToPixels(margin.Top),
-                (int)Container.Context.ToPixels(margin.Right),
-                (int)Container.Context.ToPixels(margin.Bottom)
+                (int)Container.Context.ToPixels(padding.Left),
+                (int)Container.Context.ToPixels(padding.Top),
+                (int)Container.Context.ToPixels(padding.Right),
+                (int)Container.Context.ToPixels(padding.Bottom)
             );
         }
 
-        void UpdateHorizontalAlign()
-        {
-            Container.RequestLayout();
-            //_textView.Gravity = AddText.GetHorizontalAlign(Element).ToHorizontalGravityFlags();
-        }
-
-        void UpdateVerticalAlign()
-        {
-            Container.RequestLayout();
-        }
 
         internal class ContainerOnLayoutChangeListener : Java.Lang.Object, Android.Views.View.IOnLayoutChangeListener
         {
@@ -131,7 +130,7 @@ namespace AiForms.Effects.Droid
             // For some reason, in layout that was added to container, it does not work all gravity options and all layout options.
             public void OnLayoutChange(Android.Views.View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
             {
-                if(string.IsNullOrEmpty(_textview.Text)){
+                if (string.IsNullOrEmpty(_textview.Text)) {
                     return;
                 }
 
@@ -146,17 +145,17 @@ namespace AiForms.Effects.Droid
                 textpaint.GetTextBounds(_textview.Text, 0, _textview.Text.Length, rect);
 
                 var xPos = 0;
-                if(AddText.GetHorizontalAlign(_element) == Xamarin.Forms.TextAlignment.End){
-                    xPos = v.Width - rect.Width() - _textview.PaddingLeft - _textview.PaddingRight;
-                    if (xPos < 0) {
-                        xPos = 0;
+                if (AddText.GetHorizontalAlign(_element) == Xamarin.Forms.TextAlignment.End) {
+                    xPos = v.Width - rect.Width() - _textview.PaddingLeft - _textview.PaddingRight - (int)margin.Right - 4;
+                    if (xPos < (int)margin.Left) {
+                        xPos = (int)margin.Left;
                     }
-                    _textview.Right = v.Right - (int)margin.Right;
+                    _textview.Right = v.Width - (int)margin.Right;
                 }
-                else{
+                else {
                     xPos = (int)margin.Left;
-                    _textview.Right = (int)margin.Left + rect.Width() + _textview.PaddingLeft + _textview.PaddingRight + 2;
-                    if(_textview.Right >= v.Width){
+                    _textview.Right = (int)margin.Left + rect.Width() + _textview.PaddingLeft + _textview.PaddingRight + 4;
+                    if (_textview.Right >= v.Width) {
                         _textview.Right = v.Width - (int)margin.Right;
                     }
                 }
@@ -183,6 +182,8 @@ namespace AiForms.Effects.Droid
             switch (alignment) {
                 case Xamarin.Forms.TextAlignment.End:
                     return GravityFlags.Right;
+                case Xamarin.Forms.TextAlignment.Center:
+                    return GravityFlags.Center;
                 default:
                     return GravityFlags.Left;
             }

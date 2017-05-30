@@ -96,6 +96,42 @@ namespace AiForms.Effects
             return (Color)view.GetValue(TextColorProperty);
         }
 
+        public static readonly BindableProperty BackgroundColorProperty =
+            BindableProperty.CreateAttached(
+                    "BackgroundColor",
+                    typeof(Color),
+                    typeof(AddText),
+                    Color.Transparent
+                );
+
+        public static void SetBackgroundColor(BindableObject view, Color value)
+        {
+            view.SetValue(BackgroundColorProperty, value);
+        }
+
+        public static Color GetBackgroundColor(BindableObject view)
+        {
+            return (Color)view.GetValue(BackgroundColorProperty);
+        }
+
+        public static readonly BindableProperty PaddingProperty =
+            BindableProperty.CreateAttached(
+                    "Padding",
+                    typeof(Thickness),
+                    typeof(AddText),
+                    default(Thickness)
+                );
+
+        public static void SetPadding(BindableObject view, Thickness value)
+        {
+            view.SetValue(PaddingProperty, value);
+        }
+
+        public static Thickness GetPadding(BindableObject view)
+        {
+            return (Thickness)view.GetValue(PaddingProperty);
+        }
+
         public static readonly BindableProperty MarginProperty =
             BindableProperty.CreateAttached(
                 "Margin",

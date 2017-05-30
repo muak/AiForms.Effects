@@ -72,12 +72,6 @@
     <Compile Include="AddTextPlatformEffect.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AiForms.Effects\AiForms.Effects.csproj">
-      <Project>{14FCC004-FC52-4028-A5AE-228AFD6F6222}</Project>
-      <Name>AiForms.Effects</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

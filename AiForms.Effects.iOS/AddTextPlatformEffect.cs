@@ -14,7 +14,6 @@ namespace AiForms.Effects.iOS
     {
         private PaddingLabel _textLabel;
         private NSLayoutConstraint[] _constraint;
-        private Thickness _margin = 0;
 
         protected override void OnAttached()
         {
@@ -25,9 +24,6 @@ namespace AiForms.Effects.iOS
             _textLabel.AdjustsFontSizeToFitWidth = true;
             _textLabel.BaselineAdjustment = UIBaselineAdjustment.AlignCenters;
             _textLabel.AdjustsLetterSpacingToFitWidth = true;
-            _textLabel.BackgroundColor = UIColor.FromRGBA(0, 0, 0, 0.5f);
-            _textLabel.Padding = new UIEdgeInsets(4,4,4,4);
-
 
             Container.AddSubview(_textLabel);
 
@@ -36,9 +32,9 @@ namespace AiForms.Effects.iOS
             UpdateText();
             UpdateFontSize();
             UpdateTextColor();
-            UpdateMargin();
-            UpdateHorizontalAlign();
-            UpdateVerticalAlign();
+            UpdateBackgroundColor();
+            UpdatePadding();
+            UpdateConstraint();
         }
 
         protected override void OnDetached()
@@ -47,6 +43,7 @@ namespace AiForms.Effects.iOS
             _textLabel.RemoveFromSuperview();
             _textLabel.Dispose();
             _constraint = null;
+            _textLabel = null;
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
@@ -61,14 +58,20 @@ namespace AiForms.Effects.iOS
             else if (args.PropertyName == AddText.TextColorProperty.PropertyName) {
                 UpdateTextColor();
             }
+            else if (args.PropertyName == AddText.BackgroundColorProperty.PropertyName) {
+                UpdateBackgroundColor();
+            }
+            else if (args.PropertyName == AddText.PaddingProperty.PropertyName) {
+                UpdatePadding();
+            }
             else if (args.PropertyName == AddText.MarginProperty.PropertyName) {
-                UpdateMargin();
+                UpdateConstraint();
             }
             else if (args.PropertyName == AddText.HorizontalAlignProperty.PropertyName) {
-                UpdateHorizontalAlign();
+                UpdateConstraint();
             }
             else if (args.PropertyName == AddText.VerticalAlignProperty.PropertyName) {
-                UpdateVerticalAlign();
+                UpdateConstraint();
             }
         }
 
@@ -77,7 +80,6 @@ namespace AiForms.Effects.iOS
             var text = AddText.GetText(Element);
             _textLabel.Text = text;
             _textLabel.Hidden = string.IsNullOrEmpty(text);
-
         }
 
         void UpdateFontSize()
@@ -90,55 +92,36 @@ namespace AiForms.Effects.iOS
             _textLabel.TextColor = AddText.GetTextColor(Element).ToUIColor();
         }
 
-        void UpdateMargin()
+        void UpdateBackgroundColor()
         {
-            _margin = AddText.GetMargin(Element);
+            _textLabel.BackgroundColor = AddText.GetBackgroundColor(Element).ToUIColor();
         }
 
-        void UpdateHorizontalAlign()
+        void UpdatePadding()
         {
-            //_textLabel.TextAlignment = AddText.GetHorizontalAlign(Element).ToNativeTextAlignment();
-            //var align = AddText.GetHorizontalAlign(Element);
-            //if (_constraint != null) {
-            //    Container.RemoveConstraints(_constraint);
-            //}
-            //_constraint = CreateConstraint(_margin, align == TextAlignment.Start,);
-            //Container.AddConstraints(_constraint);
-            UpdateVerticalAlign();
+            var padding = AddText.GetPadding(Element);
+            _textLabel.Padding = new UIEdgeInsets((float)padding.Top, (float)padding.Left, (float)padding.Bottom, (float)padding.Right);
         }
 
-        void UpdateVerticalAlign()
+        void UpdateConstraint()
         {
-            var align = AddText.GetVerticalAlign(Element);
+            
             if (_constraint != null) {
                 Container.RemoveConstraints(_constraint);
             }
-            _constraint = CreateConstraint(_margin, align == TextAlignment.Start);
+            _constraint = CreateConstraint();
             Container.AddConstraints(_constraint);
         }
 
-        NSLayoutConstraint[] CreateConstraint(Thickness margin, bool isTop = true)
+        NSLayoutConstraint[] CreateConstraint()
         {
             var isLeft = AddText.GetHorizontalAlign(Element) == Xamarin.Forms.TextAlignment.Start;
+            var isTop = AddText.GetVerticalAlign(Element) == Xamarin.Forms.TextAlignment.Start;
+            var margin = AddText.GetMargin(Element);
+
+            _textLabel.TextAlignment = isLeft ? UITextAlignment.Left : UITextAlignment.Right;
+
             var constraint = new NSLayoutConstraint[]{
-                //NSLayoutConstraint.Create(
-                //    _textLabel,
-                //    NSLayoutAttribute.Left,
-                //    NSLayoutRelation.Equal,
-                //    Container,
-                //    NSLayoutAttribute.Left,
-                //    1,
-                //    (nfloat)margin.Left
-                //),
-                //NSLayoutConstraint.Create(
-                //    _textLabel,
-                //    NSLayoutAttribute.Right,
-                //    NSLayoutRelation.Equal,
-                //    Container,
-                //    NSLayoutAttribute.Right,
-                //    1,
-                //    -(nfloat)margin.Right
-                //),
                 NSLayoutConstraint.Create(
                     _textLabel,
                     isLeft ? NSLayoutAttribute.Left : NSLayoutAttribute.Right,
@@ -157,16 +140,6 @@ namespace AiForms.Effects.iOS
                     1,
                     -(nfloat)(margin.Left + margin.Right)
                 ),
-                //NSLayoutConstraint.Create(
-                //    _textLabel,
-                //    NSLayoutAttribute.Height,
-                //    NSLayoutRelation.Equal,
-                //    null,
-                //    NSLayoutAttribute.Height,
-                //    1,
-                //    (float)AddText.GetFontSize(Element) + (float)margin.Top + (float)margin.Bottom
-                //),
-
                 NSLayoutConstraint.Create(
                     _textLabel,
                     isTop ? NSLayoutAttribute.Top : NSLayoutAttribute.Bottom,
@@ -177,7 +150,6 @@ namespace AiForms.Effects.iOS
                     isTop ? (nfloat)margin.Top : -(nfloat)margin.Bottom
                 )
             };
-
 
             return constraint;
         }
