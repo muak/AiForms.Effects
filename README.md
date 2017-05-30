@@ -3,7 +3,7 @@
 Xamarin.Forms Effects for Android / iOS only.
 
 ## Features
-* [AddText](#addtext)(from 0.1.1-pre)
+* [AddText](#addtext)
 	* add one line Text to a view.
 * [ToFlatButton](#toflatbutton)
 	* alter Button to flat (for Android)
@@ -70,9 +70,16 @@ and more.
 	* added text
 * TextColor
 	* Default Red
+* BackgroundColor
+	* BackgroundColor of inner text view.
+	* Default Transparent
 * FontSize
 	* Default 8
 * Margin
+	* Distance from a side of target view to inner text view.
+	* Default 0,0,0,0
+* Padding
+	* Padding of inner text view. 
 	* Default 0,0,0,0
 * HorizontalAlign
 	* horizontal text position(Start or End). Default End.
@@ -91,8 +98,9 @@ and more.
 		<Entry HorizontalOptions="FillAndExpand" Text="{Binding Title}"
 			ef:AddText.On="true" ef:AddText.TextColor="Red" 
 			ef:AddText.FontSize="10" ef:AddText.Margin="4,8,4,8" 
+			ef:AddText.Padding="2,4,2,4" ef:AddText.BackgroundColor="#A0F0F0E0"
 			ef:AddText.HorizontalAlign="End"
-      ef:AddText.VerticalAlign="Start" 
+			ef:AddText.VerticalAlign="Start" 
 			ef:AddText.Text="{Binding TitleMessage}" />
 	</StackLayout>
 </ContentPage>
