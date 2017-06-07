@@ -41,6 +41,22 @@ namespace AiForms.Effects
             }
         }
 
+        public static readonly BindableProperty IsSoundEffectProperty =
+            BindableProperty.CreateAttached(
+                "IsSoundEffect", 
+                typeof(bool), 
+                typeof(AddCommand), 
+                false);
+
+        public static void SetIsSoundEffect(BindableObject view, bool value)
+        {
+            view.SetValue(IsSoundEffectProperty, value);
+        }
+        public static bool GetIsSoundEffect(BindableObject view)
+        {
+            return (bool)view.GetValue(IsSoundEffectProperty);
+        }
+
         public static readonly BindableProperty CommandProperty =
             BindableProperty.CreateAttached(
                     "Command",
