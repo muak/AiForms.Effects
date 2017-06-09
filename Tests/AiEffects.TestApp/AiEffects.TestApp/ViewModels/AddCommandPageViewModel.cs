@@ -13,11 +13,11 @@ namespace AiEffects.TestApp.ViewModels
 {
     public class AddCommandPageViewModel : BindableBase, IDestructible, INavigationAware
     {
-        private bool _isSoundEffect;
-        public bool IsSoundEffect {
-            get { return _isSoundEffect; }
+        private bool _EnableSound;
+        public bool EnableSound {
+            get { return _EnableSound; }
             set { 
-                SetProperty(ref _isSoundEffect, value); 
+                SetProperty(ref _EnableSound, value); 
             }
         }
 
@@ -67,6 +67,12 @@ namespace AiEffects.TestApp.ViewModels
         public string TestLongParam {
             get { return _TestLongParam; }
             set { SetProperty(ref _TestLongParam, value); }
+        }
+
+        private bool _SyncCanExecute;
+        public bool SyncCanExecute {
+            get { return _SyncCanExecute; }
+            set { SetProperty(ref _SyncCanExecute, value); }
         }
 
         private DelegateCommand<object> _EffectCommand;
@@ -167,6 +173,13 @@ namespace AiEffects.TestApp.ViewModels
             }
         }
 
+        public ReactiveProperty<bool> CanExecute { get; } = new ReactiveProperty<bool>(false);
+        public ReactiveProperty<bool> CanExecuteLong { get; } = new ReactiveProperty<bool>(false);
+        public AsyncReactiveCommand CanExecuteCommand { get; set; }
+        public ReactiveCommand CanExecuteLongCommand { get; set; }
+        public ReactiveCommand CanExecuteNullToggle { get; set; } = new ReactiveCommand();
+        public ReactiveCommand CanExecuteLongNullToggle { get; set; } = new ReactiveCommand();
+
         private INavigationService Navigation;
 
         public AddCommandPageViewModel(INavigationService navigationService)
@@ -180,8 +193,45 @@ namespace AiEffects.TestApp.ViewModels
             TestParam = "Hoge";
             TestLongParam = "LongHoge";
 
-            _EffectCommand = new DelegateCommand<object>(ExecCommand);
-            LongCommand = new DelegateCommand<object>(ExecLongCommand);
+            _EffectCommand = new DelegateCommand<object>(ExecCommand,(arg) => false);
+            LongCommand = new DelegateCommand<object>(ExecLongCommand,(arg) => false);
+
+
+            SyncCanExecute = true;
+
+
+            CanExecuteNullToggle.Subscribe(_=>{
+                if(CanExecuteCommand != null){
+                    CanExecuteCommand = null;
+                    CommandParameterText = "Command is null";
+                }
+                else{
+                    CanExecuteCommand = CanExecute.ToAsyncReactiveCommand();
+                    CanExecuteCommand.Subscribe(async x=>{
+                        CommandParameterText = "Done Command";
+                        await Task.Delay(500);
+                    });
+                }
+                OnPropertyChanged(()=>CanExecuteCommand);
+            });
+
+            CanExecuteLongNullToggle.Subscribe(_=>{
+                if(CanExecuteLongCommand != null){
+                    CanExecuteLongCommand = null;
+                    CommandParameterText = "LongCommand is null";
+                }
+                else{
+                    CanExecuteLongCommand = CanExecuteLong.ToReactiveCommand();
+                    CanExecuteLongCommand.Subscribe(async x=>{
+                        CommandParameterText = "Done Long Command";
+                        await Task.Delay(500);
+                    });
+                }
+                OnPropertyChanged(()=>CanExecuteLongCommand);
+            });
+
+            CanExecuteNullToggle.Execute();
+            CanExecuteLongNullToggle.Execute();
         }
 
         void ExecCommand(object p)

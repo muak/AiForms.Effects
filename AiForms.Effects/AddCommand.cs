@@ -41,20 +41,20 @@ namespace AiForms.Effects
             }
         }
 
-        public static readonly BindableProperty IsSoundEffectProperty =
+        public static readonly BindableProperty EnableSoundProperty =
             BindableProperty.CreateAttached(
-                "IsSoundEffect", 
+                "EnableSound", 
                 typeof(bool), 
                 typeof(AddCommand), 
                 false);
 
-        public static void SetIsSoundEffect(BindableObject view, bool value)
+        public static void SetEnableSound(BindableObject view, bool value)
         {
-            view.SetValue(IsSoundEffectProperty, value);
+            view.SetValue(EnableSoundProperty, value);
         }
-        public static bool GetIsSoundEffect(BindableObject view)
+        public static bool GetEnableSound(BindableObject view)
         {
-            return (bool)view.GetValue(IsSoundEffectProperty);
+            return (bool)view.GetValue(EnableSoundProperty);
         }
 
         public static readonly BindableProperty CommandProperty =
@@ -166,10 +166,47 @@ namespace AiForms.Effects
             return (bool)view.GetValue(EnableRippleProperty);
         }
 
+        public static readonly BindableProperty DisabledAlphaProperty =
+            BindableProperty.CreateAttached(
+                "DisabledAlpha",
+                typeof(float),
+                typeof(AddCommand),
+                1.0f
+            );
+
+        public static void SetDisabledAlpha(BindableObject view, float value)
+        {
+            view.SetValue(DisabledAlphaProperty, value);
+        }
+
+        public static float GetDisabledAlpha(BindableObject view)
+        {
+            return (float)view.GetValue(DisabledAlphaProperty);
+        }
+
+        public static readonly BindableProperty SyncCanExecuteProperty =
+            BindableProperty.CreateAttached(
+                "SyncCanExecute",
+                typeof(bool),
+                typeof(AddCommand),
+                false
+            );
+
+        public static void SetSyncCanExecute(BindableObject view, bool value)
+        {
+            view.SetValue(SyncCanExecuteProperty, value);
+        }
+
+        public static bool GetSyncCanExecute(BindableObject view)
+        {
+            return (bool)view.GetValue(SyncCanExecuteProperty);
+        }
+
         class AddCommandRoutingEffect : RoutingEffect
         {
             public AddCommandRoutingEffect() : base("AiForms." + nameof(AddCommand)) { }
         }
+
     }
 
 }
