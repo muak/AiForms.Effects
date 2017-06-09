@@ -13,6 +13,14 @@ namespace AiEffects.TestApp.ViewModels
 {
     public class AddCommandPageViewModel : BindableBase, IDestructible, INavigationAware
     {
+        private bool _isSoundEffect;
+        public bool IsSoundEffect {
+            get { return _isSoundEffect; }
+            set { 
+                SetProperty(ref _isSoundEffect, value); 
+            }
+        }
+
         private bool _EffectOn;
         public bool EffectOn {
             get { return _EffectOn; }

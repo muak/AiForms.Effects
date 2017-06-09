@@ -8,6 +8,9 @@ using Android.Views;
 using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using System.Linq;
+using Android.Media;
+using Android.Content;
 
 [assembly: ResolutionGroupName("AiForms")]
 [assembly: ExportEffect(typeof(AddCommandPlatformEffect), nameof(AddCommand))]
@@ -27,7 +30,21 @@ namespace AiForms.Effects.Droid
         private bool _useRipple;
         private FrameLayout _rippleOverlay;
         private ContainerOnLayoutChangeListener _rippleListener;
-
+        private bool _isSoundEffect;
+        private bool _isTapTargetSoundEffect;
+        public static Type[] TapSoundEffectElementType = {
+            typeof(ContentPresenter),
+            typeof(ContentView),
+            typeof(Frame),
+            typeof(Cell),
+            typeof(Xamarin.Forms.ScrollView),
+            typeof(TemplatedView),
+            typeof(Xamarin.Forms.AbsoluteLayout),
+            typeof(Grid),
+            typeof(Xamarin.Forms.RelativeLayout),
+            typeof(StackLayout)
+        };
+        private AudioManager _audioManager;
 
         protected override void OnAttached()
         {
@@ -44,6 +61,11 @@ namespace AiForms.Effects.Droid
             UpdateLongCommandParameter();
             UpdateEnableRipple();
             //UpdateEffectColor();
+            UpdateIsSoundEffect();
+            _isTapTargetSoundEffect = TapSoundEffectElementType.Any(x => x == Element.GetType());
+            if (_audioManager == null) {
+                _audioManager = (AudioManager)Forms.Context.GetSystemService(Context.AudioService);
+            }
 
             _view.Click += OnClick;
         }
@@ -98,6 +120,9 @@ namespace AiForms.Effects.Droid
             else if (e.PropertyName == AddCommand.EnableRippleProperty.PropertyName) {
                 UpdateEnableRipple();
             }
+            else if (e.PropertyName == AddCommand.IsSoundEffectProperty.PropertyName) {
+                UpdateIsSoundEffect();
+            }
         }
 
         void UpdateCommand()
@@ -130,7 +155,14 @@ namespace AiForms.Effects.Droid
 
         void OnClick(object sender, EventArgs e)
         {
-            _command?.Execute(_commandParameter ?? Element);
+            if (_command == null)
+                return;
+            
+            if (_isTapTargetSoundEffect && _isSoundEffect) {
+                _audioManager?.PlaySoundEffect(SoundEffect.KeyClick);
+            }
+
+            _command.Execute(_commandParameter ?? Element);
         }
 
         void OnLongClick(object sender, Android.Views.View.LongClickEventArgs e)
@@ -140,7 +172,14 @@ namespace AiForms.Effects.Droid
                 return;
             }
 
-            _longCommand?.Execute(_longCommandParameter ?? Element);
+            if (_longCommand == null)
+                return;
+
+            if (_isSoundEffect) {
+                _audioManager?.PlaySoundEffect(SoundEffect.KeyClick);
+            }
+
+            _longCommand.Execute(_longCommandParameter ?? Element);
 
             e.Handled = true;
         }
@@ -190,6 +229,11 @@ namespace AiForms.Effects.Droid
                 RemoveRipple();
             }
             UpdateEffectColor();
+        }
+
+        void UpdateIsSoundEffect()
+        {
+            _isSoundEffect = AddCommand.GetIsSoundEffect(Element);
         }
 
         void AddRipple()

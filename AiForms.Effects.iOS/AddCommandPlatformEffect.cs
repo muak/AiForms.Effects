@@ -6,6 +6,7 @@ using CoreGraphics;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using AudioToolbox;
 
 [assembly: ResolutionGroupName("AiForms")]
 [assembly: ExportEffect(typeof(AddCommandPlatformEffect), nameof(AddCommand))]
@@ -20,9 +21,13 @@ namespace AiForms.Effects.iOS
         private object _longCommandParameter;
         private UITapGestureRecognizer _tapGesture;
         private UILongPressGestureRecognizer _longTapGesture;
+        private bool _isSoundEffect;
         private UIView _view;
         private UIView _layer;
         private double _alpha;
+        private SystemSound _clickSound;
+
+        public uint PlaySoundNo { get; set; } = 1306;
 
         protected override void OnAttached()
         {
@@ -30,7 +35,13 @@ namespace AiForms.Effects.iOS
 
             _tapGesture = new UITapGestureRecognizer(async (obj) => {
                 await TapAnimation(0.3, _alpha, 0);
-                _command?.Execute(_commandParameter ?? Element);
+                if (_command == null)
+                    return;
+                
+                if(_isSoundEffect)
+                    PlayClickSound();
+
+                 _command.Execute(_commandParameter ?? Element);
             });
 
             _view.UserInteractionEnabled = true;
@@ -41,6 +52,7 @@ namespace AiForms.Effects.iOS
             UpdateLongCommand();
             UpdateLongCommandParameter();
             UpdateEffectColor();
+            UpdateIsSoundEffect();
         }
 
         protected override void OnDetached()
@@ -58,6 +70,8 @@ namespace AiForms.Effects.iOS
                 _layer.Dispose();
                 _layer = null;
             }
+            
+            _clickSound?.Dispose();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
@@ -78,6 +92,10 @@ namespace AiForms.Effects.iOS
             }
             else if (e.PropertyName == AddCommand.LongCommandParameterProperty.PropertyName) {
                 UpdateLongCommandParameter();
+            }
+            else if (e.PropertyName == AddCommand.IsSoundEffectProperty.PropertyName)
+            {
+                UpdateIsSoundEffect();
             }
 
         }
@@ -103,8 +121,11 @@ namespace AiForms.Effects.iOS
                 return;
             }
             _longTapGesture = new UILongPressGestureRecognizer(async (obj) => {
-                if (obj.State == UIGestureRecognizerState.Began) {
-
+                if (obj.State == UIGestureRecognizerState.Began)
+                {
+                    if (_isSoundEffect)
+                        PlayClickSound();
+                    
                     _longCommand?.Execute(_longCommandParameter ?? Element);
 
                     await TapAnimation(0.5, 0, _alpha, false);
@@ -142,6 +163,11 @@ namespace AiForms.Effects.iOS
             _layer.BackgroundColor = color.ToUIColor();
 
         }
+        
+        void UpdateIsSoundEffect()
+        {
+            _isSoundEffect = AddCommand.GetIsSoundEffect(Element);
+        }
 
         async Task TapAnimation(double duration, double start = 1, double end = 0, bool remove = true)
         {
@@ -158,6 +184,15 @@ namespace AiForms.Effects.iOS
                 }
             }
         }
+
+        void PlayClickSound()
+        {
+            if(_clickSound == null)
+                _clickSound = new SystemSound(PlaySoundNo);
+            
+            _clickSound.PlaySystemSoundAsync();
+        }
+        
     }
 }
 
