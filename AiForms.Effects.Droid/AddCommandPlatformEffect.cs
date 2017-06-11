@@ -19,19 +19,8 @@ namespace AiForms.Effects.Droid
 
     public class AddCommandPlatformEffect : PlatformEffect
     {
-        private ICommand _command;
-        private object _commandParameter;
-        private ICommand _longCommand;
-        private object _longCommandParameter;
-        private Android.Views.View _view;
-        private FrameLayout _layer;
-        private RippleDrawable _ripple;
-        private Drawable _orgDrawable;
-        private bool _useRipple;
-        private FrameLayout _rippleOverlay;
-        private ContainerOnLayoutChangeListener _rippleListener;
-        private bool _enableSound;
-        private bool _isTapTargetSoundEffect;
+        public static SoundEffect PlaySoundEffect = SoundEffect.KeyClick;
+
         private static Type[] TapSoundEffectElementType = {
             typeof(ContentPresenter),
             typeof(ContentView),
@@ -44,7 +33,6 @@ namespace AiForms.Effects.Droid
             typeof(Xamarin.Forms.RelativeLayout),
             typeof(StackLayout)
         };
-        private bool _isDisableEffectTarget;
         private static Type[] DisableEffectTargetType = {
             typeof(ActivityIndicator),
             typeof(BoxView),
@@ -59,6 +47,20 @@ namespace AiForms.Effects.Droid
             typeof(StackLayout)
         };
 
+        private ICommand _command;
+        private object _commandParameter;
+        private ICommand _longCommand;
+        private object _longCommandParameter;
+        private Android.Views.View _view;
+        private FrameLayout _layer;
+        private RippleDrawable _ripple;
+        private Drawable _orgDrawable;
+        private bool _useRipple;
+        private FrameLayout _rippleOverlay;
+        private ContainerOnLayoutChangeListener _rippleListener;
+        private bool _enableSound;
+        private bool _isTapTargetSoundEffect;
+        private bool _isDisableEffectTarget;
         private AudioManager _audioManager;
         private bool _syncCanExecute;
 
@@ -76,7 +78,7 @@ namespace AiForms.Effects.Droid
             _isTapTargetSoundEffect = TapSoundEffectElementType.Any(x => x == Element.GetType());
 
             UpdateSyncCanExecute();
-            UpdateLongCommand();
+            UpdateCommandParameter();
             UpdateLongCommandParameter();
             UpdateEnableRipple();
             UpdateEnableSound();
@@ -194,7 +196,7 @@ namespace AiForms.Effects.Droid
             var forms = Element as Xamarin.Forms.View;
             if (forms == null)
                 return;
-            
+
             if (JudgeDisabled()) {
                 //Entrust the process of disabled to Forms
                 forms.IsEnabled = false;
@@ -268,7 +270,7 @@ namespace AiForms.Effects.Droid
                 return;
 
             if (_isTapTargetSoundEffect && _enableSound) {
-                _audioManager?.PlaySoundEffect(SoundEffect.KeyClick);
+                _audioManager?.PlaySoundEffect(PlaySoundEffect);
             }
 
             _command.Execute(_commandParameter ?? Element);
@@ -288,7 +290,7 @@ namespace AiForms.Effects.Droid
                 return;
 
             if (_enableSound) {
-                _audioManager?.PlaySoundEffect(SoundEffect.KeyClick);
+                _audioManager?.PlaySoundEffect(PlaySoundEffect);
             }
 
             _longCommand.Execute(_longCommandParameter ?? Element);

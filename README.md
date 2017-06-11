@@ -194,6 +194,11 @@ There are properties of Command and Parameter for tap and long tap.
 * EnableRipple
     * Ripple Effect On/Off (default true,android only)<br>
       If you don't have to use ripple effect,it make EnableRipple false.
+* EnableSound
+    * When tapped, whether play system sound effect.(Default false)
+* SyncCanExecute
+    * Whether synchronize Command's CanExecute to xamarin.forms.view's IsEnabled.(Default false)
+    * If true, a view become opacity when disabled.
 
 ### How to write by Xaml
 
@@ -217,9 +222,39 @@ There are properties of Command and Parameter for tap and long tap.
 
 ### Tips
 
+#### Changing Sound Effect
+
+AppDelegate
+```cs
+public override bool FinishedLaunching(UIApplication app, NSDictionary options) {
+    global::Xamarin.Forms.Forms.Init();
+
+    AiForms.Effects.iOS.Effects.Init();
+    //here specify sound number
+    AiForms.Effects.iOS.AddCommandPlatformEffect.PlaySoundNo = 1104;
+    ...
+}
+```
+
+MainActivity
+```cs
+protected override void OnCreate(Bundle bundle) {
+    
+    base.OnCreate(bundle);
+    ...
+    
+    global::Xamarin.Forms.Forms.Init(this, bundle);
+    
+    //here specify SE
+    AiForms.Effects.Droid.AddCommandPlatformEffect.PlaySoundEffect = Android.Media.SoundEffect.Spacebar;
+    
+    ...
+}
+```
+
 #### When using Image
 
-Ripple Effect will not occur foreground.In that case wrap by a layout view.
+Ripple Effect will not occur foreground. In that case wrap by a layout view.
 
 ```xml
 <StackLayout ef:AddCommand.On="{Binding EffectOn}"
@@ -322,6 +357,10 @@ This Effect alter LineHeight of Label and Editor.
 	</StackLayout>
 </ContentPage>
 ```
+
+## Contributors
+
+* [yuka-abn](https://github.com/yuka-abn)
 
 ## License
 

@@ -41,6 +41,9 @@
 		<StackLayout Orientation="Horizontal" VerticalOptions="Start">
 			<Label Text="SE" />
 			<Switch AutomationId="SoundEffectEnabled" IsToggled="{Binding EnableSound}" />
+			<Label Text="CanExecute" />
+			<Switch AutomationId="CanExecute" IsToggled="{Binding CanExecute.Value}" />
+			<Button WidthRequest="50" AutomationId="ChCanExecute" Text="ChCanExe" Command="{Binding ToggleCanExecute}" />
 		</StackLayout>
 		<ScrollView VerticalOptions="FillAndExpand">
 		<StackLayout>
@@ -371,8 +374,6 @@
 			<Switch IsToggled="{Binding CanExecuteLong.Value}"  />
 			<Button Text="CmdNull" Command="{Binding CanExecuteNullToggle}" />
 			<Button Text="LongCmdNull" Command="{Binding CanExecuteLongNullToggle}" />
-			<Button Text="Disabled" IsEnabled="false" />
-			<Label Text="Disabled" IsEnabled="false" TextColor="Blue" BackgroundColor="Red" />
 		</StackLayout>
 		</ScrollView>
 	</StackLayout>

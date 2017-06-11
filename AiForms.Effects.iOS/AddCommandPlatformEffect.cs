@@ -16,6 +16,14 @@ namespace AiForms.Effects.iOS
 {
     public class AddCommandPlatformEffect : PlatformEffect
     {
+        public static uint PlaySoundNo = 1306;
+
+        private static Type[] ExceptDisableEffectTargetType = {
+            typeof(Button),
+            typeof(Picker),
+            typeof(Slider),
+            typeof(Switch),
+        };
 
         private ICommand _command;
         private object _commandParameter;
@@ -30,15 +38,7 @@ namespace AiForms.Effects.iOS
         private SystemSound _clickSound;
         private bool _syncCanExecute;
         private bool _isDisableEffectTarget;
-        private static Type[] ExceptDisableEffectTargetType = {
-            typeof(Button),
-            typeof(Picker),
-            typeof(Slider),
-            typeof(Switch),
-        };
-
         private readonly float _disabledAlpha = 0.3f;
-        public uint PlaySoundNo { get; set; } = 1306;
 
         protected override void OnAttached()
         {

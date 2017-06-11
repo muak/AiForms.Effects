@@ -43,9 +43,9 @@ namespace AiForms.Effects
 
         public static readonly BindableProperty EnableSoundProperty =
             BindableProperty.CreateAttached(
-                "EnableSound", 
-                typeof(bool), 
-                typeof(AddCommand), 
+                "EnableSound",
+                typeof(bool),
+                typeof(AddCommand),
                 false);
 
         public static void SetEnableSound(BindableObject view, bool value)
@@ -164,24 +164,6 @@ namespace AiForms.Effects
         public static bool GetEnableRipple(BindableObject view)
         {
             return (bool)view.GetValue(EnableRippleProperty);
-        }
-
-        public static readonly BindableProperty DisabledAlphaProperty =
-            BindableProperty.CreateAttached(
-                "DisabledAlpha",
-                typeof(float),
-                typeof(AddCommand),
-                1.0f
-            );
-
-        public static void SetDisabledAlpha(BindableObject view, float value)
-        {
-            view.SetValue(DisabledAlphaProperty, value);
-        }
-
-        public static float GetDisabledAlpha(BindableObject view)
-        {
-            return (float)view.GetValue(DisabledAlphaProperty);
         }
 
         public static readonly BindableProperty SyncCanExecuteProperty =
