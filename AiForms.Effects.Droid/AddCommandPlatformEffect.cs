@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using AiForms.Effects;
 using AiForms.Effects.Droid;
+using Android.Content;
 using Android.Content.Res;
 using Android.Graphics.Drawables;
+using Android.Media;
 using Android.Views;
 using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using System.Linq;
-using Android.Media;
-using Android.Content;
 
 [assembly: ResolutionGroupName("AiForms")]
 [assembly: ExportEffect(typeof(AddCommandPlatformEffect), nameof(AddCommand))]
@@ -19,20 +19,9 @@ namespace AiForms.Effects.Droid
 
     public class AddCommandPlatformEffect : PlatformEffect
     {
-        private ICommand _command;
-        private object _commandParameter;
-        private ICommand _longCommand;
-        private object _longCommandParameter;
-        private Android.Views.View _view;
-        private FrameLayout _layer;
-        private RippleDrawable _ripple;
-        private Drawable _orgDrawable;
-        private bool _useRipple;
-        private FrameLayout _rippleOverlay;
-        private ContainerOnLayoutChangeListener _rippleListener;
-        private bool _isSoundEffect;
-        private bool _isTapTargetSoundEffect;
-        public static Type[] TapSoundEffectElementType = {
+        public static SoundEffect PlaySoundEffect = SoundEffect.KeyClick;
+
+        private static Type[] TapSoundEffectElementType = {
             typeof(ContentPresenter),
             typeof(ContentView),
             typeof(Frame),
@@ -44,25 +33,56 @@ namespace AiForms.Effects.Droid
             typeof(Xamarin.Forms.RelativeLayout),
             typeof(StackLayout)
         };
+        private static Type[] DisableEffectTargetType = {
+            typeof(ActivityIndicator),
+            typeof(BoxView),
+            typeof(Xamarin.Forms.Image),
+            typeof(Xamarin.Forms.ProgressBar),
+            typeof(ContentPresenter),
+            typeof(ContentView),
+            typeof(TemplatedView),
+            typeof(Xamarin.Forms.AbsoluteLayout),
+            typeof(Grid),
+            typeof(Xamarin.Forms.RelativeLayout),
+            typeof(StackLayout)
+        };
+
+        private ICommand _command;
+        private object _commandParameter;
+        private ICommand _longCommand;
+        private object _longCommandParameter;
+        private Android.Views.View _view;
+        private FrameLayout _layer;
+        private RippleDrawable _ripple;
+        private Drawable _orgDrawable;
+        private bool _useRipple;
+        private FrameLayout _rippleOverlay;
+        private ContainerOnLayoutChangeListener _rippleListener;
+        private bool _enableSound;
+        private bool _isTapTargetSoundEffect;
+        private bool _isDisableEffectTarget;
         private AudioManager _audioManager;
+        private bool _syncCanExecute;
+
+        private readonly float _disabledAlpha = 0.3f;
 
         protected override void OnAttached()
         {
             _view = Control ?? Container;
 
             if (Control is Android.Widget.ListView) {
-                //ListViewはOnClickで例外を出すので除外
+                //Except ListView because of Raising Exception OnClick
                 return;
             }
 
-            UpdateCommand();
+            _isTapTargetSoundEffect = TapSoundEffectElementType.Any(x => x == Element.GetType());
+
+            UpdateSyncCanExecute();
             UpdateCommandParameter();
-            UpdateLongCommand();
             UpdateLongCommandParameter();
             UpdateEnableRipple();
-            //UpdateEffectColor();
-            UpdateIsSoundEffect();
-            _isTapTargetSoundEffect = TapSoundEffectElementType.Any(x => x == Element.GetType());
+            UpdateEnableSound();
+
             if (_audioManager == null) {
                 _audioManager = (AudioManager)Forms.Context.GetSystemService(Context.AudioService);
             }
@@ -73,7 +93,7 @@ namespace AiForms.Effects.Droid
         protected override void OnDetached()
         {
             var renderer = Container as IVisualElementRenderer;
-            if (renderer?.Element != null) {    // Disposeされているかの判定
+            if (renderer?.Element != null) {    // Check disposed
                 _view.Click -= OnClick;
                 _view.Touch -= View_Touch;
                 _view.LongClick -= OnLongClick;
@@ -81,9 +101,16 @@ namespace AiForms.Effects.Droid
                     RemoveRipple();
                 }
             }
-            _command = null;
+
+            if (_command != null) {
+                _command.CanExecuteChanged -= CommandCanExecuteChanged;
+                _command = null;
+            }
+            if (_longCommand != null) {
+                _longCommand.CanExecuteChanged -= CommandCanExecuteChanged;
+                _longCommand = null;
+            }
             _commandParameter = null;
-            _longCommand = null;
             _longCommandParameter = null;
             _orgDrawable = null;
             _view = null;
@@ -120,14 +147,87 @@ namespace AiForms.Effects.Droid
             else if (e.PropertyName == AddCommand.EnableRippleProperty.PropertyName) {
                 UpdateEnableRipple();
             }
-            else if (e.PropertyName == AddCommand.IsSoundEffectProperty.PropertyName) {
-                UpdateIsSoundEffect();
+            else if (e.PropertyName == AddCommand.EnableSoundProperty.PropertyName) {
+                UpdateEnableSound();
             }
+            else if (e.PropertyName == AddCommand.SyncCanExecuteProperty.PropertyName) {
+                UpdateSyncCanExecute();
+            }
+        }
+
+        void UpdateSyncCanExecute()
+        {
+            _syncCanExecute = AddCommand.GetSyncCanExecute(Element);
+            if (_syncCanExecute) {
+                _isDisableEffectTarget = DisableEffectCheck();
+            }
+            UpdateCommand();
+            UpdateLongCommand();
+        }
+
+        bool DisableEffectCheck()
+        {
+            if (Element is Label) {
+                //when it was setted TextColor or BackgroundColor,it will not be turn color of disabled.
+                var label = Element as Label;
+                return label.TextColor != Xamarin.Forms.Color.Default ||
+                            label.BackgroundColor != Xamarin.Forms.Color.Default;
+            }
+
+            return DisableEffectTargetType.Any(x => x == Element.GetType());
         }
 
         void UpdateCommand()
         {
+            if (_command != null) {
+                _command.CanExecuteChanged -= CommandCanExecuteChanged;
+            }
+
             _command = AddCommand.GetCommand(Element);
+
+            if (_command != null && _syncCanExecute) {
+                _command.CanExecuteChanged += CommandCanExecuteChanged;
+                CommandCanExecuteChanged(_command, System.EventArgs.Empty);
+            }
+        }
+
+        void CommandCanExecuteChanged(object sender, System.EventArgs e)
+        {
+            var forms = Element as Xamarin.Forms.View;
+            if (forms == null)
+                return;
+
+            if (JudgeDisabled()) {
+                //Entrust the process of disabled to Forms
+                forms.IsEnabled = false;
+                if (_isDisableEffectTarget) {
+                    forms.FadeTo(_disabledAlpha);
+                }
+            }
+            else {
+                forms.IsEnabled = true;
+                if (_isDisableEffectTarget) {
+                    forms.FadeTo(1f);
+                }
+            }
+        }
+
+        bool JudgeDisabled()
+        {
+
+            if (_command != null && _longCommand == null) {
+                return !_command.CanExecute(_commandParameter);
+            }
+            else if (_command == null && _longCommand != null) {
+                return !_longCommand.CanExecute(_longCommandParameter);
+            }
+            else if (_command == null && _longCommand == null) {
+                return false;
+            }
+            else {
+                // only when both Command and LongCommand cannot execute,do disabled.
+                return !_command.CanExecute(_commandParameter) && !_longCommand.CanExecute(_longCommandParameter);
+            }
         }
 
         void UpdateCommandParameter()
@@ -138,14 +238,22 @@ namespace AiForms.Effects.Droid
         void UpdateLongCommand()
         {
             if (_longCommand != null) {
+                _longCommand.CanExecuteChanged -= CommandCanExecuteChanged;
                 _view.LongClick -= OnLongClick;
             }
+
             _longCommand = AddCommand.GetLongCommand(Element);
+
             if (_longCommand == null) {
                 return;
             }
 
             _view.LongClick += OnLongClick;
+
+            if (_syncCanExecute) {
+                _longCommand.CanExecuteChanged += CommandCanExecuteChanged;
+                CommandCanExecuteChanged(_longCommand, System.EventArgs.Empty);
+            }
 
         }
         void UpdateLongCommandParameter()
@@ -157,9 +265,12 @@ namespace AiForms.Effects.Droid
         {
             if (_command == null)
                 return;
-            
-            if (_isTapTargetSoundEffect && _isSoundEffect) {
-                _audioManager?.PlaySoundEffect(SoundEffect.KeyClick);
+
+            if (!_command.CanExecute(_commandParameter))
+                return;
+
+            if (_isTapTargetSoundEffect && _enableSound) {
+                _audioManager?.PlaySoundEffect(PlaySoundEffect);
             }
 
             _command.Execute(_commandParameter ?? Element);
@@ -175,8 +286,11 @@ namespace AiForms.Effects.Droid
             if (_longCommand == null)
                 return;
 
-            if (_isSoundEffect) {
-                _audioManager?.PlaySoundEffect(SoundEffect.KeyClick);
+            if (!_longCommand.CanExecute(_longCommandParameter))
+                return;
+
+            if (_enableSound) {
+                _audioManager?.PlaySoundEffect(PlaySoundEffect);
             }
 
             _longCommand.Execute(_longCommandParameter ?? Element);
@@ -231,9 +345,9 @@ namespace AiForms.Effects.Droid
             UpdateEffectColor();
         }
 
-        void UpdateIsSoundEffect()
+        void UpdateEnableSound()
         {
-            _isSoundEffect = AddCommand.GetIsSoundEffect(Element);
+            _enableSound = AddCommand.GetEnableSound(Element);
         }
 
         void AddRipple()

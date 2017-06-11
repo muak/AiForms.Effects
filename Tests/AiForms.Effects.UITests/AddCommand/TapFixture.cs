@@ -416,7 +416,7 @@ namespace AiForms.Effects.UITests.AddCommand
             //Tap
             app.Tap(view);
 
-            await Task.Delay(250);
+            await Task.Delay(500);
             var ret = app.Query("ResultExecute")[0];
             var label = app.Query("ResultText")[0];
 
@@ -449,6 +449,46 @@ namespace AiForms.Effects.UITests.AddCommand
             }
 
             app.Tap("ResetResult");
+            await Task.Delay(250);
+
+            if(!expected){
+                return;
+            }
+
+            //CanExecute false
+            app.Tap("ChCanExecute");
+            await Task.Delay(250);
+
+            //Tap
+            app.Tap(view);
+
+            await Task.Delay(250);
+            ret = app.Query("ResultExecute")[0];
+            label = app.Query("ResultText")[0];
+
+            Assert.AreEqual(!expected, ret.Enabled, $"{view} command error");
+
+            string.IsNullOrEmpty(label.Text).IsTrue();
+
+            app.Tap("ResetResult");
+            await Task.Delay(250);
+
+            //LongTap
+            app.TouchAndHold(view);
+            await Task.Delay(500);
+
+            ret = app.Query("ResultLong")[0];
+            label = app.Query("ResultText")[0];
+
+            Assert.AreEqual(!longExpected, ret.Enabled, $"{view} long command error");
+
+            string.IsNullOrEmpty(label.Text).IsTrue();
+
+            app.Tap("ResetResult");
+            await Task.Delay(250);
+
+            //CanExecute true
+            app.Tap("ChCanExecute");
             await Task.Delay(250);
         }
 

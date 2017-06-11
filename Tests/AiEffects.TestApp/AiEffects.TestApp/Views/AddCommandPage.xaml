@@ -40,7 +40,10 @@
 		</StackLayout>
 		<StackLayout Orientation="Horizontal" VerticalOptions="Start">
 			<Label Text="SE" />
-			<Switch AutomationId="SoundEffectEnabled" IsToggled="{Binding IsSoundEffect}" />
+			<Switch AutomationId="SoundEffectEnabled" IsToggled="{Binding EnableSound}" />
+			<Label Text="CanExecute" />
+			<Switch AutomationId="CanExecute" IsToggled="{Binding CanExecute.Value}" />
+			<Button WidthRequest="50" AutomationId="ChCanExecute" Text="ChCanExe" Command="{Binding ToggleCanExecute}" />
 		</StackLayout>
 		<ScrollView VerticalOptions="FillAndExpand">
 		<StackLayout>
@@ -51,8 +54,9 @@
 				ef:AddCommand.CommandParameter="ActivityIndicator"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongActivityIndicator"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}" /> 
 				
 			<BoxView Color="Green"  AutomationId="BoxView"
 				ef:AddCommand.On="{Binding EffectOn}" 
@@ -61,8 +65,9 @@
 				ef:AddCommand.CommandParameter="BoxView" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongBoxView"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 				 
 			<Button Text="Button"  AutomationId="Button"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -71,8 +76,9 @@
 				ef:AddCommand.CommandParameter="Button" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongButton"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<DatePicker  AutomationId="DatePicker"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -81,8 +87,9 @@
 				ef:AddCommand.CommandParameter="DatePicker"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongDatePicker"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<Editor  Text="Editor" AutomationId="Editor"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -91,8 +98,9 @@
 				ef:AddCommand.CommandParameter="Editor"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongEditor"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<Entry Text="Entry"  AutomationId="Entry"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -101,8 +109,9 @@
 				ef:AddCommand.CommandParameter="Entry" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongEntry"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<Image Source="sample" HeightRequest="30"  AutomationId="Image"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -111,8 +120,9 @@
 				ef:AddCommand.CommandParameter="Image" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongImage"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 				
 			<Label Text="Label" AutomationId="Label"
 				ef:AddCommand.On="{Binding EffectOn}" 
@@ -121,8 +131,9 @@
 				ef:AddCommand.CommandParameter="Label"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongLabel"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<ListView HeightRequest="20" BackgroundColor="Green" AutomationId="ListView"
 				ef:AddCommand.On="{Binding EffectOn}" 
@@ -131,8 +142,9 @@
 				ef:AddCommand.CommandParameter="ListView"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongListView"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<Picker Title="Picker"  AutomationId="Picker"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -141,8 +153,9 @@
 				ef:AddCommand.CommandParameter="Picker" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongPicker"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<ProgressBar Progress="0.5" AutomationId="ProgressBar"
 				ef:AddCommand.On="{Binding EffectOn}" 
@@ -151,8 +164,9 @@
 				ef:AddCommand.CommandParameter="ProgressBar"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongProgressBar"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<SearchBar AutomationId="SearchBar" HeightRequest="25"
 				ef:AddCommand.On="{Binding EffectOn}" 
@@ -161,8 +175,9 @@
 				ef:AddCommand.CommandParameter="SearchBar"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongSearchBar"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}" /> 
 
 			<Slider  AutomationId="Slider"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -171,8 +186,9 @@
 				ef:AddCommand.CommandParameter="Slider"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongSlider"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 				
 			<Stepper AutomationId="Stepper"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -181,8 +197,9 @@
 				ef:AddCommand.CommandParameter="Stepper"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongStepper"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<Switch AutomationId="Switch"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -191,8 +208,9 @@
 				ef:AddCommand.CommandParameter="Switch" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongSwitch"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<TableView HeightRequest="20" BackgroundColor="Green" AutomationId="TableView"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -201,8 +219,9 @@
 				ef:AddCommand.CommandParameter="TableView" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongTableView"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<TimePicker  AutomationId="TimePicker"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -211,8 +230,9 @@
 				ef:AddCommand.CommandParameter="TimePicker"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongTimePicker"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<WebView Source="https://www.google.co.jp/" HeightRequest="60" BackgroundColor="Green" AutomationId="WebView"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -221,8 +241,9 @@
 				ef:AddCommand.CommandParameter="WebView"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongWebView"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 				 
 			<ContentPresenter HeightRequest="20" BackgroundColor="Blue" AutomationId="ContentPresenter"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -231,8 +252,9 @@
 				ef:AddCommand.CommandParameter="ContentPresenter" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongContentPresenter"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<ContentView HeightRequest="20" BackgroundColor="Navy" AutomationId="ContentView"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -241,8 +263,9 @@
 				ef:AddCommand.CommandParameter="ContentView" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongContentView"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<Frame  AutomationId="Frame"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -251,8 +274,9 @@
 				ef:AddCommand.CommandParameter="Frame" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongFrame"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<ScrollView HeightRequest="20" BackgroundColor="Green" AutomationId="ScrollView"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -261,8 +285,9 @@
 				ef:AddCommand.CommandParameter="ScrollView" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongScrollView"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<TemplatedView HeightRequest="20" BackgroundColor="Blue" AutomationId="TemplatedView"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -271,8 +296,9 @@
 				ef:AddCommand.CommandParameter="TemplatedView" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongTemplatedView"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<AbsoluteLayout HeightRequest="20" BackgroundColor="Fuchsia" AutomationId="AbsoluteLayout"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -281,8 +307,9 @@
 				ef:AddCommand.CommandParameter="AbsoluteLayout"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongAbsoluteLayout"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<Grid HeightRequest="20" BackgroundColor="Maroon" AutomationId="Grid"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -291,8 +318,9 @@
 				ef:AddCommand.CommandParameter="Grid" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongGrid"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<RelativeLayout HeightRequest="20" BackgroundColor="Olive" AutomationId="RelativeLayout"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -301,8 +329,9 @@
 				ef:AddCommand.CommandParameter="RelativeLayout" 
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongRelativeLayout"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  /> 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
 
 			<StackLayout Orientation="Horizontal" AutomationId="StackLayout"
 				ef:AddCommand.On="{Binding EffectOn}"  
@@ -311,8 +340,10 @@
 				ef:AddCommand.CommandParameter="StackLayout"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="LongStackLayout"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
-				ef:AddCommand.EnableRipple="{Binding EnableRipple}"  > 
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"
+				> 
 				<Label Text="StackLayout" InputTransparent="true" />
 				<Image Source="sample" />
 			</StackLayout>
@@ -324,10 +355,25 @@
 				ef:AddCommand.CommandParameter="{Binding TestParam}"
 				ef:AddCommand.LongCommand="{Binding LongCommand}"
 				ef:AddCommand.LongCommandParameter="{Binding TestLongParam}"
-				ef:AddCommand.IsSoundEffect="{Binding IsSoundEffect}"
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
 				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
-			
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"
 					/>
+
+			<Label AutomationId="CanExecuteTest" Text="CanExecuteCommandTest" HeightRequest="40"
+				ef:AddCommand.On="{Binding EffectOn}"  
+				ef:AddCommand.EffectColor="{Binding EffectColor}"
+				ef:AddCommand.Command="{Binding CanExecuteCommand}"
+				ef:AddCommand.LongCommand="{Binding CanExecuteLongCommand}"	
+				ef:AddCommand.EnableSound="{Binding EnableSound}"
+				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"
+				BackgroundColor="White" TextColor="Black"
+			/>
+			<Switch IsToggled="{Binding CanExecute.Value}"  />
+			<Switch IsToggled="{Binding CanExecuteLong.Value}"  />
+			<Button Text="CmdNull" Command="{Binding CanExecuteNullToggle}" />
+			<Button Text="LongCmdNull" Command="{Binding CanExecuteLongNullToggle}" />
 		</StackLayout>
 		</ScrollView>
 	</StackLayout>
