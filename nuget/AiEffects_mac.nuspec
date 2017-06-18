@@ -2,21 +2,21 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Effects</id>
-        <version>0.2.3</version>
+        <version>0.3.0-pre</version>
         <title>AiForms.Effects for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
         <projectUrl>https://github.com/muak/AiForms.Effects</projectUrl>
         <licenseUrl>https://github.com/muak/AiForms.Effects/blob/master/LICENSE.txt</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Xamarin.Forms Effects(add Text/add Command/NumberPicker to a view,alter LineHeight of Label and Editor/Button to flat) for iOS/Android</description>
+        <description>Xamarin.Forms Effects(add Border/add Text/add Command/NumberPicker to a view,alter LineHeight of Label and Editor/Button to flat) for iOS/Android</description>
         <summary></summary>
         <releaseNotes>
-## BugFix
+## NewFeatures 
 
-[AddCommand](Android) Not working ripple effect when attached again after detached.(Issue#14)
+[Border] the effect that add border to a view.
         </releaseNotes>
-        <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect</tags>
+        <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect Border</tags>
         <language>en-US</language>
         <dependencies>
             <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
