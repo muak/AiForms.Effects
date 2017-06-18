@@ -43,5 +43,9 @@
 		<StackLayout Orientation="Horizontal">
 			<Button AutomationId="AddText" Text="AddText" Command="{Binding GotoTestCommand}" CommandParameter="AddTextPage" />
 		</StackLayout>
+		<Label Text="Border" HorizontalOptions="Center" />
+		<StackLayout Orientation="Horizontal">
+			<Button AutomationId="Border" Text="Border" Command="{Binding GotoTestCommand}" CommandParameter="BorderPage" />
+		</StackLayout>
 	</StackLayout>
 </ContentPage> 

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	x:Class="AiEffects.TestApp.Views.BorderPage">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<Style TargetType="Button">
+				<Setter Property="FontSize" Value="9" />
+				<Setter Property="WidthRequest" Value="60" />
+				<Setter Property="HeightRequest">
+					<Setter.Value>
+						<OnPlatform x:TypeArguments="x:Double" iOS="25" Android="34" />
+					</Setter.Value>
+				</Setter>
+				<Setter Property="BackgroundColor" Value="#95C25A" />
+				<Setter Property="TextColor" Value="#FFFFFF" />
+			</Style>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	
+	<StackLayout> 
+		<StackLayout Orientation="Horizontal" VerticalOptions="Start">
+			<Label Text="Effect" />
+			<Switch IsToggled="{Binding EffectOn.Value}" />
+			<Label Text="Width" />
+			<Switch IsToggled="{Binding WidthToggle.Value}" />
+			<Label Text="Radius" />
+			<Switch IsToggled="{Binding RadiusToggle.Value}" />
+		</StackLayout>
+		<ScrollView VerticalOptions="FillAndExpand">
+		<StackLayout Margin="10">
+			<ActivityIndicator AutomationId="ActivityIndicator" IsVisible="true" IsRunning="true" 
+				ef:Border.On="{Binding EffectOn.Value}" 
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				 /> 
+				
+			<BoxView Color="Green"  AutomationId="BoxView" BackgroundColor="Olive"
+				ef:Border.On="{Binding EffectOn.Value}" 
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+				 
+			<!--<Button Text="Button"  AutomationId="Button"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> -->
+
+			<DatePicker  AutomationId="DatePicker"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<Editor  Text="Editor" AutomationId="Editor"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<Entry Text="Entry"  AutomationId="Entry"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<Image Source="sample" HeightRequest="30"  AutomationId="Image"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+				
+			<Label Text="Label" AutomationId="Label"
+				ef:Border.On="{Binding EffectOn.Value}" 
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<ListView HeightRequest="20" BackgroundColor="Green" AutomationId="ListView"
+				ef:Border.On="{Binding EffectOn.Value}" 
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<Picker Title="Picker"  AutomationId="Picker"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<ProgressBar Progress="0.5" AutomationId="ProgressBar"
+				ef:Border.On="{Binding EffectOn.Value}" 
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<SearchBar AutomationId="SearchBar" HeightRequest="25"
+				ef:Border.On="{Binding EffectOn.Value}" 
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				 /> 
+
+			<Slider  AutomationId="Slider"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+				
+			<Stepper AutomationId="Stepper"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<Switch AutomationId="Switch"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<TableView HeightRequest="20" BackgroundColor="Green" AutomationId="TableView"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<TimePicker  AutomationId="TimePicker"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<WebView Source="https://www.google.co.jp/" HeightRequest="60" BackgroundColor="Green" AutomationId="WebView"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+				 
+			<ContentPresenter HeightRequest="20" BackgroundColor="Blue" AutomationId="ContentPresenter"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<ContentView HeightRequest="20" BackgroundColor="Navy" AutomationId="ContentView"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<Frame  AutomationId="Frame"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<ScrollView HeightRequest="20" BackgroundColor="Green" AutomationId="ScrollView"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<TemplatedView HeightRequest="20" BackgroundColor="Blue" AutomationId="TemplatedView"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<AbsoluteLayout HeightRequest="20" BackgroundColor="Fuchsia" AutomationId="AbsoluteLayout"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<Grid HeightRequest="20" BackgroundColor="Maroon" AutomationId="Grid"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<RelativeLayout HeightRequest="20" BackgroundColor="Olive" AutomationId="RelativeLayout"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+				/> 
+
+			<StackLayout Orientation="Horizontal" AutomationId="StackLayout"
+				ef:Border.On="{Binding EffectOn.Value}"  
+				ef:Border.Color="{Binding BorderColor.Value}"
+				ef:Border.Width="{Binding Width.Value}"
+				ef:Border.Radius="{Binding Radius.Value}"
+
+				> 
+				<Label Text="StackLayout" InputTransparent="true" />
+				<Image Source="sample" />
+			</StackLayout>
+		</StackLayout>
+		</ScrollView>
+	</StackLayout>
+</ContentPage>
