@@ -57,6 +57,10 @@
       <DependentUpon>AddTextPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddTextPageViewModel.cs" />
+    <Compile Include="Views\BorderPage.xaml.cs">
+      <DependentUpon>BorderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\BorderPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -78,6 +82,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AddTextPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\BorderPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

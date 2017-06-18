@@ -11,6 +11,7 @@
     <AssemblyName>AiForms.Effects</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <ReleaseVersion>0.0.5-pre</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +36,7 @@
     <Compile Include="AddNumberPicker.cs" />
     <Compile Include="ToFlatButton.cs" />
     <Compile Include="AddText.cs" />
+    <Compile Include="Border.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

@@ -3,6 +3,8 @@
 Xamarin.Forms Effects for Android / iOS only.
 
 ## Features
+* [Border](#border)
+    * add border to a view.
 * [AddText](#addtext)
 	* add one line Text to a view.
 * [ToFlatButton](#toflatbutton)
@@ -43,6 +45,47 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
     return base.FinishedLaunching(app, options);
 }
 ```
+
+## Border
+
+This is the effect that add border to a view.  
+Entry, Picker, DatePicker and TimePicker on iOS have a border by default.  
+When specifying their width 0, it is possible that hide border.
+
+### Parameters
+
+* On
+	* Effect On/Off (true is On)
+* Width
+	* Border width (default 0)
+* Color
+	* Border color (default transparent)
+* Radius
+	* Border radius (default 0)
+
+### How to write by Xaml
+
+```xml
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	x:Class="AiEffects.TestApp.Views.BorderPage">
+	<StackLayout Margin="4" 
+        ef:Border.Width="2" ef:Border.Radius="6" ef:Border.Color="Red">
+		<Label Text="hoge" />
+        <Label Text="fuga" />
+	</StackLayout>
+</ContentPage>
+```
+
+### Limitations
+
+* On Android Entry, Picker, DatePicker, TimePicker's input underline is hidden if this effect attached.
+* On Android, Button is not displayed correctly. Use [ToFlatButton](#toflatbutton) for button.
+* On Android WebView, Frame, ScrollView are not supported.
+* On Android ListView and TableView overflow background from border.
+* Using AddCommand simultaneously is not supported.
 
 ## AddText
 
