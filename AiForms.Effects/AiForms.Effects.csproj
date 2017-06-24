@@ -37,6 +37,8 @@
     <Compile Include="ToFlatButton.cs" />
     <Compile Include="AddText.cs" />
     <Compile Include="Border.cs" />
+    <Compile Include="AlterColor.cs" />
+    <Compile Include="IAlterColorEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

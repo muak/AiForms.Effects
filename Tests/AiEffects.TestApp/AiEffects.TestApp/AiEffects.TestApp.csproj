@@ -61,6 +61,10 @@
       <DependentUpon>BorderPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BorderPageViewModel.cs" />
+    <Compile Include="Views\AlterColorPage.xaml.cs">
+      <DependentUpon>AlterColorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AlterColorPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -85,6 +89,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\BorderPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AlterColorPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

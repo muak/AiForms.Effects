@@ -123,6 +123,7 @@ namespace AiForms.Effects.Droid
             _layer = null;
             _ripple?.Dispose();
             _ripple = null;
+            _useRipple = false;
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)

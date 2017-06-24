@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	ef:AlterColor.On="{Binding EffectOn.Value}" ef:AlterColor.Accent="{Binding Accent.Value}"
+	BackgroundColor="#EFEFEF"
+	x:Class="AiEffects.TestApp.Views.AlterColorPage">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<Style TargetType="Button">
+				<Setter Property="FontSize" Value="9" />
+				<Setter Property="WidthRequest" Value="60" />
+				<Setter Property="HeightRequest">
+					<Setter.Value>
+						<OnPlatform x:TypeArguments="x:Double" iOS="25" Android="34" />
+					</Setter.Value>
+				</Setter>
+				<Setter Property="BackgroundColor" Value="#95C25A" />
+				<Setter Property="TextColor" Value="#FFFFFF" />
+			</Style>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+	
+	<StackLayout Padding="10">
+		<StackLayout Orientation="Horizontal" VerticalOptions="Start" BackgroundColor="White">
+			<Label Text="Effect" VerticalOptions="Center" />
+			<Switch IsToggled="{Binding EffectOn.Value}" VerticalOptions="Center" />
+			<Label Text="Color" VerticalOptions="Center" />
+			<Switch IsToggled="{Binding ColorToggle.Value}" VerticalOptions="Center" />
+		</StackLayout>
+		<Slider BackgroundColor="White"  Minimum="0" Maximum="1" Value="0.5" 
+			ef:AlterColor.On="{Binding EffectOn.Value}" ef:AlterColor.Accent="{Binding Accent.Value}" />
+		<StackLayout Orientation="Horizontal" BackgroundColor="White">
+			<Label Text="Switch" HorizontalOptions="FillAndExpand" />
+			<Switch IsToggled="true" HorizontalOptions="End" ef:AlterColor.On="{Binding EffectOn.Value}" ef:AlterColor.Accent="{Binding Accent.Value}" />
+		</StackLayout>
+		<Entry ef:AlterColor.On="{Binding EffectOn.Value}" ef:AlterColor.Accent="{Binding Accent.Value}"
+			BackgroundColor="White" />
+		<Editor VerticalOptions="FillAndExpand" ef:AlterColor.On="{Binding EffectOn.Value}" ef:AlterColor.Accent="{Binding Accent.Value}"
+			BackgroundColor="White" />
+	</StackLayout>
+</ContentPage>

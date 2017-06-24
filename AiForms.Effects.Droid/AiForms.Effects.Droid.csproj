@@ -94,6 +94,12 @@
     <Compile Include="ToFlatButtonPlatformEffect.cs" />
     <Compile Include="AddTextPlatformEffect.cs" />
     <Compile Include="BorderPlatformEffect.cs" />
+    <Compile Include="AlterColorPlatformEffect.cs" />
+    <Compile Include="AlterColorSlider.cs" />
+    <Compile Include="AlterColorBase.cs" />
+    <Compile Include="AlterColorSwitch.cs" />
+    <Compile Include="AlterColorTextView.cs" />
+    <Compile Include="AlterColorStatusbar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
