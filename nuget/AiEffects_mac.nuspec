@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Effects</id>
-        <version>0.2.2</version>
+        <version>0.2.3</version>
         <title>AiForms.Effects for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
@@ -12,12 +12,9 @@
         <description>Xamarin.Forms Effects(add Text/add Command/NumberPicker to a view,alter LineHeight of Label and Editor/Button to flat) for iOS/Android</description>
         <summary></summary>
         <releaseNotes>
-        ## Enhancements 
-        
-        [AddCommand] Add EnableSound Property (PullRequests#10)
-            * system sound on/off.
-        [AddCommand] Add SyncCanExecute Property (Issues#9)
-            * synchronize Command's CanExecute to Xamarin.Forms.View's IsEnabled.
+## BugFix
+
+[AddCommand](Android) Not working ripple effect when attached again after detached.(Issue#14)
         </releaseNotes>
         <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect</tags>
         <language>en-US</language>
