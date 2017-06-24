@@ -72,6 +72,9 @@
     <Compile Include="NumberPickerSource.cs" />
     <Compile Include="AddTextPlatformEffect.cs" />
     <Compile Include="BorderPlatformEffect.cs" />
+    <Compile Include="AlterColorPlatformEffect.cs" />
+    <Compile Include="AlterColorSlider.cs" />
+    <Compile Include="AlterColorSwitch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
