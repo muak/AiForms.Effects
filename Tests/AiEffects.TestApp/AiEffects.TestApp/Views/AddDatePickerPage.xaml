@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	x:Class="AiEffects.TestApp.Views.AddDatePickerPage"
+	Title="AddDatePicker">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<Style TargetType="Button">
+				<Setter Property="FontSize" Value="9" />
+				<Setter Property="WidthRequest" Value="60" />
+				<Setter Property="HeightRequest">
+					<Setter.Value>
+						<OnPlatform x:TypeArguments="x:Double" iOS="25" Android="34" />
+					</Setter.Value>
+				</Setter>
+				<Setter Property="BackgroundColor" Value="#95C25A" />
+				<Setter Property="TextColor" Value="#FFFFFF" />
+			</Style>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	
+	<StackLayout>
+		<StackLayout Orientation="Horizontal" VerticalOptions="Start" BackgroundColor="White">
+			<Label Text="Effect" VerticalOptions="Center" />
+			<Switch IsToggled="{Binding EffectOn.Value}" VerticalOptions="Center" />
+		</StackLayout>
+		<Label Text="{Binding LabelTime.Value,StringFormat='Label {0:d}'}" 
+			ef:AddDatePicker.On="{Binding EffectOn.Value}" 
+			ef:AddDatePicker.Date="{Binding LabelTime.Value}"
+			ef:AddDatePicker.MaxDate="2018/03/31"
+			ef:AddDatePicker.MinDate="2017/01/01"
+			ef:AddDatePicker.TodayText="今日" />
+		<BoxView Color="Green"  HeightRequest="50" WidthRequest="50" HorizontalOptions="Center"
+			ef:AddDatePicker.On="{Binding EffectOn.Value}" 
+			ef:AddDatePicker.Date="{Binding BoxTime.Value}"
+			ef:AddDatePicker.Command="{Binding SelectedCommand}" />
+		<StackLayout Orientation="Horizontal" 
+			ef:AddDatePicker.On="{Binding EffectOn.Value}" 
+			ef:AddDatePicker.Date="{Binding StackTime.Value}"
+			ef:AddDatePicker.Command="{Binding SelectedCommand}" >
+			<Label Text="{Binding StackTime.Value,StringFormat='StackLayout {0:d}'}" InputTransparent="true" />
+		</StackLayout>
+		<Button Text="{Binding ButtonTime.Value,StringFormat='Button {0:d}'}"  
+			ef:AddDatePicker.On="{Binding EffectOn.Value}" 
+			ef:AddDatePicker.Date="{Binding ButtonTime.Value}"
+		 />
+		<Image Source="sample" HeightRequest="30"  WidthRequest="30" HorizontalOptions="Center"
+			ef:AddDatePicker.On="{Binding EffectOn.Value}" 
+			ef:AddDatePicker.Date="{Binding ImageTime.Value}"
+			ef:AddDatePicker.Command="{Binding SelectedCommand}" />
+	</StackLayout>
+</ContentPage>

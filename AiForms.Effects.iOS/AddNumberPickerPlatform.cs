@@ -210,19 +210,6 @@ namespace AiForms.Effects.iOS
             _command = AddNumberPicker.GetCommand(Element);
         }
 
-
-        class NoCaretField : UITextField
-        {
-            public NoCaretField() : base(new CGRect())
-            {
-            }
-
-            public override CGRect GetCaretRectForPosition(UITextPosition position)
-            {
-                return new CGRect();
-            }
-
-        }
     }
 
 }

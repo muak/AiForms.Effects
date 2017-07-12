@@ -15,6 +15,7 @@
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
     <AndroidTlsProvider></AndroidTlsProvider>
+    <ReleaseVersion>0.0.5-pre</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -92,6 +93,16 @@
     <Compile Include="AddNumberPickerPlatform.cs" />
     <Compile Include="ToFlatButtonPlatformEffect.cs" />
     <Compile Include="AddTextPlatformEffect.cs" />
+    <Compile Include="BorderPlatformEffect.cs" />
+    <Compile Include="AlterColorPlatformEffect.cs" />
+    <Compile Include="AlterColorSlider.cs" />
+    <Compile Include="AlterColorBase.cs" />
+    <Compile Include="AlterColorSwitch.cs" />
+    <Compile Include="AlterColorTextView.cs" />
+    <Compile Include="AlterColorStatusbar.cs" />
+    <Compile Include="AddTimePickerPlatformEffect.cs" />
+    <Compile Include="AddDatePickerPlatformEffect.cs" />
+    <Compile Include="PlaceholderPlatformEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
