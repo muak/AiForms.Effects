@@ -5,7 +5,27 @@
 	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
 	x:Class="AiEffects.TestApp.Views.AddTimePickerPage"
 	Title="AddTimePicker">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<Style TargetType="Button">
+				<Setter Property="FontSize" Value="9" />
+				<Setter Property="WidthRequest" Value="60" />
+				<Setter Property="HeightRequest">
+					<Setter.Value>
+						<OnPlatform x:TypeArguments="x:Double" iOS="25" Android="34" />
+					</Setter.Value>
+				</Setter>
+				<Setter Property="BackgroundColor" Value="#95C25A" />
+				<Setter Property="TextColor" Value="#FFFFFF" />
+			</Style>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	
 	<StackLayout>
+		<StackLayout Orientation="Horizontal" VerticalOptions="Start" BackgroundColor="White">
+			<Label Text="Effect" VerticalOptions="Center" />
+			<Switch IsToggled="{Binding EffectOn.Value}" VerticalOptions="Center" />
+		</StackLayout>
 		<Label Text="{Binding LabelTime.Value,StringFormat='Label {0:c}'}" 
 			ef:AddTimePicker.On="{Binding EffectOn.Value}" 
 			ef:AddTimePicker.Time="{Binding LabelTime.Value}"

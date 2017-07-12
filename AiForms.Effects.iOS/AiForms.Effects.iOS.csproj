@@ -78,6 +78,7 @@
     <Compile Include="AddTimePickerPlatformEffect.cs" />
     <Compile Include="NoCaretField.cs" />
     <Compile Include="AddDatePickerPlatformEffect.cs" />
+    <Compile Include="PlaceholderPlatformEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

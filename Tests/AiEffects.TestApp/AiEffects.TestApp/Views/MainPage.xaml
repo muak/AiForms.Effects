@@ -60,6 +60,10 @@
 		<StackLayout Orientation="Horizontal">
 			<Button AutomationId="DatePicker" Text="DatePicker" Command="{Binding GotoTestCommand}" CommandParameter="AddDatePickerPage" />
 		</StackLayout>
+		<Label Text="Placeholder" HorizontalOptions="Center" />
+		<StackLayout Orientation="Horizontal">
+			<Button AutomationId="Placeholder" Text="Placeholder" Command="{Binding GotoTestCommand}" CommandParameter="PlaceholderPage" />
+		</StackLayout>
 	</StackLayout>
 	</ScrollView>
 </ContentPage> 

@@ -102,6 +102,7 @@
     <Compile Include="AlterColorStatusbar.cs" />
     <Compile Include="AddTimePickerPlatformEffect.cs" />
     <Compile Include="AddDatePickerPlatformEffect.cs" />
+    <Compile Include="PlaceholderPlatformEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
