@@ -21,6 +21,7 @@
 			</Style>
 		</ResourceDictionary>
 	</ContentPage.Resources>
+	<ScrollView>
 	<StackLayout Spacing="4" Padding="4">
 		<Label Text="AddCommand" HorizontalOptions="Center" />
 		<StackLayout Orientation="Horizontal">
@@ -51,5 +52,14 @@
 		<StackLayout Orientation="Horizontal">
 			<Button AutomationId="AlterColor" Text="AlterColor" Command="{Binding GotoTestCommand}" CommandParameter="AlterColorPage" />
 		</StackLayout>
+		<Label Text="TimePicker" HorizontalOptions="Center" />
+		<StackLayout Orientation="Horizontal">
+			<Button AutomationId="TimePicker" Text="TimePicker" Command="{Binding GotoTestCommand}" CommandParameter="AddTimePickerPage" />
+		</StackLayout>
+		<Label Text="DatePicker" HorizontalOptions="Center" />
+		<StackLayout Orientation="Horizontal">
+			<Button AutomationId="DatePicker" Text="DatePicker" Command="{Binding GotoTestCommand}" CommandParameter="AddDatePickerPage" />
+		</StackLayout>
 	</StackLayout>
+	</ScrollView>
 </ContentPage> 

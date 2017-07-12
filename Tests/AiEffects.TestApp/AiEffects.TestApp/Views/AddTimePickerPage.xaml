@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	x:Class="AiEffects.TestApp.Views.AddTimePickerPage"
+	Title="AddTimePicker">
+	<StackLayout>
+		<Label Text="{Binding LabelTime.Value,StringFormat='Label {0:c}'}" 
+			ef:AddTimePicker.On="{Binding EffectOn.Value}" 
+			ef:AddTimePicker.Time="{Binding LabelTime.Value}"
+			ef:AddTimePicker.Title="Select time" />
+		<BoxView Color="Green"  HeightRequest="50" WidthRequest="50" HorizontalOptions="Center"
+			ef:AddTimePicker.On="{Binding EffectOn.Value}" 
+			ef:AddTimePicker.Time="{Binding BoxTime.Value}"
+			ef:AddTimePicker.Title="Select time"
+			ef:AddTimePicker.Command="{Binding SelectedCommand}" />
+		<StackLayout Orientation="Horizontal" 
+			ef:AddTimePicker.On="{Binding EffectOn.Value}" 
+			ef:AddTimePicker.Time="{Binding StackTime.Value}"
+			ef:AddTimePicker.Title="Select time"
+			ef:AddTimePicker.Command="{Binding SelectedCommand}" >
+			<Label Text="{Binding StackTime.Value,StringFormat='StackLayout {0:c}'}" InputTransparent="true" />
+		</StackLayout>
+		<Button Text="{Binding ButtonTime.Value,StringFormat='Button {0:c}'}"  
+			ef:AddTimePicker.On="{Binding EffectOn.Value}" 
+			ef:AddTimePicker.Time="{Binding ButtonTime.Value}"
+			ef:AddTimePicker.Title="Select time" />
+		<Image Source="sample" HeightRequest="30"  WidthRequest="30" HorizontalOptions="Center"
+			ef:AddTimePicker.On="{Binding EffectOn.Value}" 
+			ef:AddTimePicker.Time="{Binding ImageTime.Value}"
+			ef:AddTimePicker.Title="Select time"
+			ef:AddTimePicker.Command="{Binding SelectedCommand}" />
+	</StackLayout>
+</ContentPage>
