@@ -5,16 +5,24 @@ Xamarin.Forms Effects for Android / iOS only.
 ## Features
 * [Border](#border)
     * add border to a view.
-* [AddText](#addtext)
-	* add one line Text to a view.
+* [Placeholder](#placeholder)
+	* show placeholder on Editor.
 * [ToFlatButton](#toflatbutton)
 	* alter Button to flat (for Android)
+* [AddText](#addtext)
+	* add one line Text to a view.
 * [AddCommand](#addcommand)
     * add Command function to a view.
 * [AddNumberPicker](#addnumberpicker)
     * add NumberPicker function to a view.
+* [AddTimePicker](#addtimepicker)
+	* add TimePicker function to a view.
+* [AddDatePicker](#adddatepicker)
+	* add DatePicker function to a view.
 * [AlterLineHeight](#alterlineheight)
     * alter LineHeight of Label and Editor.
+* [AlterColor](#altercolor)
+	* alter Color of an element which it cannot change color.
 
 
 ## Minimum Device and Version etc
@@ -52,6 +60,8 @@ This is the effect that add border to a view.
 Entry, Picker, DatePicker and TimePicker on iOS have a border by default.  
 When specifying their width 0, it is possible that hide border.
 
+<img src="images/border_ios.gif" /> <img src="images/border_droid.gif" />
+
 ### Parameters
 
 * On
@@ -63,7 +73,7 @@ When specifying their width 0, it is possible that hide border.
 * Radius
 	* Border radius (default 0)
 
-### How to write by Xaml
+### How to write with Xaml
 
 ```xml
 <ContentPage 
@@ -86,6 +96,68 @@ When specifying their width 0, it is possible that hide border.
 * On Android WebView, Frame, ScrollView are not supported.
 * On Android ListView and TableView overflow background from border.
 * Using AddCommand simultaneously is not supported.
+
+## Placeholder
+
+This is the effect that show placeholder on Editor.  
+This effect supports Editor only.
+
+<img src="images/placeholder_ios.gif" /> <img src="images/placeholder_droid.gif" />
+
+### Parameters
+
+* On
+	* Effect On/Off (true is On)
+* Text
+	* Placeholder text.
+* Color
+	* Placeholder color.
+
+### How to write with Xaml
+
+```xml
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	x:Class="AiEffects.TestApp.Views.BorderPage">
+	<Editor HeightRequest="150"
+		ef:Placeholder.On="true"
+		ef:Placeholder.Text="placeholder text"
+		ef:Placeholder.Color="#E0E0E0"
+	/>
+</ContentPage>
+```
+
+## ToFlatButton
+
+This is the effect that alter Button to flat(only Android).  
+If this effect is used, you will be able to design like iOS's Button.  
+And also this effect will enable BorderRadius, BorderWidth and BorderColor of default button properties to use by Android.
+
+<img src="images/toflat1.png" height="400" /> <img src="images/toflat2.png" height="400" />
+
+### Supported View
+
+* Button (Android)
+
+### Parameters
+
+* On
+    * Effect On/Off (true is On)
+* RippleColor
+	* Ripple effect color.(default none)
+
+
+### How to write with Xaml
+
+```xml
+<Button Text="ButtonText" 
+	ef:ToFlatButton.On="true" 
+	ef:ToFlatButton.RippleColor="Red"
+	BorderWidth="4" BorderColor="Green" BorderRadius="10" 
+/>
+```
 
 ## AddText
 
@@ -129,7 +201,7 @@ and more.
 * VerticalAlign
 	* vertical text position(Start or End). Default Start.
 
-### How to write by Xaml
+### How to write with Xaml
 
 ```xml
 <ContentPage 
@@ -152,36 +224,6 @@ and more.
 ### Limitations
 
 When device rotates, text position will not be right in case android.
-
-## ToFlatButton
-
-This is the effect that alter Button to flat(only Android).  
-If this effect is used, you will be able to design like iOS's Button.  
-And also this effect will enable BorderRadius, BorderWidth and BorderColor of default button properties to use by Android.
-
-<img src="images/toflat1.png" height="400" /> <img src="images/toflat2.png" height="400" />
-
-### Supported View
-
-* Button (Android)
-
-### Parameters
-
-* On
-    * Effect On/Off (true is On)
-* RippleColor
-	* Ripple effect color.(default none)
-
-
-### How to write by Xaml
-
-```xml
-<Button Text="ButtonText" 
-	ef:ToFlatButton.On="true" 
-	ef:ToFlatButton.RippleColor="Red"
-	BorderWidth="4" BorderColor="Green" BorderRadius="10" 
-/>
-```
 
 ## AddCommand
 
@@ -243,7 +285,7 @@ There are properties of Command and Parameter for tap and long tap.
     * Whether synchronize Command's CanExecute to xamarin.forms.view's IsEnabled.(Default false)
     * If true, a view become opacity when disabled.
 
-### How to write by Xaml
+### How to write with Xaml
 
 ```xml
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -336,12 +378,12 @@ and more. same with AddCommand.
 	* current number(default twoway binding)
 * Title
 	* Picker Title(optional)
-	* In case iOS,if this is so long,it will be not beautiful.
+	* In case iOS, if this is so long, it will be not beautiful.
 * Command
-    * command invoked when number had picked(optional)
+    * command invoked when a number was picked(optional)
 
 
-### How to write by Xaml
+### How to write with Xaml
 
 ```xml
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -363,6 +405,47 @@ and more. same with AddCommand.
 </ContentPage>
 ```
 
+## AddTimePicker
+
+This is the effect that add TimePicker to a view.  
+When you tap the view, Picker is shown. And when a time is selected, that time will be  reflected to Time property. If Command property is set, the command will be executed.
+
+This effect supports views same with AddCommand.
+
+### Parameters
+
+* On
+    * Effect On/Off (true is On)
+* Time
+	* current time(default twoway binding)
+* Title
+	* Picker Title(optional)
+	* In case iOS, if this is so long, it will be not beautiful.
+* Command
+    * command invoked when a time was picked(optional)
+
+## AddDatePicker
+
+This is the effect that add DatePicker to a view.  
+When you tap the view, Picker is shown. And when a date is selected, that date will be  reflected to Date property. If Command property is set, the command will be executed.
+
+This effect supports views same with AddCommand.
+
+### Parameters
+
+* On
+    * Effect On/Off (true is On)
+* MinDate
+	* minimum date(optional)
+* MaxDate
+	* maximum date(optional)
+* Date
+	* current date(default twoway binding)
+* TodayText
+	* button text to select today(optional / only iOS)
+	* If this property is set, today's button will be shown. If that button is tapped, today will be selected.
+* Command
+    * command invoked when a date was picked(optional)
 
 ## AlterLineHeight
 
@@ -383,7 +466,7 @@ This Effect alter LineHeight of Label and Editor.
 	* Multiple to the font height.
 	* The font height * this multiple will become line height.
 
-### How to write by Xaml
+### How to write with Xaml
 
 ```xml
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -400,6 +483,37 @@ This Effect alter LineHeight of Label and Editor.
 	</StackLayout>
 </ContentPage>
 ```
+
+## AlterColor
+
+This is the effect that alter the color of an element which it cannot change color normally.  
+
+<img src="images/altercolor_ios.gif" /> <img src="images/altercolor_droid.gif" />
+
+### Supported views
+
+|                 |iOS |Android|which part|
+|-----------------|----|-------|----|
+|Page             |    |✅     | Statusbar|
+|Slider           |✅   |✅    | Trackbar|
+|Switch           |✅   |✅    | Trackbar|
+|Entry            |    |✅    | Under line|
+|Editor           |    |✅     | Under line |
+
+### Parameters
+
+* On
+    * Effect On/Off (true is On)
+* Accent
+	* changed color.
+
+### How to write with Xaml
+
+```xml
+<Slider Minimum="0" Maximum="1" Value="0.5" 
+	ef:AlterColor.On="true" ef:AlterColor.Accent="Red" />
+```
+
 
 ## Contributors
 
