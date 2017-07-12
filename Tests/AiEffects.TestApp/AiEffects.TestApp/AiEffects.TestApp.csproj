@@ -65,6 +65,18 @@
       <DependentUpon>AlterColorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AlterColorPageViewModel.cs" />
+    <Compile Include="Views\AddTimePickerPage.xaml.cs">
+      <DependentUpon>AddTimePickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddTimePickerPageViewModel.cs" />
+    <Compile Include="Views\AddDatePickerPage.xaml.cs">
+      <DependentUpon>AddDatePickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddDatePickerPageViewModel.cs" />
+    <Compile Include="Views\PlaceholderPage.xaml.cs">
+      <DependentUpon>PlaceholderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\PlaceholderPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -92,6 +104,15 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AlterColorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddTimePickerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddDatePickerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PlaceholderPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

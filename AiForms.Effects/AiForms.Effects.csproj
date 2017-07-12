@@ -39,6 +39,9 @@
     <Compile Include="Border.cs" />
     <Compile Include="AlterColor.cs" />
     <Compile Include="IAlterColorEffect.cs" />
+    <Compile Include="AddTimePicker.cs" />
+    <Compile Include="AddDatePicker.cs" />
+    <Compile Include="Placeholder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
