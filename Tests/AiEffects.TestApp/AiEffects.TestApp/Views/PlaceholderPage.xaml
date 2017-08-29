@@ -30,16 +30,21 @@
 			<Label Text="Text" VerticalOptions="Center" />
 			<Switch IsToggled="{Binding TextToggle.Value}" VerticalOptions="Center" />
 		</StackLayout>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Start" BackgroundColor="White">
+            <Button Text="ChText" VerticalOptions="Center" Command="{Binding ChangeTextCommand}" />
+        </StackLayout>
 		<Editor HeightRequest="150" BackgroundColor="#F0F0F0"
 			ef:Placeholder.On="{Binding EffectOn.Value}"
 			ef:Placeholder.Text="{Binding PlaceText.Value}"
 			ef:Placeholder.Color="{Binding PlaceColor.Value}"
+            Text="{Binding EditText.Value}"
 		/>
 
 		<Entry Placeholder="Entry Placeholder" PlaceholderColor="{Binding PlaceColor.Value}"
 			ef:Placeholder.On="{Binding EffectOn.Value}"
 			ef:Placeholder.Text="{Binding PlaceText.Value}"
 			ef:Placeholder.Color="{Binding PlaceColor.Value}"
+            Text="{Binding EditText.Value}"
 		/>
 	</StackLayout>
 </ContentPage>
