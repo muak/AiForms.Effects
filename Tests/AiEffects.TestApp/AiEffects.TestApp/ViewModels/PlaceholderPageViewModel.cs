@@ -11,6 +11,9 @@ namespace AiEffects.TestApp.ViewModels
         public ReactiveProperty<Color> PlaceColor { get; } = new ReactiveProperty<Color>();
         public ReactiveProperty<bool> ColorToggle { get; } = new ReactiveProperty<bool>();
         public ReactiveProperty<bool> TextToggle { get; } = new ReactiveProperty<bool>();
+        public ReactiveProperty<string> EditText { get; } = new ReactiveProperty<string>();
+
+        public ReactiveCommand ChangeTextCommand { get; } = new ReactiveCommand();
 
         public PlaceholderPageViewModel()
         {
@@ -28,6 +31,16 @@ namespace AiEffects.TestApp.ViewModels
 
             ColorToggle.Value = true;
             TextToggle.Value = true; 
+
+            ChangeTextCommand.Subscribe(_=>{
+                if(string.IsNullOrEmpty(EditText.Value)){
+                    EditText.Value = "Abcdef";
+                }
+                else{
+                    EditText.Value = "";
+                }
+
+            });
         }
     }
 }

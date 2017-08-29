@@ -42,7 +42,7 @@ namespace AiForms.Effects.iOS
                 _placeholderLabel.Alpha = 1;
             }
 
-            _textView.Changed += _textView_Changed;
+            _textView.Changed += _textView_Changed;  
         }
 
         protected override void OnDetached()
@@ -60,6 +60,9 @@ namespace AiForms.Effects.iOS
 
             if (e.PropertyName == Placeholder.TextProperty.PropertyName) {
                 UpdateText();
+                //avoid breaking change. 
+                //There exists same property in attached element's property. I should have named TextProperty other name.
+                _textView_Changed(_textView,EventArgs.Empty);
             }
             else if (e.PropertyName == Placeholder.ColorProperty.PropertyName) {
                 UpdateColor();
