@@ -308,7 +308,8 @@ There are properties of Command and Parameter for tap and long tap.
 ### Limitation
 
 **On Android**
-If the version is more than or equal 1.1.0 and RippleEffect is applied to a Element which is a kind of Layout, the InputTransparent of  the children become not to work.
+
+* If the version is more than or equal 1.1.0 and RippleEffect is applied to a Element which is a kind of Layout, the InputTransparent of  the children become not to work.
 
 ### Tips
 
