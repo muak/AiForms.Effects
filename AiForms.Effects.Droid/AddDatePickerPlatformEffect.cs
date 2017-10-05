@@ -9,7 +9,7 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(AddDatePickerPlatformEffect), nameof(AddDatePicker))]
 namespace AiForms.Effects.Droid
 {
-    public class AddDatePickerPlatformEffect : PlatformEffect
+    public class AddDatePickerPlatformEffect : AiEffectBase
     {
         Android.Views.View _view;
         DatePickerDialog _dialog;
@@ -19,7 +19,7 @@ namespace AiForms.Effects.Droid
         {
             _view = Control ?? Container;
 
-            _view.Click += _view_Click;
+            _view.Touch += _view_Touch;
 
             UpdateCommand();
         }
@@ -27,8 +27,8 @@ namespace AiForms.Effects.Droid
         protected override void OnDetached()
         {
             var renderer = Container as IVisualElementRenderer;
-            if (renderer?.Element != null) {
-                _view.Click -= _view_Click;
+            if (!IsDisposed) {
+                _view.Touch -= _view_Touch;
             }
             if (_dialog != null) {
                 _dialog.Dispose();
@@ -42,13 +42,21 @@ namespace AiForms.Effects.Droid
         {
             base.OnElementPropertyChanged(e);
 
+            if (IsDisposed) {
+                return;
+            }
+
             if (e.PropertyName == AddDatePicker.CommandProperty.PropertyName) {
                 UpdateCommand();
             }
         }
 
-        void _view_Click(object sender, EventArgs e)
+        void _view_Touch(object sender, Android.Views.View.TouchEventArgs e)
         {
+            if (e.Event.Action != Android.Views.MotionEventActions.Up) {
+                return;
+            }
+
             if (_dialog != null) {
                 _dialog.Dispose();
             }
@@ -67,7 +75,7 @@ namespace AiForms.Effects.Droid
         {
             var date = AddDatePicker.GetDate(Element);
 
-            _dialog = new DatePickerDialog(Container.Context, (o, e) => {
+            _dialog = new DatePickerDialog(_view.Context, (o, e) => {
                 AddDatePicker.SetDate(Element, e.Date);
                 _command?.Execute(e.Date);
                 _view.ClearFocus();

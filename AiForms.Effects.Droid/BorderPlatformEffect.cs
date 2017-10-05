@@ -8,7 +8,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(BorderPlatformEffect), nameof(Border))]
 namespace AiForms.Effects.Droid
 {
-    public class BorderPlatformEffect : PlatformEffect
+    public class BorderPlatformEffect : AiEffectBase
     {
         Android.Views.View _view;
         GradientDrawable _border;
@@ -32,8 +32,7 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            var renderer = Container as IVisualElementRenderer;
-            if (renderer?.Element != null) {    // Check disposed
+            if (!IsDisposed) {    // Check disposed
                 _view.Background = _orgDrawable;
                 if (Control == null) {
                     _view.SetPadding(0, 0, 0, 0);
@@ -48,6 +47,11 @@ namespace AiForms.Effects.Droid
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
         {
             base.OnElementPropertyChanged(args);
+
+            if (IsDisposed) {
+                return;
+            }
+
             if (args.PropertyName == Border.RadiusProperty.PropertyName) {
                 UpdateRadius();
                 UpdateBorder();
@@ -64,12 +68,12 @@ namespace AiForms.Effects.Droid
 
         void UpdateRadius()
         {
-            _radius = Container.Context.ToPixels(Border.GetRadius(Element));
+            _radius = _view.Context.ToPixels(Border.GetRadius(Element));
         }
 
         void UpdateWidth()
         {
-            _width = (int)Container.Context.ToPixels(Border.GetWidth(Element));
+            _width = (int)_view.Context.ToPixels(Border.GetWidth(Element));
         }
 
         void UpdateColor()

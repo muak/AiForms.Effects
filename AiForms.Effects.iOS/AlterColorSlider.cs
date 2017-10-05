@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 namespace AiForms.Effects.iOS
 {
-    public class AlterColorSlider : IAlterColorEffect
+    public class AlterColorSlider : IAiEffect
     {
         UISlider _slider;
         Element _element;

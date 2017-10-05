@@ -12,6 +12,7 @@ namespace AiEffects.TestApp.ViewModels
 {
     public class AddTextPageViewModel : BindableBase
     {
+        public ReactiveProperty<bool> EffectOn { get; } = new ReactiveProperty<bool>(true);
         public ReactiveProperty<TextAlignment> HAlign { get; } = new ReactiveProperty<TextAlignment>();
         public ReactiveProperty<TextAlignment> VAlign { get; } = new ReactiveProperty<TextAlignment>();
         public ReactiveProperty<int> Margin { get; } = new ReactiveProperty<int>();

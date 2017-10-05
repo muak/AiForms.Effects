@@ -1,6 +1,6 @@
 # AiForms.Effects for Xamarin.Forms
 
-Xamarin.Forms Effects for Android / iOS only.
+Xamarin.Forms Effects for only Android / iOS.
 
 ## Features
 * [Border](#border)
@@ -28,7 +28,7 @@ Xamarin.Forms Effects for Android / iOS only.
 ## Minimum Device and Version etc
 
 iOS:iPhone5s,iPod touch6,iOS9.3  
-Android:version 5.0〜7.0 (FormsAppcompatActivity only)
+Android:version 5.1.1 (only FormsAppcompatActivity) / API22
 
 ## Nuget Installation
 
@@ -304,6 +304,11 @@ There are properties of Command and Parameter for tap and long tap.
         </StackLayout>
 </ContentPage>
 ```
+
+### Limitation
+
+**On Android**
+If the version is more than or equal 1.1.0 and RippleEffect is applied to a Element which is a kind of Layout, the InputTransparent of  the children become not to work.
 
 ### Tips
 

@@ -5,7 +5,7 @@ using Xamarin.Forms.Platform.iOS;
 
 namespace AiForms.Effects.iOS
 {
-    public class LineHeightForLabel : ILineHeightEffect
+    public class LineHeightForLabel : IAiEffect
     {
         private UIView _container;
         private UILabel _nativeLabel;
@@ -44,9 +44,9 @@ namespace AiForms.Effects.iOS
             var multiple = (float)AlterLineHeight.GetMultiple(_formsLabel);
             var fontSize = (float)(_formsLabel).FontSize;
             var lineSpacing = (fontSize * multiple) - fontSize;
-            var pStyle = new NSMutableParagraphStyle() { 
+            var pStyle = new NSMutableParagraphStyle() {
                 LineSpacing = lineSpacing,
-                Alignment=_formsLabel.HorizontalTextAlignment.ToNativeTextAlignment() 
+                Alignment = _formsLabel.HorizontalTextAlignment.ToNativeTextAlignment()
             };
             var attrString = new NSMutableAttributedString(text);
 

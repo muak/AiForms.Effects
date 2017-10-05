@@ -1,7 +1,8 @@
 ﻿using System;
+
 namespace AiForms.Effects
 {
-    public interface IAlterColorEffect
+    public interface IAiEffect
     {
         void OnDetached();
         void Update();

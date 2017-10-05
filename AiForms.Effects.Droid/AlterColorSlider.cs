@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Android.OS;
-using System.Diagnostics;
-using Android.Graphics;
 
 namespace AiForms.Effects.Droid
 {
-    public class AlterColorSlider : AlterColorBase, IAlterColorEffect
+    public class AlterColorSlider : IAiEffectDroid
     {
         SeekBar _seekbar;
         Element _element;
@@ -24,7 +21,7 @@ namespace AiForms.Effects.Droid
 
         bool notSupported = false;
 
-        public AlterColorSlider(SeekBar seekbar, Element element, IVisualElementRenderer renderer) : base(renderer)
+        public AlterColorSlider(SeekBar seekbar, Element element)
         {
             _seekbar = seekbar;
             _element = element;
@@ -47,15 +44,19 @@ namespace AiForms.Effects.Droid
             _seekbar.SetThumb(_thumb);
         }
 
-        public void OnDetached()
+        public void OnDetachedIfNotDisposed()
         {
             if (notSupported) {
                 return;
             }
+            _seekbar.ProgressDrawable = _orgProgress;
+            _seekbar.SetThumb(_orgThumb);
+        }
 
-            if (!IsDisposed()) {
-                _seekbar.ProgressDrawable = _orgProgress;
-                _seekbar.SetThumb(_orgThumb);
+        public void OnDetached()
+        {
+            if (notSupported) {
+                return;
             }
 
             _minDrawable.ClearColorFilter();
@@ -89,5 +90,7 @@ namespace AiForms.Effects.Droid
             _maxDrawable.SetColorFilter(altColor, PorterDuff.Mode.SrcIn);
             _thumb.SetTint(color);
         }
+
+
     }
 }

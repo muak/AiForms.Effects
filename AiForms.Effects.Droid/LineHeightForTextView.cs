@@ -1,13 +1,12 @@
 ﻿using Android.Widget;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
 using AView = Android.Views.View;
 
 namespace AiForms.Effects.Droid
 {
-    public class LineHeightForTextView : ILineHeightEffect
+    public class LineHeightForTextView : IAiEffectDroid
     {
-        private Android.Views.ViewGroup _container;
+        private Android.Views.View _container;
         private TextView _textView;
         private float _orgMultiple;
         private float _preMultiple;
@@ -17,7 +16,7 @@ namespace AiForms.Effects.Droid
 
         public LineHeightForTextView(Android.Views.ViewGroup container, AView control, Element element)
         {
-            _container = container;
+            _container = container ?? control;
             _textView = control as TextView;
             _orgMultiple = _textView.LineSpacingMultiplier;
             _preMultiple = _orgMultiple;
@@ -27,18 +26,18 @@ namespace AiForms.Effects.Droid
             _isFixedHeight = _formsElement.HeightRequest >= 0d;
         }
 
+        public void OnDetachedIfNotDisposed()
+        {
+            _textView.SetLineSpacing(1f, _orgMultiple);
+            if (!_isFixedHeight) {
+                var size = _formsElement.Height * (_orgMultiple / _multiple);
+                _formsElement.HeightRequest = size;
+                _formsElement.HeightRequest = -1;   //再Attacheされた時の為に初期値に戻しておく
+            }
+        }
+
         public void OnDetached()
         {
-            var renderer = _container as IVisualElementRenderer;
-            if (renderer?.Element != null) {
-                _textView.SetLineSpacing(1f, _orgMultiple);
-                if (!_isFixedHeight) {
-                    var size = _formsElement.Height * (_orgMultiple / _multiple);
-                    _formsElement.HeightRequest = size;
-                    _formsElement.HeightRequest = -1;   //再Attacheされた時の為に初期値に戻しておく
-                }
-            }
-
             _textView = null;
             _formsElement = null;
         }

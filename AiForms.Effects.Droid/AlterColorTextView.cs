@@ -7,7 +7,7 @@ using Android.Content.Res;
 
 namespace AiForms.Effects.Droid
 {
-    public class AlterColorTextView : AlterColorBase, IAlterColorEffect
+    public class AlterColorTextView : IAiEffectDroid
     {
         TextView _textview;
         Element _element;
@@ -15,7 +15,7 @@ namespace AiForms.Effects.Droid
         Drawable _orgBackground;
         Drawable _background;
 
-        public AlterColorTextView(TextView textview, Element element, IVisualElementRenderer renderer) : base(renderer)
+        public AlterColorTextView(TextView textview, Element element)
         {
             _textview = textview;
             _element = element;
@@ -26,12 +26,13 @@ namespace AiForms.Effects.Droid
             _textview.Background = _background;
         }
 
+        public void OnDetachedIfNotDisposed()
+        {
+            _textview.Background = _orgBackground;
+        }
+
         public void OnDetached()
         {
-            if (!IsDisposed()) {
-                _textview.Background = _orgBackground;
-            }
-
             _background.Dispose();
             _orgBackground = null;
             _textview = null;

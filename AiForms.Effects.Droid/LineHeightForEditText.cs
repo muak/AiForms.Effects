@@ -1,12 +1,11 @@
 ﻿using Android.Text;
 using Android.Widget;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
 using AView = Android.Views.View;
 
 namespace AiForms.Effects.Droid
 {
-    public class LineHeightForEditText : ILineHeightEffect
+    public class LineHeightForEditText : IAiEffectDroid
     {
         private Android.Views.ViewGroup _container;
         private EditText _editText;
@@ -22,13 +21,14 @@ namespace AiForms.Effects.Droid
             _formsElement = element as VisualElement;
         }
 
+        public void OnDetachedIfNotDisposed()
+        {
+            _editText.SetLineSpacing(1f, _orgMultiple);
+            _editText.AfterTextChanged -= _editText_AfterTextChanged;
+        }
+
         public void OnDetached()
         {
-            var renderer = _container as IVisualElementRenderer;
-            if (renderer?.Element != null) {
-                _editText.SetLineSpacing(1f, _orgMultiple);
-                _editText.AfterTextChanged -= _editText_AfterTextChanged;
-            }
             _editText = null;
             _formsElement = null;
         }

@@ -11,7 +11,7 @@ using APicker = Android.Widget.NumberPicker;
 [assembly: ExportEffect(typeof(AddNumberPickerPlatform), nameof(AddNumberPicker))]
 namespace AiForms.Effects.Droid
 {
-    public class AddNumberPickerPlatform : PlatformEffect
+    public class AddNumberPickerPlatform : AiEffectBase
     {
         private AlertDialog _dialog;
         private Android.Views.View _view;
@@ -24,22 +24,23 @@ namespace AiForms.Effects.Droid
         {
             _view = Control ?? Container;
 
-            _view.Click += _view_Click;
+            _view.Touch += _view_Touch;
 
             UpdateList();
             UpdateCommand();
         }
 
-        void _view_Click(object sender, EventArgs e)
+        void _view_Touch(object sender, Android.Views.View.TouchEventArgs e)
         {
-            CreateDialog();
+            if (e.Event.Action == MotionEventActions.Up) {
+                CreateDialog();
+            }
         }
 
         protected override void OnDetached()
         {
-            var renderer = Container as IVisualElementRenderer;
-            if (renderer?.Element != null) {
-                _view.Click -= _view_Click;
+            if (!IsDisposed) {
+                _view.Touch -= _view_Touch;
             }
             if (_dialog != null) {
                 _dialog.Dispose();
@@ -52,6 +53,10 @@ namespace AiForms.Effects.Droid
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(e);
+
+            if (IsDisposed) {
+                return;
+            }
 
             if (e.PropertyName == AddNumberPicker.MaxProperty.PropertyName) {
                 UpdateList();
@@ -71,16 +76,16 @@ namespace AiForms.Effects.Droid
         {
             if (_dialog != null) return;
 
-            var picker = new APicker(Container.Context);
+            var picker = new APicker(_view.Context);
             picker.MinValue = _min;
             picker.MaxValue = _max;
             picker.Value = _number;
 
-            using (var builder = new AlertDialog.Builder(Container.Context)) {
+            using (var builder = new AlertDialog.Builder(_view.Context)) {
 
                 builder.SetTitle(AddNumberPicker.GetTitle(Element));
 
-                Android.Widget.FrameLayout parent = new Android.Widget.FrameLayout(Container.Context);
+                Android.Widget.FrameLayout parent = new Android.Widget.FrameLayout(_view.Context);
                 parent.AddView(picker, new Android.Widget.FrameLayout.LayoutParams(
                         ViewGroup.LayoutParams.WrapContent,
                         ViewGroup.LayoutParams.WrapContent,
