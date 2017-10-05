@@ -7,7 +7,7 @@ using Android.Content.Res;
 
 namespace AiForms.Effects.Droid
 {
-    public class AlterColorSwitch : AlterColorBase, IAlterColorEffect
+    public class AlterColorSwitch : IAiEffectDroid
     {
         SwitchCompat _aSwitch;
         Element _element;
@@ -19,7 +19,7 @@ namespace AiForms.Effects.Droid
         Drawable _thumb;
         RippleDrawable _background;
 
-        public AlterColorSwitch(SwitchCompat aswitch, Element element, IVisualElementRenderer renderer) : base(renderer)
+        public AlterColorSwitch(SwitchCompat aswitch, Element element)
         {
             _aSwitch = aswitch;
             _element = element;
@@ -41,7 +41,7 @@ namespace AiForms.Effects.Droid
             _aSwitch.ThumbDrawable = _thumb;
         }
 
-        public void OnDetached()
+        public void OnDetachedIfNotDisposed()
         {
             _track.SetTintList(null);
             _thumb.SetTintList(null);
@@ -63,12 +63,13 @@ namespace AiForms.Effects.Droid
             _orgThumb.SetState(_thumb.GetState());
             _orgBackground.SetState(_background.GetState());
 
-            if (!IsDisposed()) {
-                _aSwitch.TrackDrawable = _orgTrack;
-                _aSwitch.ThumbDrawable = _orgThumb;
-                _aSwitch.Background = _orgBackground;
-            }
+            _aSwitch.TrackDrawable = _orgTrack;
+            _aSwitch.ThumbDrawable = _orgThumb;
+            _aSwitch.Background = _orgBackground;
+        }
 
+        public void OnDetached()
+        {
             _track.Dispose();
             _thumb.Dispose();
             _background.Dispose();

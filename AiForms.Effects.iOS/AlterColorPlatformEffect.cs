@@ -10,7 +10,7 @@ namespace AiForms.Effects.iOS
 {
     public class AlterColorPlatformEffect : PlatformEffect
     {
-        IAlterColorEffect _effect;
+        IAiEffect _effect;
 
         protected override void OnAttached()
         {

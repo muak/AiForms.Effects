@@ -1,17 +1,16 @@
 ﻿using System;
-using Xamarin.Forms.Platform.Android;
-using Android.App;
+using System.Windows.Input;
 using AiForms.Effects;
-using Xamarin.Forms;
 using AiForms.Effects.Droid;
+using Android.App;
 using Android.Text.Format;
 using Android.Widget;
-using System.Windows.Input;
+using Xamarin.Forms;
 
 [assembly: ExportEffect(typeof(AddTimePickerPlatformEffect), nameof(AddTimePicker))]
 namespace AiForms.Effects.Droid
 {
-    public class AddTimePickerPlatformEffect : PlatformEffect
+    public class AddTimePickerPlatformEffect : AiEffectBase
     {
         Android.Views.View _view;
         TimePickerDialog _dialog;
@@ -22,7 +21,7 @@ namespace AiForms.Effects.Droid
         {
             _view = Control ?? Container;
 
-            _view.Click += _view_Click;
+            _view.Touch += _view_Touch;
 
             UpdateTitle();
             UpdateCommand();
@@ -30,9 +29,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            var renderer = Container as IVisualElementRenderer;
-            if (renderer?.Element != null) {
-                _view.Click -= _view_Click;
+            if (!IsDisposed) {
+                _view.Touch -= _view_Touch;
             }
             if (_dialog != null) {
                 _dialog.Dispose();
@@ -46,6 +44,10 @@ namespace AiForms.Effects.Droid
         {
             base.OnElementPropertyChanged(e);
 
+            if (IsDisposed) {
+                return;
+            }
+
             if (e.PropertyName == AddTimePicker.TitleProperty.PropertyName) {
                 UpdateTitle();
             }
@@ -54,19 +56,21 @@ namespace AiForms.Effects.Droid
             }
         }
 
-        void _view_Click(object sender, EventArgs e)
+        void _view_Touch(object sender, Android.Views.View.TouchEventArgs e)
         {
-            CreateDialog();
+            if (e.Event.Action == Android.Views.MotionEventActions.Up) {
+                CreateDialog();
+            }
         }
 
         void CreateDialog()
         {
             var time = AddTimePicker.GetTime(Element);
             if (_dialog == null) {
-                bool is24HourFormat = DateFormat.Is24HourFormat(Container.Context);
-                _dialog = new TimePickerDialog(Container.Context, TimeSelected, time.Hours, time.Minutes, is24HourFormat);
+                bool is24HourFormat = DateFormat.Is24HourFormat(_view.Context);
+                _dialog = new TimePickerDialog(_view.Context, TimeSelected, time.Hours, time.Minutes, is24HourFormat);
 
-                var title = new TextView(Container.Context);
+                var title = new TextView(_view.Context);
 
                 if (!string.IsNullOrEmpty(_title)) {
                     title.Gravity = Android.Views.GravityFlags.Center;

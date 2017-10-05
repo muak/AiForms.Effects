@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 namespace AiForms.Effects.iOS
 {
-    public class AlterColorSwitch : IAlterColorEffect
+    public class AlterColorSwitch : IAiEffect
     {
         UISwitch _uiswitch;
         Element _element;

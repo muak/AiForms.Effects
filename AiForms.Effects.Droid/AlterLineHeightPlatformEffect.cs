@@ -1,14 +1,13 @@
 ﻿using AiForms.Effects;
 using AiForms.Effects.Droid;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportEffect(typeof(AlterLineHeightPlatformEffect), nameof(AlterLineHeight))]
 namespace AiForms.Effects.Droid
 {
-    public class AlterLineHeightPlatformEffect : PlatformEffect
+    public class AlterLineHeightPlatformEffect : AiEffectBase
     {
-        private ILineHeightEffect _effect;
+        private IAiEffectDroid _effect;
 
         protected override void OnAttached()
         {
@@ -25,6 +24,9 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
+            if (!IsDisposed) {
+                _effect.OnDetachedIfNotDisposed();
+            }
             _effect?.OnDetached();
             _effect = null;
         }
@@ -33,6 +35,10 @@ namespace AiForms.Effects.Droid
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(e);
+
+            if (IsDisposed) {
+                return;
+            }
 
             if (e.PropertyName == AlterLineHeight.MultipleProperty.PropertyName) {
                 _effect?.Update();

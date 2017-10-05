@@ -158,7 +158,7 @@ namespace AiEffects.TestApp.ViewModels
             TestLongParam = "LongHoge";
 
             EnableSound = true;
-            SyncCanExecute = false;
+            SyncCanExecute = true;
 
             ToggleCanExecute.Subscribe(_ => {
                 CanExecute.Value = !CanExecute.Value;
@@ -244,7 +244,7 @@ namespace AiEffects.TestApp.ViewModels
 
         public void Destroy()
         {
-
+            //EffectOn = false;
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)

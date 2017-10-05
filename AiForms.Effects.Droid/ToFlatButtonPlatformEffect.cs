@@ -10,7 +10,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(ToFlatButtonPlatformEffect), nameof(ToFlatButton))]
 namespace AiForms.Effects.Droid
 {
-    public class ToFlatButtonPlatformEffect : PlatformEffect
+    public class ToFlatButtonPlatformEffect : AiEffectBase
     {
         private ColorStateList Colors;
         private GradientDrawable Shape;
@@ -23,7 +23,6 @@ namespace AiForms.Effects.Droid
         private Drawable OrgBackground;
         private StateListAnimator OrgStateListAnimator;
         private ColorStateList OrgBackgroundTint;
-
 
         protected override void OnAttached()
         {
@@ -55,8 +54,7 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            var renderer = Container as IVisualElementRenderer;
-            if (renderer?.Element != null) {
+            if (!IsDisposed) {
                 NativeButton.Background = OrgBackground;
                 NativeButton.StateListAnimator = OrgStateListAnimator;
                 NativeButton.SupportBackgroundTintList = OrgBackgroundTint;
@@ -82,6 +80,11 @@ namespace AiForms.Effects.Droid
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(e);
+
+            if (IsDisposed) {
+                return;
+            }
+
             if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName) {
                 UpdateBackgroundColor();
             }
@@ -127,22 +130,22 @@ namespace AiForms.Effects.Droid
         }
         void UpdateBorderRadius()
         {
-            var size = (float)Container.Context.ToPixels(FormsButton.BorderRadius);
+            var size = (float)Control.Context.ToPixels(FormsButton.BorderRadius);
             Shape.SetCornerRadius(size);
         }
         void UpdateBorder()
         {
-            var borderColor = FormsButton.BorderColor == Xamarin.Forms.Color.Default ? 
+            var borderColor = FormsButton.BorderColor == Xamarin.Forms.Color.Default ?
                                          Xamarin.Forms.Color.Transparent : FormsButton.BorderColor;
-            var size = (int)Container.Context.ToPixels(FormsButton.BorderWidth);
-            Shape.SetStroke(size,borderColor.ToAndroid());
+            var size = (int)Control.Context.ToPixels(FormsButton.BorderWidth);
+            Shape.SetStroke(size, borderColor.ToAndroid());
         }
 
         void UpdateRippleColor()
         {
             var rippleColor = ToFlatButton.GetRippleColor(Element).ToAndroid();
             if (Ripple == null) {
-                Inset = new InsetDrawable(Shape,0,1,0,1);
+                Inset = new InsetDrawable(Shape, 0, 1, 0, 1);
                 Ripple = new RippleDrawable(getPressedColorSelector(rippleColor.ToArgb()), Inset, null);
             }
             else {

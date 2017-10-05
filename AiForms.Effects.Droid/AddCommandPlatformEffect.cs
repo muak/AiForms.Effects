@@ -16,12 +16,10 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(AddCommandPlatformEffect), nameof(AddCommand))]
 namespace AiForms.Effects.Droid
 {
-
-    public class AddCommandPlatformEffect : PlatformEffect
+    public class AddCommandPlatformEffect : AiEffectBase
     {
         public static SoundEffect PlaySoundEffect = SoundEffect.KeyClick;
-
-        private static Type[] TapSoundEffectElementType = {
+        public static Type[] TapSoundEffectElementType = {
             typeof(ContentPresenter),
             typeof(ContentView),
             typeof(Frame),
@@ -33,6 +31,8 @@ namespace AiForms.Effects.Droid
             typeof(Xamarin.Forms.RelativeLayout),
             typeof(StackLayout)
         };
+
+        public static float DisabledAlpha = 0.3f;   //if necessary, change this value.
         private static Type[] DisableEffectTargetType = {
             typeof(ActivityIndicator),
             typeof(BoxView),
@@ -52,54 +52,66 @@ namespace AiForms.Effects.Droid
         private ICommand _longCommand;
         private object _longCommandParameter;
         private Android.Views.View _view;
-        private FrameLayout _layer;
         private RippleDrawable _ripple;
         private Drawable _orgDrawable;
         private bool _useRipple;
         private FrameLayout _rippleOverlay;
         private ContainerOnLayoutChangeListener _rippleListener;
+        private FastRendererOnLayoutChangeListener _fastListener;
         private bool _enableSound;
         private bool _isTapTargetSoundEffect;
         private bool _isDisableEffectTarget;
         private AudioManager _audioManager;
         private bool _syncCanExecute;
 
-        private readonly float _disabledAlpha = 0.3f;
+        private GestureDetector _gestureDetector;
 
         protected override void OnAttached()
         {
             _view = Control ?? Container;
 
-            if (Control is Android.Widget.ListView) {
-                //Except ListView because of Raising Exception OnClick
+            if (Control is Android.Widget.ListView || Control is Android.Widget.ScrollView) {
+                // Except ListView and ScrollView because of Raising Exception. 
+                Device.BeginInvokeOnMainThread(() => AddCommand.SetOn(Element, false));
                 return;
             }
 
             _isTapTargetSoundEffect = TapSoundEffectElementType.Any(x => x == Element.GetType());
 
-            UpdateSyncCanExecute();
-            UpdateCommandParameter();
-            UpdateLongCommandParameter();
-            UpdateEnableRipple();
-            UpdateEnableSound();
-
             if (_audioManager == null) {
                 _audioManager = (AudioManager)Forms.Context.GetSystemService(Context.AudioService);
             }
 
-            _view.Click += OnClick;
+            _gestureDetector = new GestureDetector(_view.Context, new ViewGestureListener(this));
+            _gestureDetector.IsLongpressEnabled = true;
+
+            _view.Clickable = true;
+            _view.LongClickable = true;
+
+            UpdateSyncCanExecute();
+            UpdateCommandParameter();
+            UpdateLongCommandParameter();
+            UpdateEnableSound();
+
+            _view.Touch += _view_Touch;
+
+            UpdateEnableRipple();
+
+
         }
 
         protected override void OnDetached()
         {
-            var renderer = Container as IVisualElementRenderer;
-            if (renderer?.Element != null) {    // Check disposed
-                _view.Click -= OnClick;
-                _view.Touch -= View_Touch;
-                _view.LongClick -= OnLongClick;
+            System.Diagnostics.Debug.WriteLine(Element.GetType().FullName);
+            if (!IsDisposed) {
                 if (_useRipple) {
                     RemoveRipple();
                 }
+                if (_rippleOverlay != null) {
+                    _rippleOverlay.Touch -= _view_Touch;
+                    _rippleOverlay?.Dispose();
+                }
+                _view.Touch -= _view_Touch;
             }
 
             if (_command != null) {
@@ -117,18 +129,27 @@ namespace AiForms.Effects.Droid
 
             _rippleListener?.Dispose();
             _rippleListener = null;
-            _rippleOverlay?.Dispose();
+
             _rippleOverlay = null;
-            _layer?.Dispose();
-            _layer = null;
+
             _ripple?.Dispose();
             _ripple = null;
             _useRipple = false;
+
+            _gestureDetector?.Dispose();
+            _gestureDetector = null;
+
+            _fastListener?.Dispose();
+            _fastListener = null;
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(e);
+
+            if (IsDisposed) {
+                return;
+            }
 
             if (e.PropertyName == AddCommand.CommandProperty.PropertyName) {
                 UpdateCommand();
@@ -156,6 +177,18 @@ namespace AiForms.Effects.Droid
             }
         }
 
+        void _view_Touch(object sender, Android.Views.View.TouchEventArgs e)
+        {
+            _gestureDetector.OnTouchEvent(e.Event);
+            // for any reason depending type of element, Handled value must be changed.
+            // I don't know the reason.
+            if (!_useRipple && !Element.IsClickable()) {
+                e.Handled = true;
+                return;
+            }
+            e.Handled = false;
+        }
+
         void UpdateSyncCanExecute()
         {
             _syncCanExecute = AddCommand.GetSyncCanExecute(Element);
@@ -169,7 +202,7 @@ namespace AiForms.Effects.Droid
         bool DisableEffectCheck()
         {
             if (Element is Label) {
-                //when it was setted TextColor or BackgroundColor,it will not be turn color of disabled.
+                //when it was setted TextColor or BackgroundColor,it will not be turn disabled color.
                 var label = Element as Label;
                 return label.TextColor != Xamarin.Forms.Color.Default ||
                             label.BackgroundColor != Xamarin.Forms.Color.Default;
@@ -202,13 +235,19 @@ namespace AiForms.Effects.Droid
                 //Entrust the process of disabled to Forms
                 forms.IsEnabled = false;
                 if (_isDisableEffectTarget) {
-                    forms.FadeTo(_disabledAlpha);
+                    forms.FadeTo(DisabledAlpha);
+                }
+                if (Element.IsFastRenderer()) {
+                    _view.Enabled = false;
                 }
             }
             else {
                 forms.IsEnabled = true;
                 if (_isDisableEffectTarget) {
                     forms.FadeTo(1f);
+                }
+                if (Element.IsFastRenderer()) {
+                    _view.Enabled = true;
                 }
             }
         }
@@ -240,7 +279,6 @@ namespace AiForms.Effects.Droid
         {
             if (_longCommand != null) {
                 _longCommand.CanExecuteChanged -= CommandCanExecuteChanged;
-                _view.LongClick -= OnLongClick;
             }
 
             _longCommand = AddCommand.GetLongCommand(Element);
@@ -248,8 +286,6 @@ namespace AiForms.Effects.Droid
             if (_longCommand == null) {
                 return;
             }
-
-            _view.LongClick += OnLongClick;
 
             if (_syncCanExecute) {
                 _longCommand.CanExecuteChanged += CommandCanExecuteChanged;
@@ -262,87 +298,35 @@ namespace AiForms.Effects.Droid
             _longCommandParameter = AddCommand.GetLongCommandParameter(Element);
         }
 
-        void OnClick(object sender, EventArgs e)
-        {
-            if (_command == null)
-                return;
-
-            if (!_command.CanExecute(_commandParameter))
-                return;
-
-            if (_isTapTargetSoundEffect && _enableSound) {
-                _audioManager?.PlaySoundEffect(PlaySoundEffect);
-            }
-
-            _command.Execute(_commandParameter ?? Element);
-        }
-
-        void OnLongClick(object sender, Android.Views.View.LongClickEventArgs e)
-        {
-            if (_longCommand == null) {
-                e.Handled = false;
-                return;
-            }
-
-            if (_longCommand == null)
-                return;
-
-            if (!_longCommand.CanExecute(_longCommandParameter))
-                return;
-
-            if (_enableSound) {
-                _audioManager?.PlaySoundEffect(PlaySoundEffect);
-            }
-
-            _longCommand.Execute(_longCommandParameter ?? Element);
-
-            e.Handled = true;
-        }
-
         void UpdateEffectColor()
         {
-
-            _view.Touch -= View_Touch;
-            if (_layer != null) {
-                _layer.Dispose();
-                _layer = null;
-            }
             var color = AddCommand.GetEffectColor(Element);
             if (color == Xamarin.Forms.Color.Default) {
                 return;
             }
 
             if (_useRipple) {
-                _ripple.SetColor(getPressedColorSelector(color.ToAndroid()));
+                _ripple?.SetColor(getPressedColorSelector(color.ToAndroid()));
             }
-            else {
-                _layer = new FrameLayout(Container.Context);
-                _layer.LayoutParameters = new ViewGroup.LayoutParams(-1, -1);
-                _layer.SetBackgroundColor(color.ToAndroid());
-                _view.Touch += View_Touch;
-            }
+
         }
 
         void UpdateEnableRipple()
         {
-            var oldValue = _useRipple;
-            var newValue = AddCommand.GetEnableRipple(Element);
-            _useRipple = newValue;
-            if (newValue == oldValue) {
-                return;
-            }
+            _useRipple = AddCommand.GetEnableRipple(Element);
 
             var color = AddCommand.GetEffectColor(Element);
             if (color == Xamarin.Forms.Color.Default) {
                 return;
             }
 
-            if (!oldValue && newValue) {
+            if (_useRipple) {
                 AddRipple();
             }
-            if (oldValue && !newValue) {
+            else {
                 RemoveRipple();
             }
+
             UpdateEffectColor();
         }
 
@@ -353,8 +337,12 @@ namespace AiForms.Effects.Droid
 
         void AddRipple()
         {
-            if (Element is Layout) {
-                _rippleOverlay = new FrameLayout(Container.Context);
+            if (_ripple != null) {
+                return;
+            }
+
+            if (Element is Layout || Element is BoxView) {
+                _rippleOverlay = new FrameLayout(_view.Context);
                 _rippleOverlay.LayoutParameters = new ViewGroup.LayoutParams(-1, -1);
 
                 _rippleListener = new ContainerOnLayoutChangeListener(_rippleOverlay);
@@ -365,6 +353,21 @@ namespace AiForms.Effects.Droid
                 _rippleOverlay.BringToFront();
 
                 _rippleOverlay.Foreground = CreateRipple(Color.Accent.ToAndroid());
+                _rippleOverlay.Clickable = true;
+                _rippleOverlay.LongClickable = true;
+
+                _view.Touch -= _view_Touch;
+                _rippleOverlay.Touch += _view_Touch;
+            }
+            else if (Element.IsFastRenderer()) {
+                if (_fastListener == null) {
+                    _fastListener = new FastRendererOnLayoutChangeListener(this);
+                    _view.AddOnLayoutChangeListener(_fastListener);
+                    _view.RequestLayout();
+                    return;
+                }
+                _view.Foreground = CreateRipple(Color.Accent.ToAndroid());
+                _view.Touch += _view_Touch;
             }
             else {
                 _orgDrawable = _view.Background;
@@ -374,7 +377,14 @@ namespace AiForms.Effects.Droid
 
         void RemoveRipple()
         {
-            if (Element is Layout) {
+            if (_ripple == null) {
+                return;
+            }
+
+            if (Element is Layout || Element is BoxView) {
+                _view.Touch += _view_Touch;
+                _rippleOverlay.Touch -= _view_Touch;
+
                 var viewgrp = _view as ViewGroup;
 
                 viewgrp.RemoveOnLayoutChangeListener(_rippleListener);
@@ -384,6 +394,16 @@ namespace AiForms.Effects.Droid
                 _rippleOverlay.Dispose();
 
                 _rippleOverlay = null;
+            }
+            else if (Element.IsFastRenderer()) {
+                _view.Touch -= _view_Touch;
+                //Control.AddOnLayoutChangeListener(null);
+                Control.RemoveOnLayoutChangeListener(_fastListener);
+                _view = Control;
+                _fastListener.CleanUp();
+                _fastListener.Dispose();
+                _fastListener = null;
+                _view.Touch += _view_Touch;
             }
             else {
                 _view.Background = _orgDrawable;
@@ -396,7 +416,7 @@ namespace AiForms.Effects.Droid
 
         RippleDrawable CreateRipple(Android.Graphics.Color color)
         {
-            if (Element is Layout) {
+            if (Element is Layout || Element is BoxView) {
                 var mask = new ColorDrawable(Android.Graphics.Color.White);
                 return _ripple = new RippleDrawable(getPressedColorSelector(color), null, mask);
             }
@@ -430,23 +450,138 @@ namespace AiForms.Effects.Droid
                 });
         }
 
-        void View_Touch(object sender, Android.Views.View.TouchEventArgs e)
+        class ViewGestureListener : Java.Lang.Object, GestureDetector.IOnGestureListener
         {
-            if (e.Event.Action == MotionEventActions.Down) {
-                Container.AddView(_layer);
-                _layer.Top = 0;
-                _layer.Left = 0;
-                _layer.Right = _view.Width;
-                _layer.Bottom = _view.Height;
-                _layer.BringToFront();
-            }
-            if (e.Event.Action == MotionEventActions.Up || e.Event.Action == MotionEventActions.Cancel) {
-                Container.RemoveView(_layer);
+            AddCommandPlatformEffect _effect;
+            public ViewGestureListener(AddCommandPlatformEffect effect)
+            {
+                _effect = effect;
             }
 
-            e.Handled = false;
+            protected override void Dispose(bool disposing)
+            {
+                if (disposing) {
+                    _effect = null;
+                }
+                base.Dispose(disposing);
+            }
+
+            public bool OnDown(MotionEvent e)
+            {
+                return false;
+            }
+
+            public bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+            {
+                return false;
+            }
+
+            public void OnLongPress(MotionEvent e)
+            {
+                if (_effect._longCommand == null) {
+                    return;
+                }
+
+                if (_effect._longCommand == null)
+                    return;
+
+                if (!_effect._longCommand.CanExecute(_effect._longCommandParameter))
+                    return;
+
+                if (_effect._enableSound) {
+                    _effect._audioManager?.PlaySoundEffect(PlaySoundEffect);
+                }
+
+                _effect._longCommand.Execute(_effect._longCommandParameter ?? _effect.Element);
+            }
+
+            public bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+            {
+                return false;
+            }
+
+            public void OnShowPress(MotionEvent e) { }
+
+            public bool OnSingleTapUp(MotionEvent e)
+            {
+                if (_effect._command == null)
+                    return false;
+
+                if (!_effect._command.CanExecute(_effect._commandParameter))
+                    return false;
+
+                if (_effect._isTapTargetSoundEffect && _effect._enableSound) {
+                    _effect._audioManager?.PlaySoundEffect(PlaySoundEffect);
+                }
+
+                _effect._command.Execute(_effect._commandParameter ?? _effect.Element);
+
+                return false;
+            }
+
+
+        }
+
+        internal class FastRendererOnLayoutChangeListener : Java.Lang.Object, Android.Views.View.IOnLayoutChangeListener
+        {
+            bool _alreadyGotParent = false;
+            AddCommandPlatformEffect _effect;
+            Android.Views.ViewGroup _parent;
+            FrameLayout _overlay;
+
+            //public FastRendererOnLayoutChangeListener(IntPtr handle, JniHandleOwnership transfer):base(handle, transfer)
+            //{
+
+            //}
+
+            public FastRendererOnLayoutChangeListener(AddCommandPlatformEffect effect)
+            {
+                _effect = effect;
+                _overlay = new FrameLayout(_effect._view.Context);
+                _overlay.Clickable = true;
+                _overlay.LongClickable = true;
+            }
+
+            // Because FastRenderer of Label or Image can't be set ClickListener, 
+            // insert FrameLayout with same position and same size on the view.
+            public void OnLayoutChange(Android.Views.View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
+            {
+                _overlay.Layout(v.Left, v.Top, v.Right, v.Bottom);
+
+                if (_alreadyGotParent) {
+                    return;
+                }
+
+                _parent = _effect.Control.Parent as Android.Views.ViewGroup;
+                _alreadyGotParent = true;
+
+                _parent.AddView(_overlay);
+
+                _overlay.BringToFront();
+
+                _effect._view.Touch -= _effect._view_Touch;
+                _effect._view = _overlay;
+                _effect.UpdateEnableRipple();
+            }
+
+            public void CleanUp()
+            {
+                _parent.RemoveView(_overlay);
+                _overlay.Dispose();
+            }
+
+            protected override void Dispose(bool disposing)
+            {
+                if (disposing) {
+                    _effect = null;
+                    _parent = null;
+                    _overlay = null;
+                }
+                base.Dispose(disposing);
+            }
         }
     }
+
 
     internal class ContainerOnLayoutChangeListener : Java.Lang.Object, Android.Views.View.IOnLayoutChangeListener
     {
@@ -457,13 +592,14 @@ namespace AiForms.Effects.Droid
             _layout = layout;
         }
 
-        //ContainerにAddViewした子要素のサイズを確定する必要があるため
-        //ContainerのOnLayoutChangeのタイミングでセットする
+        //have to decide children size when OnLayoutChange.
         public void OnLayoutChange(Android.Views.View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
         {
             _layout.Right = v.Width;
             _layout.Bottom = v.Height;
         }
     }
+
+
 }
 

@@ -29,7 +29,7 @@
 		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red" BackgroundColor="Transparent"
 			Text="Border Only" TextColor="Green" BorderWidth="3" BorderColor="Green" BorderRadius="0" />
 		
-		<Button ef:ToFlatButton.On="true"
+		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
 			Text="Flat"  BorderRadius="0" BorderWidth="0" />
 
 		<Button ef:ToFlatButton.On="true" BackgroundColor="Transparent"

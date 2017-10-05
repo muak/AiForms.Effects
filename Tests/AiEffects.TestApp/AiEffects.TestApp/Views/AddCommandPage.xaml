@@ -345,7 +345,8 @@
 				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"
 				> 
 				<Label Text="StackLayout" InputTransparent="true" />
-				<Image Source="sample" />
+				<Image Source="sample" InputTransparent="false" />
+                    
 			</StackLayout>
 
 			<Label AutomationId="PropTestView" Text="PropertyChangedTest" HeightRequest="30"

@@ -8,7 +8,7 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(PlaceholderPlatformEffect), nameof(Placeholder))]
 namespace AiForms.Effects.Droid
 {
-    public class PlaceholderPlatformEffect:PlatformEffect
+    public class PlaceholderPlatformEffect : AiEffectBase
     {
         EditText _editText;
 
@@ -22,15 +22,19 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            var renderer = Container as IVisualElementRenderer;
-            if (renderer?.Element != null) {
+            if (!IsDisposed) {
                 _editText.Hint = string.Empty;
             }
             _editText = null;
         }
 
-        protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e) {
+        protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
+        {
             base.OnElementPropertyChanged(e);
+
+            if (IsDisposed) {
+                return;
+            }
 
             if (e.PropertyName == Placeholder.TextProperty.PropertyName) {
                 UpdateText();

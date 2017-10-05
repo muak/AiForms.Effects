@@ -5,59 +5,87 @@ using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using System;
+using Android.Content;
 
 [assembly: ExportEffect(typeof(AddTextPlatformEffect), nameof(AddText))]
 namespace AiForms.Effects.Droid
 {
-    public class AddTextPlatformEffect : PlatformEffect
+    public class AddTextPlatformEffect : AiEffectBase
     {
         private TextView _textView;
         private ContainerOnLayoutChangeListener _listener;
+        private Context _context => (Control ?? Container)?.Context;
+        private ViewGroup _container;
+        private FastRendererOnLayoutChangeListener _fastListener;
 
         protected override void OnAttached()
         {
-            _textView = new TextView(Container.Context);
+            _container = Container;
+
+            _textView = new TextView(_context);
             _textView.SetMaxLines(1);
             _textView.SetMinLines(1);
             _textView.Ellipsize = Android.Text.TextUtils.TruncateAt.End;
 
-            Container.AddView(_textView);
+            if (Element.IsFastRenderer()) {
+                _container = new FrameLayout(_context);
+
+                _fastListener = new FastRendererOnLayoutChangeListener(Control, _container);
+                Control.AddOnLayoutChangeListener(_fastListener);
+            }
+
+            _container.AddView(_textView);
 
             _listener = new ContainerOnLayoutChangeListener(_textView, Element);
-            Container.AddOnLayoutChangeListener(_listener);
+            _container.AddOnLayoutChangeListener(_listener);
 
             UpdateText();
             UpdateFontSize();
             UpdateTextColor();
             UpdateBackgroundColor();
             UpdatePadding();
-            Container.RequestLayout();
+            UpdateLayout(_textView, Element, _container);
         }
 
         protected override void OnDetached()
         {
-            var renderer = Container as IVisualElementRenderer;
-            if (renderer?.Element != null) {    // check is disposed
-                Container.RemoveOnLayoutChangeListener(_listener);
+            System.Diagnostics.Debug.WriteLine(Element.GetType().FullName);
+
+            if (!IsDisposed) {
+                _container.RemoveView(_textView);
+                _container.RemoveOnLayoutChangeListener(_listener);
+
+                if (Element.IsFastRenderer()) {
+                    Control.RemoveOnLayoutChangeListener(_fastListener);
+                    _fastListener.CleanUp();
+                }
             }
 
-            _listener.Dispose();
+            _listener?.Dispose();
             _listener = null;
 
             _textView.Dispose();
             _textView = null;
+
+            _fastListener?.Dispose();
+            _fastListener = null;
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
         {
             base.OnElementPropertyChanged(args);
+
+            if (IsDisposed) {
+                return;
+            }
+
             if (args.PropertyName == AddText.TextProperty.PropertyName) {
                 UpdateText();
-                Container.RequestLayout();
+                UpdateLayout(_textView, Element, _container);
             }
             else if (args.PropertyName == AddText.FontSizeProperty.PropertyName) {
                 UpdateFontSize();
-                Container.RequestLayout();
+                UpdateLayout(_textView, Element, _container);
             }
             else if (args.PropertyName == AddText.TextColorProperty.PropertyName) {
                 UpdateTextColor();
@@ -67,16 +95,16 @@ namespace AiForms.Effects.Droid
             }
             else if (args.PropertyName == AddText.PaddingProperty.PropertyName) {
                 UpdatePadding();
-                Container.RequestLayout();
+                UpdateLayout(_textView, Element, _container);
             }
             else if (args.PropertyName == AddText.MarginProperty.PropertyName) {
-                Container.RequestLayout();
+                UpdateLayout(_textView, Element, _container);
             }
             else if (args.PropertyName == AddText.HorizontalAlignProperty.PropertyName) {
-                Container.RequestLayout();
+                UpdateLayout(_textView, Element, _container);
             }
             else if (args.PropertyName == AddText.VerticalAlignProperty.PropertyName) {
-                Container.RequestLayout();
+                UpdateLayout(_textView, Element, _container);
             }
         }
 
@@ -107,13 +135,55 @@ namespace AiForms.Effects.Droid
         {
             var padding = AddText.GetPadding(Element);
             _textView.SetPadding(
-                (int)Container.Context.ToPixels(padding.Left),
-                (int)Container.Context.ToPixels(padding.Top),
-                (int)Container.Context.ToPixels(padding.Right),
-                (int)Container.Context.ToPixels(padding.Bottom)
+                (int)_context.ToPixels(padding.Left),
+                (int)_context.ToPixels(padding.Top),
+                (int)_context.ToPixels(padding.Right),
+                (int)_context.ToPixels(padding.Bottom)
             );
         }
 
+        static void UpdateLayout(TextView textview, Element element, Android.Views.View v)
+        {
+            if (string.IsNullOrEmpty(textview.Text)) {
+                return;
+            }
+
+            var margin = AddText.GetMargin(element);
+            margin.Left = (int)v.Context.ToPixels(margin.Left);
+            margin.Top = (int)v.Context.ToPixels(margin.Top);
+            margin.Right = (int)v.Context.ToPixels(margin.Right);
+            margin.Bottom = (int)v.Context.ToPixels(margin.Bottom);
+
+            var textpaint = textview.Paint;
+            var rect = new Android.Graphics.Rect();
+            textpaint.GetTextBounds(textview.Text, 0, textview.Text.Length, rect);
+
+            var xPos = 0;
+            if (AddText.GetHorizontalAlign(element) == Xamarin.Forms.TextAlignment.End) {
+                xPos = v.Width - rect.Width() - textview.PaddingLeft - textview.PaddingRight - (int)margin.Right - 4;
+                if (xPos < (int)margin.Left) {
+                    xPos = (int)margin.Left;
+                }
+                textview.Right = v.Width - (int)margin.Right;
+            }
+            else {
+                xPos = (int)margin.Left;
+                textview.Right = (int)margin.Left + rect.Width() + textview.PaddingLeft + textview.PaddingRight + 4;
+                if (textview.Right >= v.Width) {
+                    textview.Right = v.Width - (int)margin.Right;
+                }
+            }
+
+            textview.Left = xPos;
+
+
+            var fm = textpaint.GetFontMetrics();
+            var height = (int)(Math.Abs(fm.Top) + fm.Bottom + textview.PaddingTop + textview.PaddingEnd);
+            var yPos = AddText.GetVerticalAlign(element) == Xamarin.Forms.TextAlignment.Start ? 0 + (int)margin.Top : v.Height - height - (int)margin.Bottom;
+
+            textview.Top = yPos;
+            textview.Bottom = yPos + height;
+        }
 
         internal class ContainerOnLayoutChangeListener : Java.Lang.Object, Android.Views.View.IOnLayoutChangeListener
         {
@@ -130,50 +200,69 @@ namespace AiForms.Effects.Droid
             // For some reason, in layout that was added to container, it does not work all gravity options and all layout options.
             public void OnLayoutChange(Android.Views.View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
             {
-                if (string.IsNullOrEmpty(_textview.Text)) {
-                    return;
+                UpdateLayout(_textview, _element, v);
+            }
+
+            protected override void Dispose(bool disposing)
+            {
+                if (disposing) {
+                    _textview = null;
+                    _element = null;
                 }
-
-                var margin = AddText.GetMargin(_element);
-                margin.Left = (int)Forms.Context.ToPixels(margin.Left);
-                margin.Top = (int)Forms.Context.ToPixels(margin.Top);
-                margin.Right = (int)Forms.Context.ToPixels(margin.Right);
-                margin.Bottom = (int)Forms.Context.ToPixels(margin.Bottom);
-
-                var textpaint = _textview.Paint;
-                var rect = new Android.Graphics.Rect();
-                textpaint.GetTextBounds(_textview.Text, 0, _textview.Text.Length, rect);
-
-                var xPos = 0;
-                if (AddText.GetHorizontalAlign(_element) == Xamarin.Forms.TextAlignment.End) {
-                    xPos = v.Width - rect.Width() - _textview.PaddingLeft - _textview.PaddingRight - (int)margin.Right - 4;
-                    if (xPos < (int)margin.Left) {
-                        xPos = (int)margin.Left;
-                    }
-                    _textview.Right = v.Width - (int)margin.Right;
-                }
-                else {
-                    xPos = (int)margin.Left;
-                    _textview.Right = (int)margin.Left + rect.Width() + _textview.PaddingLeft + _textview.PaddingRight + 4;
-                    if (_textview.Right >= v.Width) {
-                        _textview.Right = v.Width - (int)margin.Right;
-                    }
-                }
-
-                _textview.Left = xPos;
-
-
-                var fm = textpaint.GetFontMetrics();
-                var height = (int)(Math.Abs(fm.Top) + fm.Bottom + _textview.PaddingTop + _textview.PaddingEnd);
-                var yPos = AddText.GetVerticalAlign(_element) == Xamarin.Forms.TextAlignment.Start ? 0 + (int)margin.Top : v.Height - height - (int)margin.Bottom;
-
-                _textview.Top = yPos;
-                _textview.Bottom = yPos + height;
+                base.Dispose(disposing);
             }
         }
 
+        internal class FastRendererOnLayoutChangeListener : Java.Lang.Object, Android.Views.View.IOnLayoutChangeListener
+        {
+            bool _alreadyGotParent = false;
+            Android.Views.ViewGroup _parent;
+            Android.Views.View _view;
+            ViewGroup _overlay;
 
+            public FastRendererOnLayoutChangeListener(Android.Views.View view, ViewGroup container)
+            {
+                _view = view;
+                _overlay = container;
+            }
+
+            // Because FastRenderer of Label or Image can't be set ClickListener, 
+            // insert FrameLayout with same position and same size on the view.
+            public void OnLayoutChange(Android.Views.View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
+            {
+                _overlay.Layout(v.Left, v.Top, v.Right, v.Bottom);
+
+                if (_alreadyGotParent) {
+                    return;
+                }
+
+                _parent = _view.Parent as Android.Views.ViewGroup;
+                _alreadyGotParent = true;
+
+                _parent.AddView(_overlay);
+
+                _overlay.BringToFront();
+            }
+
+            public void CleanUp()
+            {
+                _parent.RemoveView(_overlay);
+                _overlay.Dispose();
+            }
+
+            protected override void Dispose(bool disposing)
+            {
+                if (disposing) {
+                    _parent = null;
+                    _overlay = null;
+                    _view = null;
+                }
+                base.Dispose(disposing);
+            }
+
+        }
     }
+
 
     internal static class AlignmentExtensions
     {

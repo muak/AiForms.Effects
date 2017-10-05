@@ -5,18 +5,20 @@ using Xamarin.Forms;
 
 namespace AiForms.Effects.Droid
 {
-    public class AlterColorStatusbar : AlterColorBase, IAlterColorEffect
+    public class AlterColorStatusbar : IAiEffectDroid
     {
         Window _window;
         Element _element;
         int _orgColor;
 
-        public AlterColorStatusbar(Element element, IVisualElementRenderer renderer) : base(renderer)
+        public AlterColorStatusbar(Element element)
         {
             _window = (Xamarin.Forms.Forms.Context as FormsAppCompatActivity).Window;
             _element = element;
             _orgColor = _window.StatusBarColor;
         }
+
+        public void OnDetachedIfNotDisposed() { }
 
         public void OnDetached()
         {
