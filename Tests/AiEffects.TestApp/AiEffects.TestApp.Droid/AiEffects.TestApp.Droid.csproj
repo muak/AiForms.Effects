@@ -120,6 +120,12 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\..\..\packages\Xamarin.Forms.2.4.0.282\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+    <Reference Include="AiForms.Effects">
+      <HintPath>..\..\..\packages\AiForms.Effects.1.1.0-pre1\lib\MonoAndroid\AiForms.Effects.dll</HintPath>
+    </Reference>
+    <Reference Include="AiForms.Effects.Droid">
+      <HintPath>..\..\..\packages\AiForms.Effects.1.1.0-pre1\lib\MonoAndroid\AiForms.Effects.Droid.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AiEffects.Sample\AiEffects.Sample.csproj">
@@ -129,14 +135,6 @@
     <ProjectReference Include="..\AiEffects.TestApp\AiEffects.TestApp.csproj">
       <Project>{02E2C54E-9A67-4255-BACC-C035A5529716}</Project>
       <Name>AiEffects.TestApp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\AiForms.Effects\AiForms.Effects.csproj">
-      <Project>{14FCC004-FC52-4028-A5AE-228AFD6F6222}</Project>
-      <Name>AiForms.Effects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\AiForms.Effects.Droid\AiForms.Effects.Droid.csproj">
-      <Project>{49FC4DB1-A6EB-4670-A3A3-16E877E39D0C}</Project>
-      <Name>AiForms.Effects.Droid</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

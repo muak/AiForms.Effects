@@ -24,13 +24,13 @@ Corresponded to Xamarin.Forms 2.4.0
         <language>en-US</language>
         <dependencies>
             <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
-                <dependency id="Xamarin.Forms" version="2.3.3" />
+                <dependency id="Xamarin.Forms" version="2.4.0" />
             </group>
             <group targetFramework="MonoAndroid">
-                <dependency id="Xamarin.Forms" version="2.3.3" />
+                <dependency id="Xamarin.Forms" version="2.4.0" />
             </group>
             <group targetFramework="MonoTouch">
-                <dependency id="Xamarin.Forms" version="2.3.3" />
+                <dependency id="Xamarin.Forms" version="2.4.0" />
             </group>
         </dependencies>
     </metadata>
