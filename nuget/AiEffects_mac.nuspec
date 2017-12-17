@@ -24,7 +24,7 @@ Corresponded to Xamarin.Forms 2.5.0 And .NetStandard1.4
 
 [AddCommand][Android] Done away with the simple effect that is invoked when EnableRipple is false.
         </releaseNotes>
-        <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect Border TimePicker DatePicker Placeholder Color</tags>
+        <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect Border TimePicker DatePicker Placeholder Color SizeToFit</tags>
         <language>en-US</language>
         <dependencies>
             <group targetFramework="netstandard1.4">
