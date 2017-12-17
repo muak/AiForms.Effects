@@ -3,6 +3,8 @@
 Xamarin.Forms Effects for only Android / iOS.
 
 ## Features
+* [SizeToFit](#sizetofit)
+    * make font size adjusted to fit the Label size.
 * [Border](#border)
     * add border to a view.
 * [Placeholder](#placeholder)
@@ -52,6 +54,36 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 
     return base.FinishedLaunching(app, options);
 }
+```
+
+## SizeToFit
+
+This is the effect that make font size adjusted to fit the Label size.
+This can be used only Label. 
+
+### Parameters
+
+* On
+    * Effect On/Off (true is On)
+* CanExpand
+    * Whether font size is expanded when making it fit. (Default true)
+    * If false, font size won't be expanded and only shrinked.
+
+### Demo
+
+https://youtu.be/yMjcFOp38XE
+
+### How to write with Xaml
+
+```xml
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	x:Class="AiEffects.TestApp.Views.BorderPage">
+	<Label Text="LongText..." ef:SizeToFit.On="true" ef.SizeToFit.CanExpand="false"
+			HeightRequest="50" Width="200"  />
+</ContentPage>
 ```
 
 ## Border

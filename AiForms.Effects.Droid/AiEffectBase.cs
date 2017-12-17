@@ -8,6 +8,8 @@ namespace AiForms.Effects.Droid
 {
     public abstract class AiEffectBase : PlatformEffect
     {
+        public static bool IsFastRenderers = global::Xamarin.Forms.Forms.Flags.Any(x => x == "FastRenderers_Experimental");
+
         IVisualElementRenderer _renderer;
         bool _isDisposed = false;
         protected bool IsDisposed {
@@ -20,11 +22,34 @@ namespace AiForms.Effects.Droid
                     _renderer = (Container ?? Control) as IVisualElementRenderer;
                 }
 
-                if (Element.IsFastRendererButton()) {
+                if (IsFastRendererButton) {
                     return CheckButtonIsDisposed();
                 }
 
                 return _isDisposed = _renderer?.Tracker == null; //disposed check
+            }
+        }
+
+        // whether Element is FastRenderer.(Exept Button)
+        protected bool IsFastRenderer{
+            get{
+                //If Container is null, it regards this as FastRenderer Element.
+                //But this judging may not become right in the future. 
+                return IsFastRenderers && (Container == null && !(Element is Xamarin.Forms.Button));
+            }
+        }
+
+        // whether Element is a Button of FastRenderer.
+        protected bool IsFastRendererButton{
+            get{
+                return (IsFastRenderers && (Element is Xamarin.Forms.Button));
+            }
+        }
+
+        // whether Element can add ClickListener.
+        protected bool IsClickable{
+            get{
+                return !(IsFastRenderer || Element is Xamarin.Forms.Layout || Element is Xamarin.Forms.BoxView);
             }
         }
 

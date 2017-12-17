@@ -23,7 +23,7 @@ namespace AiForms.Effects.Droid
                 _effect = new AlterColorTextView(Control as TextView, Element);
             }
             else if (Element is Page) {
-                _effect = new AlterColorStatusbar(Element);
+                _effect = new AlterColorStatusbar(Element,(Control ?? Container).Context);
             }
             else {
                 Device.BeginInvokeOnMainThread(() => AlterColor.SetOn(Element, false));

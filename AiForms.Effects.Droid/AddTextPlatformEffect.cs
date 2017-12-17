@@ -27,7 +27,7 @@ namespace AiForms.Effects.Droid
             _textView.SetMinLines(1);
             _textView.Ellipsize = Android.Text.TextUtils.TruncateAt.End;
 
-            if (Element.IsFastRenderer()) {
+            if (IsFastRenderer) {
                 _container = new FrameLayout(_context);
 
                 _fastListener = new FastRendererOnLayoutChangeListener(Control, _container);
@@ -55,7 +55,7 @@ namespace AiForms.Effects.Droid
                 _container.RemoveView(_textView);
                 _container.RemoveOnLayoutChangeListener(_listener);
 
-                if (Element.IsFastRenderer()) {
+                if (IsFastRenderer) {
                     Control.RemoveOnLayoutChangeListener(_fastListener);
                     _fastListener.CleanUp();
                 }
