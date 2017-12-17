@@ -2,6 +2,7 @@
 using Xamarin.Forms.Platform.Android;
 using Android.Views;
 using Xamarin.Forms;
+using Android.Content;
 
 namespace AiForms.Effects.Droid
 {
@@ -11,9 +12,9 @@ namespace AiForms.Effects.Droid
         Element _element;
         int _orgColor;
 
-        public AlterColorStatusbar(Element element)
+        public AlterColorStatusbar(Element element,Context context)
         {
-            _window = (Xamarin.Forms.Forms.Context as FormsAppCompatActivity).Window;
+            _window = (context as FormsAppCompatActivity).Window;
             _element = element;
             _orgColor = _window.StatusBarColor;
         }

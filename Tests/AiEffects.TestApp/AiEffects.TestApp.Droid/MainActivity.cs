@@ -9,6 +9,8 @@ using Android.Widget;
 using Android.OS;
 using Prism.Unity;
 using Microsoft.Practices.Unity;
+using Xamarin.Forms.Internals;
+using Android.Media;
 
 namespace AiEffects.TestApp.Droid
 {

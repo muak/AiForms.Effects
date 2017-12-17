@@ -79,7 +79,7 @@ namespace AiForms.Effects.Droid
             _isTapTargetSoundEffect = TapSoundEffectElementType.Any(x => x == Element.GetType());
 
             if (_audioManager == null) {
-                _audioManager = (AudioManager)Forms.Context.GetSystemService(Context.AudioService);
+                _audioManager = (AudioManager)_view.Context.GetSystemService(Context.AudioService);
             }
 
             _gestureDetector = new GestureDetector(_view.Context, new ViewGestureListener(this));
@@ -182,7 +182,7 @@ namespace AiForms.Effects.Droid
             _gestureDetector.OnTouchEvent(e.Event);
             // for any reason depending type of element, Handled value must be changed.
             // I don't know the reason.
-            if (!_useRipple && !Element.IsClickable()) {
+            if (!_useRipple && !IsClickable) {
                 e.Handled = true;
                 return;
             }
@@ -237,7 +237,7 @@ namespace AiForms.Effects.Droid
                 if (_isDisableEffectTarget) {
                     forms.FadeTo(DisabledAlpha);
                 }
-                if (Element.IsFastRenderer()) {
+                if (IsFastRenderer) {
                     _view.Enabled = false;
                 }
             }
@@ -246,7 +246,7 @@ namespace AiForms.Effects.Droid
                 if (_isDisableEffectTarget) {
                     forms.FadeTo(1f);
                 }
-                if (Element.IsFastRenderer()) {
+                if (IsFastRenderer) {
                     _view.Enabled = true;
                 }
             }
@@ -359,7 +359,7 @@ namespace AiForms.Effects.Droid
                 _view.Touch -= _view_Touch;
                 _rippleOverlay.Touch += _view_Touch;
             }
-            else if (Element.IsFastRenderer()) {
+            else if (IsFastRenderer) {
                 if (_fastListener == null) {
                     _fastListener = new FastRendererOnLayoutChangeListener(this);
                     _view.AddOnLayoutChangeListener(_fastListener);
@@ -395,9 +395,8 @@ namespace AiForms.Effects.Droid
 
                 _rippleOverlay = null;
             }
-            else if (Element.IsFastRenderer()) {
+            else if (IsFastRenderer) {
                 _view.Touch -= _view_Touch;
-                //Control.AddOnLayoutChangeListener(null);
                 Control.RemoveOnLayoutChangeListener(_fastListener);
                 _view = Control;
                 _fastListener.CleanUp();

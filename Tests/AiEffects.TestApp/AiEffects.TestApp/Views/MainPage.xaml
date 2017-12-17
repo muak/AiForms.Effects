@@ -64,6 +64,10 @@
 		<StackLayout Orientation="Horizontal">
 			<Button AutomationId="Placeholder" Text="Placeholder" Command="{Binding GotoTestCommand}" CommandParameter="PlaceholderPage" />
 		</StackLayout>
+        <Label Text="SizeToFit" HorizontalOptions="Center" />
+        <StackLayout Orientation="Horizontal">
+            <Button AutomationId="SizeToFit" Text="SizeToFit" Command="{Binding GotoTestCommand}" CommandParameter="SizeToFitPage" />
+        </StackLayout>
 	</StackLayout>
 	</ScrollView>
 </ContentPage> 
