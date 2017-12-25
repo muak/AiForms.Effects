@@ -307,10 +307,10 @@ There are properties of Command and Parameter for tap and long tap.
 * LongCommandParameter
     * Long Tap Command Parameter
 * EffectColor
-    * background color when to tap.if it doesn't setting,nothing will occur.
+    * background color when to tap. if it doesn't setting,nothing will occur.
 * EnableRipple
     * Ripple Effect On/Off (default true,android only)<br>
-      If you don't have to use ripple effect,it make EnableRipple false.
+      If you don't have to use ripple effect, it make EnableRipple false.
 * EnableSound
     * When tapped, whether play system sound effect.(Default false)
 * SyncCanExecute
