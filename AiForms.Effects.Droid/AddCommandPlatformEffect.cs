@@ -96,8 +96,6 @@ namespace AiForms.Effects.Droid
             _view.Touch += _view_Touch;
 
             UpdateEnableRipple();
-
-
         }
 
         protected override void OnDetached()
@@ -300,12 +298,13 @@ namespace AiForms.Effects.Droid
 
         void UpdateEffectColor()
         {
-            var color = AddCommand.GetEffectColor(Element);
-            if (color == Xamarin.Forms.Color.Default) {
-                return;
-            }
-
-            if (_useRipple) {
+            if (_useRipple)
+            {
+                var color = AddCommand.GetEffectColor(Element);
+                if (color == Xamarin.Forms.Color.Default) {
+                    color = Xamarin.Forms.Color.Accent;
+                }
+           
                 _ripple?.SetColor(getPressedColorSelector(color.ToAndroid()));
             }
 
@@ -314,11 +313,6 @@ namespace AiForms.Effects.Droid
         void UpdateEnableRipple()
         {
             _useRipple = AddCommand.GetEnableRipple(Element);
-
-            var color = AddCommand.GetEffectColor(Element);
-            if (color == Xamarin.Forms.Color.Default) {
-                return;
-            }
 
             if (_useRipple) {
                 AddRipple();

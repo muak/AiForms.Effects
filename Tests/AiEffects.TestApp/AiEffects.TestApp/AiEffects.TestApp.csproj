@@ -80,6 +80,10 @@
       <DependentUpon>SizeToFitPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\SizeToFitPageViewModel.cs" />
+    <Compile Include="Views\ViewCellPage.xaml.cs">
+      <DependentUpon>ViewCellPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ViewCellPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -122,6 +126,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ViewCellPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.ServiceLocation">
@@ -133,6 +141,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AiForms.Effects\AiForms.Effects.csproj">
+      <Project>{14FCC004-FC52-4028-A5AE-228AFD6F6222}</Project>
+      <Name>AiForms.Effects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

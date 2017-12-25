@@ -23,6 +23,11 @@
 	</ContentPage.Resources>
 	<ScrollView>
 	<StackLayout Spacing="4" Padding="4">
+        <Label Text="ViewCell" HorizontalOptions="Center" />
+        <StackLayout Orientation="Horizontal">
+            <Button AutomationId="ViewCell" Text="ViewCell" 
+                Command="{Binding GotoTestCommand}" CommandParameter="ViewCellPage" />
+        </StackLayout>
 		<Label Text="AddCommand" HorizontalOptions="Center" />
 		<StackLayout Orientation="Horizontal">
 			<Button AutomationId="AddCommandTapTest" Text="Tap" 
