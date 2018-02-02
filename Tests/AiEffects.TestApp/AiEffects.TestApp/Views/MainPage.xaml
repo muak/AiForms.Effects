@@ -73,6 +73,11 @@
         <StackLayout Orientation="Horizontal">
             <Button AutomationId="SizeToFit" Text="SizeToFit" Command="{Binding GotoTestCommand}" CommandParameter="SizeToFitPage" />
         </StackLayout>
+        <Label Text="AddCommandSample" HorizontalOptions="Center" />
+        <StackLayout Orientation="Horizontal">
+            <Button Text="AddCommandSample" 
+                Command="{Binding GotoTestCommand}" CommandParameter="AddCommandSample" />
+        </StackLayout>
 	</StackLayout>
 	</ScrollView>
 </ContentPage> 

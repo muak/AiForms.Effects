@@ -84,6 +84,10 @@
       <DependentUpon>ViewCellPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ViewCellPageViewModel.cs" />
+    <Compile Include="Views\AddCommandSample.xaml.cs">
+      <DependentUpon>AddCommandSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddCommandSampleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -127,6 +131,10 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ViewCellPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddCommandSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

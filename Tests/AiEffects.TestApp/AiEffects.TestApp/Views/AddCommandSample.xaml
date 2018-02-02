@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+    prism:ViewModelLocator.AutowireViewModel="True" 
+    x:Class="AiEffects.TestApp.Views.AddCommandSample">
+    <AbsoluteLayout BackgroundColor="White">
+        <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,40" Padding="6">
+            <Label Text="CanExecute" HorizontalOptions="FillAndExpand" HeightRequest="40" VerticalTextAlignment="Center"  />
+            <Switch IsToggled="{Binding CanExecute.Value}" HorizontalOptions="End" VerticalOptions="Center" />
+        </StackLayout>
+        
+        <Label Text="Label" HeightRequest="30" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+            AbsoluteLayout.LayoutFlags="XProportional" AbsoluteLayout.LayoutBounds="0.5,80,100,30"
+                ef:AddCommand.On="true" 
+                ef:AddCommand.EffectColor="#90FFFF00"
+                ef:AddCommand.Command="{Binding TapCommand}"
+                ef:AddCommand.CommandParameter="Label"
+                ef:AddCommand.LongCommand="{Binding LongCommand}"
+                ef:AddCommand.LongCommandParameter="Label"
+                ef:AddCommand.EnableSound="true"
+                ef:AddCommand.EnableRipple="{Binding EnableRipple}"
+                ef:AddCommand.SyncCanExecute="true"/> 
+        
+        <ContentView HeightRequest="20" BackgroundColor="Navy"
+            AbsoluteLayout.LayoutFlags="XProportional" AbsoluteLayout.LayoutBounds="0.5,140,100,100"
+                ef:AddCommand.On="true"  
+                ef:AddCommand.EffectColor="#90FFFF00"
+                ef:AddCommand.Command="{Binding TapCommand}"
+                ef:AddCommand.CommandParameter="ContentView" 
+                ef:AddCommand.LongCommand="{Binding LongCommand}"
+                ef:AddCommand.LongCommandParameter="ContentView"
+                ef:AddCommand.EnableSound="true"
+                ef:AddCommand.EnableRipple="true"
+                ef:AddCommand.SyncCanExecute="true" > 
+            <Image Source="sample" InputTransparent="false" Aspect="Fill" />
+        </ContentView> 
+    </AbsoluteLayout>
+</ContentPage>
