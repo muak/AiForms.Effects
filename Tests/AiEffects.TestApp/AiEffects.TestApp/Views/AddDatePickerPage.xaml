@@ -31,7 +31,7 @@
 			ef:AddDatePicker.Date="{Binding LabelTime.Value}"
 			ef:AddDatePicker.MaxDate="2018/03/31"
 			ef:AddDatePicker.MinDate="2017/01/01"
-			ef:AddDatePicker.TodayText="今日" />
+			ef:AddDatePicker.TodayText="Today" />
 		<BoxView Color="Green"  HeightRequest="50" WidthRequest="50" HorizontalOptions="Center"
 			ef:AddDatePicker.On="{Binding EffectOn.Value}" 
 			ef:AddDatePicker.Date="{Binding BoxTime.Value}"
