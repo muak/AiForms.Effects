@@ -12,20 +12,20 @@
 			ef:AddNumberPicker.Min="10"
 			ef:AddNumberPicker.Max="999"
 			ef:AddNumberPicker.Number="{Binding LabelNumber}"
-			ef:AddNumberPicker.Title="数値を選択" />
+			ef:AddNumberPicker.Title="Select a number" />
 		<BoxView Color="Green"  HeightRequest="50" WidthRequest="50" HorizontalOptions="Center"
 			ef:AddNumberPicker.On="{Binding EffectOn}" 
 			ef:AddNumberPicker.Min="10"
 			ef:AddNumberPicker.Max="999"
 			ef:AddNumberPicker.Number="{Binding BoxNumber}"
-			ef:AddNumberPicker.Title="数値を選択"
+			ef:AddNumberPicker.Title="Select a number"
 			ef:AddNumberPicker.Command="{Binding SelectedCommand}" />
 		<StackLayout Orientation="Horizontal" 
 			ef:AddNumberPicker.On="{Binding EffectOn}" 
 			ef:AddNumberPicker.Min="10"
 			ef:AddNumberPicker.Max="999"
 			ef:AddNumberPicker.Number="{Binding StackNumber}"
-			ef:AddNumberPicker.Title="数値を選択"
+			ef:AddNumberPicker.Title="Select a number"
 			ef:AddNumberPicker.Command="{Binding SelectedCommand}" >
 			<Label Text="{Binding StackNumber,StringFormat='StackLayout {0}'}" InputTransparent="true" />
 		</StackLayout>
@@ -34,13 +34,13 @@
 			ef:AddNumberPicker.Min="10"
 			ef:AddNumberPicker.Max="999"
 			ef:AddNumberPicker.Number="{Binding ButtonNumber}"
-			ef:AddNumberPicker.Title="数値を選択" />
+			ef:AddNumberPicker.Title="Select a number" />
 		<Image Source="sample" HeightRequest="30"  WidthRequest="30" HorizontalOptions="Center"
 			ef:AddNumberPicker.On="{Binding EffectOn}" 
 			ef:AddNumberPicker.Min="10"
 			ef:AddNumberPicker.Max="999"
 			ef:AddNumberPicker.Number="{Binding ImageNumber}"
-			ef:AddNumberPicker.Title="数値を選択"
+			ef:AddNumberPicker.Title="Select a number"
 			ef:AddNumberPicker.Command="{Binding SelectedCommand}" />
 	</StackLayout>
 </ContentPage>
