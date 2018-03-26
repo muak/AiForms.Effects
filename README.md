@@ -280,7 +280,7 @@ There are properties of Command and Parameter for tap and long tap.
 |SearchBar        |❌   |❌      |
 |Slider           |✅   |❌      |
 |Stepper          |✅   |❌      |
-|Switch           |❌   |✅      |
+|Switch           |❌   |❌      |
 |TableView        |❌   |❌      |
 |TimePicker       |❌   |✅      |
 |WebView          |❌   |❌      |

@@ -419,12 +419,6 @@ namespace AiForms.Effects.Droid
                 var mask = new ColorDrawable(Android.Graphics.Color.White);
                 return _ripple = new RippleDrawable(getPressedColorSelector(color), null, mask);
             }
-            else if (back is RippleDrawable) {
-                _ripple = back.GetConstantState().NewDrawable() as RippleDrawable;
-                _ripple.SetColor(getPressedColorSelector(color));
-
-                return _ripple;
-            }
             else {
                 return _ripple = new RippleDrawable(getPressedColorSelector(color), back, null);
             }

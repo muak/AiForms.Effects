@@ -6,6 +6,7 @@ using Android.Graphics.Drawables;
 using Android.Support.V7.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using System;
 
 [assembly: ExportEffect(typeof(ToFlatButtonPlatformEffect), nameof(ToFlatButton))]
 namespace AiForms.Effects.Droid
@@ -22,7 +23,6 @@ namespace AiForms.Effects.Droid
 
         private Drawable OrgBackground;
         private StateListAnimator OrgStateListAnimator;
-        private ColorStateList OrgBackgroundTint;
 
         protected override void OnAttached()
         {
@@ -34,12 +34,9 @@ namespace AiForms.Effects.Droid
 
             OrgBackground = NativeButton.Background;
             OrgStateListAnimator = NativeButton.StateListAnimator;
-            OrgBackgroundTint = NativeButton.SupportBackgroundTintList;
 
             //shadow off
             NativeButton.StateListAnimator = null;
-            //disabled default background
-            NativeButton.SupportBackgroundTintList = null;
 
             Shape = new GradientDrawable();
             Shape.SetShape(ShapeType.Rectangle);
@@ -57,7 +54,6 @@ namespace AiForms.Effects.Droid
             if (!IsDisposed) {
                 NativeButton.Background = OrgBackground;
                 NativeButton.StateListAnimator = OrgStateListAnimator;
-                NativeButton.SupportBackgroundTintList = OrgBackgroundTint;
             }
             Colors.Dispose();
             Shape.Dispose();
@@ -68,7 +64,6 @@ namespace AiForms.Effects.Droid
             NativeButton = null;
             OrgBackground = null;
             OrgStateListAnimator = null;
-            OrgBackgroundTint = null;
 
             Colors = null;
             Shape = null;
@@ -88,7 +83,7 @@ namespace AiForms.Effects.Droid
             if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName) {
                 UpdateBackgroundColor();
             }
-            else if (e.PropertyName == Button.BorderRadiusProperty.PropertyName) {
+            else if (e.PropertyName == Button.CornerRadiusProperty.PropertyName || e.PropertyName == Button.BorderRadiusProperty.PropertyName) {
                 UpdateBorderRadius();
             }
             else if (e.PropertyName == Button.BorderWidthProperty.PropertyName) {
@@ -130,7 +125,7 @@ namespace AiForms.Effects.Droid
         }
         void UpdateBorderRadius()
         {
-            var size = (float)Control.Context.ToPixels(FormsButton.BorderRadius);
+            var size = (float)Control.Context.ToPixels(Math.Max(FormsButton.CornerRadius,FormsButton.BorderRadius));
             Shape.SetCornerRadius(size);
         }
         void UpdateBorder()
