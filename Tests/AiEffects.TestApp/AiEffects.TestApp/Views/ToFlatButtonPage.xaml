@@ -20,22 +20,22 @@
 	<StackLayout Spacing="10" Margin="10,10,10,0">
 		<Button ef:ToFlatButton.On="false" ef:ToFlatButton.RippleColor="Red" Text="Default" />
 
-		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
+		<Button ef:ToFlatButton.On="{Binding On.Value}" ef:ToFlatButton.RippleColor="Red"
 			Text="Radius Only"  BorderRadius="10" />
 		
-		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
-			Text="Radius + Border" BorderWidth="3" BorderColor="Green" BorderRadius="10" />
+		<Button ef:ToFlatButton.On="{Binding On.Value}" ef:ToFlatButton.RippleColor="Red"
+			Text="Radius + Border" BorderWidth="3" BorderColor="Green" CornerRadius="10" />
 
-		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red" BackgroundColor="Transparent"
-			Text="Border Only" TextColor="Green" BorderWidth="3" BorderColor="Green" BorderRadius="0" />
+		<Button ef:ToFlatButton.On="{Binding On.Value}" ef:ToFlatButton.RippleColor="Red" BackgroundColor="Transparent"
+			Text="Border Only" TextColor="Green" BorderWidth="3" BorderColor="Green" CornerRadius="0" />
 		
-		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
-			Text="Flat"  BorderRadius="0" BorderWidth="0" />
+		<Button ef:ToFlatButton.On="{Binding On.Value}" ef:ToFlatButton.RippleColor="Red"
+			Text="Flat" CornerRadius="0" BorderWidth="0" />
 
-		<Button ef:ToFlatButton.On="true" BackgroundColor="Transparent"
-			Text="Full Flat" TextColor="Green"  BorderRadius="0" BorderWidth="0" />
+		<Button ef:ToFlatButton.On="{Binding On.Value}" BackgroundColor="Transparent"
+			Text="Full Flat" TextColor="Green"  CornerRadius="0" BorderWidth="0" />
 
-		<Button ef:ToFlatButton.On="true" ef:ToFlatButton.RippleColor="Red"
-			Text="Disabled" BorderWidth="2" BorderColor="Green" BorderRadius="8" IsEnabled="false" />
+		<Button ef:ToFlatButton.On="{Binding On.Value}" ef:ToFlatButton.RippleColor="Red"
+			Text="Disabled" BorderWidth="2" BorderColor="Green" CornerRadius="8" IsEnabled="false" />
 	</StackLayout> 
 </ContentPage>

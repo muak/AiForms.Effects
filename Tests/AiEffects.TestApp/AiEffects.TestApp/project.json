@@ -13,7 +13,7 @@
     "System.Reactive.Linq": "3.0.0",
     "System.Reactive.PlatformServices": "3.0.0",
     "Unity": "4.0.1",
-    "Xamarin.Forms": "2.5.0.121934"
+    "Xamarin.Forms": "2.5.0.280555"
   },
   "frameworks": {
     "netstandard1.4": {

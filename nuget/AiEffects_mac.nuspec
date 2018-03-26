@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Effects</id>
-        <version>1.1.2</version>
+        <version>1.2.0</version>
         <title>AiForms.Effects for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
@@ -14,22 +14,29 @@
         <releaseNotes>
 ## Bug fix
 
-* [AddCommand] Isn't executed command when EffectColor is default value on Android.
+* [ToFlatButton] Null Exception in Xamarin.Forms 2.5.0.280555 on Android.
+* [AddCommand] Null Exception in Xamarin.Forms 2.5.0.280555 on Android.
+
+## Important changing
+
+* Change supported Xamarin.Forms version to 2.5.0.280555
+* [ToFlatButton] Support CornerRadius Property.
+* [AddCommand] Unsupport Slider and Switch on Android.
         </releaseNotes>
         <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect Border TimePicker DatePicker Placeholder Color SizeToFit</tags>
         <language>en-US</language>
         <dependencies>
             <group targetFramework="netstandard1.4">
-                <dependency id="Xamarin.Forms" version="2.5.0" />
+                <dependency id="Xamarin.Forms" version="2.5.0.280555" />
             </group>
             <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
-                <dependency id="Xamarin.Forms" version="2.5.0" />
+                <dependency id="Xamarin.Forms" version="2.5.0.280555" />
             </group>
             <group targetFramework="MonoAndroid">
-                <dependency id="Xamarin.Forms" version="2.5.0" />
+                <dependency id="Xamarin.Forms" version="2.5.0.280555" />
             </group>
             <group targetFramework="MonoTouch">
-                <dependency id="Xamarin.Forms" version="2.5.0" />
+                <dependency id="Xamarin.Forms" version="2.5.0.280555" />
             </group>
         </dependencies>
     </metadata>

@@ -84,6 +84,7 @@
       <DependentUpon>ViewCellPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ViewCellPageViewModel.cs" />
+    <Compile Include="ViewModels\ToFlatButtonPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
