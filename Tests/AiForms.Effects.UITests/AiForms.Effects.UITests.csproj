@@ -54,10 +54,6 @@
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\AiEffects.TestApp\AiEffects.TestApp\AiEffects.TestApp.csproj">
-      <Project>{02E2C54E-9A67-4255-BACC-C035A5529716}</Project>
-      <Name>AiEffects.TestApp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AiEffects.TestApp\AiEffects.TestApp.Droid\AiEffects.TestApp.Droid.csproj">
       <Project>{8F6AF907-6204-46C5-8ABB-F2BDD40FFC66}</Project>
       <Name>AiEffects.TestApp.Droid</Name>

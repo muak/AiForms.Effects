@@ -2,31 +2,32 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Effects</id>
-        <version>1.2.0</version>
+        <version>1.3.0</version>
         <title>AiForms.Effects for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
         <projectUrl>https://github.com/muak/AiForms.Effects</projectUrl>
         <licenseUrl>https://github.com/muak/AiForms.Effects/blob/master/LICENSE.txt</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Xamarin.Forms Effects(add Border / add placeholder / add Text / add Command / add NumberPicker, TimePicker and DatePicker / alter color for switch and slider / alter LineHeight of Label and Editor / Button to flat / Size to fit for Label) for iOS/Android</description>
+        <description>Xamarin.Forms Effects(add Border / add placeholder / add Text / add Command / add NumberPicker, TimePicker and DatePicker / alter color for switch and slider / alter LineHeight of Label and Editor / Button to flat / Size to fit for Label / add touch events) for iOS / Android</description>
         <summary></summary>
         <releaseNotes>
 ## Bug fix
 
-* [ToFlatButton] Null Exception in Xamarin.Forms 2.5.0.280555 on Android.
-* [AddCommand] Null Exception in Xamarin.Forms 2.5.0.280555 on Android.
+* [SizeToFit] Null Exception in OnDetached on iOS.
 
-## Important changing
+## New feature
 
-* Change supported Xamarin.Forms version to 2.5.0.280555
-* [ToFlatButton] Support CornerRadius Property.
-* [AddCommand] Unsupport Slider and Switch on Android.
+* [AddTouch] the effect adding touch events (begin, move, end, cancel) to a view.
+
+## others
+
+* Support .NETStandard2.0
         </releaseNotes>
         <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect Border TimePicker DatePicker Placeholder Color SizeToFit</tags>
         <language>en-US</language>
         <dependencies>
-            <group targetFramework="netstandard1.4">
+            <group targetFramework="netstandard2.0">
                 <dependency id="Xamarin.Forms" version="2.5.0.280555" />
             </group>
             <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
@@ -41,18 +42,18 @@
         </dependencies>
     </metadata>
     <files>
-        <!-- .netstandard 1.4 -->
-        <file src="../AiForms.Effects/bin/Release/AiForms.Effects.dll" target="lib/netstandard1.4" />
+        <!-- .netstandard 2.0 -->
+        <file src="../AiForms.Effects/bin/Release/netstandard2.0/AiForms.Effects.dll" target="lib/netstandard2.0" />
         <!-- PCL -->
-        <file src="../AiForms.Effects/bin/Release/AiForms.Effects.dll" target="lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10" />
+        <file src="../AiForms.Effects/bin/Release/netstandard2.0/AiForms.Effects.dll" target="lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10" />
         <!-- Mono.Android -->
-        <file src="../AiForms.Effects/bin/Release/AiForms.Effects.dll" target="lib/MonoAndroid" />
+        <file src="../AiForms.Effects/bin/Release/netstandard2.0/AiForms.Effects.dll" target="lib/MonoAndroid" />
         <file src="../AiForms.Effects.Droid/bin/Release/AiForms.Effects.Droid.dll" target="lib/MonoAndroid" />
         <!-- Mono.Touch -->
-        <file src="../AiForms.Effects/bin/Release/AiForms.Effects.dll" target="lib/MonoTouch" />
+        <file src="../AiForms.Effects/bin/Release/netstandard2.0/AiForms.Effects.dll" target="lib/MonoTouch" />
         <file src="../AiForms.Effects.iOS/bin/Release/AiForms.Effects.iOS.dll" target="lib/MonoTouch" />
         <!-- Xamarin.iOS10 -->
-        <file src="../AiForms.Effects/bin/Release/AiForms.Effects.dll" target="lib/Xamarin.iOS10" />
+        <file src="../AiForms.Effects/bin/Release/netstandard2.0/AiForms.Effects.dll" target="lib/Xamarin.iOS10" />
         <file src="../AiForms.Effects.iOS/bin/Release/AiForms.Effects.iOS.dll" target="lib/Xamarin.iOS10" />
     </files>
 </package>

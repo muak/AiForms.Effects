@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Foundation;
-using Microsoft.Practices.Unity;
 using Prism;
-using Prism.Unity;
+using Prism.Ioc;
 using UIKit;
 
 namespace AiEffects.TestApp.iOS
@@ -39,8 +35,8 @@ namespace AiEffects.TestApp.iOS
 
     public class iOSInitializer : IPlatformInitializer
     {
-        public void RegisterTypes(IUnityContainer container) {
-
+        public void RegisterTypes(IContainerRegistry containerRegistry)
+        {
         }
     }
 }

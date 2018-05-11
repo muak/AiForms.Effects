@@ -9,8 +9,6 @@ namespace AiEffects.TestApp.Views
            Children.Add(new AddCommandPage { Title = "Tab1" });
            Children.Add(new ContentPage { Title = "Tab3", BackgroundColor = Color.Green });
         }
-
-
     }
 
     public class LineHeightTabbed : TabbedPage
