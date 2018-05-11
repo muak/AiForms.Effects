@@ -1,8 +1,10 @@
 using System.Linq;
 using System.Reflection;
-using Microsoft.Practices.ObjectBuilder2;
+using Prism;
+using Prism.Ioc;
 using Prism.Unity;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 [assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
 namespace AiEffects.TestApp
@@ -23,13 +25,13 @@ namespace AiEffects.TestApp
             }
         }
 
-        protected override void RegisterTypes()
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             this.GetType().GetTypeInfo().Assembly
             .DefinedTypes
             .Where(t => t.Namespace.EndsWith(".Views", System.StringComparison.Ordinal))
             .ForEach(t => {
-                Container.RegisterTypeForNavigation(t.AsType(), t.Name);
+                containerRegistry.RegisterForNavigation(t.AsType(), t.Name);
             });
 
         }

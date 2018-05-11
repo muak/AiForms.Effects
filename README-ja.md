@@ -1,52 +1,50 @@
 # AiForms.Effects for Xamarin.Forms
 
-AiForms.Effects is the effects library that provides you with more flexible functions than default by targetting only Android and iOS in a Xamarin.Forms project.
+AiForms.Effect は Android と iOS に特化することにより、標準のコントロールをより便利にするための機能を提供する Xamarin.Forms の Effectsライブラリです。
 
-[Japanese](./README-ja.md)
-
-## Features
+## 機能
 * [AddTouch](#addtouch)
-    * add touch event ( begin, move, end, cancel ).
+    * 各種タッチイベントを追加
 * [SizeToFit](#sizetofit)
-    * make font size adjusted to fit the Label size.
+    * フォントサイズをLabelの大きさに調整
 * [Border](#border)
-    * add border to a view.
+    * 罫線の追加.
 * [Placeholder](#placeholder)
-	* show placeholder on Editor.
+	* Editor に Placeholder を追加.
 * [ToFlatButton](#toflatbutton)
-	* alter Button to flat (for Android)
+	* ボタンをフラットにする (Android)
 * [AddText](#addtext)
-	* add one line Text to a view.
+	* 1行テキストを任意のviewに追加
 * [AddCommand](#addcommand)
-    * add Command function to a view.
+    * コマンドを任意のviewに追加
 * [AddNumberPicker](#addnumberpicker)
-    * add NumberPicker function to a view.
+    * NumberPicker 機能を任意のviewに追加
 * [AddTimePicker](#addtimepicker)
-	* add TimePicker function to a view.
+	* TimePicker 機能を任意のviewに追加
 * [AddDatePicker](#adddatepicker)
-	* add DatePicker function to a view.
+	* DatePicker 機能を任意のviewに追加
 * [AlterLineHeight](#alterlineheight)
-    * alter LineHeight of Label and Editor.
+    * LabelとEditorの行の高さを変更
 * [AlterColor](#altercolor)
-	* alter Color of an element which it cannot change color.
+	* 通常変えられない箇所の色を変える
 
 
-## Minimum Device and Version etc
+## 動作条件など
 
 iOS:iPhone5s,iPod touch6,iOS9.3  
 Android:version 5.1.1 (only FormsAppcompatActivity) / API22
 
-## Nuget Installation
+## Nuget インストール
 
 ```bash
 Install-Package AiForms.Effects
 ```
 
-You need to install this nuget package to .NETStandard project and each platform project.
+共有プロジェクト（PCL / .NETStandard）と各プラットフォームのプロジェクトにそれぞれインストールする必要があります。
 
-### for iOS project
+### iOS プロジェクト
 
-To use by iOS, you need to write the following code in AppDelegate.cs.
+iOSで使用するために、AppDelegate.csに以下のようなコードの追加が必要です。
 
 ```csharp
 public override bool FinishedLaunching(UIApplication app, NSDictionary options) {
@@ -62,6 +60,7 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 
 ## AddTouch
 
+この Effectは …（めんどくさくなったので翻訳一旦中止w）
 This is the effect that adds touch events (begin, move, end, cancel) to a view.
 Each touch events provides location property and can be taken X and Y position.
 

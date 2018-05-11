@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    x:Class="AiEffects.TestApp.Views.AddTouchPage"
+    Title="AddTouch" BackgroundColor="White">
+    <StackLayout Margin="30">
+        <StackLayout VerticalOptions="Start" BackgroundColor="Silver" HeightRequest="300"
+                     ef:AddTouch.On="true" x:Name="container" Margin="0,0,0,30" />
+
+        <Label  HeightRequest="50" x:Name="posXLabel"  />
+        <Label  HeightRequest="50" x:Name="posYLabel"  />
+        <Label  HeightRequest="50" x:Name="eventLabel" />
+    </StackLayout>
+</ContentPage>

@@ -1,153 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{02E2C54E-9A67-4255-BACC-C035A5529716}</ProjectGuid>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <RootNamespace>AiEffects.TestApp</RootNamespace>
-    <AssemblyName>AiEffects.TestApp</AssemblyName>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
-    <ReleaseVersion>0.0.5-pre</ReleaseVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="Views\MyTabbed.cs" />
-    <Compile Include="Views\AddCommandPage.xaml.cs">
-      <DependentUpon>AddCommandPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\AddCommandPageViewModel.cs" />
-    <Compile Include="Views\Navigations.cs" />
-    <Compile Include="ViewModels\AlterLineHeightPageViewModel.cs" />
-    <Compile Include="Views\AlterLineHeightPage.xaml.cs">
-      <DependentUpon>AlterLineHeightPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddNumberPickerPage.xaml.cs">
-      <DependentUpon>AddNumberPickerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\AddNumberPickerPageViewModel.cs" />
-    <Compile Include="Views\ToFlatButtonPage.xaml.cs">
-      <DependentUpon>ToFlatButtonPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddTextPage.xaml.cs">
-      <DependentUpon>AddTextPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\AddTextPageViewModel.cs" />
-    <Compile Include="Views\BorderPage.xaml.cs">
-      <DependentUpon>BorderPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\BorderPageViewModel.cs" />
-    <Compile Include="Views\AlterColorPage.xaml.cs">
-      <DependentUpon>AlterColorPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\AlterColorPageViewModel.cs" />
-    <Compile Include="Views\AddTimePickerPage.xaml.cs">
-      <DependentUpon>AddTimePickerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\AddTimePickerPageViewModel.cs" />
-    <Compile Include="Views\AddDatePickerPage.xaml.cs">
-      <DependentUpon>AddDatePickerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\AddDatePickerPageViewModel.cs" />
-    <Compile Include="Views\PlaceholderPage.xaml.cs">
-      <DependentUpon>PlaceholderPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\PlaceholderPageViewModel.cs" />
-    <Compile Include="Views\SizeToFitPage.xaml.cs">
-      <DependentUpon>SizeToFitPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\SizeToFitPageViewModel.cs" />
-    <Compile Include="Views\ViewCellPage.xaml.cs">
-      <DependentUpon>ViewCellPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\ViewCellPageViewModel.cs" />
-    <Compile Include="ViewModels\ToFlatButtonPageViewModel.cs" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
+    <PackageReference Include="Prism.Unity.Forms" Version="7.0.0.396" />
+    <PackageReference Include="ReactiveProperty" Version="4.2.2" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\AddCommandPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\AlterLineHeightPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\AddNumberPickerPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\ToFlatButtonPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\AddTextPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\BorderPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\AlterColorPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\AddTimePickerPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\AddDatePickerPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\PlaceholderPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\SizeToFitPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\ViewCellPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+    <ProjectReference Include="..\..\..\AiForms.Effects\AiForms.Effects.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity">
-      <HintPath>..\packages\Unity.4.0.1\lib\portable-net45+wp80+win8+wpa81+MonoAndroid10+MonoTouch10\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="project.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\AiForms.Effects\AiForms.Effects.csproj">
-      <Project>{14FCC004-FC52-4028-A5AE-228AFD6F6222}</Project>
-      <Name>AiForms.Effects</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+
 </Project>

@@ -28,7 +28,7 @@ namespace AiForms.Effects.iOS
         {
             _view.Font = UIFont.FromName(_view.Font.Name, _orgFontSize);
             var render = Platform.GetRenderer(Element as Label) as LabelRenderer;
-            render.LayoutSubviews();
+            render?.LayoutSubviews();
             _view = null;
         }
 
