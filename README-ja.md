@@ -60,9 +60,8 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 
 ## AddTouch
 
-この Effectは …（めんどくさくなったので翻訳一旦中止w）
-This is the effect that adds touch events (begin, move, end, cancel) to a view.
-Each touch events provides location property and can be taken X and Y position.
+これはタッチイベント（begin, move, end, cancel）をviewに追加する Effect です。
+それぞれのタッチイベントにはlocationプロパティが提供され、X・Y座標を取得できます。
 
 ### Parameters
 
@@ -80,10 +79,10 @@ Each touch events provides location property and can be taken X and Y position.
 
 https://youtu.be/9zrVQcr_Oqo
 
-### How to use
+### 使い方
 
-This effect usage is a little different from the other effects.
-First of all, set On attached property to a target control and set the value to true in XAML.
+この Effect の使い方 は他のEffectと少し違っています。
+まず XAML で `On` 添付プロパティをコントロールにセットし、その値をtrueにします。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -94,8 +93,7 @@ First of all, set On attached property to a target control and set the value to 
 </ContentPage>
 ```
 
-In turn, use AddTouch.GetRecognizer method, get a TouchRecognizer in code.
-This recognizer can be used to handle each touch events.
+その後 コードビハインドで `AddTouch.GetRecognizer` メソッドを使って、`TouchRecognizer` を取得し、この recognizer を使ってそれぞれのタッチイベントをハンドルします。
 
 ```cs
 var recognizer = AddTouch.GetRecognizer(container);
@@ -120,22 +118,21 @@ recognizer.TouchCancel += (sender, e) => {
 
 ## SizeToFit
 
-This is the effect that make font size adjusted to fit the Label size.
-This can be used only Label. 
+これは Labelの大きさに合わせてフォントサイズをフィットさせる Effect で、Label専用です。
 
 ### Parameters
 
 * On
     * Effect On/Off (true is On)
 * CanExpand
-    * Whether font size is expanded when making it fit. (Default true)
-    * If false, font size won't be expanded and only shrinked.
+    * フィットさせるときにフォントサイズを拡大させるかどうか (Default true)
+    * falseの場合、フォントサイズは拡大はせず、縮小だけします。
 
 ### Demo
 
 https://youtu.be/yMjcFOp38XE
 
-### How to write with Xaml
+### Xamlでの使用法
 
 ```xml
 <ContentPage 
@@ -150,9 +147,8 @@ https://youtu.be/yMjcFOp38XE
 
 ## Border
 
-This is the effect that add border to a view.  
-Entry, Picker, DatePicker and TimePicker on iOS have a border by default.  
-When specifying their width 0, it is possible that hide border.
+これは任意のviewに罫線を追加する Effect です。
+Entry・Picker・DatePicker・TimePickerはiOSではデフォルトで罫線を持っていますが、widthを0に指定することで罫線を非表示にすることができます。
 
 <img src="images/border_ios.gif" /> <img src="images/border_droid.gif" />
 
@@ -167,7 +163,7 @@ When specifying their width 0, it is possible that hide border.
 * Radius
 	* Border radius (default 0)
 
-### How to write with Xaml
+### Xamlでの使用法
 
 ```xml
 <ContentPage 
@@ -183,18 +179,17 @@ When specifying their width 0, it is possible that hide border.
 </ContentPage>
 ```
 
-### Limitations
+### 制限事項
 
-* On Android Entry, Picker, DatePicker, TimePicker's input underline is hidden if this effect attached.
-* On Android, Button is not displayed correctly. Use [ToFlatButton](#toflatbutton) for button.
-* On Android WebView, Frame, ScrollView are not supported.
-* On Android ListView and TableView overflow background from border.
-* Using AddCommand simultaneously is not supported.
+* Android の Entry・Picker・DatePicker・TimePicker の 入力欄の下線は、この Effect を使うと非表示になります。
+* Android の Button では正しく表示されません。Buttonには [ToFlatButton](#toflatbutton)を使用してください。
+* Android の WebView・Frame・ScrollView は動作対象外です。
+* Android の ListView と TableView は罫線から背景がはみ出します。
+* AddCommand と同時に使用することは動作対象外です。
 
 ## Placeholder
 
-This is the effect that show placeholder on Editor.  
-This effect supports Editor only.
+これは Editor に プレースホルダーを表示する Effectで、Editor専用です。
 
 <img src="images/placeholder_ios.gif" /> <img src="images/placeholder_droid.gif" />
 
@@ -207,7 +202,7 @@ This effect supports Editor only.
 * Color
 	* Placeholder color.
 
-### How to write with Xaml
+### Xamlでの使用法
 
 ```xml
 <ContentPage 
@@ -225,9 +220,9 @@ This effect supports Editor only.
 
 ## ToFlatButton
 
-This is the effect that alter Button to flat(only Android).  
-If this effect is used, you will be able to design like iOS's Button.  
-And also this effect will enable BorderRadius, BorderWidth and BorderColor of default button properties to use by Android.
+これは Android で Button をフラットに変える Effect です。
+このEffectを使うことで、 iOSっぽいボタンデザインにすることができます。
+またこのEffectは Android でButtonのプロパティの BorderRadius, BorderWidth, BorderColorを使用可能にします。
 
 <img src="images/toflat1.png" height="400" /> <img src="images/toflat2.png" height="400" />
 
@@ -243,7 +238,7 @@ And also this effect will enable BorderRadius, BorderWidth and BorderColor of de
 	* Ripple effect color.(default none)
 
 
-### How to write with Xaml
+### Xamlでの使用法
 
 ```xml
 <Button Text="ButtonText" 
@@ -255,9 +250,9 @@ And also this effect will enable BorderRadius, BorderWidth and BorderColor of de
 
 ## AddText
 
-This is the effect that add one line text into a view.  
-If you use this effect, for example you will be able to show a information that validations or character count etc.  
-You will be able to change text position(top-left,top-right,bottom-left,bottom-right), text color,font size and margin by specifying property.
+これは任意のviewに1行テキストを追加するEffectです。
+このEffectを使うと、例えばバリデーションや文字カウントなどの情報を表示することができます。
+またテキストの位置（左上・右上・右下・左下）、テキスト色、フォントサイズ、マージンなどをプロパティを指定できます。
 
 <img src="images/addtext_ios.gif" /> <img src="images/addtext_droid.gif" />
 
@@ -268,8 +263,6 @@ You will be able to change text position(top-left,top-right,bottom-left,bottom-r
 * Editor
 * StackLayout
 * AbsoluteLayout
-
-and more.
 
 ### Parameters
 
@@ -295,7 +288,7 @@ and more.
 * VerticalAlign
 	* vertical text position(Start or End). Default Start.
 
-### How to write with Xaml
+### Xamlでの使用方法
 
 ```xml
 <ContentPage 
@@ -315,14 +308,14 @@ and more.
 </ContentPage>
 ```
 
-### Limitations
+### 制限事項
 
-When device rotates, text position will not be right in case android.
+Androidの場合、デバイスを回転したときテキストの位置が正しくなりません。
 
 ## AddCommand
 
-This Effect add Command function to a view.  
-There are properties of Command and Parameter for tap and long tap.
+これは任意のviewにCommandの機能を追加するEffectです。
+タップとロングタップにそれぞれのCommandとParameterを設定できます。
 
 ### Supported View (in case Xamarin.Forms 2.3.4)
 
@@ -361,25 +354,25 @@ There are properties of Command and Parameter for tap and long tap.
 * On
     * Effect On/Off (true is On)
 * Command
-    * Tap Command
+    * タップ時のCommand
 * CommandParameter
-    * Tap Command Parameter
+    * タップ時のCommandParameter
 * LongCommand
-    * Long Tap Command
+    * ロングタップ時のCommand
 * LongCommandParameter
-    * Long Tap Command Parameter
+    * ロングタップ時のCommandParameter
 * EffectColor
-    * background color when to tap. if it doesn't setting,nothing will occur.
+    * タップした時の背景色。未設定の場合は変化しません。
 * EnableRipple
     * Ripple Effect On/Off (default true,android only)<br>
-      If you don't have to use ripple effect, it make EnableRipple false.
+      Rippleを使いたくない場合はfalseに設定してください。
 * EnableSound
-    * When tapped, whether play system sound effect.(Default false)
+    * タップしたときにシステム音を鳴らします。(Default false)
 * SyncCanExecute
-    * Whether synchronize Command's CanExecute to xamarin.forms.view's IsEnabled.(Default false)
-    * If true, a view become opacity when disabled.
+    * CommandのCanExecuteとviewのIsEnableを同期させるかどうか(Default false)
+    * trueにするとviewはCanExecuteがfalseの場合はdisableっぽい外観になります。
 
-### How to write with Xaml
+### Xamlでの使用法
 
 ```xml
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -399,15 +392,15 @@ There are properties of Command and Parameter for tap and long tap.
 </ContentPage>
 ```
 
-### Limitation
+### 制限事項
 
-**On Android**
+**Android**
 
-* If the version is more than or equal 1.1.0 and RippleEffect is applied to a Element which is a kind of Layout, the InputTransparent of  the children become not to work.
+* AiForms.Effects 1.1.0 以上で Layout系の要素にRippleを適用した場合、子のInputTrasparentは動作しなくなります。
 
 ### Tips
 
-#### Changing Sound Effect
+#### システム音の変更
 
 AppDelegate
 ```cs
@@ -437,9 +430,9 @@ protected override void OnCreate(Bundle bundle) {
 }
 ```
 
-#### When using Image
+#### Imageへ使用する場合
 
-Ripple Effect will not occur foreground. In that case wrap by a layout view.
+Ripple エフェクトはフォアグラウンドで発生せずにバックグラウンドとして発生していまいます。この場合はLayoutでラップすると回避できます。
 
 ```xml
 <StackLayout ef:AddCommand.On="{Binding EffectOn}"
@@ -450,8 +443,8 @@ Ripple Effect will not occur foreground. In that case wrap by a layout view.
 
 ## AddNumberPicker
 
-This Effect add NumberPicker function to a view.<br>
-When you tap the view ,Picker is shown. And when you select a number,it reflects to Number property.If you set Command property,it executes.
+このEffectは任意のviewに NumberPicker の機能を追加します。
+viewをタップするとPickerが表示され、数値を選択すると、それが Numberプロパティに反映されます。この時 Commandプロパティを設定していれば、それも実行されます。
 
 <img src="images/numberpicker1.gif" height=400 /> <img src="images/numberpicker2.gif" height=400 />
 
@@ -464,7 +457,7 @@ When you tap the view ,Picker is shown. And when you select a number,it reflects
 * StackLayout
 * AbsoluteLayout
 
-and more. same with AddCommand.
+他はだいたいAddCommandと同じです。
 
 ### Parameters
 
@@ -478,12 +471,12 @@ and more. same with AddCommand.
 	* current number(default twoway binding)
 * Title
 	* Picker Title(optional)
-	* In case iOS, if this is so long, it will be not beautiful.
+	* iOSではこれが長すぎると外観を損ねるので注意してください。
 * Command
     * command invoked when a number was picked(optional)
 
 
-### How to write with Xaml
+### Xamlでの使用法
 
 ```xml
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -507,10 +500,8 @@ and more. same with AddCommand.
 
 ## AddTimePicker
 
-This is the effect that add TimePicker to a view.  
-When you tap the view, Picker is shown. And when a time is selected, that time will be  reflected to Time property. If Command property is set, the command will be executed.
-
-This effect supports views same with AddCommand.
+これは任意のviewに TimePicker を追加するEffectです。
+viewをタップするとPickerが表示され、時間を選択すると、それが Time プロパティに反映されます。この時 Command プロパティを設定していれば、それも実行されます。
 
 ### Parameters
 
@@ -520,16 +511,14 @@ This effect supports views same with AddCommand.
 	* current time(default twoway binding)
 * Title
 	* Picker Title(optional)
-	* In case iOS, if this is so long, it will be not beautiful.
+	* iOSではこれが長すぎると外観を損ねるので注意してください。
 * Command
     * command invoked when a time was picked(optional)
 
 ## AddDatePicker
 
-This is the effect that add DatePicker to a view.  
-When you tap the view, Picker is shown. And when a date is selected, that date will be  reflected to Date property. If Command property is set, the command will be executed.
-
-This effect supports views same with AddCommand.
+これは、任意のviewに DatePicker の機能を追加する Effectです。
+viewをタップするとPickerが表示され、日付を選択すると、それが Date プロパティに反映されます。この時 Command プロパティを設定していれば、それも実行されます。
 
 ### Parameters
 
@@ -542,14 +531,14 @@ This effect supports views same with AddCommand.
 * Date
 	* current date(default twoway binding)
 * TodayText
-	* button text to select today(optional / only iOS)
-	* If this property is set, today's button will be shown. If that button is tapped, today will be selected.
+	* 今日 を選択するためのボタンのタイトル(optional / only iOS)
+	* このプロパティを設定すると「今日」ボタンが表示され、タップすると今日が選択されます。
 * Command
     * command invoked when a date was picked(optional)
 
 ## AlterLineHeight
 
-This Effect alter LineHeight of Label and Editor.
+このEffectは Label と Editor で行間・行高を変更します。
 
 <img src="images/lineheight1.gif" width=250 /> <img src="images/lineheight2.jpg" width=250 />
 
@@ -563,10 +552,10 @@ This Effect alter LineHeight of Label and Editor.
 * On
     * Effect On/Off (true is On)
 * Multiple
-	* Multiple to the font height.
-	* The font height * this multiple will become line height.
+	* フォントサイズに対する倍率
+	* フォントの高さ * この倍率 が 行の高さになります。
 
-### How to write with Xaml
+### Xamlでの使用法
 
 ```xml
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -586,7 +575,7 @@ This Effect alter LineHeight of Label and Editor.
 
 ## AlterColor
 
-This is the effect that alter the color of an element which it cannot change color normally.  
+これは通常変更できない箇所の色を変更する Effect です。
 
 <img src="images/altercolor_ios.gif" /> <img src="images/altercolor_droid.gif" />
 
@@ -607,7 +596,7 @@ This is the effect that alter the color of an element which it cannot change col
 * Accent
 	* changed color.
 
-### How to write with Xaml
+### Xamlでの使用法
 
 ```xml
 <Slider Minimum="0" Maximum="1" Value="0.5" 
