@@ -10,6 +10,7 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(AddTimePickerPlatformEffect), nameof(AddTimePicker))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AddTimePickerPlatformEffect : AiEffectBase
     {
         Android.Views.View _view;

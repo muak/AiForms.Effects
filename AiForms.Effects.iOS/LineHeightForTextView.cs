@@ -5,6 +5,7 @@ using Xamarin.Forms;
 
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class LineHeightForTextView : IAiEffect
     {
         private UITextView _nativeTextView;

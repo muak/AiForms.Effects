@@ -11,6 +11,7 @@ using System.Windows.Input;
 [assembly: ExportEffect(typeof(AddTimePickerPlatformEffect), nameof(AddTimePicker))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class AddTimePickerPlatformEffect : PlatformEffect
     {
         UIDatePicker _picker;

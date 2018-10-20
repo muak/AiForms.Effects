@@ -16,6 +16,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(AddCommandPlatformEffect), nameof(AddCommand))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers =true)]
     public class AddCommandPlatformEffect : AiEffectBase
     {
         public static SoundEffect PlaySoundEffect = SoundEffect.KeyClick;
@@ -569,7 +570,7 @@ namespace AiForms.Effects.Droid
         }
     }
 
-
+    [Android.Runtime.Preserve(AllMembers = true)]
     internal class ContainerOnLayoutChangeListener : Java.Lang.Object, Android.Views.View.IOnLayoutChangeListener
     {
         private Android.Widget.FrameLayout _layout;

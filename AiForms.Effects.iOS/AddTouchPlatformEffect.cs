@@ -7,6 +7,7 @@ using Xamarin.Forms.Platform.iOS;
 [assembly: ExportEffect(typeof(AddTouchPlatformEffect), nameof(AddTouch))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class AddTouchPlatformEffect : PlatformEffect
     {
         UIView _view;

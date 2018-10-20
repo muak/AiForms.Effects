@@ -2,10 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <ReleaseVersion>0.0.5-pre</ReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
   </ItemGroup>
   
+  <ItemGroup>
+    <Compile Remove="WeakEventManager.cs" />
+  </ItemGroup>
 </Project>

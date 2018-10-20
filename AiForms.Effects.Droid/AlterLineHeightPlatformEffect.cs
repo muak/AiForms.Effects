@@ -5,6 +5,7 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(AlterLineHeightPlatformEffect), nameof(AlterLineHeight))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AlterLineHeightPlatformEffect : AiEffectBase
     {
         private IAiEffectDroid _effect;

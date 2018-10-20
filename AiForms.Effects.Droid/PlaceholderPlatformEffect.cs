@@ -8,6 +8,7 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(PlaceholderPlatformEffect), nameof(Placeholder))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class PlaceholderPlatformEffect : AiEffectBase
     {
         EditText _editText;

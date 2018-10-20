@@ -9,6 +9,7 @@ using System.Linq;
 [assembly: ExportEffect(typeof(BorderPlatformEffect), nameof(Border))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class BorderPlatformEffect : PlatformEffect
     {
         UIView _view;

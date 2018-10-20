@@ -7,6 +7,7 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(AlterColorPlatformEffect), nameof(AlterColor))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AlterColorPlatformEffect : AiEffectBase
     {
         IAiEffectDroid _effect;

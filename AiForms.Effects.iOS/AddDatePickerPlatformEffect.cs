@@ -11,6 +11,7 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(AddDatePickerPlatformEffect), nameof(AddDatePicker))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class AddDatePickerPlatformEffect : PlatformEffect
     {
         UIView _view;

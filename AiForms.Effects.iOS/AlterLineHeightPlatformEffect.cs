@@ -6,6 +6,7 @@ using Xamarin.Forms.Platform.iOS;
 [assembly: ExportEffect(typeof(AlterLineHeightPlatformEffect), nameof(AlterLineHeight))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class AlterLineHeightPlatformEffect : PlatformEffect
     {
 

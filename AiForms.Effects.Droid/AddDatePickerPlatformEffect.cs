@@ -9,6 +9,7 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(AddDatePickerPlatformEffect), nameof(AddDatePicker))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AddDatePickerPlatformEffect : AiEffectBase
     {
         Android.Views.View _view;

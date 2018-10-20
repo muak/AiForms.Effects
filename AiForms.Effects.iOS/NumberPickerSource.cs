@@ -5,6 +5,7 @@ using UIKit;
 
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     internal class NumberPickerSource : UIPickerViewModel
     {
         public IList<int> Items { get; private set; }

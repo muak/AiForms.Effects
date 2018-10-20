@@ -9,6 +9,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(AddTouchPlatformEffect), nameof(AddTouch))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AddTouchPlatformEffect:PlatformEffect
     {
         WeakReference<Android.Views.View> _viewRef;

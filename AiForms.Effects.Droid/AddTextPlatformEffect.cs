@@ -10,6 +10,7 @@ using Android.Content;
 [assembly: ExportEffect(typeof(AddTextPlatformEffect), nameof(AddText))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AddTextPlatformEffect : AiEffectBase
     {
         private TextView _textView;

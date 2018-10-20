@@ -11,6 +11,7 @@ using APicker = Android.Widget.NumberPicker;
 [assembly: ExportEffect(typeof(AddNumberPickerPlatform), nameof(AddNumberPicker))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AddNumberPickerPlatform : AiEffectBase
     {
         private AlertDialog _dialog;

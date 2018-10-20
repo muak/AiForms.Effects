@@ -6,6 +6,7 @@ using Android.Content;
 
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AlterColorStatusbar : IAiEffectDroid
     {
         Window _window;

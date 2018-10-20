@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>AiForms.Effects.Droid</RootNamespace>
     <AssemblyName>AiForms.Effects.Droid</AssemblyName>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
@@ -131,6 +131,7 @@
     <Compile Include="IAiEffectDroid.cs" />
     <Compile Include="SizeToFitPlatformEffect.cs" />
     <Compile Include="AddTouchPlatformEffect.cs" />
+    <Compile Include="FeedbackPlatformEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

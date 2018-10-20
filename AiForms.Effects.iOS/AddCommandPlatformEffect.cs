@@ -14,6 +14,7 @@ using System.Linq;
 [assembly: ExportEffect(typeof(AddCommandPlatformEffect), nameof(AddCommand))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers =true)]
     public class AddCommandPlatformEffect : PlatformEffect
     {
         public static uint PlaySoundNo = 1306;
@@ -44,14 +45,14 @@ namespace AiForms.Effects.iOS
         {
             _view = Control ?? Container;
 
-            _tapGesture = new UITapGestureRecognizer(async (obj) => {
+            _tapGesture = new UITapGestureRecognizer((obj) => {
                 if (_command == null)
                     return;
 
                 if (!_command.CanExecute(_commandParameter))
                     return;
 
-                await TapAnimation(0.3, _alpha, 0);
+                TapAnimation(0.3, _alpha, 0);
 
                 if (_enableSound)
                     PlayClickSound();
@@ -222,13 +223,13 @@ namespace AiForms.Effects.iOS
 
                     _longCommand?.Execute(_longCommandParameter ?? Element);
 
-                    await TapAnimation(0.5, 0, _alpha, false);
+                    TapAnimation(0.5, 0, _alpha, false);
                 }
                 else if (obj.State == UIGestureRecognizerState.Ended ||
                          obj.State == UIGestureRecognizerState.Cancelled ||
                          obj.State == UIGestureRecognizerState.Failed) {
 
-                    await TapAnimation(0.5, _alpha, 0);
+                    TapAnimation(0.5, _alpha, 0);
                 }
             });
             _view.AddGestureRecognizer(_longTapGesture);
@@ -264,14 +265,15 @@ namespace AiForms.Effects.iOS
             _enableSound = AddCommand.GetEnableSound(Element);
         }
 
-        async Task TapAnimation(double duration, double start = 1, double end = 0, bool remove = true)
+        async void TapAnimation(double duration, double start = 1, double end = 0, bool remove = true)
         {
             if (_layer != null) {
                 _layer.Frame = new CGRect(0, 0, Container.Bounds.Width, Container.Bounds.Height);
                 Container.AddSubview(_layer);
                 Container.BringSubviewToFront(_layer);
                 _layer.Alpha = (float)start;
-                await UIView.AnimateAsync(duration, () => {
+                await UIView.AnimateAsync(duration, () => 
+                {
                     _layer.Alpha = (float)end;
                 });
                 if (remove) {

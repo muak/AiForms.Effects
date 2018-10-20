@@ -8,6 +8,7 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(PlaceholderPlatformEffect), nameof(Placeholder))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class PlaceholderPlatformEffect : PlatformEffect
     {
         UITextView _textView;

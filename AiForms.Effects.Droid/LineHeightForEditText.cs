@@ -5,6 +5,7 @@ using AView = Android.Views.View;
 
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class LineHeightForEditText : IAiEffectDroid
     {
         private Android.Views.ViewGroup _container;

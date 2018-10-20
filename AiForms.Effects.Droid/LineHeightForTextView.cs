@@ -4,6 +4,7 @@ using AView = Android.Views.View;
 
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class LineHeightForTextView : IAiEffectDroid
     {
         private Android.Views.View _container;

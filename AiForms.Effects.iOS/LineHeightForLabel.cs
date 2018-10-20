@@ -5,6 +5,7 @@ using Xamarin.Forms.Platform.iOS;
 
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class LineHeightForLabel : IAiEffect
     {
         private UIView _container;

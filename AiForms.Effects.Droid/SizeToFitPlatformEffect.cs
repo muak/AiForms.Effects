@@ -11,6 +11,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(SizeToFitPlatformEffect), nameof(SizeToFit))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class SizeToFitPlatformEffect : AiEffectBase
     {
         FormsTextView _view;

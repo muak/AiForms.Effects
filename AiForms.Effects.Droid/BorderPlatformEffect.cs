@@ -8,6 +8,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(BorderPlatformEffect), nameof(Border))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class BorderPlatformEffect : AiEffectBase
     {
         Android.Views.View _view;

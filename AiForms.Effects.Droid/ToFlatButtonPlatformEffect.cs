@@ -11,6 +11,7 @@ using System;
 [assembly: ExportEffect(typeof(ToFlatButtonPlatformEffect), nameof(ToFlatButton))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class ToFlatButtonPlatformEffect : AiEffectBase
     {
         private ColorStateList Colors;
