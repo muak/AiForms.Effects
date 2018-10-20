@@ -24,6 +24,7 @@ namespace AiForms.Effects.iOS
 
         protected override void OnDetached()
         {
+            Element.ClearValue(AddTouch.RecognizerProperty);
             _view?.RemoveGestureRecognizer(_recognizer);
             _view = null;
             _recognizer?.Dispose();

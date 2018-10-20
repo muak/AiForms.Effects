@@ -20,6 +20,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             _view = Control ?? Container;
 
             _border = new GradientDrawable();
@@ -39,10 +41,12 @@ namespace AiForms.Effects.Droid
                     _view.SetPadding(0, 0, 0, 0);
                     _view.ClipToOutline = false;
                 }
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
             _border?.Dispose();
             _border = null;
             _view = null;
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)

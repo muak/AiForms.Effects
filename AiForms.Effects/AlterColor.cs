@@ -9,48 +9,30 @@ namespace AiForms.Effects
         public static readonly BindableProperty OnProperty =
             BindableProperty.CreateAttached(
                 propertyName: "On",
-                returnType: typeof(bool),
+                returnType: typeof(bool?),
                 declaringType: typeof(AlterColor),
-                defaultValue: false,
-                propertyChanged: OnOffChanged
+                defaultValue: null,
+                propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<AlterColorRoutingEffect>
             );
 
-        public static void SetOn(BindableObject view, bool value)
+        public static void SetOn(BindableObject view, bool? value)
         {
             view.SetValue(OnProperty, value);
         }
 
-        public static bool GetOn(BindableObject view)
+        public static bool? GetOn(BindableObject view)
         {
-            return (bool)view.GetValue(OnProperty);
+            return (bool?)view.GetValue(OnProperty);
         }
 
-        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = bindable as Element;
-            if (view == null)
-                return;
-
-            if (!(view is Slider || view is Switch || view is Entry || view is Editor || view is Page)) {
-                return;
-            }
-
-            if ((bool)newValue) {
-                view.Effects.Add(new AlterColorRoutingEffect());
-            }
-            else {
-                var toRemove = view.Effects.FirstOrDefault(e => e is AlterColorRoutingEffect);
-                if (toRemove != null)
-                    view.Effects.Remove(toRemove);
-            }
-        }
 
         public static readonly BindableProperty AccentProperty =
             BindableProperty.CreateAttached(
                 "Accent",
                 typeof(Color),
                 typeof(AlterColor),
-                default(Color)
+                default(Color),
+                propertyChanged: AiRoutingEffectBase.AddEffectHandler<AlterColorRoutingEffect>
             );
 
         public static void SetAccent(BindableObject view, Color value)
@@ -63,7 +45,7 @@ namespace AiForms.Effects
             return (Color)view.GetValue(AccentProperty);
         }
 
-        class AlterColorRoutingEffect : RoutingEffect
+        class AlterColorRoutingEffect : AiRoutingEffectBase
         {
             public AlterColorRoutingEffect() : base("AiForms." + nameof(AlterColor)) { }
         }

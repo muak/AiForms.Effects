@@ -9,42 +9,36 @@ namespace AiForms.Effects
         public static readonly BindableProperty OnProperty =
             BindableProperty.CreateAttached(
                     "On",
-                    typeof(bool),
+                    typeof(bool?),
                     typeof(AddTouch),
-                    default(bool),
-                    propertyChanged: OnOffChanged
+                    null,
+                    propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<AddTouchRoutingEffect>,
+                    propertyChanging: OnOffChanging            
                 );
 
-        public static void SetOn(BindableObject view, bool value)
+        public static void SetOn(BindableObject view, bool? value)
         {
             view.SetValue(OnProperty, value);
         }
 
-        public static bool GetOn(BindableObject view)
+        public static bool? GetOn(BindableObject view)
         {
-            return (bool)view.GetValue(OnProperty);
+            return (bool?)view.GetValue(OnProperty);
         }
 
-        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
+
+        static void OnOffChanging(BindableObject bindable, object oldValue, object newValue)
         {
-            var view = bindable as View;
-            if (view == null)
+            if (!(bindable is View view))
                 return;
 
             if ((bool)newValue)
             {
                 SetRecognizer(view, new TouchRecognizer());
-                view.Effects.Add(new AddTouchRoutingEffect());
             }
             else
             {
-                var toRemove = view.Effects.FirstOrDefault(e => e is AddTouchRoutingEffect);
-                if (toRemove != null)
-                {
-                    view.Effects.Remove(toRemove);
-                    SetRecognizer(view, null);
-                }
-                
+                view.ClearValue(RecognizerProperty);                
             }
         }
 
@@ -66,9 +60,12 @@ namespace AiForms.Effects
             return (TouchRecognizer)view.GetValue(RecognizerProperty);
         }
 
-        class AddTouchRoutingEffect : RoutingEffect
+        class AddTouchRoutingEffect : AiRoutingEffectBase
         {
-            public AddTouchRoutingEffect() : base("AiForms." + nameof(AddTouch)) { }
+            public AddTouchRoutingEffect() : base("AiForms." + nameof(AddTouch)) 
+            {
+
+            }
         }
     }
 }

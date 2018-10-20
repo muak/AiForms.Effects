@@ -32,8 +32,7 @@ namespace AiForms.Effects.Droid
             _textView.SetLineSpacing(1f, _orgMultiple);
             if (!_isFixedHeight) {
                 var size = _formsElement.Height * (_orgMultiple / _multiple);
-                _formsElement.HeightRequest = size;
-                _formsElement.HeightRequest = -1;   //再Attacheされた時の為に初期値に戻しておく
+                _formsElement.Layout(new Rectangle(_formsElement.Bounds.X, _formsElement.Bounds.Y, _formsElement.Bounds.Width, size));
             }
         }
 
@@ -51,7 +50,7 @@ namespace AiForms.Effects.Droid
 
             if (!_isFixedHeight && _formsElement.Height >= 0) {
                 var size = _formsElement.Height * (_multiple / _preMultiple);
-                _formsElement.HeightRequest = size;
+                _formsElement.Layout(new Rectangle(_formsElement.Bounds.X, _formsElement.Bounds.Y, _formsElement.Bounds.Width, size));
             }
 
             _preMultiple = _multiple;

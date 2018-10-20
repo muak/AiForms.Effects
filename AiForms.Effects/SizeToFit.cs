@@ -9,40 +9,20 @@ namespace AiForms.Effects
         public static readonly BindableProperty OnProperty =
             BindableProperty.CreateAttached(
                 "On",
-                typeof(bool),
+                typeof(bool?),
                 typeof(SizeToFit),
-                default(bool),
-                propertyChanged: OnOffChanged
+                null,
+                propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<SizeToFitRoutingEffect>
             );
 
-        public static void SetOn(BindableObject view, bool value)
+        public static void SetOn(BindableObject view, bool? value)
         {
             view.SetValue(OnProperty, value);
         }
 
-        public static bool GetOn(BindableObject view)
+        public static bool? GetOn(BindableObject view)
         {
-            return (bool)view.GetValue(OnProperty);
-        }
-
-        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = bindable as View;
-            if (view == null)
-                return;
-            if (!(view is Label))
-                return;
-
-            if ((bool)newValue)
-            {
-                view.Effects.Add(new SizeToFitRoutingEffect());
-            }
-            else
-            {
-                var toRemove = view.Effects.FirstOrDefault(e => e is SizeToFitRoutingEffect);
-                if (toRemove != null)
-                    view.Effects.Remove(toRemove);
-            }
+            return (bool?)view.GetValue(OnProperty);
         }
 
         public static readonly BindableProperty CanExpandProperty =
@@ -50,7 +30,8 @@ namespace AiForms.Effects
                     "CanExpand",
                     typeof(bool),
                     typeof(SizeToFit),
-                    true
+                    true,
+                    propertyChanged: AiRoutingEffectBase.AddEffectHandler<SizeToFitRoutingEffect>
                 );
 
         public static void SetCanExpand(BindableObject view, bool value)
@@ -63,7 +44,7 @@ namespace AiForms.Effects
             return (bool)view.GetValue(CanExpandProperty);
         }
 
-        class SizeToFitRoutingEffect : RoutingEffect
+        class SizeToFitRoutingEffect : AiRoutingEffectBase
         {
             public SizeToFitRoutingEffect() : base("AiForms." + nameof(SizeToFit)) { }
         }

@@ -9,36 +9,20 @@ namespace AiForms.Effects
         public static readonly BindableProperty OnProperty =
             BindableProperty.CreateAttached(
                     propertyName: "On",
-                    returnType: typeof(bool),
+                    returnType: typeof(bool?),
                     declaringType: typeof(AddNumberPicker),
-                    defaultValue: false,
-                    propertyChanged: OnOffChanged
+                    defaultValue: null,
+                    propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<AddNumberPickerRoutingEffect>
                 );
 
-        public static void SetOn(BindableObject view, bool value)
+        public static void SetOn(BindableObject view, bool? value)
         {
             view.SetValue(OnProperty, value);
         }
 
-        public static bool GetOn(BindableObject view)
+        public static bool? GetOn(BindableObject view)
         {
-            return (bool)view.GetValue(OnProperty);
-        }
-
-        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = bindable as View;
-            if (view == null)
-                return;
-
-            if ((bool)newValue) {
-                view.Effects.Add(new AddNumberPickerRoutingEffect());
-            }
-            else {
-                var toRemove = view.Effects.FirstOrDefault(e => e is AddNumberPickerRoutingEffect);
-                if (toRemove != null)
-                    view.Effects.Remove(toRemove);
-            }
+            return (bool?)view.GetValue(OnProperty);
         }
 
         public static readonly BindableProperty MaxProperty =
@@ -83,7 +67,8 @@ namespace AiForms.Effects
                     typeof(int),
                     typeof(AddNumberPicker),
                     default(int),
-                    BindingMode.TwoWay
+                    BindingMode.TwoWay,
+                    propertyChanged: AiRoutingEffectBase.AddEffectHandler<AddNumberPickerRoutingEffect>
                 );
 
         public static void SetNumber(BindableObject view, int value)
@@ -135,7 +120,7 @@ namespace AiForms.Effects
 
 
 
-        class AddNumberPickerRoutingEffect : RoutingEffect
+        class AddNumberPickerRoutingEffect : AiRoutingEffectBase
         {
             public AddNumberPickerRoutingEffect() : base("AiForms." + nameof(AddNumberPicker))
             {

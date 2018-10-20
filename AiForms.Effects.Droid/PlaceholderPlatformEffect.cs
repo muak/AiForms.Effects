@@ -15,6 +15,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             _editText = Control as EditText;
 
             UpdateText();
@@ -25,8 +27,10 @@ namespace AiForms.Effects.Droid
         {
             if (!IsDisposed) {
                 _editText.Hint = string.Empty;
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
             _editText = null;
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)

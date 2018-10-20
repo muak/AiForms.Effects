@@ -10,6 +10,7 @@ using System.Linq;
 [assembly: ExportEffect(typeof(FeedbackPlatformEffect), nameof(Feedback))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class FeedbackPlatformEffect:PlatformEffect
     {
         public static uint PlaySoundNo = 1306;

@@ -27,6 +27,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             NativeButton = Control as AppCompatButton;
             if (NativeButton == null)
                 return;
@@ -55,6 +57,7 @@ namespace AiForms.Effects.Droid
             if (!IsDisposed) {
                 NativeButton.Background = OrgBackground;
                 NativeButton.StateListAnimator = OrgStateListAnimator;
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
             Colors.Dispose();
             Shape.Dispose();
@@ -70,7 +73,7 @@ namespace AiForms.Effects.Droid
             Shape = null;
             Ripple = null;
             Inset = null;
-
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)

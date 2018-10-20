@@ -36,19 +36,16 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
-            Element view = Element;
-            while (!(view is NavigationPage) && view != null)
+            var visual = Element as VisualElement;
+            var naviCandidate = visual.Navigation.NavigationStack.FirstOrDefault()?.Parent as NavigationPage;
+            if(naviCandidate != null) 
             {
-                view = view.Parent;
+                naviCandidate.Popped += PagePopped;
+                _navigationRef = new WeakReference<NavigationPage>(naviCandidate);
             }
 
-            _navigationRef = new WeakReference<NavigationPage>(view as NavigationPage);
-
-            if (_navigationRef.TryGetTarget(out var navi))
-            {
-                navi.Popped += PagePopped;
-            }
-            Xamarin.Forms.Application.Current.ModalPopped += ModalPopped;
+            // Use not Popped but Popping because it is too late.
+            Xamarin.Forms.Application.Current.ModalPopping += ModalPopping;
         }
 
 
@@ -110,18 +107,18 @@ namespace AiForms.Effects.Droid
             Clear();
         }
 
-        void ModalPopped(object sender, ModalPoppedEventArgs e)
+        void ModalPopping(object sender, ModalPoppingEventArgs e)
         {
             Clear();
         }
 
         void Clear()
         {
-            if (_navigationRef.TryGetTarget(out var navi))
+            if (_navigationRef != null && _navigationRef.TryGetTarget(out var navi))
             {
                 navi.Popped -= PagePopped;
             }
-            Xamarin.Forms.Application.Current.ModalPopped -= ModalPopped;
+            Xamarin.Forms.Application.Current.ModalPopping -= ModalPopping;
             _navigationRef = null;
 
             // For Android, when a page is popped, OnDetached is automatically not called. (when iOS, it is called)
@@ -129,7 +126,7 @@ namespace AiForms.Effects.Droid
             // and make the effect manually removed when the page is popped.
             if (IsAttached && !IsDisposed)
             {
-                var toRemove = Element.Effects.Cast<AiRoutingEffectBase>().FirstOrDefault(x => x.EffectId == ResolveId);
+                var toRemove = Element.Effects.OfType<AiRoutingEffectBase>().FirstOrDefault(x => x.EffectId == ResolveId);
                 Element.Effects.Remove(toRemove);
             }
         }

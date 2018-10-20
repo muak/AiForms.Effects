@@ -153,15 +153,25 @@ namespace AiForms.Effects.Droid
             }
         }
 
+        protected virtual Color GetEffectColor()
+        {
+            return Feedback.GetEffectColor(Element);
+        }
+
+        protected virtual bool GetEnableSound()
+        {
+            return Feedback.GetEnableSound(Element);
+        }
+
         void UpdateEffectColor()
         {
-            var color = Feedback.GetEffectColor(Element);
+            var color = GetEffectColor();
             _ripple?.SetColor(getPressedColorSelector(color.ToAndroid()));
         }
 
         void UpdateEnableSound()
         {
-            _enableSound = Feedback.GetEnableSound(Element);
+            _enableSound = GetEnableSound();
         }
 
         void UpdateIsEnabled()

@@ -9,44 +9,30 @@ namespace AiForms.Effects
         public static readonly BindableProperty OnProperty =
             BindableProperty.CreateAttached(
                 propertyName: "On",
-                returnType: typeof(bool),
+                returnType: typeof(bool?),
                 declaringType: typeof(Border),
-                defaultValue: false,
-                propertyChanged: OnOffChanged
+                defaultValue: null,
+                propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<BorderRoutingEffect>
             );
 
-        public static void SetOn(BindableObject view, bool value)
+        public static void SetOn(BindableObject view, bool? value)
         {
             view.SetValue(OnProperty, value);
         }
 
-        public static bool GetOn(BindableObject view)
+        public static bool? GetOn(BindableObject view)
         {
-            return (bool)view.GetValue(OnProperty);
+            return (bool?)view.GetValue(OnProperty);
         }
 
-        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = bindable as View;
-            if (view == null)
-                return;
-
-            if ((bool)newValue) {
-                view.Effects.Add(new BorderRoutingEffect());
-            }
-            else {
-                var toRemove = view.Effects.FirstOrDefault(e => e is BorderRoutingEffect);
-                if (toRemove != null)
-                    view.Effects.Remove(toRemove);
-            }
-        }
 
         public static readonly BindableProperty RadiusProperty =
             BindableProperty.CreateAttached(
                 "Radius",
                 typeof(double),
                 typeof(Border),
-                default(double)
+                default(double),
+                propertyChanged: AiRoutingEffectBase.AddEffectHandler<BorderRoutingEffect>
             );
 
         public static void SetRadius(BindableObject view, double value)
@@ -64,7 +50,8 @@ namespace AiForms.Effects
                 "Width",
                 typeof(double),
                 typeof(Border),
-                default(double)
+                default(double),
+                propertyChanged: AiRoutingEffectBase.AddEffectHandler<BorderRoutingEffect>
             );
 
         public static void SetWidth(BindableObject view, double value)
@@ -95,7 +82,7 @@ namespace AiForms.Effects
             return (Color)view.GetValue(ColorProperty);
         }
 
-        class BorderRoutingEffect : RoutingEffect
+        class BorderRoutingEffect : AiRoutingEffectBase
         {
             public BorderRoutingEffect() : base("AiForms." + nameof(Border)) { }
         }

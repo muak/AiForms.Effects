@@ -19,6 +19,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             _view = Control as FormsTextView;
             _orgFontSize = _view.TextSize;
 
@@ -29,8 +31,10 @@ namespace AiForms.Effects.Droid
         {
             if(!IsDisposed){
                 _view.SetTextSize(ComplexUnitType.Px, _orgFontSize);
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
             _view = null;
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)

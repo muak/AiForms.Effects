@@ -12,6 +12,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             if (Element is Label) {
                 _effect = new LineHeightForTextView(Container, Control, Element);
             }
@@ -27,9 +29,11 @@ namespace AiForms.Effects.Droid
         {
             if (!IsDisposed) {
                 _effect.OnDetachedIfNotDisposed();
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
             _effect?.OnDetached();
             _effect = null;
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
 

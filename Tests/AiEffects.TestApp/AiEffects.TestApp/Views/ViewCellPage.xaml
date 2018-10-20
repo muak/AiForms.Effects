@@ -5,8 +5,12 @@
     xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
     x:Class="AiEffects.TestApp.Views.ViewCellPage">
     <StackLayout Orientation="Vertical">
-        <ContentView BackgroundColor="Red" HeightRequest="30" VerticalOptions="Start"
-             ef:AddCommand.On="true" ef:AddCommand.Command="{Binding TestCommand}"
+        <Label Text="XYZ" BackgroundColor="Red" HeightRequest="30" VerticalOptions="Start"
+             ef:Border.Width="3" ef:Border.Radius="8" ef:AddCommand.Command="{Binding TestCommand}"
+             ef:AddCommand.LongCommand="{Binding TestCommand}"
+             ef:AddText.Text="Abc"
+             ef:AlterLineHeight.Multiple="1.5"
+             ef:SizeToFit.CanExpand="true"        
 
                         />
     	<!--<ListView ItemsSource="{Binding ItemsSource}" x:Name="listview" VerticalOptions="FillAndExpand">

@@ -1,82 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
-		prism:ViewModelLocator.AutowireViewModel="True" 
-		xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
-		x:Class="AiEffects.TestApp.Views.MainPage" 
-		Title="Select Test">
-	<ContentPage.Resources>
-		<ResourceDictionary>
-			<Style TargetType="Button">
-				<Setter Property="FontSize" Value="9" />
-				<Setter Property="WidthRequest" Value="60" />
-				<Setter Property="HeightRequest">
-					<Setter.Value>
-						<OnPlatform x:TypeArguments="x:Double" iOS="25" Android="34" />
-					</Setter.Value>
-				</Setter>
-				<Setter Property="BackgroundColor" Value="#95C25A" />
-				<Setter Property="TextColor" Value="#FFFFFF" />
-			</Style>
-		</ResourceDictionary>
-	</ContentPage.Resources>
-	<ScrollView>
-	<StackLayout Spacing="4" Padding="4">
-        <Label Text="ViewCell" HorizontalOptions="Center" />
-        <StackLayout Orientation="Horizontal">
-            <Button AutomationId="ViewCell" Text="ViewCell" 
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+	prism:ViewModelLocator.AutowireViewModel="True" 
+    xmlns:sv="clr-namespace:AiForms.Renderers;assembly=SettingsView"
+	x:Class="AiEffects.TestApp.Views.MainPage" 
+	Title="Select Test">
+        
+    <sv:SettingsView RowHeight="40" HasUnevenRows="false">
+        <sv:Section>
+            <sv:ButtonCell AutomationId="ViewCell" Title="ViewCell" 
                 Command="{Binding GotoTestCommand}" CommandParameter="ViewCellPage" />
-        </StackLayout>
-		<Label Text="AddCommand" HorizontalOptions="Center" />
-		<StackLayout Orientation="Horizontal">
-			<Button AutomationId="AddCommandTapTest" Text="Tap" 
-				Command="{Binding GotoTestCommand}" CommandParameter="AddCommandPage" />
-		</StackLayout>
-		<Label Text="AddNumberPicker" HorizontalOptions="Center"  />
-		<StackLayout Orientation="Horizontal">
-			<Button AutomationId="AddNumberPicker" Text="AddNumberPicker" Command="{Binding GotoTestCommand}" CommandParameter="AddNumberPickerPage" />
-		</StackLayout>
-		<Label Text="AlterLineHeight" HorizontalOptions="Center" />
-		<StackLayout Orientation="Horizontal">
-			<Button AutomationId="AlterLineHeight" Text="AlterLineHeight" Command="{Binding GotoTestCommand}" CommandParameter="AlterLineHeightPage" />
-		</StackLayout>
-		<Label Text="ToFlatButton" HorizontalOptions="Center" />
-		<StackLayout Orientation="Horizontal">
-			<Button AutomationId="ToFlatButton" Text="ToFlatButton" Command="{Binding GotoTestCommand}" CommandParameter="ToFlatButtonPage" />
-		</StackLayout>
-		<Label Text="AddText" HorizontalOptions="Center" />
-		<StackLayout Orientation="Horizontal">
-			<Button AutomationId="AddText" Text="AddText" Command="{Binding GotoTestCommand}" CommandParameter="AddTextPage" />
-		</StackLayout>
-		<Label Text="Border" HorizontalOptions="Center" />
-		<StackLayout Orientation="Horizontal">
-			<Button AutomationId="Border" Text="Border" Command="{Binding GotoTestCommand}" CommandParameter="BorderPage" />
-		</StackLayout>
-		<Label Text="AlterColor" HorizontalOptions="Center" />
-		<StackLayout Orientation="Horizontal">
-			<Button AutomationId="AlterColor" Text="AlterColor" Command="{Binding GotoTestCommand}" CommandParameter="AlterColorPage" />
-		</StackLayout>
-		<Label Text="TimePicker" HorizontalOptions="Center" />
-		<StackLayout Orientation="Horizontal">
-			<Button AutomationId="TimePicker" Text="TimePicker" Command="{Binding GotoTestCommand}" CommandParameter="AddTimePickerPage" />
-		</StackLayout>
-		<Label Text="DatePicker" HorizontalOptions="Center" />
-		<StackLayout Orientation="Horizontal">
-			<Button AutomationId="DatePicker" Text="DatePicker" Command="{Binding GotoTestCommand}" CommandParameter="AddDatePickerPage" />
-		</StackLayout>
-		<Label Text="Placeholder" HorizontalOptions="Center" />
-		<StackLayout Orientation="Horizontal">
-			<Button AutomationId="Placeholder" Text="Placeholder" Command="{Binding GotoTestCommand}" CommandParameter="PlaceholderPage" />
-		</StackLayout>
-        <Label Text="SizeToFit" HorizontalOptions="Center" />
-        <StackLayout Orientation="Horizontal">
-            <Button AutomationId="SizeToFit" Text="SizeToFit" Command="{Binding GotoTestCommand}" CommandParameter="SizeToFitPage" />
-        </StackLayout>
-        <Label Text="AddTouch" HorizontalOptions="Center" />
-        <StackLayout Orientation="Horizontal">
-            <Button AutomationId="AddTouch" Text="AddTouch" Command="{Binding GotoTestCommand}" CommandParameter="AddTouchPage" />
-        </StackLayout>
-	</StackLayout>
-	</ScrollView>
+            
+            <sv:ButtonCell AutomationId="AddCommandTapTest" Title="AddCommand" 
+                Command="{Binding GotoTestCommand}" CommandParameter="AddCommandPage" />
+            
+            <sv:ButtonCell AutomationId="AddNumberPicker" Title="AddNumberPicker" Command="{Binding GotoTestCommand}" CommandParameter="AddNumberPickerPage" />
+            <sv:ButtonCell AutomationId="AlterLineHeight" Title="AlterLineHeight" Command="{Binding GotoTestCommand}" CommandParameter="AlterLineHeightPage" />
+            <sv:ButtonCell AutomationId="ToFlatButton" Title="ToFlatButton" Command="{Binding GotoTestCommand}" CommandParameter="ToFlatButtonPage"/>
+            <sv:ButtonCell AutomationId="AddText" Title="AddText" Command="{Binding GotoTestCommand}" CommandParameter="AddTextPage" />
+            <sv:ButtonCell AutomationId="Border" Title="Border" Command="{Binding GotoTestCommand}" CommandParameter="BorderPage" />
+            <sv:ButtonCell AutomationId="AlterColor" Title="AlterColor" Command="{Binding GotoTestCommand}" CommandParameter="AlterColorPage" />
+            <sv:ButtonCell AutomationId="TimePicker" Title="TimePicker" Command="{Binding GotoTestCommand}" CommandParameter="AddTimePickerPage" />
+            <sv:ButtonCell AutomationId="DatePicker" Title="DatePicker" Command="{Binding GotoTestCommand}" CommandParameter="AddDatePickerPage" />
+            <sv:ButtonCell AutomationId="Placeholder" Title="Placeholder" Command="{Binding GotoTestCommand}" CommandParameter="PlaceholderPage" />
+            <sv:ButtonCell AutomationId="SizeToFit" Title="SizeToFit" Command="{Binding GotoTestCommand}" CommandParameter="SizeToFitPage" />
+            <sv:ButtonCell AutomationId="AddTouch" Title="AddTouch" Command="{Binding GotoTestCommand}" CommandParameter="AddTouchPage" />
+        </sv:Section>
+    </sv:SettingsView>
 </ContentPage> 

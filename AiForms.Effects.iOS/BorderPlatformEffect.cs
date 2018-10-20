@@ -43,8 +43,12 @@ namespace AiForms.Effects.iOS
                 textfield.BorderStyle = UITextBorderStyle.RoundedRect;
             }
             _view.ClipsToBounds = _clipsToBounds;
-            _view.Layer.CornerRadius = 0f;
-            _view.Layer.BorderWidth = 0;
+            if(_view.Layer != null)
+            {
+                _view.Layer.CornerRadius = 0f;
+                _view.Layer.BorderWidth = 0;
+            }
+
             _view = null;
         }
 
