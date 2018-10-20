@@ -6,7 +6,7 @@
     x:Class="AiEffects.TestApp.Views.ViewCellPage">
     <StackLayout Orientation="Vertical">
         <ContentView BackgroundColor="Red" HeightRequest="30" VerticalOptions="Start"
-             ef:Feedback.EffectColor="#770000"
+             ef:AddCommand.On="true" ef:AddCommand.Command="{Binding TestCommand}"
 
                         />
     	<!--<ListView ItemsSource="{Binding ItemsSource}" x:Name="listview" VerticalOptions="FillAndExpand">

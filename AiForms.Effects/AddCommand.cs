@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System;
 
 namespace AiForms.Effects
 {
@@ -47,11 +48,12 @@ namespace AiForms.Effects
                 typeof(bool),
                 typeof(AddCommand),
                 false);
-
+                
         public static void SetEnableSound(BindableObject view, bool value)
         {
             view.SetValue(EnableSoundProperty, value);
         }
+
         public static bool GetEnableSound(BindableObject view)
         {
             return (bool)view.GetValue(EnableSoundProperty);
@@ -137,7 +139,7 @@ namespace AiForms.Effects
                     typeof(AddCommand),
                     Color.Default
                 );
-
+            
         public static void SetEffectColor(BindableObject view, Color value)
         {
             view.SetValue(EffectColorProperty, value);

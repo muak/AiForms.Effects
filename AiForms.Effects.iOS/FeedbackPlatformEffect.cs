@@ -48,6 +48,7 @@ namespace AiForms.Effects.iOS
 
             _toucheController = new TouchRecognizer();
             _touchRecognizer = new TouchEffectGestureRecognizer(_toucheController);
+            _touchRecognizer.Delegate = new AlwaysSimultaneouslyGestureRecognizerDelegate();
 
             _view.AddGestureRecognizer(_touchRecognizer);
 
@@ -66,13 +67,14 @@ namespace AiForms.Effects.iOS
             _toucheController.TouchCancel -= OnTouchEnd;
 
             _view.RemoveGestureRecognizer(_touchRecognizer);
+            _touchRecognizer.Delegate?.Dispose();
+            _touchRecognizer.Delegate = null;
             _touchRecognizer.Dispose();
 
             _touchRecognizer = null;
             _toucheController = null;
 
             _layer.RemoveFromSuperview();
-            _layer.RemoveConstraints(_layer.Constraints);
             _layer.Dispose();
             _layer = null;
 
@@ -103,6 +105,8 @@ namespace AiForms.Effects.iOS
             // if it is a variety of Picker, make it fire.
             _view.Subviews.FirstOrDefault(x => x is NoCaretField)?.BecomeFirstResponder();
 
+            _view.BecomeFirstResponder();
+
             if (_enableSound)
             {
                 PlayClickSound();
@@ -126,7 +130,7 @@ namespace AiForms.Effects.iOS
 
         void UpdateEffectColor()
         {
-            var color = Feedback.GetEffectColor(Element);
+            var color = GetEffectColor();
 
             _alpha = color.A < 1.0f ? 1f : 0.3f;
             _layer.BackgroundColor = color.ToUIColor();
@@ -134,7 +138,17 @@ namespace AiForms.Effects.iOS
 
         void UpdateEnableSound()
         {
-            _enableSound = Feedback.GetEnableSound(Element);
+            _enableSound = GetEnableSound();
+        }
+
+        protected virtual Color GetEffectColor()
+        {
+            return Feedback.GetEffectColor(Element);
+        }
+
+        protected virtual bool GetEnableSound()
+        {
+            return Feedback.GetEnableSound(Element);
         }
 
         void PlayClickSound()
@@ -143,6 +157,16 @@ namespace AiForms.Effects.iOS
                 _clickSound = new SystemSound(PlaySoundNo);
 
             _clickSound.PlaySystemSoundAsync();
+        }
+
+    }
+
+    public class AlwaysSimultaneouslyGestureRecognizerDelegate:UIGestureRecognizerDelegate
+    {
+        public override bool ShouldRecognizeSimultaneously(UIGestureRecognizer gestureRecognizer, UIGestureRecognizer otherGestureRecognizer)
+        {
+            // always recognize simultaneously.
+            return true;
         }
     }
 }
