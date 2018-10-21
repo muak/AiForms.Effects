@@ -52,35 +52,35 @@
 				ef:Border.Radius="{Binding Radius.Value}"
 				/> -->
 
-			<DatePicker  AutomationId="DatePicker"
+			<DatePicker  AutomationId="DatePicker" BackgroundColor="Silver"
 				ef:Border.On="{Binding EffectOn.Value}"  
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"
 				ef:Border.Radius="{Binding Radius.Value}"
 				/> 
 
-			<Editor  Text="Editor" AutomationId="Editor"
+			<Editor  Text="Editor" AutomationId="Editor" BackgroundColor="Silver"
 				ef:Border.On="{Binding EffectOn.Value}"  
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"
 				ef:Border.Radius="{Binding Radius.Value}"
 				/> 
 
-			<Entry Text="Entry"  AutomationId="Entry"
+			<Entry Text="Entry"  AutomationId="Entry" BackgroundColor="Silver"
 				ef:Border.On="{Binding EffectOn.Value}"  
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"
 				ef:Border.Radius="{Binding Radius.Value}"
 				/> 
 
-			<Image Source="sample" HeightRequest="30"  AutomationId="Image"
+			<Image Source="sample" HeightRequest="30"  AutomationId="Image" BackgroundColor="Silver"
 				ef:Border.On="{Binding EffectOn.Value}"  
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"
 				ef:Border.Radius="{Binding Radius.Value}"
 				/> 
 				
-			<Label Text="Label" AutomationId="Label"
+			<Label Text="Label" AutomationId="Label" BackgroundColor="Silver"
 				ef:Border.On="{Binding EffectOn.Value}" 
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"
@@ -94,42 +94,42 @@
 				ef:Border.Radius="{Binding Radius.Value}"
 				/> 
 
-			<Picker Title="Picker"  AutomationId="Picker"
+			<Picker Title="Picker"  AutomationId="Picker" BackgroundColor="Silver"
 				ef:Border.On="{Binding EffectOn.Value}"  
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"
 				ef:Border.Radius="{Binding Radius.Value}"
 				/> 
 
-			<ProgressBar Progress="0.5" AutomationId="ProgressBar"
+			<ProgressBar Progress="0.5" AutomationId="ProgressBar" BackgroundColor="Silver"
 				ef:Border.On="{Binding EffectOn.Value}" 
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"
 				ef:Border.Radius="{Binding Radius.Value}"
 				/> 
 
-			<SearchBar AutomationId="SearchBar" HeightRequest="25"
+			<SearchBar AutomationId="SearchBar" HeightRequest="25" BackgroundColor="Silver"
 				ef:Border.On="{Binding EffectOn.Value}" 
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"
 				ef:Border.Radius="{Binding Radius.Value}"
 				 /> 
 
-			<Slider  AutomationId="Slider"
+			<Slider  AutomationId="Slider" BackgroundColor="Silver"
 				ef:Border.On="{Binding EffectOn.Value}"  
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"
 				ef:Border.Radius="{Binding Radius.Value}"
 				/> 
 				
-			<Stepper AutomationId="Stepper"
-				ef:Border.On="{Binding EffectOn.Value}"  
+			<Stepper AutomationId="Stepper" BackgroundColor="Silver"
+				ef:Border.On="{Binding EffectOn.Value}"   
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"
 				ef:Border.Radius="{Binding Radius.Value}"
 				/> 
 
-			<Switch AutomationId="Switch"
+			<Switch AutomationId="Switch" BackgroundColor="Silver"
 				ef:Border.On="{Binding EffectOn.Value}"  
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"
@@ -143,7 +143,7 @@
 				ef:Border.Radius="{Binding Radius.Value}"
 				/> 
 
-			<TimePicker  AutomationId="TimePicker"
+			<TimePicker  AutomationId="TimePicker" BackgroundColor="Silver"
 				ef:Border.On="{Binding EffectOn.Value}"  
 				ef:Border.Color="{Binding BorderColor.Value}"
 				ef:Border.Width="{Binding Width.Value}"

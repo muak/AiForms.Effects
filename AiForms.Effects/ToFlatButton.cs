@@ -44,10 +44,10 @@ namespace AiForms.Effects
             return (Color)view.GetValue(RippleColorProperty);
         }
 
+    }
 
-        class ToFlatButtonRoutingEffect : AiRoutingEffectBase
-        {
-            public ToFlatButtonRoutingEffect() : base("AiForms." + nameof(ToFlatButton)) { }
-        }
+    internal class ToFlatButtonRoutingEffect : AiRoutingEffectBase
+    {
+        public ToFlatButtonRoutingEffect() : base("AiForms." + nameof(ToFlatButton)) { }
     }
 }

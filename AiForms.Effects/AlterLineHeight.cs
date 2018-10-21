@@ -12,7 +12,7 @@ namespace AiForms.Effects
                 typeof(AlterLineHeight),
                 null,
                 BindingMode.OneWay,
-                propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<LineHeightEffectRoutingEffect>
+                propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<AlterLineHeightRoutingEffect>
             );
 
         public static void SetOn(BindableObject view, bool? value)
@@ -31,7 +31,7 @@ namespace AiForms.Effects
                     typeof(double),
                     typeof(AlterLineHeight),
                     default(double),
-                    propertyChanged: AiRoutingEffectBase.AddEffectHandler<LineHeightEffectRoutingEffect>
+                    propertyChanged: AiRoutingEffectBase.AddEffectHandler<AlterLineHeightRoutingEffect>
                 );
 
         public static void SetMultiple(BindableObject view, double value)
@@ -44,13 +44,14 @@ namespace AiForms.Effects
             return (double)view.GetValue(MultipleProperty);
         }
 
-        class LineHeightEffectRoutingEffect : AiRoutingEffectBase
-        {
-            public LineHeightEffectRoutingEffect() : base("AiForms." + nameof(AlterLineHeight))
-            {
-            }
-        }
 
+    }
+
+    internal class AlterLineHeightRoutingEffect : AiRoutingEffectBase
+    {
+        public AlterLineHeightRoutingEffect() : base("AiForms." + nameof(AlterLineHeight))
+        {
+        }
     }
 }
 

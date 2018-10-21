@@ -15,4 +15,9 @@
     <ProjectReference Include="..\..\..\AiForms.Effects\AiForms.Effects.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\FloatingPage.xaml.cs">
+      <DependentUpon>FloatingPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

@@ -117,13 +117,12 @@ namespace AiForms.Effects
         {
             return (string)view.GetValue(TodayTextProperty);
         }
+    }
 
-        class AddDatePickerRoutingEffect : AiRoutingEffectBase
+    internal class AddDatePickerRoutingEffect : AiRoutingEffectBase
+    {
+        public AddDatePickerRoutingEffect() : base("AiForms." + nameof(AddDatePicker))
         {
-            public AddDatePickerRoutingEffect() : base("AiForms." + nameof(AddDatePicker))
-            {
-            }
         }
-
     }
 }

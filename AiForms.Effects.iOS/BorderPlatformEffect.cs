@@ -25,6 +25,12 @@ namespace AiForms.Effects.iOS
         {
             _view = Control ?? Container;
 
+            if(Element is Label)
+            {
+                // If Control is used, the effect doesn't have an effect on Background's border and radius.
+                _view = Container;
+            }
+
             _clipsToBounds = _view.ClipsToBounds;
             if (hasBorderTypes.Any(x => x == Element.GetType())) {
                 var textfield = _view as UITextField;

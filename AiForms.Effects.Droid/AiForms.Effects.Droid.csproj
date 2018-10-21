@@ -141,6 +141,7 @@
     <Compile Include="SizeToFitPlatformEffect.cs" />
     <Compile Include="AddTouchPlatformEffect.cs" />
     <Compile Include="FeedbackPlatformEffect.cs" />
+    <Compile Include="FloatingPlatformEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

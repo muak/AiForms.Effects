@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+    prism:ViewModelLocator.AutowireViewModel="True" 
+    x:Class="AiEffects.TestApp.Views.FloatingPage" BackgroundColor="Transparent">
+    
+    <ef:Floating.Content>
+        <ef:FloatingLayout>
+             <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Fill"
+                             ProportionalWidth="1.0" HeightRequest="100">
+                <ContentView BackgroundColor="#6000FF00" />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="End">
+                <StackLayout WidthRequest="100">
+                    <Label Text="Hoge" TextColor="Blue" />
+                    <Button Text="FloatingButton" Clicked="Handle_Clicked_1" />
+                </StackLayout>
+            </ef:FloatingView>
+        </ef:FloatingLayout>
+    </ef:Floating.Content>
+    
+    <StackLayout>
+        <Button Text="Button" Clicked="Handle_Clicked" />
+        <Label Text="Body" />
+    </StackLayout>
+</ContentPage>

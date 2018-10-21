@@ -62,13 +62,12 @@ namespace AiForms.Effects
             return (bool)view.GetValue(EnableSoundProperty);
         }
 
+    }
 
-        class FeedbackRoutingEffect : AiRoutingEffectBase
+    internal class FeedbackRoutingEffect : AiRoutingEffectBase
+    {
+        public FeedbackRoutingEffect() : base("AiForms." + nameof(Feedback))
         {
-            public FeedbackRoutingEffect() : base("AiForms." + nameof(Feedback)) 
-            {
-            }
         }
-
     }
 }

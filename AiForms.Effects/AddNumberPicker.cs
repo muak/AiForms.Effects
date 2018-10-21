@@ -117,15 +117,12 @@ namespace AiForms.Effects
         {
             return (ICommand)view.GetValue(CommandProperty);
         }
+    }
 
-
-
-        class AddNumberPickerRoutingEffect : AiRoutingEffectBase
+    internal class AddNumberPickerRoutingEffect : AiRoutingEffectBase
+    {
+        public AddNumberPickerRoutingEffect() : base("AiForms." + nameof(AddNumberPicker))
         {
-            public AddNumberPickerRoutingEffect() : base("AiForms." + nameof(AddNumberPicker))
-            {
-
-            }
         }
     }
 }

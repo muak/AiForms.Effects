@@ -45,9 +45,10 @@ namespace AiForms.Effects
             return (Color)view.GetValue(AccentProperty);
         }
 
-        class AlterColorRoutingEffect : AiRoutingEffectBase
-        {
-            public AlterColorRoutingEffect() : base("AiForms." + nameof(AlterColor)) { }
-        }
+    }
+
+    internal class AlterColorRoutingEffect : AiRoutingEffectBase
+    {
+        public AlterColorRoutingEffect() : base("AiForms." + nameof(AlterColor)) { }
     }
 }

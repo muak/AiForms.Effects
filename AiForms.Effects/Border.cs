@@ -82,11 +82,10 @@ namespace AiForms.Effects
             return (Color)view.GetValue(ColorProperty);
         }
 
-        class BorderRoutingEffect : AiRoutingEffectBase
-        {
-            public BorderRoutingEffect() : base("AiForms." + nameof(Border)) { }
-        }
+    }
 
-
+    internal class BorderRoutingEffect : AiRoutingEffectBase
+    {
+        public BorderRoutingEffect() : base("AiForms." + nameof(Border)) { }
     }
 }

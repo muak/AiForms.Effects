@@ -62,10 +62,10 @@ namespace AiForms.Effects
         {
             return (Color)view.GetValue(ColorProperty);
         }
+    }
 
-        class PlaceholderRoutingEffect : AiRoutingEffectBase
-        {
-            public PlaceholderRoutingEffect() : base("AiForms." + nameof(Placeholder)) { }
-        }
+    internal class PlaceholderRoutingEffect : AiRoutingEffectBase
+    {
+        public PlaceholderRoutingEffect() : base("AiForms." + nameof(Placeholder)) { }
     }
 }

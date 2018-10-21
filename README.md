@@ -94,7 +94,7 @@ Each touch events provides location property and can be taken X and Y position.
 * On
     * Effect On / Off
 
-Since this effect hasn't any trriger property, control by On property.
+> Since this effect hasn't any trriger property, control by On property.
 
 ### TouchRecognizer events
 
@@ -154,9 +154,11 @@ This can be used only Label.
 
 * On
     * Effect On/Off (true is On)
-* CanExpand (trigger)
+* CanExpand
     * Whether font size is expanded when making it fit. (Default true)
     * If false, font size won't be expanded and only shrinked.
+
+> Since this effect hasn't any trriger property, control by On property.
 
 ### Demo
 

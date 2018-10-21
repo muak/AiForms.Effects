@@ -84,12 +84,12 @@ namespace AiForms.Effects
             return (ICommand)view.GetValue(CommandProperty);
         }
 
-        class AddTimePickerRoutingEffect : AiRoutingEffectBase
-        {
-            public AddTimePickerRoutingEffect() : base("AiForms." + nameof(AddTimePicker))
-            {
+    }
 
-            }
+    internal class AddTimePickerRoutingEffect : AiRoutingEffectBase
+    {
+        public AddTimePickerRoutingEffect() : base("AiForms." + nameof(AddTimePicker))
+        {
         }
     }
 }

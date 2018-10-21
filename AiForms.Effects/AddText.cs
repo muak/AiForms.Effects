@@ -171,10 +171,11 @@ namespace AiForms.Effects
             return (TextAlignment)view.GetValue(VerticalAlignProperty);
         }
 
+    }
 
-        class AddTextRoutingEffect : AiRoutingEffectBase
-        {
-            public AddTextRoutingEffect() : base("AiForms." + nameof(AddText)) { }
-        }
+
+    internal class AddTextRoutingEffect : AiRoutingEffectBase
+    {
+        public AddTextRoutingEffect() : base("AiForms." + nameof(AddText)) { }
     }
 }

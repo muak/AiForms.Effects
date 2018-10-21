@@ -22,7 +22,7 @@ namespace AiForms.Effects.Droid
         {
             base.OnAttached();
 
-            _view = Control ?? Container;
+            _view = Container ?? Control;
 
             _border = new GradientDrawable();
             _orgDrawable = _view.Background;
@@ -37,10 +37,10 @@ namespace AiForms.Effects.Droid
         {
             if (!IsDisposed) {    // Check disposed
                 _view.Background = _orgDrawable;
-                if (Control == null) {
-                    _view.SetPadding(0, 0, 0, 0);
-                    _view.ClipToOutline = false;
-                }
+
+                _view.SetPadding(0, 0, 0, 0);
+                _view.ClipToOutline = false;
+
                 System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
             _border?.Dispose();
@@ -103,10 +103,9 @@ namespace AiForms.Effects.Droid
                 }
             }
 
-            if (Control == null) {
-                _view.SetPadding(_width, _width, _width, _width);
-                _view.ClipToOutline = true; //not to overflow children
-            }
+            _view.SetPadding(_width, _width, _width, _width);
+            _view.ClipToOutline = true; //not to overflow children
+
             _view.SetBackground(_border);
 
         }

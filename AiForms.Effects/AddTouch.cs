@@ -59,13 +59,12 @@ namespace AiForms.Effects
         {
             return (TouchRecognizer)view.GetValue(RecognizerProperty);
         }
+    }
 
-        class AddTouchRoutingEffect : AiRoutingEffectBase
+    internal class AddTouchRoutingEffect : AiRoutingEffectBase
+    {
+        public AddTouchRoutingEffect() : base("AiForms." + nameof(AddTouch))
         {
-            public AddTouchRoutingEffect() : base("AiForms." + nameof(AddTouch)) 
-            {
-
-            }
         }
     }
 }

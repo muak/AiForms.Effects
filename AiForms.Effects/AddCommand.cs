@@ -174,13 +174,11 @@ namespace AiForms.Effects
         {
             return (bool)view.GetValue(SyncCanExecuteProperty);
         }
-
-        class AddCommandRoutingEffect : AiRoutingEffectBase
-        {
-            public AddCommandRoutingEffect() : base("AiForms." + nameof(AddCommand)) { }
-        }
-
     }
 
+    internal class AddCommandRoutingEffect : AiRoutingEffectBase
+    {
+        public AddCommandRoutingEffect() : base("AiForms." + nameof(AddCommand)) { }
+    }
 }
 
