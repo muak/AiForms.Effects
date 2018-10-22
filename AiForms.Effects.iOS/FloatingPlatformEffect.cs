@@ -6,19 +6,19 @@ using Xamarin.Forms.Platform.iOS;
 using UIKit;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Linq;
 
 [assembly: ExportEffect(typeof(FloatingPlatformEffect), nameof(Floating))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers =true)]
     public class FloatingPlatformEffect:PlatformEffect
     {
         Page _page;
         UIView _nativePage;
-        UIView _layoutView;
         FloatingLayout _formsLayout;
-        List<IVisualElementRenderer> _renderers = new List<IVisualElementRenderer>();
         Action OnceInitializeAction;
-        List<UIView> _children;
 
         protected override void OnAttached()
         {
@@ -32,11 +32,34 @@ namespace AiForms.Effects.iOS
             _page = Element as Page;
             _page.SizeChanged += _page_SizeChanged;
 
+            void BindingContextChanged(object sender,EventArgs e)
+            {
+                // When the target is a Page, since OnDetached method isn't automatically called,
+                // manually make it call at this timing.
+                if (_page.BindingContext != null && !IsAttached) return;
+
+                _page.BindingContextChanged -= BindingContextChanged;
+
+                var toRemove = Element.Effects.OfType<AiRoutingEffectBase>().FirstOrDefault(x => x.EffectId == ResolveId);
+                Element.Effects.Remove(toRemove);
+            }
+
+            _page.BindingContextChanged += BindingContextChanged;
         }
 
         protected override void OnDetached()
         {
+            _page.SizeChanged -= _page_SizeChanged;
+            _formsLayout.Parent = null;
 
+            foreach(var child in _formsLayout)
+            {
+                PlatformUtility.DisposeModelAndChildrenRenderers(child);
+            }
+
+            _formsLayout = null;
+            _nativePage = null;
+            _page = null;
         }
 
         void _page_SizeChanged(object sender, EventArgs e)
@@ -48,7 +71,7 @@ namespace AiForms.Effects.iOS
             }
             else
             {
-                OnceInitializeAction?.Invoke();
+                OnceInitializeAction.Invoke();
             }
         }
 
@@ -62,32 +85,16 @@ namespace AiForms.Effects.iOS
         {
             OnceInitializeAction = null;
 
-            _nativePage = Container.Subviews[0];
+            _nativePage = Container;
 
             _formsLayout.Layout(_nativePage.Bounds.ToRectangle());
 
             foreach (var child in _formsLayout)
             {
-                var renderer = GetOrCreateNativeView(child);
+                var renderer = PlatformUtility.GetOrCreateNativeView(child);
                 _formsLayout.LayoutChild(child);
                 SetLayoutAlignment(renderer.NativeView, _nativePage, child);
-                _renderers.Add(renderer);
             }
-        }
-
-        internal static IVisualElementRenderer GetOrCreateNativeView(VisualElement view)
-        {
-            IVisualElementRenderer renderer = Platform.GetRenderer(view);
-            if (renderer == null)
-            {
-                renderer = Platform.CreateRenderer(view);
-                Platform.SetRenderer(view, renderer);
-            }
-
-            renderer.NativeView.AutoresizingMask = UIViewAutoresizing.All;
-            renderer.NativeView.ContentMode = UIViewContentMode.ScaleToFill;
-
-            return renderer;
         }
 
         internal static void SetLayoutAlignment(UIView targetView, UIView parentView, FloatingView floating)

@@ -3,41 +3,11 @@ using Xamarin.Forms;
 
 namespace AiForms.Effects
 {
-    public class FloatingView:ContentView
+    public class FloatingView : ContentView
     {
         public FloatingView()
         {
             CompressedLayout.SetIsHeadless(this, true);
-        }
-
-        public static BindableProperty ProportionalWidthProperty =
-            BindableProperty.Create(
-                nameof(ProportionalWidth),
-                typeof(double),
-                typeof(FloatingView),
-                -1d,
-                defaultBindingMode: BindingMode.OneWay
-            );
-
-        public double ProportionalWidth
-        {
-            get { return (double)GetValue(ProportionalWidthProperty); }
-            set { SetValue(ProportionalWidthProperty, value); }
-        }
-
-        public static BindableProperty ProportionalHeightProperty =
-            BindableProperty.Create(
-                nameof(ProportionalHeight),
-                typeof(double),
-                typeof(FloatingView),
-                -1d,
-                defaultBindingMode: BindingMode.OneWay
-            );
-
-        public double ProportionalHeight
-        {
-            get { return (double)GetValue(ProportionalHeightProperty); }
-            set { SetValue(ProportionalHeightProperty, value); }
         }
 
         public static BindableProperty VerticalLayoutAlignmentProperty =
@@ -98,6 +68,25 @@ namespace AiForms.Effects
         {
             get { return (int)GetValue(OffsetYProperty); }
             set { SetValue(OffsetYProperty, value); }
+        }
+
+        public static BindableProperty HiddenProperty =
+            BindableProperty.Create(
+                nameof(Hidden),
+                typeof(bool),
+                typeof(FloatingView),
+                default(bool),
+                defaultBindingMode: BindingMode.OneWay,
+                propertyChanged: (bindable, oldValue, newValue) => {
+                    bindable.SetValue(OpacityProperty, (bool)newValue ? 0 : 1);
+                    bindable.SetValue(InputTransparentProperty, (bool)newValue);
+                }
+            );
+
+        public bool Hidden
+        {
+            get { return (bool)GetValue(HiddenProperty); }
+            set { SetValue(HiddenProperty, value); }
         }
     }
 }

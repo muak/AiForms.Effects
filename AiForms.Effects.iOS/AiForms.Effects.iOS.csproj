@@ -85,6 +85,7 @@
     <Compile Include="TouchEffectGestureRecognizer.cs" />
     <Compile Include="FeedbackPlatformEffect.cs" />
     <Compile Include="FloatingPlatformEffect.cs" />
+    <Compile Include="PlatformUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AiForms.Effects\AiForms.Effects.csproj">

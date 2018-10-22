@@ -142,6 +142,9 @@
     <Compile Include="AddTouchPlatformEffect.cs" />
     <Compile Include="FeedbackPlatformEffect.cs" />
     <Compile Include="FloatingPlatformEffect.cs" />
+    <Compile Include="PlatformUtility.cs" />
+    <Compile Include="FloatingLayoutRenderer.cs" />
+    <Compile Include="FloatingViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

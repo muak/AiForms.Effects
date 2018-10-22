@@ -14,12 +14,37 @@ namespace AiEffects.TestApp.Views
 
         void Handle_Clicked(object sender, System.EventArgs e)
         {
-            DisplayAlert("", "Tap", "OK");
+            DisplayAlert("", "BaseTap", "OK");
         }
 
-        void Handle_Clicked_1(object sender, System.EventArgs e)
+        void GreenTap(object sender, System.EventArgs e)
         {
-            DisplayAlert("", "FloatingTap", "OK");
+            DisplayAlert("", "GreenTap", "OK");
+        }
+
+        void BlueTap(object sender, System.EventArgs e)
+        {
+            DisplayAlert("", "BlueTap", "OK");
+        }
+
+        void RedTap(object sender, System.EventArgs e)
+        {
+            DisplayAlert("", "RedTap", "OK");
+        }
+
+        void LimeTap(object sender, System.EventArgs e)
+        {
+            DisplayAlert("", "LimeTap", "OK");
+        }
+
+        void NavyTap(object sender, System.EventArgs e)
+        {
+            DisplayAlert("", "NavyTap", "OK");
+        }
+
+        void PinkTap(object sender, System.EventArgs e)
+        {
+            DisplayAlert("", "PinkTap", "OK");
         }
     }
 }

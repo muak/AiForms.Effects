@@ -6,12 +6,20 @@ using System.Collections;
 
 namespace AiForms.Effects
 {
-    public class FloatingLayout : View, IList<FloatingView>
+    public class FloatingLayout :View, IList<FloatingView>
     {
-        ObservableCollection<FloatingView> _children = new ObservableCollection<FloatingView>();
-
         public FloatingLayout()
         {
+        }
+
+        protected override void OnParentSet()
+        {
+            base.OnParentSet();
+
+            foreach(var child in _children)
+            {
+                child.Parent = Parent;
+            }
         }
 
         public void LayoutChildren()
@@ -24,25 +32,15 @@ namespace AiForms.Effects
 
         public void LayoutChild(FloatingView child)
         {
-            child.Parent = Parent;
+            var sizeRequest = child.Measure(Width, Height);
 
-            var fWidth = child.ProportionalWidth >= 0 ? Width * child.ProportionalWidth : Width;
-            var fHeight = child.ProportionalHeight >= 0 ? Height * child.ProportionalHeight : Height;
+            var finalW = child.HorizontalLayoutAlignment == LayoutAlignment.Fill ? Width : sizeRequest.Request.Width;
+            var finalH = child.VerticalLayoutAlignment == LayoutAlignment.Fill ? Height : sizeRequest.Request.Height;
 
-            if (child.ProportionalWidth < 0 || child.ProportionalHeight < 0)
-            {
-                var sizeRequest = child.Measure(fWidth, fHeight);
-
-                var reqWidth = child.ProportionalWidth >= 0 ? fWidth : sizeRequest.Request.Width;
-                var reqHeight = child.ProportionalHeight >= 0 ? fHeight : sizeRequest.Request.Height;
-
-                child.Layout(new Rectangle(0, 0, reqWidth, reqHeight));
-                return;
-            }
-
-            // If both width and height are proportional, Measure is not called.
-            child.Layout(new Rectangle(0,0,fWidth, fHeight));
+            child.Layout(new Rectangle(0, 0, finalW,finalH));
         }
+
+        ObservableCollection<FloatingView> _children = new ObservableCollection<FloatingView>();
 
         public FloatingView this[int index] {
             get { return _children[index]; }
@@ -55,6 +53,7 @@ namespace AiForms.Effects
 
         public void Add(FloatingView item)
         {
+            item.Parent = Parent;
             _children.Add(item);
         }
 
@@ -85,16 +84,19 @@ namespace AiForms.Effects
 
         public void Insert(int index, FloatingView item)
         {
+            item.Parent = Parent;
             _children.Insert(index, item);
         }
 
         public bool Remove(FloatingView item)
         {
+            item.Parent = null;
             return _children.Remove(item);
         }
 
         public void RemoveAt(int index)
         {
+            _children[index].Parent = null;
             _children.RemoveAt(index);
         }
 
@@ -102,5 +104,7 @@ namespace AiForms.Effects
         {
             return _children.GetEnumerator();
         }
+
+
     }
 }
