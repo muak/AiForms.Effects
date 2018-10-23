@@ -180,7 +180,7 @@ FloatingLayoutによって配置される要素です。
 * On
     * Effect On / Off
 
-このeffectには他にプロパティが存在しないため On プロパティで制御してください。
+> このeffectには他にプロパティが存在しないため On プロパティで制御してください。
 
 ### TouchRecognizer events
 
@@ -238,9 +238,11 @@ recognizer.TouchCancel += (sender, e) => {
 
 * On
     * Effect On/Off (true is On)
-* CanExpand (trigger)
+* CanExpand
     * フィットさせるときにフォントサイズを拡大させるかどうか (Default true)
     * falseの場合、フォントサイズは拡大はせず、縮小だけします。
+
+> このeffectには他にプロパティが存在しないため On プロパティで制御してください。
 
 ### Demo
 
