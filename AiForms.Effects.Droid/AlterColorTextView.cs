@@ -7,6 +7,7 @@ using Android.Content.Res;
 
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AlterColorTextView : IAiEffectDroid
     {
         TextView _textview;

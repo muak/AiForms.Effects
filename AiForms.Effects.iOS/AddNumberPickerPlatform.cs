@@ -9,6 +9,7 @@ using Xamarin.Forms.Platform.iOS;
 [assembly: ExportEffect(typeof(NumberPickerPlatform), nameof(AddNumberPicker))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class NumberPickerPlatform : PlatformEffect
     {
         private UIPickerView _picker;

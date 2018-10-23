@@ -8,6 +8,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(BorderPlatformEffect), nameof(Border))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class BorderPlatformEffect : AiEffectBase
     {
         Android.Views.View _view;
@@ -19,7 +20,9 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
-            _view = Control ?? Container;
+            base.OnAttached();
+
+            _view = Container ?? Control;
 
             _border = new GradientDrawable();
             _orgDrawable = _view.Background;
@@ -34,14 +37,16 @@ namespace AiForms.Effects.Droid
         {
             if (!IsDisposed) {    // Check disposed
                 _view.Background = _orgDrawable;
-                if (Control == null) {
-                    _view.SetPadding(0, 0, 0, 0);
-                    _view.ClipToOutline = false;
-                }
+
+                _view.SetPadding(0, 0, 0, 0);
+                _view.ClipToOutline = false;
+
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
             _border?.Dispose();
             _border = null;
             _view = null;
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
@@ -98,10 +103,9 @@ namespace AiForms.Effects.Droid
                 }
             }
 
-            if (Control == null) {
-                _view.SetPadding(_width, _width, _width, _width);
-                _view.ClipToOutline = true; //not to overflow children
-            }
+            _view.SetPadding(_width, _width, _width, _width);
+            _view.ClipToOutline = true; //not to overflow children
+
             _view.SetBackground(_border);
 
         }

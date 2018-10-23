@@ -9,6 +9,7 @@ using System.Linq;
 [assembly: ExportEffect(typeof(BorderPlatformEffect), nameof(Border))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class BorderPlatformEffect : PlatformEffect
     {
         UIView _view;
@@ -23,6 +24,12 @@ namespace AiForms.Effects.iOS
         protected override void OnAttached()
         {
             _view = Control ?? Container;
+
+            if(Element is Label)
+            {
+                // If Control is used, the effect doesn't have an effect on Background's border and radius.
+                _view = Container;
+            }
 
             _clipsToBounds = _view.ClipsToBounds;
             if (hasBorderTypes.Any(x => x == Element.GetType())) {
@@ -42,8 +49,12 @@ namespace AiForms.Effects.iOS
                 textfield.BorderStyle = UITextBorderStyle.RoundedRect;
             }
             _view.ClipsToBounds = _clipsToBounds;
-            _view.Layer.CornerRadius = 0f;
-            _view.Layer.BorderWidth = 0;
+            if(_view.Layer != null)
+            {
+                _view.Layer.CornerRadius = 0f;
+                _view.Layer.BorderWidth = 0;
+            }
+
             _view = null;
         }
 

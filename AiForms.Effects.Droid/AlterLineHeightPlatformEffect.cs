@@ -5,12 +5,15 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(AlterLineHeightPlatformEffect), nameof(AlterLineHeight))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AlterLineHeightPlatformEffect : AiEffectBase
     {
         private IAiEffectDroid _effect;
 
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             if (Element is Label) {
                 _effect = new LineHeightForTextView(Container, Control, Element);
             }
@@ -26,9 +29,11 @@ namespace AiForms.Effects.Droid
         {
             if (!IsDisposed) {
                 _effect.OnDetachedIfNotDisposed();
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
             _effect?.OnDetached();
             _effect = null;
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
 

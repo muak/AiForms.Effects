@@ -3,14 +3,16 @@
 AiForms.Effect は Android と iOS に特化することにより、標準のコントロールをより便利にするための機能を提供する Xamarin.Forms の Effectsライブラリです。
 
 ## 機能
+* [Floating](#floating)
+    * ページの前面の任意の場所に複数のフローティングな要素(FABなど)を配置します。
+* [Feedback](#feedback)
+    * タッチフィードバック効果（色やシステム音）を追加。コマンドは含みません。
 * [AddTouch](#addtouch)
     * 各種タッチイベントを追加
 * [SizeToFit](#sizetofit)
     * フォントサイズをLabelの大きさに調整
 * [Border](#border)
     * 罫線の追加.
-* [Placeholder](#placeholder)
-	* Editor に Placeholder を追加.
 * [ToFlatButton](#toflatbutton)
 	* ボタンをフラットにする (Android)
 * [AddText](#addtext)
@@ -27,7 +29,38 @@ AiForms.Effect は Android と iOS に特化することにより、標準のコ
     * LabelとEditorの行の高さを変更
 * [AlterColor](#altercolor)
 	* 通常変えられない箇所の色を変える
+* [Placeholder](#placeholder)
+	* Editor に Placeholder を追加.
 
+## **トリガープロパティ (1.4.0~)**
+
+EffectのOn・OffはそれぞれのOnプロパティで操作していましたが、ver.1.4.0よりEffectの主要なプロパティを設定するだけで起動できるようになりました。
+このプロパティはトリガープロパティとします。
+例えば、AddCommandの場合は Command や LongCommand がトリガープロパティになります。このドキュメントに該当のプロパティには trigger と記載しています。
+
+### 旧 (~1.3.1)
+
+```xml
+<Label Text="Text" ef:AddCommand.On="true" ef:AddCommand.Command="{Binding GoCommand}" />
+```
+必ずOnの指定が必要。
+
+### 新 (1.4.0~)
+
+```xml
+<Label Text="Text" ef:AddCommand.Command="{Binding GoCommand}" />
+```
+
+Trigger Propertyを指定していれば On は不要。
+
+### 旧方式のままを保つには
+
+Onプロパティを使用して動的にEffectの有効無効を切り替えて使用していた場合は、Trigger Property方式だとうまく動作しなくなる可能性があります。
+従来の動きのままにする場合は .NETStandard プロジェクトの任意の場所に以下のように記述することで無効化できます。
+
+```csharp
+AiForms.Effects.EffectConfig.EnableTriggerProperty = false;
+```
 
 ## 動作条件など
 
@@ -58,15 +91,96 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 }
 ```
 
+## Floating
+
+ページの上の任意の場所に複数のフローティングView (Floating Action Buttonなど) を配置するEffectです。
+配置されは要素はContentPageより前面に表示され、ContentPageのスクロールの影響を受けません。
+
+### 使い方
+
+このサンプルでは、垂直下端から上に25dp、水平右端から左に25dpの位置に配置しています。
+
+```xml
+<ContentPage xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects">
+    
+    <ef:Floating.Content>
+        <ef:FloatingLayout>
+            <!-- 右下から上に25dp 左に25dp -->
+            <ef:FloatingView 
+                VerticalLayoutAlignment="End" 
+                HorizontalLayoutAlignment="End"
+                OffsetX="-25" OffsetY="-25" >
+                 <!-- Code behindのハンドラ指定やViewModelのBindingも可能 -->
+                 <Button Clicked="BlueTap" BackgroundColor="{Binding ButtonColor}" 
+                         BorderRadius="28" WidthRequest="56" HeightRequest="56" 
+                         Text="+" FontSize="24"
+                         TextColor="White" Padding="0" />
+            </ef:FloatingView>
+        </ef:FloatingLayout>
+    </ef:Floating.Content>
+
+    <StackLayout>
+        <Label Text="MainContents" />
+    </StackLayout>
+</ContentPage>
+```
+
+<img src="images/floating.jpg" width="600" /> 
+
+### Property
+
+* Content (trigger)
+    * FloatingViewを配置するためのルート要素で FloatingLayoutクラスです。
+
+### FloatingLayout
+
+ページ上に複数のFloatingViewを自由に配置できるレイアウト要素です。
+
+### FloatingView
+
+FloatingLayoutによって配置される要素です。
+このViewは、HorizontalLayoutAlignment, VerticalLayoutAlignment, OffsetX, OffsetX を指定して自身の位置を決めるために使用します。
+このViewの子要素には任意のVisualElementを配置できます。
+
+#### Properties
+
+* HorizontalLayoutAlignment (defalut: Center)
+    * 水平方向の位置の列挙値 (Start / Center / End / Fill)
+* VerticalLayoutAlignment (defalut: Center)
+    * 垂直方向の位置の列挙値 (Start / Center / End / Fill)
+* OffsetX
+    * 水平方向の位置の調整値。HorizontalLayoutAlignmentからの相対値を指定します。(Fillの場合は無効)
+* OffsetY
+    * 垂直方向の位置の調整値。VerticalLayoutAlignmentからの相対値を指定します。(Fillの場合は無効)
+* Hidden
+    * Viewを表示するか非表示にするかのbool値。
+    * AndroidでIsVisibleがfalseの状態でページを表示すると、それ以降falseにした要素をtrueにしても表示されなくなる問題があり、それを回避するためのプロパティです。もしIsVisibleで問題がある場合はこちらを使用してください。
+    * 内部でOpacityとInputTransparentプロパティを利用しています。
+
+## Feedback
+
+これは任意のviewにタッチフィードバック（押した感）を追加するEffectで、以前のバージョンでAddCommandに含まれていた機能を独立させたものです。
+このeffectは他のeffect （例えば AddNumberPickerやAddDatePickerなど）と同時に使用することができます。
+ただし、AddCommandには既にこの機能が含まれているため併用することはできません。
+
+### Properties
+
+* EffectColor (trigger)
+    * タッチフィードバックの色。 (default: transparent)
+* EnableSound (trigger)
+    * タッチフィードバックのシステム音。 (default: false)
+
 ## AddTouch
 
 これはタッチイベント（begin, move, end, cancel）をviewに追加する Effect です。
 それぞれのタッチイベントにはlocationプロパティが提供され、X・Y座標を取得できます。
 
-### Parameters
+### Properties
 
 * On
     * Effect On / Off
+
+このeffectには他にプロパティが存在しないため On プロパティで制御してください。
 
 ### TouchRecognizer events
 
@@ -120,11 +234,11 @@ recognizer.TouchCancel += (sender, e) => {
 
 これは Labelの大きさに合わせてフォントサイズをフィットさせる Effect で、Label専用です。
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
-* CanExpand
+* CanExpand (trigger)
     * フィットさせるときにフォントサイズを拡大させるかどうか (Default true)
     * falseの場合、フォントサイズは拡大はせず、縮小だけします。
 
@@ -152,15 +266,15 @@ Entry・Picker・DatePicker・TimePickerはiOSではデフォルトで罫線を�
 
 <img src="images/border_ios.gif" /> <img src="images/border_droid.gif" />
 
-### Parameters
+### Properties
 
 * On
 	* Effect On/Off (true is On)
-* Width
+* Width (trigger)
 	* Border width (default 0)
 * Color
 	* Border color (default transparent)
-* Radius
+* Radius (trigger)
 	* Border radius (default 0)
 
 ### Xamlでの使用法
@@ -187,37 +301,6 @@ Entry・Picker・DatePicker・TimePickerはiOSではデフォルトで罫線を�
 * Android の ListView と TableView は罫線から背景がはみ出します。
 * AddCommand と同時に使用することは動作対象外です。
 
-## Placeholder
-
-これは Editor に プレースホルダーを表示する Effectで、Editor専用です。
-
-<img src="images/placeholder_ios.gif" /> <img src="images/placeholder_droid.gif" />
-
-### Parameters
-
-* On
-	* Effect On/Off (true is On)
-* Text
-	* Placeholder text.
-* Color
-	* Placeholder color.
-
-### Xamlでの使用法
-
-```xml
-<ContentPage 
-	xmlns="http://xamarin.com/schemas/2014/forms" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
-	x:Class="AiEffects.TestApp.Views.BorderPage">
-	<Editor HeightRequest="150"
-		ef:Placeholder.On="true"
-		ef:Placeholder.Text="placeholder text"
-		ef:Placeholder.Color="#E0E0E0"
-	/>
-</ContentPage>
-```
-
 ## ToFlatButton
 
 これは Android で Button をフラットに変える Effect です。
@@ -230,11 +313,11 @@ Entry・Picker・DatePicker・TimePickerはiOSではデフォルトで罫線を�
 
 * Button (Android)
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
-* RippleColor
+* RippleColor (trigger)
 	* Ripple effect color.(default none)
 
 
@@ -264,7 +347,7 @@ Entry・Picker・DatePicker・TimePickerはiOSではデフォルトで罫線を�
 * StackLayout
 * AbsoluteLayout
 
-### Parameters
+### Properties
 
 * On
 	* Effect On/Off (true is On)
@@ -349,23 +432,24 @@ Androidの場合、デバイスを回転したときテキストの位置が正�
 | RelativeLayout    | ✅    | ✅       |
 | StackLayout       | ✅    | ✅       |
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
-* Command
+* Command (trigger)
     * タップ時のCommand
 * CommandParameter
     * タップ時のCommandParameter
-* LongCommand
+* LongCommand (trigger)
     * ロングタップ時のCommand
 * LongCommandParameter
     * ロングタップ時のCommandParameter
 * EffectColor
-    * タップした時の背景色。未設定の場合は変化しません。
-* EnableRipple
-    * Ripple Effect On/Off (default true,android only)<br>
-      Rippleを使いたくない場合はfalseに設定してください。
+    * タップした時の背景色。(Default: transparent)
+* ~~EnableRipple~~
+    * ~~Ripple Effect On/Off (default true,android only)
+      Rippleを使いたくない場合はfalseに設定してください。~~
+    * ver.1.4.0 で廃止されました。
 * EnableSound
     * タップしたときにシステム音を鳴らします。(Default false)
 * SyncCanExecute
@@ -409,7 +493,7 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 
     AiForms.Effects.iOS.Effects.Init();
     //here specify sound number
-    AiForms.Effects.iOS.AddCommandPlatformEffect.PlaySoundNo = 1104;
+    AiForms.Effects.iOS.FeedbackPlatformEffect.PlaySoundNo = 1104;
     ...
 }
 ```
@@ -424,7 +508,7 @@ protected override void OnCreate(Bundle bundle) {
     global::Xamarin.Forms.Forms.Init(this, bundle);
     
     //here specify SE
-    AiForms.Effects.Droid.AddCommandPlatformEffect.PlaySoundEffect = Android.Media.SoundEffect.Spacebar;
+    AiForms.Effects.Droid.FeedbackPlatformEffect.PlaySoundEffect = Android.Media.SoundEffect.Spacebar;
     
     ...
 }
@@ -459,7 +543,7 @@ viewをタップするとPickerが表示され、数値を選択すると、そ�
 
 他はだいたいAddCommandと同じです。
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
@@ -467,7 +551,7 @@ viewをタップするとPickerが表示され、数値を選択すると、そ�
 	* minimum number(positive integer)
 * Max
 	* maximum number(positive integer)
-* Number
+* Number (trigger)
 	* current number(default twoway binding)
 * Title
 	* Picker Title(optional)
@@ -503,11 +587,11 @@ viewをタップするとPickerが表示され、数値を選択すると、そ�
 これは任意のviewに TimePicker を追加するEffectです。
 viewをタップするとPickerが表示され、時間を選択すると、それが Time プロパティに反映されます。この時 Command プロパティを設定していれば、それも実行されます。
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
-* Time
+* Time (trigger)
 	* current time(default twoway binding)
 * Title
 	* Picker Title(optional)
@@ -520,7 +604,7 @@ viewをタップするとPickerが表示され、時間を選択すると、そ�
 これは、任意のviewに DatePicker の機能を追加する Effectです。
 viewをタップするとPickerが表示され、日付を選択すると、それが Date プロパティに反映されます。この時 Command プロパティを設定していれば、それも実行されます。
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
@@ -528,7 +612,7 @@ viewをタップするとPickerが表示され、日付を選択すると、そ�
 	* minimum date(optional)
 * MaxDate
 	* maximum date(optional)
-* Date
+* Date (trigger)
 	* current date(default twoway binding)
 * TodayText
 	* 今日 を選択するためのボタンのタイトル(optional / only iOS)
@@ -547,11 +631,11 @@ viewをタップするとPickerが表示され、日付を選択すると、そ�
 * Label
 * Editor
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
-* Multiple
+* Multiple (trigger)
 	* フォントサイズに対する倍率
 	* フォントの高さ * この倍率 が 行の高さになります。
 
@@ -589,11 +673,11 @@ viewをタップするとPickerが表示され、日付を選択すると、そ�
 | Entry             |      | ✅       | Under line |
 | Editor            |      | ✅       | Under line |
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
-* Accent
+* Accent (trigger)
 	* changed color.
 
 ### Xamlでの使用法
@@ -603,6 +687,40 @@ viewをタップするとPickerが表示され、日付を選択すると、そ�
 	ef:AlterColor.On="true" ef:AlterColor.Accent="Red" />
 ```
 
+## Placeholder
+
+** この機能は Xamarin.Forms 3.2.0 で実装されました。 **
+
+> 3.2.0より前のバージョンを使っている場合は、このEffectを利用できます。
+
+これは Editor に プレースホルダーを表示する Effectで、Editor専用です。
+
+<img src="images/placeholder_ios.gif" /> <img src="images/placeholder_droid.gif" />
+
+### Properties
+
+* On
+	* Effect On/Off (true is On)
+* Text (trigger)
+	* Placeholder text.
+* Color
+	* Placeholder color.
+
+### Xamlでの使用法
+
+```xml
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	x:Class="AiEffects.TestApp.Views.BorderPage">
+	<Editor HeightRequest="150"
+		ef:Placeholder.On="true"
+		ef:Placeholder.Text="placeholder text"
+		ef:Placeholder.Color="#E0E0E0"
+	/>
+</ContentPage>
+```
 
 ## Contributors
 

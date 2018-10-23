@@ -10,6 +10,7 @@ using Android.Content;
 [assembly: ExportEffect(typeof(AddTextPlatformEffect), nameof(AddText))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AddTextPlatformEffect : AiEffectBase
     {
         private TextView _textView;
@@ -20,6 +21,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             _container = Container;
 
             _textView = new TextView(_context);
@@ -59,6 +62,7 @@ namespace AiForms.Effects.Droid
                     Control.RemoveOnLayoutChangeListener(_fastListener);
                     _fastListener.CleanUp();
                 }
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
 
             _listener?.Dispose();
@@ -69,6 +73,7 @@ namespace AiForms.Effects.Droid
 
             _fastListener?.Dispose();
             _fastListener = null;
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)

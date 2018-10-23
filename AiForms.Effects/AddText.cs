@@ -9,36 +9,20 @@ namespace AiForms.Effects
         public static readonly BindableProperty OnProperty =
             BindableProperty.CreateAttached(
                     "On",
-                    typeof(bool),
+                    typeof(bool?),
                     typeof(AddText),
-                    default(bool),
-                    propertyChanged: OnOffChanged
+                    null,
+                    propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<AddTextRoutingEffect>
                 );
 
-        public static void SetOn(BindableObject view, bool value)
+        public static void SetOn(BindableObject view, bool? value)
         {
             view.SetValue(OnProperty, value);
         }
 
-        public static bool GetOn(BindableObject view)
+        public static bool? GetOn(BindableObject view)
         {
-            return (bool)view.GetValue(OnProperty);
-        }
-
-        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = bindable as View;
-            if (view == null)
-                return;
-
-            if ((bool)newValue) {
-                view.Effects.Add(new AddTextRoutingEffect());
-            }
-            else {
-                var toRemove = view.Effects.FirstOrDefault(e => e is AddTextRoutingEffect);
-                if (toRemove != null)
-                    view.Effects.Remove(toRemove);
-            }
+            return (bool?)view.GetValue(OnProperty);
         }
 
         public static readonly BindableProperty TextProperty =
@@ -46,7 +30,8 @@ namespace AiForms.Effects
                 "Text",
                 typeof(string),
                 typeof(AddText),
-                default(string)
+                default(string),
+                propertyChanged: AiRoutingEffectBase.AddEffectHandler<AddTextRoutingEffect>
             );
 
         public static void SetText(BindableObject view, string value)
@@ -186,10 +171,11 @@ namespace AiForms.Effects
             return (TextAlignment)view.GetValue(VerticalAlignProperty);
         }
 
+    }
 
-        class AddTextRoutingEffect : RoutingEffect
-        {
-            public AddTextRoutingEffect() : base("AiForms." + nameof(AddText)) { }
-        }
+
+    internal class AddTextRoutingEffect : AiRoutingEffectBase
+    {
+        public AddTextRoutingEffect() : base("AiForms." + nameof(AddText)) { }
     }
 }

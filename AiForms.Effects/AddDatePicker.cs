@@ -10,36 +10,20 @@ namespace AiForms.Effects
         public static readonly BindableProperty OnProperty =
             BindableProperty.CreateAttached(
                 propertyName: "On",
-                returnType: typeof(bool),
+                returnType: typeof(bool?),
                 declaringType: typeof(AddDatePicker),
-                defaultValue: false,
-                propertyChanged: OnOffChanged
+                defaultValue: null,
+                propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<AddDatePickerRoutingEffect>
             );
 
-        public static void SetOn(BindableObject view, bool value)
+        public static void SetOn(BindableObject view, bool? value)
         {
             view.SetValue(OnProperty, value);
         }
 
-        public static bool GetOn(BindableObject view)
+        public static bool? GetOn(BindableObject view)
         {
-            return (bool)view.GetValue(OnProperty);
-        }
-
-        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = bindable as View;
-            if (view == null)
-                return;
-
-            if ((bool)newValue) {
-                view.Effects.Add(new AddDatePickerRoutingEffect());
-            }
-            else {
-                var toRemove = view.Effects.FirstOrDefault(e => e is AddDatePickerRoutingEffect);
-                if (toRemove != null)
-                    view.Effects.Remove(toRemove);
-            }
+            return (bool?)view.GetValue(OnProperty);
         }
 
         public static readonly BindableProperty DateProperty =
@@ -48,7 +32,8 @@ namespace AiForms.Effects
                     typeof(DateTime),
                     typeof(AddDatePicker),
                     default(DateTime),
-                    defaultBindingMode:BindingMode.TwoWay
+                    defaultBindingMode:BindingMode.TwoWay,
+                    propertyChanged: AiRoutingEffectBase.AddEffectHandler<AddDatePickerRoutingEffect>
                 );
 
         public static void SetDate(BindableObject view, DateTime value)
@@ -132,14 +117,12 @@ namespace AiForms.Effects
         {
             return (string)view.GetValue(TodayTextProperty);
         }
+    }
 
-        class AddDatePickerRoutingEffect : RoutingEffect
+    internal class AddDatePickerRoutingEffect : AiRoutingEffectBase
+    {
+        public AddDatePickerRoutingEffect() : base("AiForms." + nameof(AddDatePicker))
         {
-            public AddDatePickerRoutingEffect() : base("AiForms." + nameof(AddDatePicker))
-            {
-
-            }
         }
-
     }
 }

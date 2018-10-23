@@ -5,6 +5,7 @@ using Xamarin.Forms.Platform.iOS;
 
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class LineHeightForLabel : IAiEffect
     {
         private UIView _container;
@@ -68,12 +69,11 @@ namespace AiForms.Effects.iOS
 
             if (NeedToChangeSize()) {
                 var size = _nativeLabel.SizeThatFits(_container.Frame.Size);
-                _formsLabel.HeightRequest = size.Height;
-                _formsLabel.HeightRequest = -1; //再Attacheされた時の為に初期値に戻しておく
+                _formsLabel.Layout(new Rectangle(_formsLabel.Bounds.X, _formsLabel.Bounds.Y, size.Width, size.Height));
             }
             else {
                 var render = Platform.GetRenderer(_formsLabel) as LabelRenderer;
-                render.LayoutSubviews();
+                render?.LayoutSubviews();
             }
         }
 

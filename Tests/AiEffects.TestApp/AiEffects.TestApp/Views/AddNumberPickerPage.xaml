@@ -12,21 +12,27 @@
 			ef:AddNumberPicker.Min="10"
 			ef:AddNumberPicker.Max="999"
 			ef:AddNumberPicker.Number="{Binding LabelNumber}"
-			ef:AddNumberPicker.Title="数値を選択" />
+			ef:AddNumberPicker.Title="数値を選択"
+            ef:Feedback.EffectColor="#00FF00"
+            ef:Feedback.EnableSound="true" />
 		<BoxView Color="Green"  HeightRequest="50" WidthRequest="50" HorizontalOptions="Center"
 			ef:AddNumberPicker.On="{Binding EffectOn}" 
 			ef:AddNumberPicker.Min="10"
 			ef:AddNumberPicker.Max="999"
 			ef:AddNumberPicker.Number="{Binding BoxNumber}"
 			ef:AddNumberPicker.Title="数値を選択"
-			ef:AddNumberPicker.Command="{Binding SelectedCommand}" />
+			ef:AddNumberPicker.Command="{Binding SelectedCommand}"
+            ef:Feedback.EffectColor="#FF0000"
+            ef:Feedback.EnableSound="true" />
 		<StackLayout Orientation="Horizontal" 
 			ef:AddNumberPicker.On="{Binding EffectOn}" 
 			ef:AddNumberPicker.Min="10"
 			ef:AddNumberPicker.Max="999"
 			ef:AddNumberPicker.Number="{Binding StackNumber}"
 			ef:AddNumberPicker.Title="数値を選択"
-			ef:AddNumberPicker.Command="{Binding SelectedCommand}" >
+			ef:AddNumberPicker.Command="{Binding SelectedCommand}" 
+            ef:Feedback.EffectColor="#FF0000"
+            ef:Feedback.EnableSound="true" >
 			<Label Text="{Binding StackNumber,StringFormat='StackLayout {0}'}" InputTransparent="true" />
 		</StackLayout>
 		<Button Text="{Binding ButtonNumber,StringFormat='Button {0}'}"  
@@ -34,13 +40,17 @@
 			ef:AddNumberPicker.Min="10"
 			ef:AddNumberPicker.Max="999"
 			ef:AddNumberPicker.Number="{Binding ButtonNumber}"
-			ef:AddNumberPicker.Title="数値を選択" />
+			ef:AddNumberPicker.Title="数値を選択"
+            ef:Feedback.EffectColor="#FF0000"
+            ef:Feedback.EnableSound="true" />
 		<Image Source="sample" HeightRequest="30"  WidthRequest="30" HorizontalOptions="Center"
 			ef:AddNumberPicker.On="{Binding EffectOn}" 
 			ef:AddNumberPicker.Min="10"
 			ef:AddNumberPicker.Max="999"
 			ef:AddNumberPicker.Number="{Binding ImageNumber}"
 			ef:AddNumberPicker.Title="数値を選択"
-			ef:AddNumberPicker.Command="{Binding SelectedCommand}" />
+			ef:AddNumberPicker.Command="{Binding SelectedCommand}"
+            ef:Feedback.EffectColor="#FF0000"
+            ef:Feedback.EnableSound="true" />
 	</StackLayout>
 </ContentPage>

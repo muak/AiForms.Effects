@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+    prism:ViewModelLocator.AutowireViewModel="True" 
+    x:Class="AiEffects.TestApp.Views.TriggerTest"
+    Title="Trigger Test">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="11" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Start">
+        <Label Text="Feedback Color" x:Name="FeedbackColor" ef:Feedback.EffectColor="#FF0000" />
+        <Label Text="Feedback Sound" x:Name="FeedbackSound" ef:Feedback.EnableSound="true" />
+        <Label Text="Border Width" x:Name="BorderWidth" ef:Border.Width="3" ef:Border.Color="#00FF00" HeightRequest="20" />
+        <Label Text="Border Radius" x:Name="BorderRadius" ef:Border.Radius="6" BackgroundColor="Silver" HeightRequest="20" />
+        <Button Text="ToFlatButton RippleColor" x:Name="ToFlatButtonRippleColor" ef:ToFlatButton.RippleColor="#FF0000" FlexLayout.Basis="100%" />
+        <Label Text="AddText Text" x:Name="AddTextText" ef:AddText.Text="HintText" />
+        <Label Text="AddCommand Command" x:Name="AddCommandCommand" ef:AddCommand.Command="{Binding TapCommand}" />
+        <Label Text="AddCommand LongCommand" x:Name="AddCommandLongCommand" ef:AddCommand.LongCommand="{Binding LongTapCommand}" />
+        <Label Text="AddNumberPicker Number" x:Name="AddNumberPickerNumber" ef:AddNumberPicker.Number="5" />
+        <Label Text="AddTimePicker Time" x:Name="AddTimePickerTime" ef:AddTimePicker.Time="19:55:30" />
+        <Label Text="AddDatePicker Date" x:Name="AddDatePickerDate" ef:AddDatePicker.Date="2018-10-20" />
+        <Label Text="AlterLineHeight Multiple" x:Name="AlterLineHeightMultiple" ef:AlterLineHeight.Multiple="1.5" />
+        <Switch x:Name="AlterColorAccent" ef:AlterColor.Accent="#FF0000" IsToggled="true" />
+        <Editor Text="" x:Name="PlaceholderText" ef:Placeholder.Text="Placeholder Text" ef:Placeholder.Color="Yellow" FlexLayout.Basis="100%" HeightRequest="50" />
+        <Label FlexLayout.Grow="1" FlexLayout.Basis="100%" FontSize="Large" x:Name="ResultLabel" BackgroundColor="White" HorizontalTextAlignment="Center" />
+    </FlexLayout>
+</ContentPage>

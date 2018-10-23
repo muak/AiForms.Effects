@@ -4,6 +4,7 @@ using UIKit;
 
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     internal class NoCaretField : UITextField
     {
         public NoCaretField() : base(new CGRect())

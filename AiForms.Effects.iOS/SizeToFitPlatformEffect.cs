@@ -11,6 +11,7 @@ using Metal;
 [assembly: ExportEffect(typeof(SizeToFitPlatformEffect), nameof(SizeToFit))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class SizeToFitPlatformEffect : PlatformEffect
     {
         UILabel _view;

@@ -41,10 +41,7 @@
 		/>
 
 		<Entry Placeholder="Entry Placeholder" PlaceholderColor="{Binding PlaceColor.Value}"
-			ef:Placeholder.On="{Binding EffectOn.Value}"
-			ef:Placeholder.Text="{Binding PlaceText.Value}"
-			ef:Placeholder.Color="{Binding PlaceColor.Value}"
-            Text="{Binding EditText.Value}"
+			Text="{Binding EditText.Value}"
 		/>
 	</StackLayout>
 </ContentPage>

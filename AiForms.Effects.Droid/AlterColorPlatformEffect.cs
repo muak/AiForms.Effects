@@ -7,12 +7,15 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(AlterColorPlatformEffect), nameof(AlterColor))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AlterColorPlatformEffect : AiEffectBase
     {
         IAiEffectDroid _effect;
 
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             if (Element is Slider) {
                 _effect = new AlterColorSlider(Control as SeekBar, Element);
             }
@@ -37,9 +40,11 @@ namespace AiForms.Effects.Droid
         {
             if (!IsDisposed) {
                 _effect?.OnDetachedIfNotDisposed();
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
             _effect?.OnDetached();
             _effect = null;
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)

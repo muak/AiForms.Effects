@@ -7,6 +7,7 @@ using Xamarin.Forms.Platform.iOS;
 [assembly: ExportEffect(typeof(AddTouchPlatformEffect), nameof(AddTouch))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class AddTouchPlatformEffect : PlatformEffect
     {
         UIView _view;
@@ -23,6 +24,7 @@ namespace AiForms.Effects.iOS
 
         protected override void OnDetached()
         {
+            Element.ClearValue(AddTouch.RecognizerProperty);
             _view?.RemoveGestureRecognizer(_recognizer);
             _view = null;
             _recognizer?.Dispose();

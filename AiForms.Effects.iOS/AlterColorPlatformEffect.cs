@@ -8,6 +8,7 @@ using AiForms.Effects.iOS;
 [assembly: ExportEffect(typeof(AlterColorPlatformEffect), nameof(AlterColor))]
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class AlterColorPlatformEffect : PlatformEffect
     {
         IAiEffect _effect;

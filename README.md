@@ -5,14 +5,16 @@ AiForms.Effects is the effects library that provides you with more flexible func
 [Japanese](./README-ja.md)
 
 ## Features
+* [Floating](#floating)
+    * arrange some floating views (e.g. FAB) at any place over a page.
+* [Feedback](#feedback)
+    * add touch feedback effect (color and sound) without command.
 * [AddTouch](#addtouch)
     * add touch event ( begin, move, end, cancel ).
 * [SizeToFit](#sizetofit)
     * make font size adjusted to fit the Label size.
 * [Border](#border)
     * add border to a view.
-* [Placeholder](#placeholder)
-	* show placeholder on Editor.
 * [ToFlatButton](#toflatbutton)
 	* alter Button to flat (for Android)
 * [AddText](#addtext)
@@ -29,7 +31,42 @@ AiForms.Effects is the effects library that provides you with more flexible func
     * alter LineHeight of Label and Editor.
 * [AlterColor](#altercolor)
 	* alter Color of an element which it cannot change color.
+* [Placeholder](#placeholder)
+	* show placeholder on Editor.
 
+## **Trigger Property (1.4.0~)**
+
+Though toggling an effect had used On property in less than ver.1.4.0, As of ver.1.4.0, an effect can be enabled by setting one or more main properties of the effect.
+These properties are named "Trigger Properties".
+
+ **Trigger properties** correspond to main properties such as Command and LongCommand in case of AddCommand Effect.
+
+In this document,  trigger properties are written "trigger".
+
+
+### Old (~1.3.1)
+
+```xml
+<Label Text="Text" ef:AddCommand.On="true" ef:AddCommand.Command="{Binding GoCommand}" />
+```
+Always needs On property.
+
+### New (1.4.0~)
+
+```xml
+<Label Text="Text" ef:AddCommand.Command="{Binding GoCommand}" />
+```
+
+Need not On property when specified Trigger Property.
+
+### To keep traditional
+
+If an effect had been used to dynamically toggle to with the On property specified, it may not correctly work on the trigger properties mode.
+To keep traditional mode, you can disable trigger properties by specifying the static config property at any place in .NETStandard project as the following code.
+
+```csharp
+AiForms.Effects.EffectConfig.EnableTriggerProperty = false;
+```
 
 ## Minimum Device and Version etc
 
@@ -60,15 +97,100 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 }
 ```
 
+## Floating
+
+This is the effect that arranges some floating views (e.g. FAB) at any place on a page.
+The arranged elements are displayed more front than a ContentPage and are not affected a ContentPage scrolling.
+
+### How to use
+
+This sample is that an element is arranged at above 25dp from the vertical end and left 25dp from the horizontal end.
+
+```xml
+<ContentPage xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects">
+    
+    <ef:Floating.Content>
+        <ef:FloatingLayout>
+            <!-- This element is arranged at above 25dp from the vertical end and left 25dp from the horizontal end. -->
+            <ef:FloatingView 
+                VerticalLayoutAlignment="End" 
+                HorizontalLayoutAlignment="End"
+                OffsetX="-25" OffsetY="-25" >
+                 <!-- Code behind handling / ViewModel binding OK -->
+                 <Button Clicked="BlueTap" BackgroundColor="{Binding ButtonColor}" 
+                         BorderRadius="28" WidthRequest="56" HeightRequest="56" 
+                         Text="+" FontSize="24"
+                         TextColor="White" Padding="0" />
+            </ef:FloatingView>
+        </ef:FloatingLayout>
+    </ef:Floating.Content>
+
+    <StackLayout>
+        <Label Text="MainContents" />
+    </StackLayout>
+</ContentPage>
+```
+
+<img src="images/floating.jpg" width="600" /> 
+
+### Property
+
+* Content (trigger)
+    * The root element to arrange floating views.
+    * This property is of type FloatingLayout.
+
+> Note that this effect doesn't work without trigger property because it hasn't an On property. 
+
+### FloatingLayout
+
+This is the Layout that can freely arrange several FloatingView's over a page.
+
+### FloatingView
+
+It is a view that FloatingLayout arranges.
+This view is used to specify HorizontalLayoutAlignment, VerticalLayoutAlignment, OffsetX, OffsetX and determine itself position.
+This view can be set any VisualElements.
+
+#### Properties
+
+* HorizontalLayoutAlignment (defalut: Center)
+    * The horizontal position enumeration value (Start / Center / End / Fill)
+* VerticalLayoutAlignment (default: Center)
+    * The vertical position enumeration value (Start / Center / End / Fill)
+* OffsetX
+    * The adjustment relative value from the horizontal layout position. (without Fill)
+* OffsetY
+    * The adjustment relative value from the vertical layout position. (without Fill)
+* Hidden
+    * The bool value whether a view is hidden or shown.
+    * On Android, If IsVisible is false when a page is rendered, there is the issue that views are never displayed. This method is used to avoid the issue. If there is some problem using IsVisible, use this instead of.
+    * In internal, this property uses Opacity and InputTransparent properties.
+
+
+## Feedback
+
+This is the effect that adds touch feedback effects (color and sound) to a view.
+This effect can be made use of with others effect (for example, AddNumberPicker and AddDatePicker) simultaneously.
+However, AddCommand can't be used along with this effect because AddCommand contains this functions.
+
+### Properties
+
+* EffectColor (trigger)
+    * Touch feedback color. (default: transparent)
+* EnableSound (trigger)
+    * Touch feedback system sound. (default: false)
+
 ## AddTouch
 
 This is the effect that adds touch events (begin, move, end, cancel) to a view.
 Each touch events provides location property and can be taken X and Y position.
 
-### Parameters
+### Properties
 
 * On
     * Effect On / Off
+
+> Since this effect hasn't any trriger property, control by On property.
 
 ### TouchRecognizer events
 
@@ -124,13 +246,15 @@ recognizer.TouchCancel += (sender, e) => {
 This is the effect that make font size adjusted to fit the Label size.
 This can be used only Label. 
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
 * CanExpand
     * Whether font size is expanded when making it fit. (Default true)
     * If false, font size won't be expanded and only shrinked.
+
+> Since this effect hasn't any trriger property, control by On property.
 
 ### Demo
 
@@ -157,15 +281,15 @@ When specifying their width 0, it is possible that hide border.
 
 <img src="images/border_ios.gif" /> <img src="images/border_droid.gif" />
 
-### Parameters
+### Properties
 
 * On
 	* Effect On/Off (true is On)
-* Width
+* Width (trigger)
 	* Border width (default 0)
 * Color
 	* Border color (default transparent)
-* Radius
+* Radius (trigger)
 	* Border radius (default 0)
 
 ### How to write with Xaml
@@ -192,37 +316,6 @@ When specifying their width 0, it is possible that hide border.
 * On Android ListView and TableView overflow background from border.
 * Using AddCommand simultaneously is not supported.
 
-## Placeholder
-
-This is the effect that show placeholder on Editor.  
-This effect supports Editor only.
-
-<img src="images/placeholder_ios.gif" /> <img src="images/placeholder_droid.gif" />
-
-### Parameters
-
-* On
-	* Effect On/Off (true is On)
-* Text
-	* Placeholder text.
-* Color
-	* Placeholder color.
-
-### How to write with Xaml
-
-```xml
-<ContentPage 
-	xmlns="http://xamarin.com/schemas/2014/forms" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
-	x:Class="AiEffects.TestApp.Views.BorderPage">
-	<Editor HeightRequest="150"
-		ef:Placeholder.On="true"
-		ef:Placeholder.Text="placeholder text"
-		ef:Placeholder.Color="#E0E0E0"
-	/>
-</ContentPage>
-```
 
 ## ToFlatButton
 
@@ -236,11 +329,11 @@ And also this effect will enable BorderRadius, BorderWidth and BorderColor of de
 
 * Button (Android)
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
-* RippleColor
+* RippleColor (trigger)
 	* Ripple effect color.(default none)
 
 
@@ -272,11 +365,11 @@ You will be able to change text position(top-left,top-right,bottom-left,bottom-r
 
 and more.
 
-### Parameters
+### Properties
 
 * On
 	* Effect On/Off (true is On)
-* Text
+* Text (trigger)
 	* added text
 * TextColor
 	* Default Red
@@ -357,23 +450,24 @@ There are properties of Command and Parameter for tap and long tap.
 | RelativeLayout    | ✅    | ✅       |
 | StackLayout       | ✅    | ✅       |
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
-* Command
+* Command (trigger)
     * Tap Command
 * CommandParameter
     * Tap Command Parameter
-* LongCommand
+* LongCommand (trigger)
     * Long Tap Command
 * LongCommandParameter
     * Long Tap Command Parameter
 * EffectColor
-    * background color when to tap. if it doesn't setting,nothing will occur.
-* EnableRipple
-    * Ripple Effect On/Off (default true,android only)<br>
-      If you don't have to use ripple effect, it make EnableRipple false.
+    * foreground color when tapped. (default: transparent)
+* ~~EnableRipple~~
+    * ~~Ripple Effect On/Off (default true,android only)
+      If you don't have to use ripple effect, it make EnableRipple false.~~
+    * This property is obsolete as of version 1.4.0. 
 * EnableSound
     * When tapped, whether play system sound effect.(Default false)
 * SyncCanExecute
@@ -417,7 +511,7 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 
     AiForms.Effects.iOS.Effects.Init();
     //here specify sound number
-    AiForms.Effects.iOS.AddCommandPlatformEffect.PlaySoundNo = 1104;
+    AiForms.Effects.iOS.FeedbackPlatformEffect.PlaySoundNo = 1104;
     ...
 }
 ```
@@ -432,7 +526,7 @@ protected override void OnCreate(Bundle bundle) {
     global::Xamarin.Forms.Forms.Init(this, bundle);
     
     //here specify SE
-    AiForms.Effects.Droid.AddCommandPlatformEffect.PlaySoundEffect = Android.Media.SoundEffect.Spacebar;
+    AiForms.Effects.Droid.FeedbackPlatformEffect.PlaySoundEffect = Android.Media.SoundEffect.Spacebar;
     
     ...
 }
@@ -467,7 +561,7 @@ When you tap the view ,Picker is shown. And when you select a number,it reflects
 
 and more. same with AddCommand.
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
@@ -475,7 +569,7 @@ and more. same with AddCommand.
 	* minimum number(positive integer)
 * Max
 	* maximum number(positive integer)
-* Number
+* Number (trigger)
 	* current number(default twoway binding)
 * Title
 	* Picker Title(optional)
@@ -513,11 +607,11 @@ When you tap the view, Picker is shown. And when a time is selected, that time w
 
 This effect supports views same with AddCommand.
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
-* Time
+* Time (trigger)
 	* current time(default twoway binding)
 * Title
 	* Picker Title(optional)
@@ -532,7 +626,7 @@ When you tap the view, Picker is shown. And when a date is selected, that date w
 
 This effect supports views same with AddCommand.
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
@@ -540,7 +634,7 @@ This effect supports views same with AddCommand.
 	* minimum date(optional)
 * MaxDate
 	* maximum date(optional)
-* Date
+* Date (trigger)
 	* current date(default twoway binding)
 * TodayText
 	* button text to select today(optional / only iOS)
@@ -559,11 +653,11 @@ This Effect alter LineHeight of Label and Editor.
 * Label
 * Editor
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
-* Multiple
+* Multiple (trigger)
 	* Multiple to the font height.
 	* The font height * this multiple will become line height.
 
@@ -601,11 +695,11 @@ This is the effect that alter the color of an element which it cannot change col
 | Entry             |      | ✅       | Under line |
 | Editor            |      | ✅       | Under line |
 
-### Parameters
+### Properties
 
 * On
     * Effect On/Off (true is On)
-* Accent
+* Accent (trigger)
 	* changed color.
 
 ### How to write with Xaml
@@ -613,6 +707,43 @@ This is the effect that alter the color of an element which it cannot change col
 ```xml
 <Slider Minimum="0" Maximum="1" Value="0.5" 
 	ef:AlterColor.On="true" ef:AlterColor.Accent="Red" />
+```
+
+## Placeholder
+
+** This feature was implemented in Xamarin.Forms 3.2.0. **
+
+> In case you use version less than 3.2.0, this effect can be made use of.
+
+
+This is the effect that show placeholder on Editor.  
+This effect supports Editor only.
+
+<img src="images/placeholder_ios.gif" /> <img src="images/placeholder_droid.gif" />
+
+### Properties
+
+* On
+	* Effect On/Off (true is On)
+* Text (trigger)
+	* Placeholder text.
+* Color
+	* Placeholder color.
+
+### How to write with Xaml
+
+```xml
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+	x:Class="AiEffects.TestApp.Views.BorderPage">
+	<Editor HeightRequest="150"
+		ef:Placeholder.On="true"
+		ef:Placeholder.Text="placeholder text"
+		ef:Placeholder.Color="#E0E0E0"
+	/>
+</ContentPage>
 ```
 
 

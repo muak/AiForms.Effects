@@ -10,37 +10,22 @@ namespace AiForms.Effects
         public static readonly BindableProperty OnProperty =
             BindableProperty.CreateAttached(
                 propertyName: "On",
-                returnType: typeof(bool),
+                returnType: typeof(bool?),
                 declaringType: typeof(AddTimePicker),
-                defaultValue: false,
-                propertyChanged: OnOffChanged
+                defaultValue: null,
+                propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<AddTimePickerRoutingEffect>
             );
 
-        public static void SetOn(BindableObject view, bool value)
+        public static void SetOn(BindableObject view, bool? value)
         {
             view.SetValue(OnProperty, value);
         }
 
-        public static bool GetOn(BindableObject view)
+        public static bool? GetOn(BindableObject view)
         {
-            return (bool)view.GetValue(OnProperty);
+            return (bool?)view.GetValue(OnProperty);
         }
 
-        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = bindable as View;
-            if (view == null)
-                return;
-
-            if ((bool)newValue) {
-                view.Effects.Add(new AddTimePickerRoutingEffect());
-            }
-            else {
-                var toRemove = view.Effects.FirstOrDefault(e => e is AddTimePickerRoutingEffect);
-                if (toRemove != null)
-                    view.Effects.Remove(toRemove);
-            }
-        }
 
         public static readonly BindableProperty TimeProperty =
             BindableProperty.CreateAttached(
@@ -48,7 +33,8 @@ namespace AiForms.Effects
                     typeof(TimeSpan),
                     typeof(AddTimePicker),
                     default(TimeSpan),
-                    defaultBindingMode:BindingMode.TwoWay
+                    defaultBindingMode:BindingMode.TwoWay,
+                    propertyChanged: AiRoutingEffectBase.AddEffectHandler<AddTimePickerRoutingEffect>
                 );
 
         public static void SetTime(BindableObject view, TimeSpan value)
@@ -98,12 +84,12 @@ namespace AiForms.Effects
             return (ICommand)view.GetValue(CommandProperty);
         }
 
-        class AddTimePickerRoutingEffect : RoutingEffect
-        {
-            public AddTimePickerRoutingEffect() : base("AiForms." + nameof(AddTimePicker))
-            {
+    }
 
-            }
+    internal class AddTimePickerRoutingEffect : AiRoutingEffectBase
+    {
+        public AddTimePickerRoutingEffect() : base("AiForms." + nameof(AddTimePicker))
+        {
         }
     }
 }

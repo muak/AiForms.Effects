@@ -3,15 +3,19 @@ using Xamarin.Forms.Platform.Android;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public abstract class AiEffectBase : PlatformEffect
     {
         public static bool IsFastRenderers = global::Xamarin.Forms.Forms.Flags.Any(x => x == "FastRenderers_Experimental");
 
         IVisualElementRenderer _renderer;
         bool _isDisposed = false;
+        WeakReference<NavigationPage> _navigationRef;
+
         protected bool IsDisposed {
             get {
                 if (_isDisposed) {
@@ -29,6 +33,21 @@ namespace AiForms.Effects.Droid
                 return _isDisposed = _renderer?.Tracker == null; //disposed check
             }
         }
+
+        protected override void OnAttached()
+        {
+            var visual = Element as VisualElement;
+            var naviCandidate = visual.Navigation.NavigationStack.FirstOrDefault()?.Parent as NavigationPage;
+            if(naviCandidate != null) 
+            {
+                naviCandidate.Popped += PagePopped;
+                _navigationRef = new WeakReference<NavigationPage>(naviCandidate);
+            }
+
+            // Use not Popped but Popping because it is too late.
+            Xamarin.Forms.Application.Current.ModalPopping += ModalPopping;
+        }
+
 
         // whether Element is FastRenderer.(Exept Button)
         protected bool IsFastRenderer{
@@ -81,6 +100,35 @@ namespace AiForms.Effects.Droid
             );
 
             return lambda.Compile();
+        }
+
+        void PagePopped(object sender, NavigationEventArgs e)
+        {
+            Clear();
+        }
+
+        void ModalPopping(object sender, ModalPoppingEventArgs e)
+        {
+            Clear();
+        }
+
+        void Clear()
+        {
+            if (_navigationRef != null && _navigationRef.TryGetTarget(out var navi))
+            {
+                navi.Popped -= PagePopped;
+            }
+            Xamarin.Forms.Application.Current.ModalPopping -= ModalPopping;
+            _navigationRef = null;
+
+            // For Android, when a page is popped, OnDetached is automatically not called. (when iOS, it is called)
+            // So, made the Popped & ModalPopped event subscribe in advance 
+            // and make the effect manually removed when the page is popped.
+            if (IsAttached && !IsDisposed)
+            {
+                var toRemove = Element.Effects.OfType<AiRoutingEffectBase>().FirstOrDefault(x => x.EffectId == ResolveId);
+                Element.Effects.Remove(toRemove);
+            }
         }
     }
 }

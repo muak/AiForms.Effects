@@ -6,6 +6,7 @@ using Xamarin.Forms.Platform.Android;
 
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AlterColorSlider : IAiEffectDroid
     {
         SeekBar _seekbar;

@@ -22,11 +22,13 @@ namespace AiEffects.TestApp
             }
             else if (Device.OS == TargetPlatform.Android) {
                 NavigationService.NavigateAsync("NaviA/MainPage");
+                //NavigationService.NavigateAsync("NaviA/MyTabbedPage?createTab=MainPage");
             }
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<MyTabbedPage>();
             this.GetType().GetTypeInfo().Assembly
             .DefinedTypes
             .Where(t => t.Namespace.EndsWith(".Views", System.StringComparison.Ordinal))
@@ -35,6 +37,11 @@ namespace AiEffects.TestApp
             });
 
         }
+    }
+
+    public class MyTabbedPage:TabbedPage
+    {
+
     }
 }
 

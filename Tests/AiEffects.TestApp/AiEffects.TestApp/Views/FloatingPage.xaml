@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+    prism:ViewModelLocator.AutowireViewModel="True" 
+    x:Class="AiEffects.TestApp.Views.FloatingPage" BackgroundColor="Transparent">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="Opacity" Value="0.7" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Next" Command="{Binding NextCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <ef:Floating.Content>
+        <ef:FloatingLayout>
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="End"
+                             OffsetX="-25" OffsetY="-25" Hidden="{Binding Visible.Value}">
+                <Button BorderRadius="28" WidthRequest="56" HeightRequest="56" Clicked="BlueTap"
+                        Text="+" FontSize="24" BackgroundColor="Blue" TextColor="White" Padding="0" />
+            </ef:FloatingView>
+
+            <!-- V Start -->
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Start"
+                             HeightRequest="50" WidthRequest="50" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="GreenTap" BackgroundColor="Green" />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Start"
+                             HeightRequest="50" WidthRequest="50" OffsetX="25" OffsetY="25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="BlueTap" BackgroundColor="Blue"/>
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Start"
+                             HeightRequest="50" WidthRequest="50" OffsetX="-25" OffsetY="-25" Hidden="{Binding Visible1.Value}"  >
+                 <Button Clicked="RedTap" BackgroundColor="Red" />
+            </ef:FloatingView>
+            
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Center"
+                             HeightRequest="50" WidthRequest="50" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="GreenTap" BackgroundColor="Green"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Center"
+                             HeightRequest="50" WidthRequest="50" OffsetX="25" OffsetY="25" Hidden="{Binding Visible1.Value}" >
+                 <Button Clicked="BlueTap" BackgroundColor="Blue" />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Center"
+                             HeightRequest="50" WidthRequest="50" OffsetX="-25" OffsetY="-25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="RedTap" BackgroundColor="Red"  />
+            </ef:FloatingView>
+            
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="End"
+                             HeightRequest="50" WidthRequest="50" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="GreenTap" BackgroundColor="Green"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="End"
+                             HeightRequest="50" WidthRequest="50" OffsetX="25" OffsetY="25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="BlueTap" BackgroundColor="Blue"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="End"
+                             HeightRequest="50" WidthRequest="50" OffsetX="-25" OffsetY="-25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="RedTap" BackgroundColor="Red"  />
+            </ef:FloatingView>
+            
+            <!-- V Center -->
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Start"
+                             HeightRequest="50" WidthRequest="50" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="GreenTap" BackgroundColor="Green"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Start"
+                             HeightRequest="50" WidthRequest="50" OffsetX="25" OffsetY="25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="BlueTap" BackgroundColor="Blue"   />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Start"
+                             HeightRequest="50" WidthRequest="50" OffsetX="-25" OffsetY="-25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="RedTap" BackgroundColor="Red"  />
+            </ef:FloatingView>
+            
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Center"
+                             HeightRequest="50" WidthRequest="50" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="GreenTap" BackgroundColor="Green"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Center"
+                             HeightRequest="50" WidthRequest="50" OffsetX="25" OffsetY="25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="BlueTap" BackgroundColor="Blue"   />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Center"
+                             HeightRequest="50" WidthRequest="50" OffsetX="-25" OffsetY="-25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="RedTap" BackgroundColor="Red"  />
+            </ef:FloatingView>
+            
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="End"
+                             HeightRequest="50" WidthRequest="50" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="GreenTap" BackgroundColor="Green"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="End"
+                             HeightRequest="50" WidthRequest="50" OffsetX="25" OffsetY="25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="BlueTap" BackgroundColor="Blue"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="End"
+                             HeightRequest="50" WidthRequest="50" OffsetX="-25" OffsetY="-25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="RedTap" BackgroundColor="Red"  />
+            </ef:FloatingView>
+            
+            <!-- V End -->
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="Start"
+                             HeightRequest="50" WidthRequest="50" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="GreenTap" BackgroundColor="Green"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="Start"
+                             HeightRequest="50" WidthRequest="50" OffsetX="25" OffsetY="25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="BlueTap" BackgroundColor="Blue"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="Start"
+                             HeightRequest="50" WidthRequest="50" OffsetX="-25" OffsetY="-25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="RedTap" BackgroundColor="Red"  />
+            </ef:FloatingView>
+            
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="Center"
+                             HeightRequest="50" WidthRequest="50" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="GreenTap" BackgroundColor="Green"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="Center"
+                             HeightRequest="50" WidthRequest="50" OffsetX="25" OffsetY="25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="BlueTap" BackgroundColor="Blue"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="Center"
+                             HeightRequest="50" WidthRequest="50" OffsetX="-25" OffsetY="-25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="RedTap" BackgroundColor="Red"  />
+            </ef:FloatingView>
+            
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="End"
+                             HeightRequest="50" WidthRequest="50" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="GreenTap" BackgroundColor="Green"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="End"
+                             HeightRequest="50" WidthRequest="50" OffsetX="25" OffsetY="25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="BlueTap" BackgroundColor="Blue"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="End"
+                             HeightRequest="50" WidthRequest="50" OffsetX="-25" OffsetY="-25" Hidden="{Binding Visible1.Value}">
+                 <Button Clicked="RedTap" BackgroundColor="Red" />
+            </ef:FloatingView>
+            
+            <!-- V Start / H Fill -->
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Fill"
+                             HeightRequest="100" Hidden="{Binding Visible2.Value}">
+                 <Button Clicked="LimeTap" BackgroundColor="Lime"/>
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Fill"
+                             HeightRequest="100" OffsetX="25" OffsetY="75" Hidden="{Binding Visible2.Value}">
+                 <Button Clicked="NavyTap" BackgroundColor="Navy"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Fill"
+                             HeightRequest="100" OffsetX="-25" OffsetY="-75" Hidden="{Binding Visible2.Value}">
+                 <Button Clicked="PinkTap" BackgroundColor="Fuchsia"  />
+            </ef:FloatingView>
+            
+            <!-- V Center / H Fill -->
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Fill"
+                             HeightRequest="100" Hidden="{Binding Visible2.Value}">
+                 <Button Clicked="LimeTap" BackgroundColor="Lime"/>
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Fill"
+                             HeightRequest="100" OffsetX="25" OffsetY="75" Hidden="{Binding Visible2.Value}">
+                 <Button Clicked="NavyTap" BackgroundColor="Navy"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Fill"
+                             HeightRequest="100" OffsetX="-25" OffsetY="-75" Hidden="{Binding Visible2.Value}">
+                 <Button Clicked="PinkTap" BackgroundColor="Fuchsia"  />
+            </ef:FloatingView>
+            
+            <!-- V End / H Fill -->
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="Fill"
+                             HeightRequest="100" WidthRequest="50" Hidden="{Binding Visible2.Value}">
+                 <Button Clicked="LimeTap" BackgroundColor="Lime"/>
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="Fill"
+                             HeightRequest="100" WidthRequest="50" OffsetX="25" OffsetY="75" Hidden="{Binding Visible2.Value}">
+                 <Button Clicked="NavyTap" BackgroundColor="Navy"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="Fill"
+                             HeightRequest="100" WidthRequest="50" OffsetX="-25" OffsetY="-75" Hidden="{Binding Visible2.Value}">
+                 <Button Clicked="PinkTap" BackgroundColor="Fuchsia"  />
+            </ef:FloatingView>
+            
+            
+            <!-- V Fill / H Start -->
+            <ef:FloatingView VerticalLayoutAlignment="Fill" HorizontalLayoutAlignment="Start"
+                             HeightRequest="100" WidthRequest="50" Hidden="{Binding Visible3.Value}">
+                 <Button Clicked="LimeTap" BackgroundColor="Lime"/>
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Fill" HorizontalLayoutAlignment="Start"
+                             HeightRequest="100" WidthRequest="50" OffsetX="35" OffsetY="75" Hidden="{Binding Visible3.Value}">
+                 <Button Clicked="NavyTap" BackgroundColor="Navy"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Fill" HorizontalLayoutAlignment="Start"
+                             HeightRequest="100" WidthRequest="50" OffsetX="-35" OffsetY="-75" Hidden="{Binding Visible3.Value}">
+                 <Button Clicked="PinkTap" BackgroundColor="Fuchsia"  />
+            </ef:FloatingView>
+            
+            <!-- V Fill / H Center -->
+            <ef:FloatingView VerticalLayoutAlignment="Fill" HorizontalLayoutAlignment="Center"
+                             HeightRequest="100" WidthRequest="50" Hidden="{Binding Visible3.Value}">
+                 <Button Clicked="LimeTap" BackgroundColor="Lime"/>
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Fill" HorizontalLayoutAlignment="Center"
+                             HeightRequest="100" WidthRequest="50" OffsetX="35" OffsetY="75" Hidden="{Binding Visible3.Value}">
+                 <Button Clicked="NavyTap" BackgroundColor="Navy"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Fill" HorizontalLayoutAlignment="Center"
+                             HeightRequest="100" WidthRequest="50" OffsetX="-35" OffsetY="-75" Hidden="{Binding Visible3.Value}">
+                 <Button Clicked="PinkTap" BackgroundColor="Fuchsia"  />
+            </ef:FloatingView>
+            
+            <!-- V Fill / H End -->
+            <ef:FloatingView VerticalLayoutAlignment="Fill" HorizontalLayoutAlignment="End"
+                             HeightRequest="100" WidthRequest="50" Hidden="{Binding Visible3.Value}">
+                 <Button Clicked="LimeTap" BackgroundColor="Lime"/>
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Fill" HorizontalLayoutAlignment="End"
+                             HeightRequest="100" WidthRequest="50" OffsetX="35" OffsetY="75" Hidden="{Binding Visible3.Value}">
+                 <Button Clicked="NavyTap" BackgroundColor="Navy"  />
+            </ef:FloatingView>
+            <ef:FloatingView VerticalLayoutAlignment="Fill" HorizontalLayoutAlignment="End"
+                             HeightRequest="100" WidthRequest="50" OffsetX="-35" OffsetY="-75" Hidden="{Binding Visible3.Value}">
+                 <Button Clicked="PinkTap" BackgroundColor="Fuchsia"  />
+            </ef:FloatingView>
+            
+            <!-- V Fill / H Fill -->
+            <ef:FloatingView VerticalLayoutAlignment="Fill" HorizontalLayoutAlignment="Fill"
+                             HeightRequest="100" WidthRequest="50" OffsetX="-35" OffsetY="-75" Hidden="{Binding Visible4.Value}">
+                 <Button Clicked="BlueTap" BackgroundColor="Blue" />
+            </ef:FloatingView>
+            
+           
+        </ef:FloatingLayout>
+    </ef:Floating.Content>
+    
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Header" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Button Text="Button" Clicked="Handle_Clicked" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Footer" />
+        </StackLayout>
+    </ScrollView>    
+</ContentPage>

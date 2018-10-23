@@ -11,8 +11,8 @@ namespace AiEffects.TestApp.ViewModels
             set { SetProperty(ref _LabelText, value); }
         }
 
-        private bool _EffectOn;
-        public bool EffectOn {
+        private bool? _EffectOn;
+        public bool? EffectOn {
             get { return _EffectOn; }
             set { SetProperty(ref _EffectOn, value); }
         }
@@ -21,7 +21,7 @@ namespace AiEffects.TestApp.ViewModels
         public DelegateCommand EffectCommand {
             get {
                 return _EffectCommand = _EffectCommand ?? new DelegateCommand(() => {
-                    EffectOn = !EffectOn;
+                    EffectOn = !EffectOn.GetValueOrDefault(true);
                 });
             }
         }
@@ -36,7 +36,7 @@ However, if Height Request is specified in advance, it will be given priority an
 //1.5と指定すればFontSizeが10の場合、15が行の高さとなります。Labelの場合は、行間を広げた場合にViewの高さも合わせて可変します。
 //ただしHeightRequestがあらかじめ指定されている場合はそちらが優先され高さは固定されます。Editorは高さは可変しません。";
 
-            EffectOn = false;
+            EffectOn = null;
         }
     }
 }

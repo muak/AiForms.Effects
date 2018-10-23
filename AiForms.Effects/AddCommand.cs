@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System;
 
 namespace AiForms.Effects
 {
@@ -9,36 +10,20 @@ namespace AiForms.Effects
         public static readonly BindableProperty OnProperty =
             BindableProperty.CreateAttached(
                     propertyName: "On",
-                    returnType: typeof(bool),
+                    returnType: typeof(bool?),
                     declaringType: typeof(AddCommand),
-                    defaultValue: false,
-                    propertyChanged: OnOffChanged
+                    defaultValue: null,
+                    propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<AddCommandRoutingEffect>
                 );
 
-        public static void SetOn(BindableObject view, bool value)
+        public static void SetOn(BindableObject view, bool? value)
         {
             view.SetValue(OnProperty, value);
         }
 
-        public static bool GetOn(BindableObject view)
+        public static bool? GetOn(BindableObject view)
         {
-            return (bool)view.GetValue(OnProperty);
-        }
-
-        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = bindable as View;
-            if (view == null)
-                return;
-
-            if ((bool)newValue) {
-                view.Effects.Add(new AddCommandRoutingEffect());
-            }
-            else {
-                var toRemove = view.Effects.FirstOrDefault(e => e is AddCommandRoutingEffect);
-                if (toRemove != null)
-                    view.Effects.Remove(toRemove);
-            }
+            return (bool?)view.GetValue(OnProperty);
         }
 
         public static readonly BindableProperty EnableSoundProperty =
@@ -47,11 +32,12 @@ namespace AiForms.Effects
                 typeof(bool),
                 typeof(AddCommand),
                 false);
-
+                
         public static void SetEnableSound(BindableObject view, bool value)
         {
             view.SetValue(EnableSoundProperty, value);
         }
+
         public static bool GetEnableSound(BindableObject view)
         {
             return (bool)view.GetValue(EnableSoundProperty);
@@ -62,7 +48,8 @@ namespace AiForms.Effects
                     "Command",
                     typeof(ICommand),
                     typeof(AddCommand),
-                    default(ICommand)
+                    default(ICommand),
+                    propertyChanged: AiRoutingEffectBase.AddEffectHandler<AddCommandRoutingEffect>
                 );
 
         public static void SetCommand(BindableObject view, ICommand value)
@@ -99,7 +86,8 @@ namespace AiForms.Effects
                     "LongCommand",
                     typeof(ICommand),
                     typeof(AddCommand),
-                    default(ICommand)
+                    default(ICommand),
+                    propertyChanged: AiRoutingEffectBase.AddEffectHandler<AddCommandRoutingEffect>
                 );
 
         public static void SetLongCommand(BindableObject view, ICommand value)
@@ -135,9 +123,9 @@ namespace AiForms.Effects
                     "EffectColor",
                     typeof(Color),
                     typeof(AddCommand),
-                    Color.Default
+                    Color.Transparent
                 );
-
+            
         public static void SetEffectColor(BindableObject view, Color value)
         {
             view.SetValue(EffectColorProperty, value);
@@ -148,6 +136,7 @@ namespace AiForms.Effects
             return (Color)view.GetValue(EffectColorProperty);
         }
 
+        [Obsolete("This property is obsolete as of version 1.4. Ripple color is transparent by default.")]
         public static readonly BindableProperty EnableRippleProperty =
             BindableProperty.CreateAttached(
                     "EnableRipple",
@@ -156,11 +145,13 @@ namespace AiForms.Effects
                     true
                 );
 
+        [Obsolete("This method is obsolete as of version 1.4. Ripple color is transparent by default.")]
         public static void SetEnableRipple(BindableObject view, bool value)
         {
             view.SetValue(EnableRippleProperty, value);
         }
 
+        [Obsolete("This method is obsolete as of version 1.4. Ripple color is transparent by default.")]
         public static bool GetEnableRipple(BindableObject view)
         {
             return (bool)view.GetValue(EnableRippleProperty);
@@ -183,13 +174,11 @@ namespace AiForms.Effects
         {
             return (bool)view.GetValue(SyncCanExecuteProperty);
         }
-
-        class AddCommandRoutingEffect : RoutingEffect
-        {
-            public AddCommandRoutingEffect() : base("AiForms." + nameof(AddCommand)) { }
-        }
-
     }
 
+    internal class AddCommandRoutingEffect : AiRoutingEffectBase
+    {
+        public AddCommandRoutingEffect() : base("AiForms." + nameof(AddCommand)) { }
+    }
 }
 

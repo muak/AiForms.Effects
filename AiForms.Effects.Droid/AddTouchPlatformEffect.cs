@@ -9,7 +9,8 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(AddTouchPlatformEffect), nameof(AddTouch))]
 namespace AiForms.Effects.Droid
 {
-    public class AddTouchPlatformEffect:PlatformEffect
+    [Android.Runtime.Preserve(AllMembers = true)]
+    public class AddTouchPlatformEffect:AiEffectBase
     {
         WeakReference<Android.Views.View> _viewRef;
         TouchRecognizer _recognizer;
@@ -17,6 +18,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             _viewRef = new WeakReference<Android.Views.View>(Control ?? Container);
 
 
@@ -62,9 +65,19 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
+            if(!IsDisposed)
+            {
+                if (_viewRef.TryGetTarget(out var view))
+                {
+                    view.Touch -= _view_Touch;
+                }
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
+            }
+            Element.ClearValue(AddTouch.RecognizerProperty);
             _context = null;
             _recognizer = null;
             _viewRef = null;
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
     }

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Effects</id>
-        <version>1.3.1</version>
+        <version>1.4.0-pre</version>
         <title>AiForms.Effects for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
@@ -12,18 +12,11 @@
         <description>Xamarin.Forms Effects(add Border / add placeholder / add Text / add Command / add NumberPicker, TimePicker and DatePicker / alter color for switch and slider / alter LineHeight of Label and Editor / Button to flat / Size to fit for Label / add touch events) for iOS / Android</description>
         <summary></summary>
         <releaseNotes>
-## Bug fix
+## New Features
 
-* [AddTouch] Not include Recognizer attached property.
-* [SizeToFit] Null Exception in OnDetached on iOS.
-
-## New feature
-
-* [AddTouch] the effect adding touch events (begin, move, end, cancel) to a view.
-
-## others
-
-* Support .NETStandard2.0
+* Feedback – add touch feedback effect (color and sound) without command.
+* Floating – arrange some floating views (e.g. FAB) at any place over a page.
+* TriggerProperty – An Effect can be invoked by setting main properties.
         </releaseNotes>
         <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect Border TimePicker DatePicker Placeholder Color SizeToFit TouchEvents</tags>
         <language>en-US</language>

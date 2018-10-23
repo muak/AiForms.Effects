@@ -9,46 +9,30 @@ namespace AiForms.Effects
         public static readonly BindableProperty OnProperty =
             BindableProperty.CreateAttached(
                 propertyName: "On",
-                returnType: typeof(bool),
+                returnType: typeof(bool?),
                 declaringType: typeof(Placeholder),
-                defaultValue: false,
-                propertyChanged: OnOffChanged
+                defaultValue: null,
+                propertyChanged: AiRoutingEffectBase.ToggleEffectHandler<PlaceholderRoutingEffect>
             );
 
-        public static void SetOn(BindableObject view, bool value)
+        public static void SetOn(BindableObject view, bool? value)
         {
             view.SetValue(OnProperty, value);
         }
 
-        public static bool GetOn(BindableObject view)
+        public static bool? GetOn(BindableObject view)
         {
-            return (bool)view.GetValue(OnProperty);
+            return (bool?)view.GetValue(OnProperty);
         }
 
-        private static void OnOffChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = bindable as View;
-            if (view == null)
-                return;
-            if(!(view is Editor))
-                return;
-
-            if ((bool)newValue) {
-                view.Effects.Add(new PlaceholderRoutingEffect());
-            }
-            else {
-                var toRemove = view.Effects.FirstOrDefault(e => e is PlaceholderRoutingEffect);
-                if (toRemove != null)
-                    view.Effects.Remove(toRemove);
-            }
-        }
 
         public static readonly BindableProperty TextProperty =
             BindableProperty.CreateAttached(
                     "Text",
                     typeof(string),
                     typeof(Placeholder),
-                    default(string)
+                    default(string),
+                    propertyChanged: AiRoutingEffectBase.AddEffectHandler<PlaceholderRoutingEffect>
                 );
 
         public static void SetText(BindableObject view, string value)
@@ -78,10 +62,10 @@ namespace AiForms.Effects
         {
             return (Color)view.GetValue(ColorProperty);
         }
+    }
 
-        class PlaceholderRoutingEffect : RoutingEffect
-        {
-            public PlaceholderRoutingEffect() : base("AiForms." + nameof(Placeholder)) { }
-        }
+    internal class PlaceholderRoutingEffect : AiRoutingEffectBase
+    {
+        public PlaceholderRoutingEffect() : base("AiForms." + nameof(Placeholder)) { }
     }
 }

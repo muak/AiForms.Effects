@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 namespace AiForms.Effects.iOS
 {
+    [Foundation.Preserve(AllMembers = true)]
     public class AlterColorSwitch : IAiEffect
     {
         UISwitch _uiswitch;

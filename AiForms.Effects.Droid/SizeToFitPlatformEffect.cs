@@ -11,6 +11,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(SizeToFitPlatformEffect), nameof(SizeToFit))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class SizeToFitPlatformEffect : AiEffectBase
     {
         FormsTextView _view;
@@ -18,6 +19,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             _view = Control as FormsTextView;
             _orgFontSize = _view.TextSize;
 
@@ -28,8 +31,10 @@ namespace AiForms.Effects.Droid
         {
             if(!IsDisposed){
                 _view.SetTextSize(ComplexUnitType.Px, _orgFontSize);
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
             _view = null;
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)

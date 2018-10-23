@@ -21,7 +21,7 @@ namespace AiEffects.TestApp.ViewModels
         private DelegateCommand<object> _GotoTestCommand;
         public DelegateCommand<object> GotoTestCommand {
             get { return _GotoTestCommand = _GotoTestCommand ?? new DelegateCommand<object>(async (p) => {
-                await Navigation.NavigateAsync(p.ToString()); 
+                await Navigation.NavigateAsync(p.ToString(),null,false); 
             }); }
         } 
 

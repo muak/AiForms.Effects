@@ -9,6 +9,7 @@ using Xamarin.Forms;
 [assembly: ExportEffect(typeof(AddDatePickerPlatformEffect), nameof(AddDatePicker))]
 namespace AiForms.Effects.Droid
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class AddDatePickerPlatformEffect : AiEffectBase
     {
         Android.Views.View _view;
@@ -17,6 +18,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             _view = Control ?? Container;
 
             _view.Touch += _view_Touch;
@@ -29,6 +32,7 @@ namespace AiForms.Effects.Droid
             var renderer = Container as IVisualElementRenderer;
             if (!IsDisposed) {
                 _view.Touch -= _view_Touch;
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }
             if (_dialog != null) {
                 _dialog.Dispose();
@@ -36,6 +40,7 @@ namespace AiForms.Effects.Droid
             }
             _view = null;
             _command = null;
+            System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
