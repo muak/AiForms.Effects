@@ -88,5 +88,9 @@ namespace AiForms.Effects
             get { return (bool)GetValue(HiddenProperty); }
             set { SetValue(HiddenProperty, value); }
         }
+
+        // kill exists properties.
+        private new LayoutOptions VerticalOptions { get; set; }
+        private new LayoutOptions HorizontalOptions { get; set; }
     }
 }

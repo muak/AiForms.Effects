@@ -3,6 +3,8 @@
 AiForms.Effect は Android と iOS に特化することにより、標準のコントロールをより便利にするための機能を提供する Xamarin.Forms の Effectsライブラリです。
 
 ## 機能
+* [Floating](#floating)
+    * ページの前面の任意の場所に複数のフローティングな要素(FABなど)を配置します。
 * [Feedback](#feedback)
     * タッチフィードバック効果（色やシステム音）を追加。コマンドは含みません。
 * [AddTouch](#addtouch)
@@ -30,6 +32,35 @@ AiForms.Effect は Android と iOS に特化することにより、標準のコ
 * [Placeholder](#placeholder)
 	* Editor に Placeholder を追加.
 
+## **トリガープロパティ (1.4.0~)**
+
+EffectのOn・OffはそれぞれのOnプロパティで操作していましたが、ver.1.4.0よりEffectの主要なプロパティを設定するだけで起動できるようになりました。
+このプロパティはトリガープロパティとします。
+例えば、AddCommandの場合は Command や LongCommand がトリガープロパティになります。このドキュメントに該当のプロパティには trigger と記載しています。
+
+### 旧 (~1.3.1)
+
+```xml
+<Label Text="Text" ef:AddCommand.On="true" ef:AddCommand.Command="{Binding GoCommand}" />
+```
+必ずOnの指定が必要。
+
+### 新 (1.4.0~)
+
+```xml
+<Label Text="Text" ef:AddCommand.Command="{Binding GoCommand}" />
+```
+
+Trigger Propertyを指定していれば On は不要。
+
+### 旧方式のままを保つには
+
+Onプロパティを使用して動的にEffectの有効無効を切り替えて使用していた場合は、Trigger Property方式だとうまく動作しなくなる可能性があります。
+従来の動きのままにする場合は .NETStandard プロジェクトの任意の場所に以下のように記述することで無効化できます。
+
+```csharp
+AiForms.Effects.EffectConfig.EnableTriggerProperty = false;
+```
 
 ## 動作条件など
 
@@ -60,12 +91,71 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 }
 ```
 
-## 共通の添付プロパティ
+## Floating
 
-* On
-    * Effect のOn・Offを指定します。trueの場合は view に effect が追加され、falseの場合は削除されます。
-    * このプロパティを使用しなくても、トリガープロパティに値を設定することでEffectを発動できます。
-    * **Trigger Property** には、AddCommandの場合は Command や LongCommand のようなメインとなるプロパティが該当します。
+ページの上の任意の場所に複数のフローティングView (Floating Action Buttonなど) を配置するEffectです。
+配置されは要素はContentPageより前面に表示され、ContentPageのスクロールの影響を受けません。
+
+### 使い方
+
+このサンプルでは、垂直下端から上に25dp、水平右端から左に25dpの位置に配置しています。
+
+```xml
+<ContentPage xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects">
+    
+    <ef:Floating.Content>
+        <ef:FloatingLayout>
+            <!-- 右下から上に25dp 左に25dp -->
+            <ef:FloatingView 
+                VerticalLayoutAlignment="End" 
+                HorizontalLayoutAlignment="End"
+                OffsetX="-25" OffsetY="-25" >
+                 <!-- Code behindのハンドラ指定やViewModelのBindingも可能 -->
+                 <Button Clicked="BlueTap" BackgroundColor="{Binding ButtonColor}" 
+                         BorderRadius="28" WidthRequest="56" HeightRequest="56" 
+                         Text="+" FontSize="24"
+                         TextColor="White" Padding="0" />
+            </ef:FloatingView>
+        </ef:FloatingLayout>
+    </ef:Floating.Content>
+
+    <StackLayout>
+        <Label Text="MainContents" />
+    </StackLayout>
+</ContentPage>
+```
+
+<img src="images/floating.jpg" width="600" /> 
+
+### Property
+
+* Content (trigger)
+    * FloatingViewを配置するためのルート要素で FloatingLayoutクラスです。
+
+### FloatingLayout
+
+ページ上に複数のFloatingViewを自由に配置できるレイアウト要素です。
+
+### FloatingView
+
+FloatingLayoutによって配置される要素です。
+このViewは、HorizontalLayoutAlignment, VerticalLayoutAlignment, OffsetX, OffsetX を指定して自身の位置を決めるために使用します。
+このViewの子要素には任意のVisualElementを配置できます。
+
+#### Properties
+
+* HorizontalLayoutAlignment (defalut: Center)
+    * 水平方向の位置の列挙値 (Start / Center / End / Fill)
+* VerticalLayoutAlignment (defalut: Center)
+    * 垂直方向の位置の列挙値 (Start / Center / End / Fill)
+* OffsetX
+    * 水平方向の位置の調整値。HorizontalLayoutAlignmentからの相対値を指定します。(Fillの場合は無効)
+* OffsetY
+    * 垂直方向の位置の調整値。VerticalLayoutAlignmentからの相対値を指定します。(Fillの場合は無効)
+* Hidden
+    * Viewを表示するか非表示にするかのbool値。
+    * AndroidでIsVisibleがfalseの状態でページを表示すると、それ以降falseにした要素をtrueにしても表示されなくなる問題があり、それを回避するためのプロパティです。もしIsVisibleで問題がある場合はこちらを使用してください。
+    * 内部でOpacityとInputTransparentプロパティを利用しています。
 
 ## Feedback
 

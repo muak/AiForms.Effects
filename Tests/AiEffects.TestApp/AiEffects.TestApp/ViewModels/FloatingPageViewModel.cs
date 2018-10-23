@@ -9,7 +9,8 @@ namespace AiEffects.TestApp.ViewModels
     public class FloatingPageViewModel:INavigatedAware
     {
         public ReactiveCommand NextCommand { get; set; } = new ReactiveCommand();
-        public ReactivePropertySlim<bool> Visible1 { get; set; } = new ReactivePropertySlim<bool>(false);
+        public ReactivePropertySlim<bool> Visible { get; set; } = new ReactivePropertySlim<bool>(false);
+        public ReactivePropertySlim<bool> Visible1 { get; set; } = new ReactivePropertySlim<bool>(true);
         public ReactivePropertySlim<bool> Visible2 { get; set; } = new ReactivePropertySlim<bool>(true);
         public ReactivePropertySlim<bool> Visible3 { get; set; } = new ReactivePropertySlim<bool>(true);
         public ReactivePropertySlim<bool> Visible4 { get; set; } = new ReactivePropertySlim<bool>(true);
@@ -18,6 +19,7 @@ namespace AiEffects.TestApp.ViewModels
 
         public FloatingPageViewModel()
         {
+            _visibles.Add(Visible);
             _visibles.Add(Visible1);
             _visibles.Add(Visible2);
             _visibles.Add(Visible3);

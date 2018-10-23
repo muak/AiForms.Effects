@@ -23,10 +23,16 @@
     
     <ef:Floating.Content>
         <ef:FloatingLayout>
+            <ef:FloatingView VerticalLayoutAlignment="End" HorizontalLayoutAlignment="End"
+                             OffsetX="-25" OffsetY="-25" Hidden="{Binding Visible.Value}">
+                <Button BorderRadius="28" WidthRequest="56" HeightRequest="56" Clicked="BlueTap"
+                        Text="+" FontSize="24" BackgroundColor="Blue" TextColor="White" Padding="0" />
+            </ef:FloatingView>
+
             <!-- V Start -->
             <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Start"
                              HeightRequest="50" WidthRequest="50" Hidden="{Binding Visible1.Value}">
-                 <Button Clicked="GreenTap" BackgroundColor="Green"  />
+                 <Button Clicked="GreenTap" BackgroundColor="Green" />
             </ef:FloatingView>
             <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Start"
                              HeightRequest="50" WidthRequest="50" OffsetX="25" OffsetY="25" Hidden="{Binding Visible1.Value}">
@@ -145,29 +151,29 @@
             
             <!-- V Start / H Fill -->
             <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Fill"
-                             HeightRequest="100" WidthRequest="50" Hidden="{Binding Visible2.Value}">
+                             HeightRequest="100" Hidden="{Binding Visible2.Value}">
                  <Button Clicked="LimeTap" BackgroundColor="Lime"/>
             </ef:FloatingView>
             <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Fill"
-                             HeightRequest="100" WidthRequest="50" OffsetX="25" OffsetY="75" Hidden="{Binding Visible2.Value}">
+                             HeightRequest="100" OffsetX="25" OffsetY="75" Hidden="{Binding Visible2.Value}">
                  <Button Clicked="NavyTap" BackgroundColor="Navy"  />
             </ef:FloatingView>
             <ef:FloatingView VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Fill"
-                             HeightRequest="100" WidthRequest="50" OffsetX="-25" OffsetY="-75" Hidden="{Binding Visible2.Value}">
+                             HeightRequest="100" OffsetX="-25" OffsetY="-75" Hidden="{Binding Visible2.Value}">
                  <Button Clicked="PinkTap" BackgroundColor="Fuchsia"  />
             </ef:FloatingView>
             
             <!-- V Center / H Fill -->
             <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Fill"
-                             HeightRequest="100" WidthRequest="50" Hidden="{Binding Visible2.Value}">
+                             HeightRequest="100" Hidden="{Binding Visible2.Value}">
                  <Button Clicked="LimeTap" BackgroundColor="Lime"/>
             </ef:FloatingView>
             <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Fill"
-                             HeightRequest="100" WidthRequest="50" OffsetX="25" OffsetY="75" Hidden="{Binding Visible2.Value}">
+                             HeightRequest="100" OffsetX="25" OffsetY="75" Hidden="{Binding Visible2.Value}">
                  <Button Clicked="NavyTap" BackgroundColor="Navy"  />
             </ef:FloatingView>
             <ef:FloatingView VerticalLayoutAlignment="Center" HorizontalLayoutAlignment="Fill"
-                             HeightRequest="100" WidthRequest="50" OffsetX="-25" OffsetY="-75" Hidden="{Binding Visible2.Value}">
+                             HeightRequest="100" OffsetX="-25" OffsetY="-75" Hidden="{Binding Visible2.Value}">
                  <Button Clicked="PinkTap" BackgroundColor="Fuchsia"  />
             </ef:FloatingView>
             
@@ -184,6 +190,7 @@
                              HeightRequest="100" WidthRequest="50" OffsetX="-25" OffsetY="-75" Hidden="{Binding Visible2.Value}">
                  <Button Clicked="PinkTap" BackgroundColor="Fuchsia"  />
             </ef:FloatingView>
+            
             
             <!-- V Fill / H Start -->
             <ef:FloatingView VerticalLayoutAlignment="Fill" HorizontalLayoutAlignment="Start"
@@ -232,16 +239,23 @@
                              HeightRequest="100" WidthRequest="50" OffsetX="-35" OffsetY="-75" Hidden="{Binding Visible4.Value}">
                  <Button Clicked="BlueTap" BackgroundColor="Blue" />
             </ef:FloatingView>
+            
            
         </ef:FloatingLayout>
     </ef:Floating.Content>
     
     <ScrollView>
-    <StackLayout>
-        <Label Text="Header" />
-        <Button Text="Button" Clicked="Handle_Clicked" />
-        <Label Text="Long Content" HeightRequest="1000" />
-        <Label Text="Footer" />
-    </StackLayout>
+        <StackLayout>
+            <Label Text="Header" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Button Text="Button" Clicked="Handle_Clicked" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Main Content" HeightRequest="200" />
+            <Label Text="Footer" />
+        </StackLayout>
     </ScrollView>    
 </ContentPage>

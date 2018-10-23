@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Linq;
+using System.Diagnostics;
+using CoreGraphics;
 
 [assembly: ExportEffect(typeof(FloatingPlatformEffect), nameof(Floating))]
 namespace AiForms.Effects.iOS
@@ -19,6 +21,7 @@ namespace AiForms.Effects.iOS
         UIView _nativePage;
         FloatingLayout _formsLayout;
         Action OnceInitializeAction;
+        UIDeviceOrientation _previousOrientation;
 
         protected override void OnAttached()
         {
@@ -30,7 +33,8 @@ namespace AiForms.Effects.iOS
             _formsLayout.Parent = Element;
 
             _page = Element as Page;
-            _page.SizeChanged += _page_SizeChanged;
+            _page.SizeChanged += PageSizeChanged;
+            _page.LayoutChanged += PageLayoutChanged;
 
             void BindingContextChanged(object sender,EventArgs e)
             {
@@ -49,7 +53,8 @@ namespace AiForms.Effects.iOS
 
         protected override void OnDetached()
         {
-            _page.SizeChanged -= _page_SizeChanged;
+            _page.SizeChanged -= PageSizeChanged;
+            _page.LayoutChanged -= PageLayoutChanged;
             _formsLayout.Parent = null;
 
             foreach(var child in _formsLayout)
@@ -62,19 +67,22 @@ namespace AiForms.Effects.iOS
             _page = null;
         }
 
-        void _page_SizeChanged(object sender, EventArgs e)
+
+        void PageLayoutChanged(object sender, EventArgs e)
         {
-            if(OnceInitializeAction == null)
+            if (OnceInitializeAction == null && _previousOrientation != UIDevice.CurrentDevice.Orientation)
             {
                 _formsLayout.Layout(_nativePage.Bounds.ToRectangle());
                 _formsLayout.LayoutChildren();
             }
-            else
-            {
-                OnceInitializeAction.Invoke();
-            }
+            _previousOrientation = UIDevice.CurrentDevice.Orientation;
         }
 
+
+        void PageSizeChanged(object sender, EventArgs e)
+        {
+            OnceInitializeAction?.Invoke();
+        }
 
         protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
         {

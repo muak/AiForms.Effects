@@ -5,6 +5,8 @@ AiForms.Effects is the effects library that provides you with more flexible func
 [Japanese](./README-ja.md)
 
 ## Features
+* [Floating](#floating)
+    * arrange some floating views (e.g. FAB) at any place over a page.
 * [Feedback](#feedback)
     * add touch feedback effect (color and sound) without command.
 * [AddTouch](#addtouch)
@@ -32,6 +34,39 @@ AiForms.Effects is the effects library that provides you with more flexible func
 * [Placeholder](#placeholder)
 	* show placeholder on Editor.
 
+## **Trigger Property (1.4.0~)**
+
+Though toggling an effect had used On property in less than ver.1.4.0, As of ver.1.4.0, an effect can be enabled by setting one or more main properties of the effect.
+These properties are named "Trigger Properties".
+
+ **Trigger properties** correspond to main properties such as Command and LongCommand in case of AddCommand Effect.
+
+In this document,  trigger properties are written "trigger".
+
+
+### Old (~1.3.1)
+
+```xml
+<Label Text="Text" ef:AddCommand.On="true" ef:AddCommand.Command="{Binding GoCommand}" />
+```
+Always needs On property.
+
+### New (1.4.0~)
+
+```xml
+<Label Text="Text" ef:AddCommand.Command="{Binding GoCommand}" />
+```
+
+Need not On property when specified Trigger Property.
+
+### To keep traditional
+
+If an effect had been used to dynamically toggle to with the On property specified, it may not correctly work on the trigger properties mode.
+To keep traditional mode, you can disable trigger properties by specifying the static config property at any place in .NETStandard project as the following code.
+
+```csharp
+AiForms.Effects.EffectConfig.EnableTriggerProperty = false;
+```
 
 ## Minimum Device and Version etc
 
@@ -62,14 +97,75 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 }
 ```
 
-## Trigger Property
+## Floating
 
-* On
-    * Whether the effect is enabled. If true, add the effect to a view; Otherwise, remove it.
+This is the effect that arranges some floating views (e.g. FAB) at any place on a page.
+The arranged elements are displayed more front than a ContentPage and are not affected a ContentPage scrolling.
 
+### How to use
 
-    * Even if this property is not used, setting a trigger property to value can add the effect.
-    * **Trigger properties** correspond to main properties such as Command and LongCommand in case of AddCommand Effect.
+This sample is that an element is arranged at above 25dp from the vertical end and left 25dp from the horizontal end.
+
+```xml
+<ContentPage xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects">
+    
+    <ef:Floating.Content>
+        <ef:FloatingLayout>
+            <!-- This element is arranged at above 25dp from the vertical end and left 25dp from the horizontal end. -->
+            <ef:FloatingView 
+                VerticalLayoutAlignment="End" 
+                HorizontalLayoutAlignment="End"
+                OffsetX="-25" OffsetY="-25" >
+                 <!-- Code behind handling / ViewModel binding OK -->
+                 <Button Clicked="BlueTap" BackgroundColor="{Binding ButtonColor}" 
+                         BorderRadius="28" WidthRequest="56" HeightRequest="56" 
+                         Text="+" FontSize="24"
+                         TextColor="White" Padding="0" />
+            </ef:FloatingView>
+        </ef:FloatingLayout>
+    </ef:Floating.Content>
+
+    <StackLayout>
+        <Label Text="MainContents" />
+    </StackLayout>
+</ContentPage>
+```
+
+<img src="images/floating.jpg" width="600" /> 
+
+### Property
+
+* Content (trigger)
+    * The root element to arrange floating views.
+    * This property is of type FloatingLayout.
+
+> Note that this effect doesn't work without trigger property because it hasn't an On property. 
+
+### FloatingLayout
+
+This is the Layout that can freely arrange several FloatingView's over a page.
+
+### FloatingView
+
+It is a view that FloatingLayout arranges.
+This view is used to specify HorizontalLayoutAlignment, VerticalLayoutAlignment, OffsetX, OffsetX and determine itself position.
+This view can be set any VisualElements.
+
+#### Properties
+
+* HorizontalLayoutAlignment (defalut: Center)
+    * The horizontal position enumeration value (Start / Center / End / Fill)
+* VerticalLayoutAlignment (default: Center)
+    * The vertical position enumeration value (Start / Center / End / Fill)
+* OffsetX
+    * The adjustment relative value from the horizontal layout position. (without Fill)
+* OffsetY
+    * The adjustment relative value from the vertical layout position. (without Fill)
+* Hidden
+    * The bool value whether a view is hidden or shown.
+    * On Android, If IsVisible is false when a page is rendered, there is the issue that views are never displayed. This method is used to avoid the issue. If there is some problem using IsVisible, use this instead of.
+    * In internal, this property uses Opacity and InputTransparent properties.
+
 
 ## Feedback
 

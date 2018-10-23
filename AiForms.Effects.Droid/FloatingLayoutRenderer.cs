@@ -38,7 +38,6 @@ namespace AiForms.Effects.Droid
             }
         }
 
-
         protected override void Dispose(bool disposing)
         {
             if(disposing)
