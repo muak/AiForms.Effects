@@ -54,6 +54,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
+            base.OnDetached();
+
             if (!IsDisposed) {
                 NativeButton.Background = OrgBackground;
                 NativeButton.StateListAnimator = OrgStateListAnimator;

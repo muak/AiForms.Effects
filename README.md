@@ -4,6 +4,8 @@ AiForms.Effects is the effects library that provides you with more flexible func
 
 [Japanese](./README-ja.md)
 
+![Build status](https://kamusoft.visualstudio.com/NugetCI/_apis/build/status/AiForms.Effects)
+
 ## Features
 * [Floating](#floating)
     * arrange some floating views (e.g. FAB) at any place over a page.

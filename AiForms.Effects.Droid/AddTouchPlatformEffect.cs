@@ -65,7 +65,9 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            if(!IsDisposed)
+            base.OnDetached();
+
+            if (!IsDisposed)
             {
                 if (_viewRef.TryGetTarget(out var view))
                 {

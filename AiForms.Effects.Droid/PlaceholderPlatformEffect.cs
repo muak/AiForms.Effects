@@ -25,6 +25,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
+            base.OnDetached();
+
             if (!IsDisposed) {
                 _editText.Hint = string.Empty;
                 System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");

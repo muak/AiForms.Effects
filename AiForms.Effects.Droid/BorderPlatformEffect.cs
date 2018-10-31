@@ -35,6 +35,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
+            base.OnDetached();
+
             if (!IsDisposed) {    // Check disposed
                 _view.Background = _orgDrawable;
 

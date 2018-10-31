@@ -29,6 +29,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
+            base.OnDetached();
+
             var renderer = Container as IVisualElementRenderer;
             if (!IsDisposed) {
                 _view.Touch -= _view_Touch;

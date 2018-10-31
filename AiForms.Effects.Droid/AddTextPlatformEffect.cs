@@ -52,6 +52,7 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
+            base.OnDetached();
             System.Diagnostics.Debug.WriteLine(Element.GetType().FullName);
 
             if (!IsDisposed) {

@@ -42,6 +42,8 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
+            base.OnDetached();
+
             if (!IsDisposed) {
                 _view.Touch -= _view_Touch;
                 System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");

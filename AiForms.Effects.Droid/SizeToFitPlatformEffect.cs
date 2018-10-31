@@ -29,7 +29,9 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            if(!IsDisposed){
+            base.OnDetached();
+
+            if (!IsDisposed){
                 _view.SetTextSize(ComplexUnitType.Px, _orgFontSize);
                 System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
             }

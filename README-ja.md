@@ -2,6 +2,8 @@
 
 AiForms.Effect は Android と iOS に特化することにより、標準のコントロールをより便利にするための機能を提供する Xamarin.Forms の Effectsライブラリです。
 
+![Build status](https://kamusoft.visualstudio.com/NugetCI/_apis/build/status/AiForms.Effects)
+
 ## 機能
 * [Floating](#floating)
     * ページの前面の任意の場所に複数のフローティングな要素(FABなど)を配置します。
