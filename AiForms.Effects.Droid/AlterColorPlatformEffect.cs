@@ -45,13 +45,15 @@ namespace AiForms.Effects.Droid
             _effect?.OnDetached();
             _effect = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
+
+            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
         {
             base.OnElementPropertyChanged(args);
 
-            if (IsDisposed) {
+            if (IsNullOrDisposed) {
                 return;
             }
 

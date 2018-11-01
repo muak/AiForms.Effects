@@ -28,6 +28,8 @@ namespace AiForms.Effects.iOS
         {
             _effect?.OnDetached();
             _effect = null;
+
+            System.Diagnostics.Debug.WriteLine($"Detached {GetType().Name} from {Element.GetType().FullName}");
         }
 
 

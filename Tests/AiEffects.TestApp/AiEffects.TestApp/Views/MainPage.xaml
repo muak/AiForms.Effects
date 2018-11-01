@@ -10,6 +10,7 @@
         
     <sv:SettingsView RowHeight="40" HasUnevenRows="false">
         <sv:Section>
+            <sv:ButtonCell Title="ForInvestigation" Command="{Binding GotoTestCommand}" CommandParameter="ForInvestigation" />
             <sv:ButtonCell AutomationId="Floating" Title="Floating" Command="{Binding GotoTestCommand}" CommandParameter="FloatingPage" />
             <sv:ButtonCell AutomationId="TriggerTest" Title="TriggerTest" Command="{Binding GotoTestCommand}" CommandParameter="TriggerTest" />
             <sv:ButtonCell AutomationId="ViewCell" Title="ViewCell" 

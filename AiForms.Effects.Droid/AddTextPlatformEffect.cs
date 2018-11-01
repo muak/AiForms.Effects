@@ -74,6 +74,8 @@ namespace AiForms.Effects.Droid
             _fastListener?.Dispose();
             _fastListener = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
+
+            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)

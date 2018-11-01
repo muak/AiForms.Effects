@@ -4,7 +4,7 @@ using Prism.Navigation;
 
 namespace AiEffects.TestApp.ViewModels
 {
-    public class MainPageViewModel : BindableBase, INavigationAware
+    public class MainPageViewModel : BindableBase
     {
         private string _title;
         public string Title {
@@ -30,22 +30,6 @@ namespace AiEffects.TestApp.ViewModels
         public MainPageViewModel(INavigationService navigationService)
         {
             Navigation = navigationService;
-        }
-
-        public void OnNavigatedFrom(NavigationParameters parameters)
-        {
-
-        }
-
-        public void OnNavigatedTo(NavigationParameters parameters)
-        {
-            if (parameters.ContainsKey("title"))
-                Title = (string)parameters["title"] + " and Prism";
-        }
-
-        public void OnNavigatingTo(NavigationParameters parameters)
-        {
-            //throw new NotImplementedException();
         }
     }
 }

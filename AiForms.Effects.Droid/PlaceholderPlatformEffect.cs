@@ -31,6 +31,8 @@ namespace AiForms.Effects.Droid
             }
             _editText = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
+
+            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)

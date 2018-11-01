@@ -65,6 +65,8 @@ namespace AiForms.Effects.iOS
             _formsLayout = null;
             _nativePage = null;
             _page = null;
+
+            System.Diagnostics.Debug.WriteLine($"Detached {GetType().Name} from {Element.GetType().FullName}");
         }
 
 

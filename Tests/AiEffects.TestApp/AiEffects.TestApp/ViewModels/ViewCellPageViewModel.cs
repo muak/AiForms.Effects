@@ -17,8 +17,8 @@ namespace AiEffects.TestApp.ViewModels
             }
 
             TestCommand.Subscribe(async _=>{
-                await navigationService.GoBackAsync(null);
-                //await pageDlg.DisplayAlertAsync("", "Tap", "OK");
+                //await navigationService.GoBackAsync(null);
+                await pageDlg.DisplayAlertAsync("", "Tap", "OK");
 
             });
         }

@@ -47,6 +47,8 @@ namespace AiForms.Effects.Droid
             _border = null;
             _view = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
+
+            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
@@ -68,6 +70,9 @@ namespace AiForms.Effects.Droid
             else if (args.PropertyName == Border.ColorProperty.PropertyName) {
                 UpdateColor();
                 UpdateBorder();
+            }
+            else if (args.PropertyName == VisualElement.BackgroundColorProperty.PropertyName) {
+                UpdateBackgroundColor();
             }
         }
 
@@ -107,7 +112,12 @@ namespace AiForms.Effects.Droid
             _view.ClipToOutline = true; //not to overflow children
 
             _view.SetBackground(_border);
+        }
 
+        void UpdateBackgroundColor()
+        {
+            _orgDrawable = _view.Background;
+            UpdateBorder();
         }
     }
 }

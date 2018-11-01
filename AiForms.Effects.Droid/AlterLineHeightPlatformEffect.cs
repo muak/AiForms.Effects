@@ -34,6 +34,8 @@ namespace AiForms.Effects.Droid
             _effect?.OnDetached();
             _effect = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
+
+            base.OnDetached();
         }
 
 

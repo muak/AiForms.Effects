@@ -5,11 +5,21 @@
     <ReleaseVersion>0.0.5-pre</ReleaseVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile>bin\Release\netstandard2.0\AiForms.Effects.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
   </ItemGroup>
   
   <ItemGroup>
     <Compile Remove="WeakEventManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\nuget\AzurePipelines.nuspec">
+      <Link>AzurePipelines.nuspec</Link>
+    </None>
   </ItemGroup>
 </Project>

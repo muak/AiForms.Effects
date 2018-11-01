@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    x:Class="AiEffects.TestApp.Views.ForInvestigation">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Go" Command="{Binding GoCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout>
+        <Label Text="Hoge" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White"
+               ef:Border.Width="3" ef:Border.Color="Red"
+               ef:Border.Radius="4" BackgroundColor="{Binding BackColor.Value}"
+       />
+    </StackLayout>
+</ContentPage>

@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using Reactive.Bindings;
 using Xamarin.Forms;
+using System.Diagnostics;
 
 namespace AiEffects.TestApp.ViewModels
 {
@@ -14,7 +15,7 @@ namespace AiEffects.TestApp.ViewModels
         public AlterColorPageViewModel()
         {
             ColorToggle.Subscribe(x=>{
-                Accent.Value = x ? Color.FromHex("#2455b3") : Color.FromHex("#CCA3B0"); 
+                Accent.Value = x ? Color.FromHex("#2455b3") : Color.FromHex("#CCA3B0");
             });
         }
     }
