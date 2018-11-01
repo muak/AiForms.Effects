@@ -72,9 +72,6 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            base.OnDetached();
-
-            System.Diagnostics.Debug.WriteLine(Element.GetType().FullName);
             if (!IsDisposed)
             {
                 if (!IsClickable)
@@ -100,6 +97,8 @@ namespace AiForms.Effects.Droid
 
             _audioManager = null;
             _view = null;
+
+            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)

@@ -29,8 +29,6 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            base.OnDetached();
-
             var renderer = Container as IVisualElementRenderer;
             if (!IsDisposed) {
                 _view.Touch -= _view_Touch;
@@ -43,6 +41,8 @@ namespace AiForms.Effects.Droid
             _view = null;
             _command = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
+
+            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)

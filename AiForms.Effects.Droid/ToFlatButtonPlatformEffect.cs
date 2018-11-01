@@ -54,8 +54,6 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            base.OnDetached();
-
             if (!IsDisposed) {
                 NativeButton.Background = OrgBackground;
                 NativeButton.StateListAnimator = OrgStateListAnimator;
@@ -76,6 +74,8 @@ namespace AiForms.Effects.Droid
             Ripple = null;
             Inset = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
+
+            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)

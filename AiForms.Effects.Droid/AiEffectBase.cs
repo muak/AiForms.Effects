@@ -14,6 +14,7 @@ namespace AiForms.Effects.Droid
 
         IVisualElementRenderer _renderer;
         bool _isDisposed = false;
+        WeakReference<Page> _pageRef;
 
         protected bool IsDisposed {
             get {
@@ -45,12 +46,29 @@ namespace AiForms.Effects.Droid
 
         protected override void OnAttached()
         {
-            Element.BindingContextChanged += BindingContextChanged;
+            var visual = Element as VisualElement;
+
+            var page = visual.Navigation.NavigationStack.LastOrDefault() ?? 
+                           visual.Navigation.ModalStack.LastOrDefault();
+
+            if (page == null)
+                return;
+
+            page.Disappearing += Page_Disappearing;
+
+            _pageRef = new WeakReference<Page>(page);
         }
 
         protected override void OnDetached()
         {
-            Element.BindingContextChanged -= BindingContextChanged;
+            System.Diagnostics.Debug.WriteLine($"Detached {GetType().Name} from {Element.GetType().FullName}");
+            if (_pageRef != null && _pageRef.TryGetTarget(out var page))
+            {
+                page.Disappearing -= Page_Disappearing;
+            }
+
+            _renderer = null;
+            _pageRef = null;
         }
 
 
@@ -107,25 +125,15 @@ namespace AiForms.Effects.Droid
             return lambda.Compile();
         }
 
-        void BindingContextChanged(object sender, EventArgs e)
+        void Page_Disappearing(object sender, EventArgs e)
         {
-            if (Element.BindingContext == null)
-            {
-                Clear();
-            }
-        }       
-
-        void Clear()
-        {
-            Element.BindingContextChanged -= BindingContextChanged;
-
             // For Android, when a page is popped, OnDetached is automatically not called. (when iOS, it is called)
-            // So, made the BindingContextChanged event subscribe in advance 
-            // and make the effect manually removed when the BindingContext is null.
+            // So, made the Page.Disappearing event subscribe in advance 
+            // and make the effect manually removed when the page is popped.
             if (IsAttached && !IsDisposed)
             {
                 var toRemove = Element.Effects.OfType<AiRoutingEffectBase>().FirstOrDefault(x => x.EffectId == ResolveId);
-                Device.BeginInvokeOnMainThread(()=>Element.Effects.Remove(toRemove));
+                Device.BeginInvokeOnMainThread(() => Element.Effects.Remove(toRemove));
             }
         }
     }

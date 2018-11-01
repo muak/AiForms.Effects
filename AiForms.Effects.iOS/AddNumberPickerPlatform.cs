@@ -40,6 +40,8 @@ namespace AiForms.Effects.iOS
             _model.Dispose();
             _title.Dispose();
             _picker.Dispose();
+
+            System.Diagnostics.Debug.WriteLine($"Detached {GetType().Name} from {Element.GetType().FullName}");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)

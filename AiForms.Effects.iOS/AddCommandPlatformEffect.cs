@@ -85,6 +85,8 @@ namespace AiForms.Effects.iOS
             _longCommandParameter = null;
 
             _view = null;
+
+            System.Diagnostics.Debug.WriteLine($"Detached {GetType().Name} from {Element.GetType().FullName}");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)

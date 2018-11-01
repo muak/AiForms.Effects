@@ -44,6 +44,8 @@ namespace AiForms.Effects.iOS
             _textLabel.Dispose();
             _constraint = null;
             _textLabel = null;
+
+            System.Diagnostics.Debug.WriteLine($"Detached {GetType().Name} from {Element.GetType().FullName}");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)

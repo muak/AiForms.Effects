@@ -68,9 +68,6 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            base.OnDetached();
-
-            System.Diagnostics.Debug.WriteLine(Element.GetType().FullName);
             if (!IsDisposed) {
                 _view.Touch -= _view_Touch;
             }
@@ -92,6 +89,8 @@ namespace AiForms.Effects.Droid
             _gestureDetector = null;
 
             _view = null;
+
+            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)

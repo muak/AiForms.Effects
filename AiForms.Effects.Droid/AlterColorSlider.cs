@@ -1,4 +1,5 @@
-﻿using Android.Graphics;
+﻿using Android.Content.Res;
+using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Widget;
 using Xamarin.Forms;
@@ -6,6 +7,8 @@ using Xamarin.Forms.Platform.Android;
 
 namespace AiForms.Effects.Droid
 {
+    // References:
+    // http://www.zoftino.com/android-seekbar-and-custom-seekbar-examples
     [Android.Runtime.Preserve(AllMembers = true)]
     public class AlterColorSlider : IAiEffectDroid
     {
@@ -16,9 +19,8 @@ namespace AiForms.Effects.Droid
         Drawable _orgThumb;
 
         LayerDrawable _progress;
-        Drawable _minDrawable;
-        Drawable _maxDrawable;
         Drawable _thumb;
+        ColorStateList _orgProgressBackground;
 
         bool notSupported = false;
 
@@ -35,8 +37,7 @@ namespace AiForms.Effects.Droid
 
             _progress = (LayerDrawable)(_seekbar.ProgressDrawable.Current.GetConstantState().NewDrawable());
 
-            _minDrawable = _progress.GetDrawable(2);
-            _maxDrawable = _progress.GetDrawable(0);
+            _orgProgressBackground = _seekbar.ProgressBackgroundTintList;
 
             _orgThumb = _seekbar.Thumb;
             _thumb = _seekbar.Thumb.GetConstantState().NewDrawable();
@@ -50,6 +51,7 @@ namespace AiForms.Effects.Droid
             if (notSupported) {
                 return;
             }
+            _seekbar.ProgressBackgroundTintList = _orgProgressBackground;
             _seekbar.ProgressDrawable = _orgProgress;
             _seekbar.SetThumb(_orgThumb);
         }
@@ -60,20 +62,14 @@ namespace AiForms.Effects.Droid
                 return;
             }
 
-            _minDrawable.ClearColorFilter();
-            _maxDrawable.ClearColorFilter();
-
-            _minDrawable.Dispose();
-            _maxDrawable.Dispose();
             _thumb.Dispose();
             _progress.Dispose();
 
-            _minDrawable = null;
-            _maxDrawable = null;
             _thumb = null;
             _progress = null;
             _orgProgress = null;
             _orgThumb = null;
+            _orgProgressBackground = null;
             _seekbar = null;
             _element = null;
         }
@@ -84,11 +80,18 @@ namespace AiForms.Effects.Droid
                 return;
             }
             var color = AlterColor.GetAccent(_element).ToAndroid();
-            var altColor = Android.Graphics.Color.Argb(76, color.R, color.G, color.B);
 
-            //if use SetTint,it cannot restore.
-            _minDrawable.SetColorFilter(color, PorterDuff.Mode.SrcIn);
-            _maxDrawable.SetColorFilter(altColor, PorterDuff.Mode.SrcIn);
+            _progress.SetColorFilter(color, PorterDuff.Mode.SrcIn);
+            _seekbar.ProgressBackgroundTintList = new ColorStateList(
+                new int[][]
+                {
+                    new int[]{}
+                },
+                new int[]
+                {
+                    color,
+                });
+
             _thumb.SetTint(color);
         }
 

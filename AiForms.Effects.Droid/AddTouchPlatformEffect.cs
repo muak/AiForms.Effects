@@ -65,8 +65,6 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            base.OnDetached();
-
             if (!IsDisposed)
             {
                 if (_viewRef.TryGetTarget(out var view))
@@ -80,6 +78,8 @@ namespace AiForms.Effects.Droid
             _recognizer = null;
             _viewRef = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
+
+            base.OnDetached();
         }
 
     }

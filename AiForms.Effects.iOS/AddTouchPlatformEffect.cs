@@ -29,6 +29,8 @@ namespace AiForms.Effects.iOS
             _view = null;
             _recognizer?.Dispose();
             _recognizer = null;
+
+            System.Diagnostics.Debug.WriteLine($"Detached {GetType().Name} from {Element.GetType().FullName}");
         }
     }
 }

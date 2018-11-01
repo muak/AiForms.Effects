@@ -38,8 +38,6 @@ namespace AiForms.Effects.Droid
 
         protected override void OnDetached()
         {
-            base.OnDetached();
-
             if (!IsDisposed) {
                 _effect?.OnDetachedIfNotDisposed();
                 System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached Disposing");
@@ -47,6 +45,8 @@ namespace AiForms.Effects.Droid
             _effect?.OnDetached();
             _effect = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
+
+            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)

@@ -31,6 +31,8 @@ namespace AiForms.Effects.iOS
             var render = Platform.GetRenderer(Element as Label) as LabelRenderer;
             render?.LayoutSubviews();
             _view = null;
+
+            System.Diagnostics.Debug.WriteLine($"Detached {GetType().Name} from {Element.GetType().FullName}");
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
