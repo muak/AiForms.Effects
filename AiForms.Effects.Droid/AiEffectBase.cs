@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Linq;
 using Xamarin.Forms;
+using Android.App;
 
 namespace AiForms.Effects.Droid
 {
@@ -14,7 +15,6 @@ namespace AiForms.Effects.Droid
 
         IVisualElementRenderer _renderer;
         bool _isDisposed = false;
-        WeakReference<Page> _pageRef;
 
         protected bool IsDisposed {
             get {
@@ -47,28 +47,32 @@ namespace AiForms.Effects.Droid
         protected override void OnAttached()
         {
             var visual = Element as VisualElement;
+            var page = visual.Navigation.NavigationStack.LastOrDefault();
+            if(page == null)
+            {
+                page = visual.Navigation.ModalStack.LastOrDefault();
+                if (page == null) {
+                    // In case the element in DataTemplate, NavigationProxycan't be got.
+                    // Instead of it, the page dismissal is judged by whether the BindingContext is null.
+                    Element.BindingContextChanged += BindingContextChanged;
+                    return;
+                }
+            }
 
-            var page = visual.Navigation.NavigationStack.LastOrDefault() ?? 
-                           visual.Navigation.ModalStack.LastOrDefault();
-
-            if (page == null)
-                return;
-
-            page.Disappearing += Page_Disappearing;
-
-            _pageRef = new WeakReference<Page>(page);
+            // To call certainly a OnDetached method when the page is popped, 
+            // it executes the process removing all the effects in the page at once with Attached bindable property.
+            if (!GetIsRegistered(page))
+            {
+                SetIsRegistered(page, true);
+            }
         }
 
         protected override void OnDetached()
         {
             System.Diagnostics.Debug.WriteLine($"Detached {GetType().Name} from {Element.GetType().FullName}");
-            if (_pageRef != null && _pageRef.TryGetTarget(out var page))
-            {
-                page.Disappearing -= Page_Disappearing;
-            }
+            Element.BindingContextChanged -= BindingContextChanged;
 
             _renderer = null;
-            _pageRef = null;
         }
 
 
@@ -125,15 +129,94 @@ namespace AiForms.Effects.Droid
             return lambda.Compile();
         }
 
-        void Page_Disappearing(object sender, EventArgs e)
+        void BindingContextChanged(object sender, EventArgs e)
         {
+            if (Element.BindingContext != null)
+                return;
+
             // For Android, when a page is popped, OnDetached is automatically not called. (when iOS, it is called)
-            // So, made the Page.Disappearing event subscribe in advance 
-            // and make the effect manually removed when the page is popped.
-            if (IsAttached && !IsDisposed)
+            // So, made the BindingContextChanged event subscribe in advance 
+            // and make the effect manually removed when the BindingContext is null.
+            // However, there is the problem that it isn't called when the BindingContext remains null all along.
+            // The above solution is to use NavigationPage.Popped or Application.ModalPopping event.
+            // That's why the following code runs only when the element is in a DataTemplate.
+            if (IsAttached)
             {
                 var toRemove = Element.Effects.OfType<AiRoutingEffectBase>().FirstOrDefault(x => x.EffectId == ResolveId);
                 Device.BeginInvokeOnMainThread(() => Element.Effects.Remove(toRemove));
+            }
+        }
+
+        internal static readonly BindableProperty IsRegisteredProperty =
+            BindableProperty.CreateAttached(
+                    "IsRegistered",
+                    typeof(bool),
+                    typeof(AiEffectBase),
+                    default(bool),
+                    propertyChanged: IsRegisteredPropertyChanged
+                );
+
+        internal static void SetIsRegistered(BindableObject view, bool value)
+        {
+            view.SetValue(IsRegisteredProperty, value);
+        }
+
+        internal static bool GetIsRegistered(BindableObject view)
+        {
+            return (bool)view.GetValue(IsRegisteredProperty);
+        }
+
+        static void IsRegisteredPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (!(bool)newValue) return;
+
+            var page = bindable as Page;
+
+            if (page.Parent is NavigationPage navi)
+            {
+                navi.Popped += NaviPopped;
+            }
+            else
+            {
+                Xamarin.Forms.Application.Current.ModalPopping += ModalPopping;
+            }
+
+            void NaviPopped(object sender, NavigationEventArgs e)
+            {
+                if (e.Page != page)
+                    return;
+
+                navi.Popped -= NaviPopped;
+
+                RemoveEffects();
+            }
+
+            void ModalPopping(object sender, ModalPoppingEventArgs e)
+            {
+                if (e.Modal != page)
+                    return;
+
+                Xamarin.Forms.Application.Current.ModalPopping -= ModalPopping;
+
+                RemoveEffects();
+            }
+
+            void RemoveEffects()
+            {
+                foreach (var child in page.Descendants())
+                {
+                    foreach (var effect in child.Effects.OfType<AiRoutingEffectBase>())
+                    {
+                        Device.BeginInvokeOnMainThread(() => child.Effects.Remove(effect));
+                    }
+                }
+
+                foreach(var effect in page.Effects.OfType<AiRoutingEffectBase>())
+                {
+                    Device.BeginInvokeOnMainThread(() => page.Effects.Remove(effect));
+                }
+
+                page.ClearValue(IsRegisteredProperty);
             }
         }
     }

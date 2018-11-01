@@ -10,10 +10,9 @@
              ef:AddCommand.LongCommand="{Binding TestCommand}"
              ef:AddText.Text="Abc"
              ef:AlterLineHeight.Multiple="1.5"
-             ef:SizeToFit.CanExpand="true"        
-
-                        />
-    	<!--<ListView ItemsSource="{Binding ItemsSource}" x:Name="listview" VerticalOptions="FillAndExpand">
+             ef:SizeToFit.CanExpand="true"     />
+        
+    	<ListView ItemsSource="{Binding ItemsSource}" x:Name="listview" VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -26,6 +25,6 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>-->
+        </ListView>
     </StackLayout>
 </ContentPage>

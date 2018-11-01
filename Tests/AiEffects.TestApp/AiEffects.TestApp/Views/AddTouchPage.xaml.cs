@@ -10,7 +10,7 @@ namespace AiEffects.TestApp.Views
         public AddTouchPage()
         {
             InitializeComponent();
-
+            BindingContext = this;
             var recognizer = AddTouch.GetRecognizer(container);
 
             recognizer.TouchBegin += (sender, e) => {

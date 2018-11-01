@@ -15,11 +15,11 @@ namespace AiEffects.TestApp.ViewModels
             BackColor.Value = Color.Blue;
 
             var toggle = false;
-            GoCommand.Subscribe(_ =>
+            GoCommand.Subscribe(async _ =>
             {
                 //BackColor.Value = toggle ? Color.Blue : Color.Green;
                 //toggle = !toggle;
-                navigationService.GoBackAsync(null, false);
+                await navigationService.NavigateAsync("MainPage",null,true);
             });
         }
     }
