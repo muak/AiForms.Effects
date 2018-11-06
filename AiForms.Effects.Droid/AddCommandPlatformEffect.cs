@@ -39,9 +39,9 @@ namespace AiForms.Effects.Droid
 
         private GestureDetector _gestureDetector;
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
+            base.OnAttachedOverride();
 
             _view = Control ?? Container;
 
@@ -66,7 +66,7 @@ namespace AiForms.Effects.Droid
             _view.Touch += _view_Touch;
         }
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             if (!IsDisposed) {
                 _view.Touch -= _view_Touch;
@@ -90,12 +90,15 @@ namespace AiForms.Effects.Droid
 
             _view = null;
 
-            base.OnDetached();
+            base.OnDetachedOverride();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(e);
+
+            if (!IsSupportedByApi)
+                return;
 
             if (IsDisposed) {
                 return;

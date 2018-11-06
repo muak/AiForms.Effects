@@ -18,10 +18,8 @@ namespace AiForms.Effects.Droid
         ICommand _command;
         string _title;
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
-
             _view = Control ?? Container;
 
             _view.Touch += _view_Touch;
@@ -30,7 +28,7 @@ namespace AiForms.Effects.Droid
             UpdateCommand();
         }
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             if (!IsDisposed) {
                 _view.Touch -= _view_Touch;
@@ -43,13 +41,14 @@ namespace AiForms.Effects.Droid
             _view = null;
             _command = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
-
-            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(e);
+
+            if (!IsSupportedByApi)
+                return;
 
             if (IsDisposed) {
                 return;

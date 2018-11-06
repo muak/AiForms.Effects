@@ -44,8 +44,13 @@ namespace AiForms.Effects.Droid
             }
         }
 
+        protected bool IsSupportedByApi => Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop;
+
         protected override void OnAttached()
         {
+            if (!IsSupportedByApi)
+                return;
+
             var visual = Element as VisualElement;
             var page = visual.Navigation.NavigationStack.LastOrDefault();
             if(page == null)
@@ -65,15 +70,26 @@ namespace AiForms.Effects.Droid
             {
                 SetIsRegistered(page, true);
             }
+
+            OnAttachedOverride();
         }
+
+        protected virtual void OnAttachedOverride() { }
 
         protected override void OnDetached()
         {
+            if (!IsSupportedByApi)
+                return;
+
+            OnDetachedOverride();
+
             System.Diagnostics.Debug.WriteLine($"Detached {GetType().Name} from {Element.GetType().FullName}");
             Element.BindingContextChanged -= BindingContextChanged;
 
             _renderer = null;
         }
+
+        protected virtual void OnDetachedOverride() { }
 
 
         // whether Element is FastRenderer.(Exept Button)

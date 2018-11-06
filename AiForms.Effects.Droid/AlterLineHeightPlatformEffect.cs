@@ -10,10 +10,8 @@ namespace AiForms.Effects.Droid
     {
         private IAiEffectDroid _effect;
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
-
             if (Element is Label) {
                 _effect = new LineHeightForTextView(Container, Control, Element);
             }
@@ -25,7 +23,7 @@ namespace AiForms.Effects.Droid
 
         }
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             if (!IsDisposed) {
                 _effect.OnDetachedIfNotDisposed();
@@ -34,14 +32,15 @@ namespace AiForms.Effects.Droid
             _effect?.OnDetached();
             _effect = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
-
-            base.OnDetached();
         }
 
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(e);
+
+            if (!IsSupportedByApi)
+                return;
 
             if (IsDisposed) {
                 return;
