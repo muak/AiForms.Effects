@@ -60,6 +60,7 @@ namespace AiForms.Effects.Droid
                     // In case the element in DataTemplate, NavigationProxycan't be got.
                     // Instead of it, the page dismissal is judged by whether the BindingContext is null.
                     Element.BindingContextChanged += BindingContextChanged;
+                    OnAttachedOverride();
                     return;
                 }
             }
