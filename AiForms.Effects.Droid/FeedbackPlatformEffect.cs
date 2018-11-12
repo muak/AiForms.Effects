@@ -41,10 +41,8 @@ namespace AiForms.Effects.Droid
         private AudioManager _audioManager;
 
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
-
             _view = Control ?? Container;
 
             _isTapTargetSoundEffect = TapSoundEffectElementType.Any(x => x == Element.GetType());
@@ -70,7 +68,7 @@ namespace AiForms.Effects.Droid
             UpdateIsEnabled();
         }
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             if (!IsDisposed)
             {
@@ -97,13 +95,14 @@ namespace AiForms.Effects.Droid
 
             _audioManager = null;
             _view = null;
-
-            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(e);
+
+            if (!IsSupportedByApi)
+                return;
 
             if (IsDisposed)
             {

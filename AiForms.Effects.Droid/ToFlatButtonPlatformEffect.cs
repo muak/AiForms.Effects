@@ -25,10 +25,8 @@ namespace AiForms.Effects.Droid
         private Drawable OrgBackground;
         private StateListAnimator OrgStateListAnimator;
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
-
             NativeButton = Control as AppCompatButton;
             if (NativeButton == null)
                 return;
@@ -52,7 +50,7 @@ namespace AiForms.Effects.Droid
             NativeButton.Background = Ripple;
         }
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             if (!IsDisposed) {
                 NativeButton.Background = OrgBackground;
@@ -74,13 +72,14 @@ namespace AiForms.Effects.Droid
             Ripple = null;
             Inset = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
-
-            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(e);
+            
+            if (!IsSupportedByApi)
+                return;
 
             if (IsDisposed) {
                 return;

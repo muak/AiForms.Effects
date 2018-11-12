@@ -18,10 +18,8 @@ namespace AiForms.Effects.Droid
         float _radius;
         Drawable _orgDrawable;
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
-
             _view = Container ?? Control;
 
             _border = new GradientDrawable();
@@ -33,7 +31,7 @@ namespace AiForms.Effects.Droid
             UpdateBorder();
         }
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             if (!IsDisposed) {    // Check disposed
                 _view.Background = _orgDrawable;
@@ -47,13 +45,14 @@ namespace AiForms.Effects.Droid
             _border = null;
             _view = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
-
-            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
         {
             base.OnElementPropertyChanged(args);
+
+            if (!IsSupportedByApi)
+                return;
 
             if (IsDisposed) {
                 return;
