@@ -13,17 +13,15 @@ namespace AiForms.Effects.Droid
     {
         EditText _editText;
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
-
             _editText = Control as EditText;
 
             UpdateText();
             UpdateColor();
         }
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             if (!IsDisposed) {
                 _editText.Hint = string.Empty;
@@ -31,13 +29,14 @@ namespace AiForms.Effects.Droid
             }
             _editText = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
-
-            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(e);
+
+            if (!IsSupportedByApi)
+                return;
 
             if (IsDisposed) {
                 return;

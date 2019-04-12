@@ -15,6 +15,9 @@ namespace AiForms.Effects.Droid
     {
         protected override void OnAttached()
         {
+            if (!IsSupportedByApi)
+                return;
+
             if (!(Element is XF.Page)) return;
 
             var layout = Floating.GetContent(Element);

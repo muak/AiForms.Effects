@@ -420,37 +420,37 @@ When device rotates, text position will not be right in case android.
 This Effect add Command function to a view.  
 There are properties of Command and Parameter for tap and long tap.
 
-### Supported View (in case Xamarin.Forms 2.3.4)
+### Supported View (in case Xamarin.Forms 3.6.0)
 
-|                   | iOS  | Android |
-| ----------------- | ---- | ------- |
-| ActivityIndicator | ✅    | ✅       |
-| BoxView           | ✅    | ✅       |
-| Button            | ✅    | ✅       |
-| DatePicker        | ❌    | ✅       |
-| Editor            | ❌    | ❌       |
-| Entry             | ❌    | ❌       |
-| Image             | ✅    | ✅       |
-| Label             | ✅    | ✅       |
-| ListView          | ✅    | ❌       |
-| Picker            | ❌    | ✅       |
-| ProgressBar       | ✅    | ✅       |
-| SearchBar         | ❌    | ❌       |
-| Slider            | ✅    | ❌       |
-| Stepper           | ✅    | ❌       |
-| Switch            | ❌    | ❌       |
-| TableView         | ❌    | ❌       |
-| TimePicker        | ❌    | ✅       |
-| WebView           | ❌    | ❌       |
-| ContentPresenter  | ✅    | ✅       |
-| ContentView       | ✅    | ✅       |
-| Frame             | ✅    | ❌       |
-| ScrollView        | ✅    | ❌       |
-| TemplatedView     | ✅    | ✅       |
-| AbsoluteLayout    | ✅    | ✅       |
-| Grid              | ✅    | ✅       |
-| RelativeLayout    | ✅    | ✅       |
-| StackLayout       | ✅    | ✅       |
+|                   | iOS | Android |
+| ----------------- | --- | ------- |
+| ActivityIndicator | ✅   | ✅       |
+| BoxView           | ✅   | ✅       |
+| Button            | ✅   | ✅       |
+| DatePicker        | ❌   | ✅       |
+| Editor            | ❌   | ❌       |
+| Entry             | ❌   | ❌       |
+| Image             | ✅   | ✅       |
+| Label             | ✅   | ✅       |
+| ListView          | ✅   | ❌       |
+| Picker            | ❌   | ✅       |
+| ProgressBar       | ✅   | ✅       |
+| SearchBar         | ❌   | ❌       |
+| Slider            | ✅   | ❌       |
+| Stepper           | ✅   | ❌       |
+| Switch            | ❌   | ❌       |
+| TableView         | ❌   | ❌       |
+| TimePicker        | ❌   | ✅       |
+| WebView           | ❌   | ❌       |
+| ContentPresenter  | ✅   | ✅       |
+| ContentView       | ✅   | ✅       |
+| Frame             | ✅   | ❌       |
+| ScrollView        | ❌   | ❌       |
+| TemplatedView     | ✅   | ✅       |
+| AbsoluteLayout    | ✅   | ✅       |
+| Grid              | ✅   | ✅       |
+| RelativeLayout    | ✅   | ✅       |
+| StackLayout       | ✅   | ✅       |
 
 ### Properties
 
@@ -689,13 +689,13 @@ This is the effect that alter the color of an element which it cannot change col
 
 ### Supported views
 
-|                   | iOS  | Android | which part |
-| ----------------- | ---- | ------- | ---------- |
-| Page              |      | ✅       | Statusbar  |
-| Slider            | ✅    | ✅       | Trackbar   |
-| Switch            | ✅    | ✅       | Trackbar   |
-| Entry             |      | ✅       | Under line |
-| Editor            |      | ✅       | Under line |
+|        | iOS | Android | which part |
+| ------ | --- | ------- | ---------- |
+| Page   |     | ✅       | Statusbar  |
+| Slider | ✅   | ✅       | Trackbar   |
+| Switch | ✅   | ✅       | Trackbar   |
+| Entry  |     | ✅       | Under line |
+| Editor |     | ✅       | Under line |
 
 ### Properties
 
@@ -752,6 +752,7 @@ This effect supports Editor only.
 ## Contributors
 
 * [yuka-abn](https://github.com/yuka-abn)
+* [gentledepp](https://github.com/gentledepp)
 
 ## License
 

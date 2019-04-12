@@ -101,7 +101,7 @@
 				ef:AddCommand.EnableSound="{Binding EnableSound}"
 				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
 				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
-
+                
 			<Entry Text="Entry"  AutomationId="Entry"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
@@ -167,7 +167,7 @@
 				ef:AddCommand.EnableSound="{Binding EnableSound}"
 				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
 				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
-
+                
 			<SearchBar AutomationId="SearchBar" HeightRequest="25"
 				ef:AddCommand.On="{Binding EffectOn}" 
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
@@ -233,7 +233,7 @@
 				ef:AddCommand.EnableSound="{Binding EnableSound}"
 				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
 				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
-
+                
 			<WebView Source="https://www.google.co.jp/" HeightRequest="60" BackgroundColor="Green" AutomationId="WebView"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"
@@ -276,8 +276,8 @@
 				ef:AddCommand.LongCommandParameter="LongFrame"
 				ef:AddCommand.EnableSound="{Binding EnableSound}"
 				ef:AddCommand.EnableRipple="{Binding EnableRipple}"
-				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/> 
-
+				ef:AddCommand.SyncCanExecute="{Binding SyncCanExecute}"/>
+                
 			<ScrollView HeightRequest="20" BackgroundColor="Green" AutomationId="ScrollView"
 				ef:AddCommand.On="{Binding EffectOn}"  
 				ef:AddCommand.EffectColor="{Binding EffectColor}"

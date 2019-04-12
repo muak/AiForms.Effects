@@ -16,19 +16,9 @@ namespace AiForms.Effects.Droid
         TouchRecognizer _recognizer;
         Context _context;
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
-
             _viewRef = new WeakReference<Android.Views.View>(Control ?? Container);
-
-
-            if (Control is Android.Widget.ListView || Control is Android.Widget.ScrollView)
-            {
-                // Except ListView and ScrollView because of Raising Exception. 
-                Device.BeginInvokeOnMainThread(() => AddTouch.SetOn(Element, false));
-                return;
-            }
 
             _recognizer = AddTouch.GetRecognizer(Element);
 
@@ -63,7 +53,7 @@ namespace AiForms.Effects.Droid
         }
 
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             if (!IsDisposed)
             {
@@ -78,8 +68,6 @@ namespace AiForms.Effects.Droid
             _recognizer = null;
             _viewRef = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
-
-            base.OnDetached();
         }
 
     }

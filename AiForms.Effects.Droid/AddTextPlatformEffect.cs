@@ -19,10 +19,8 @@ namespace AiForms.Effects.Droid
         private ViewGroup _container;
         private FastRendererOnLayoutChangeListener _fastListener;
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
-
             _container = Container;
 
             _textView = new TextView(_context);
@@ -50,7 +48,7 @@ namespace AiForms.Effects.Droid
             UpdateLayout(_textView, Element, _container);
         }
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             System.Diagnostics.Debug.WriteLine(Element.GetType().FullName);
 
@@ -74,13 +72,14 @@ namespace AiForms.Effects.Droid
             _fastListener?.Dispose();
             _fastListener = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
-
-            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
         {
             base.OnElementPropertyChanged(args);
+
+            if (!IsSupportedByApi)
+                return;
 
             if (IsDisposed) {
                 return;

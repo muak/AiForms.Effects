@@ -41,10 +41,8 @@ namespace AiForms.Effects.Droid
         private AudioManager _audioManager;
 
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
-
             _view = Control ?? Container;
 
             _isTapTargetSoundEffect = TapSoundEffectElementType.Any(x => x == Element.GetType());
@@ -70,7 +68,7 @@ namespace AiForms.Effects.Droid
             UpdateIsEnabled();
         }
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             if (!IsDisposed)
             {
@@ -78,7 +76,9 @@ namespace AiForms.Effects.Droid
                 {
                     _view.Touch -= OnOverlayTouch;
                     _view.RemoveOnLayoutChangeListener(_fastListener);
-                    _rippleOverlay.RemoveFromParent();
+                    // If a NavigationPage is used and the following code is enabled, a null exception occurs when a NavigationPageRenderer is disposed of.
+                    // So this code is disabled.
+                    //_rippleOverlay.RemoveFromParent();
                     _fastListener.Dispose();
                     _fastListener = null;
                     _rippleOverlay.Dispose();
@@ -97,13 +97,14 @@ namespace AiForms.Effects.Droid
 
             _audioManager = null;
             _view = null;
-
-            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(e);
+
+            if (!IsSupportedByApi)
+                return;
 
             if (IsDisposed)
             {

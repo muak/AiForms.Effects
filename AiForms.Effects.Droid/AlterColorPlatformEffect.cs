@@ -12,10 +12,8 @@ namespace AiForms.Effects.Droid
     {
         IAiEffectDroid _effect;
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
-
             if (Element is Slider) {
                 _effect = new AlterColorSlider(Control as SeekBar, Element);
             }
@@ -36,7 +34,7 @@ namespace AiForms.Effects.Droid
             _effect?.Update();
         }
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             if (!IsDisposed) {
                 _effect?.OnDetachedIfNotDisposed();
@@ -45,13 +43,14 @@ namespace AiForms.Effects.Droid
             _effect?.OnDetached();
             _effect = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
-
-            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
         {
             base.OnElementPropertyChanged(args);
+
+            if (!IsSupportedByApi)
+                return;
 
             if (IsNullOrDisposed) {
                 return;

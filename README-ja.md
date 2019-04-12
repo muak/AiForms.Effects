@@ -404,37 +404,37 @@ Androidの場合、デバイスを回転したときテキストの位置が正�
 これは任意のviewにCommandの機能を追加するEffectです。
 タップとロングタップにそれぞれのCommandとParameterを設定できます。
 
-### Supported View (in case Xamarin.Forms 2.3.4)
+### Supported View (in case Xamarin.Forms 3.6.0)
 
-|                   | iOS  | Android |
-| ----------------- | ---- | ------- |
-| ActivityIndicator | ✅    | ✅       |
-| BoxView           | ✅    | ✅       |
-| Button            | ✅    | ✅       |
-| DatePicker        | ❌    | ✅       |
-| Editor            | ❌    | ❌       |
-| Entry             | ❌    | ❌       |
-| Image             | ✅    | ✅       |
-| Label             | ✅    | ✅       |
-| ListView          | ✅    | ❌       |
-| Picker            | ❌    | ✅       |
-| ProgressBar       | ✅    | ✅       |
-| SearchBar         | ❌    | ❌       |
-| Slider            | ✅    | ❌       |
-| Stepper           | ✅    | ❌       |
-| Switch            | ❌    | ❌       |
-| TableView         | ❌    | ❌       |
-| TimePicker        | ❌    | ✅       |
-| WebView           | ❌    | ❌       |
-| ContentPresenter  | ✅    | ✅       |
-| ContentView       | ✅    | ✅       |
-| Frame             | ✅    | ❌       |
-| ScrollView        | ✅    | ❌       |
-| TemplatedView     | ✅    | ✅       |
-| AbsoluteLayout    | ✅    | ✅       |
-| Grid              | ✅    | ✅       |
-| RelativeLayout    | ✅    | ✅       |
-| StackLayout       | ✅    | ✅       |
+|                   | iOS | Android |
+| ----------------- | --- | ------- |
+| ActivityIndicator | ✅   | ✅       |
+| BoxView           | ✅   | ✅       |
+| Button            | ✅   | ✅       |
+| DatePicker        | ❌   | ✅       |
+| Editor            | ❌   | ❌       |
+| Entry             | ❌   | ❌       |
+| Image             | ✅   | ✅       |
+| Label             | ✅   | ✅       |
+| ListView          | ✅   | ❌       |
+| Picker            | ❌   | ✅       |
+| ProgressBar       | ✅   | ✅       |
+| SearchBar         | ❌   | ❌       |
+| Slider            | ✅   | ❌       |
+| Stepper           | ✅   | ❌       |
+| Switch            | ❌   | ❌       |
+| TableView         | ❌   | ❌       |
+| TimePicker        | ❌   | ✅       |
+| WebView           | ❌   | ❌       |
+| ContentPresenter  | ✅   | ✅       |
+| ContentView       | ✅   | ✅       |
+| Frame             | ✅   | ❌       |
+| ScrollView        | ❌   | ❌       |
+| TemplatedView     | ✅   | ✅       |
+| AbsoluteLayout    | ✅   | ✅       |
+| Grid              | ✅   | ✅       |
+| RelativeLayout    | ✅   | ✅       |
+| StackLayout       | ✅   | ✅       |
 
 ### Properties
 
@@ -669,13 +669,13 @@ viewをタップするとPickerが表示され、日付を選択すると、そ�
 
 ### Supported views
 
-|                   | iOS  | Android | which part |
-| ----------------- | ---- | ------- | ---------- |
-| Page              |      | ✅       | Statusbar  |
-| Slider            | ✅    | ✅       | Trackbar   |
-| Switch            | ✅    | ✅       | Trackbar   |
-| Entry             |      | ✅       | Under line |
-| Editor            |      | ✅       | Under line |
+|        | iOS | Android | which part |
+| ------ | --- | ------- | ---------- |
+| Page   |     | ✅       | Statusbar  |
+| Slider | ✅   | ✅       | Trackbar   |
+| Switch | ✅   | ✅       | Trackbar   |
+| Entry  |     | ✅       | Under line |
+| Editor |     | ✅       | Under line |
 
 ### Properties
 
@@ -729,6 +729,7 @@ viewをタップするとPickerが表示され、日付を選択すると、そ�
 ## Contributors
 
 * [yuka-abn](https://github.com/yuka-abn)
+* [gentledepp](https://github.com/gentledepp)
 
 ## License
 

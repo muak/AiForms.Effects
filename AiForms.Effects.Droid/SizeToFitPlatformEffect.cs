@@ -17,17 +17,15 @@ namespace AiForms.Effects.Droid
         FormsTextView _view;
         float _orgFontSize;
 
-        protected override void OnAttached()
+        protected override void OnAttachedOverride()
         {
-            base.OnAttached();
-
             _view = Control as FormsTextView;
             _orgFontSize = _view.TextSize;
 
             UpdateFitFont();
         }
 
-        protected override void OnDetached()
+        protected override void OnDetachedOverride()
         {
             if (!IsDisposed){
                 _view.SetTextSize(ComplexUnitType.Px, _orgFontSize);
@@ -35,13 +33,15 @@ namespace AiForms.Effects.Droid
             }
             _view = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
-
-            base.OnDetached();
         }
 
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
         {
             base.OnElementPropertyChanged(args);
+
+            if (!IsSupportedByApi)
+                return;
+
             if (args.PropertyName == VisualElement.HeightProperty.PropertyName ||
                 args.PropertyName == VisualElement.WidthProperty.PropertyName ||
                 args.PropertyName == Label.TextProperty.PropertyName ||
