@@ -20,14 +20,6 @@ namespace AiForms.Effects.Droid
         {
             _viewRef = new WeakReference<Android.Views.View>(Control ?? Container);
 
-
-            if (Control is Android.Widget.ListView || Control is Android.Widget.ScrollView)
-            {
-                // Except ListView and ScrollView because of Raising Exception. 
-                Device.BeginInvokeOnMainThread(() => AddTouch.SetOn(Element, false));
-                return;
-            }
-
             _recognizer = AddTouch.GetRecognizer(Element);
 
             if(_viewRef.TryGetTarget(out var view)){

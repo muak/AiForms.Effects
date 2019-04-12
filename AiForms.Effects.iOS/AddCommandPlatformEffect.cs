@@ -32,8 +32,18 @@ namespace AiForms.Effects.iOS
         private bool _isDisableEffectTarget;
         private readonly float _disabledAlpha = 0.3f;
 
+        private bool _isForceDetached;
+
         protected override void OnAttached()
         {
+            if (Control is UIWebView || Control is UIScrollView)
+            {
+                _isForceDetached = true;
+                // Except WebView and ScrollView because of Raising Exception when OnDetached. 
+                Device.BeginInvokeOnMainThread(() => AddCommand.SetOn(Element, false));
+                return;
+            }
+
             base.OnAttached();
 
             _view = Control ?? Container;
@@ -59,6 +69,10 @@ namespace AiForms.Effects.iOS
 
         protected override void OnDetached()
         {
+            if(_isForceDetached)
+            {
+                return;
+            }
             base.OnDetached();
 
             _view.RemoveGestureRecognizer(_tapGesture);

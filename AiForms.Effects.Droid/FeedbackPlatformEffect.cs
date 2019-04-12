@@ -76,7 +76,9 @@ namespace AiForms.Effects.Droid
                 {
                     _view.Touch -= OnOverlayTouch;
                     _view.RemoveOnLayoutChangeListener(_fastListener);
-                    _rippleOverlay.RemoveFromParent();
+                    // If a NavigationPage is used and the following code is enabled, a null exception occurs when a NavigationPageRenderer is disposed of.
+                    // So this code is disabled.
+                    //_rippleOverlay.RemoveFromParent();
                     _fastListener.Dispose();
                     _fastListener = null;
                     _rippleOverlay.Dispose();
