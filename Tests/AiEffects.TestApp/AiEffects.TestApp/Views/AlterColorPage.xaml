@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage 
 	xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -30,7 +30,7 @@
 			<Label Text="Color" VerticalOptions="Center" />
 			<Switch IsToggled="{Binding ColorToggle.Value}" VerticalOptions="Center" />
 		</StackLayout>
-		<Slider BackgroundColor="White"  Minimum="0" Maximum="1" Value="0.5" 
+		<Slider BackgroundColor="White"  Minimum="0" Maximum="1" Value="0.5" HeightRequest="50"
 			ef:AlterColor.On="{Binding EffectOn.Value}" ef:AlterColor.Accent="{Binding Accent.Value}" />
 		<StackLayout Orientation="Horizontal" BackgroundColor="White">
 			<Label Text="Switch" HorizontalOptions="FillAndExpand" />

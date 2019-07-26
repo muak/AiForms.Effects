@@ -92,7 +92,7 @@ namespace AiForms.Effects.Droid
                     color,
                 });
 
-            _thumb.SetTint(color);
+            _thumb.SetColorFilter(color, PorterDuff.Mode.SrcIn);
         }
 
 

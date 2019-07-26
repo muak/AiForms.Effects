@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Effects</id>
@@ -8,24 +8,14 @@
         <owners>kamu</owners>
         <projectUrl>https://github.com/muak/AiForms.Effects</projectUrl>
         <licenseUrl>https://github.com/muak/AiForms.Effects/blob/master/LICENSE.txt</licenseUrl>
+        <iconUrl>https://raw.githubusercontent.com/muak/AiForms.Effects/master/images/icon.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Xamarin.Forms Effects(add Border / add placeholder / add Text / add Command / add NumberPicker, TimePicker and DatePicker / alter color for switch and slider / alter LineHeight of Label and Editor / Button to flat / Size to fit for Label / add touch events / Floating / Feedback) for iOS / Android</description>
         <summary></summary>
         <releaseNotes>    
-## New Features
-
-* Feedback – add touch feedback effect (color and sound) without command.
-* Floating – arrange some floating views (e.g. FAB) at any place over a page.
-* TriggerProperty – An Effect can be invoked by setting main properties.
-
 ## Bug fixes
 
-* Border – When changing the BackgroundColor dynamically, the border disappears. #35
-* AlterColor – Slider progressbar color isn't changed.
-
-## Others
-
-* Updated dependency Xamarin.Forms Version to 3.6.0.293080
+* AlterColor – Slider thumb color isn't changed.
         </releaseNotes>
         <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect Border TimePicker DatePicker Placeholder Color SizeToFit TouchEvents Floating</tags>
         <language>en-US</language>
