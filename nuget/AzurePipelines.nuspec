@@ -8,6 +8,7 @@
         <owners>kamu</owners>
         <projectUrl>https://github.com/muak/AiForms.Effects</projectUrl>
         <licenseUrl>https://github.com/muak/AiForms.Effects/blob/master/LICENSE.txt</licenseUrl>
+        <iconUrl>https://raw.githubusercontent.com/muak/AiForms.Effects/master/images/icon.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Xamarin.Forms Effects(add Border / add placeholder / add Text / add Command / add NumberPicker, TimePicker and DatePicker / alter color for switch and slider / alter LineHeight of Label and Editor / Button to flat / Size to fit for Label / add touch events / Floating / Feedback) for iOS / Android</description>
         <summary></summary>

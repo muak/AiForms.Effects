@@ -15,7 +15,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidTlsProvider></AndroidTlsProvider>
-    <ReleaseVersion>1.1.2</ReleaseVersion>
+    <ReleaseVersion>0.0.5-pre</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -216,7 +216,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AiForms.Effects\AiForms.Effects.csproj">
-      <Project>{C9EEDB6E-0DDB-4CDE-A633-21ABC199D40E}</Project>
+      <Project>{14FCC004-FC52-4028-A5AE-228AFD6F6222}</Project>
       <Name>AiForms.Effects</Name>
     </ProjectReference>
   </ItemGroup>
