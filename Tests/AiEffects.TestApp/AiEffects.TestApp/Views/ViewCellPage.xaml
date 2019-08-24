@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    xmlns:sv="clr-namespace:AiForms.Renderers;assembly=SettingsView"
     x:Class="AiEffects.TestApp.Views.ViewCellPage">
     <StackLayout Orientation="Vertical">
         <Label Text="XYZ" BackgroundColor="Red" HeightRequest="30" VerticalOptions="Start"
@@ -12,12 +13,13 @@
              ef:AlterLineHeight.Multiple="1.5"
              ef:SizeToFit.CanExpand="true"     />
         
-    	<ListView ItemsSource="{Binding ItemsSource}" x:Name="listview" VerticalOptions="FillAndExpand">
+    	<!--<ListView ItemsSource="{Binding ItemsSource}" x:Name="listview" VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding}" HorizontalOptions="StartAndExpand" />
+                            <Slider Minimum="0" Maximum="1" Value="0.5" ef:AlterColor.Accent="Red" HorizontalOptions="FillAndExpand" />
                             <ContentView BackgroundColor="Red" HorizontalOptions="End" WidthRequest="30" HeightRequest="30"
                                 ef:AddCommand.On="true" ef:AddCommand.Command="{Binding BindingContext.TestCommand,Source={x:Reference listview}}" ef:AddCommand.EnableRipple="true"
                             />
@@ -25,6 +27,23 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
+        <sv:SettingsView>
+            <sv:Section ItemsSource="{Binding ItemsSource}" x:Name="listview">
+                <sv:Section.ItemTemplate>
+                    <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding}" HorizontalOptions="StartAndExpand" />
+                            <Slider Minimum="0" Maximum="1" Value="0.5" ef:AlterColor.Accent="Red" HorizontalOptions="FillAndExpand" />
+                            <ContentView BackgroundColor="Red" HorizontalOptions="End" WidthRequest="30" HeightRequest="30"
+                                ef:AddCommand.On="true" ef:AddCommand.Command="{Binding BindingContext.TestCommand,Source={x:Reference listview}}" ef:AddCommand.EnableRipple="true"
+                            />
+                        </StackLayout> 
+                    </ViewCell>
+                </DataTemplate>
+                </sv:Section.ItemTemplate>
+            </sv:Section>
+        </sv:SettingsView>
     </StackLayout>
 </ContentPage>

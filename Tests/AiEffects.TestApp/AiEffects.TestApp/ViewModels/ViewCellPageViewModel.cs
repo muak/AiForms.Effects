@@ -12,7 +12,7 @@ namespace AiEffects.TestApp.ViewModels
 
         public ViewCellPageViewModel(INavigationService navigationService, IPageDialogService pageDlg)
         {
-            for (var i = 0; i < 20;i++){
+            for (var i = 0; i < 40;i++){
                 ItemsSource.Add("Name");
             }
 
