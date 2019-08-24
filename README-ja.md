@@ -83,13 +83,26 @@ iOSで使用するために、AppDelegate.csに以下のようなコードの追
 
 ```csharp
 public override bool FinishedLaunching(UIApplication app, NSDictionary options) {
+    
     global::Xamarin.Forms.Forms.Init();
-
     AiForms.Effects.iOS.Effects.Init();  //need to write here
 
-    LoadApplication(new App(new iOSInitializer()));
-
     return base.FinishedLaunching(app, options);
+}
+```
+
+### Android プロジェクト
+
+MainActivity.cs に以下のようなコードを追記します。
+
+```csharp
+protected override void OnCreate(Bundle bundle) {
+            
+    base.OnCreate(bundle);
+
+    global::Xamarin.Forms.Forms.Init(this, bundle);
+    AiForms.Effects.Droid.Effects.Init(); //need to write here
+    ...
 }
 ```
 

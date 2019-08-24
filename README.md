@@ -85,17 +85,31 @@ You need to install this nuget package to .NETStandard project and each platform
 
 ### for iOS project
 
-To use by iOS, you need to write the following code in AppDelegate.cs.
+You need to write the following code in AppDelegate.cs:
 
 ```csharp
 public override bool FinishedLaunching(UIApplication app, NSDictionary options) {
+    
     global::Xamarin.Forms.Forms.Init();
-
     AiForms.Effects.iOS.Effects.Init();  //need to write here
 
-    LoadApplication(new App(new iOSInitializer()));
-
+    ...
     return base.FinishedLaunching(app, options);
+}
+```
+
+### for Android project
+
+You need to write the following code in MainActivity.cs:
+
+```csharp
+protected override void OnCreate(Bundle bundle) {
+            
+    base.OnCreate(bundle);
+
+    global::Xamarin.Forms.Forms.Init(this, bundle);
+    AiForms.Effects.Droid.Effects.Init(); //need to write here
+    ...
 }
 ```
 

@@ -18,6 +18,7 @@ namespace AiEffects.TestApp.Droid
 
             global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            AiForms.Effects.Droid.Effects.Init();
 
             Xamarin.Forms.Forms.ViewInitialized += (object sender, Xamarin.Forms.ViewInitializedEventArgs e) => {
                 if (!string.IsNullOrWhiteSpace(e.View.AutomationId)) {
