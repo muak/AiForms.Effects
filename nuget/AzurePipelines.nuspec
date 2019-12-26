@@ -15,11 +15,10 @@
         <releaseNotes>
 ## Changes
 
-* Add the Android platform init method.
 
 ## Bug fixes
 
-* AlterColor – Slider thumb color isn't changed.
+* AddText – Fixed the end of characters is sometimes omitted.
         </releaseNotes>
         <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect Border TimePicker DatePicker Placeholder Color SizeToFit TouchEvents Floating</tags>
         <language>en-US</language>
