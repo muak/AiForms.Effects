@@ -744,6 +744,21 @@ viewをタップするとPickerが表示され、日付を選択すると、そ�
 * [yuka-abn](https://github.com/yuka-abn)
 * [gentledepp](https://github.com/gentledepp)
 
+## 寄付
+
+開発継続のため、寄付を募集しています。
+
+寄付をいただけるとやる気が非常にアップしますので、どうかよろしくお願いいたします🙇
+
+* [PayPalMe](https://paypal.me/kamusoftJP?locale.x=ja_JP)
+
+## スポンサー
+
+スポンサーも募集しています。
+こちらはサブスクリプション制になります。
+
+* [GitHub Sponsors](https://github.com/sponsors/muak)
+
 ## License
 
 MIT Licensed.

@@ -768,6 +768,22 @@ This effect supports Editor only.
 * [yuka-abn](https://github.com/yuka-abn)
 * [gentledepp](https://github.com/gentledepp)
 
+## Donation
+
+I am asking for your donation for continuous development🙇
+
+Your donation will allow me to work harder and harder.
+
+* [PayPalMe](https://paypal.me/kamusoftJP?locale.x=ja_JP)
+
+
+## Sponsors
+
+I am asking for sponsors too.
+This is a subscription.
+
+* [GitHub Sponsors](https://github.com/sponsors/muak)
+
 ## License
 
 MIT Licensed.

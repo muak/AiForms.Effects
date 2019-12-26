@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using System;
 using Android.Content;
+using System.Threading.Tasks;
 
 [assembly: ExportEffect(typeof(AddTextPlatformEffect), nameof(AddText))]
 namespace AiForms.Effects.Droid
@@ -162,11 +163,12 @@ namespace AiForms.Effects.Droid
 
             var textpaint = textview.Paint;
             var rect = new Android.Graphics.Rect();
-            textpaint.GetTextBounds(textview.Text, 0, textview.Text.Length, rect);
+            //textpaint.GetTextBounds(textview.Text, 0, textview.Text.Length, rect); // GetTextBound.Width is sometimes a little small less than actual width.
+            var textWidth = (int)textpaint.MeasureText(textview.Text);
 
             var xPos = 0;
             if (AddText.GetHorizontalAlign(element) == Xamarin.Forms.TextAlignment.End) {
-                xPos = v.Width - rect.Width() - textview.PaddingLeft - textview.PaddingRight - (int)margin.Right - 4;
+                xPos = v.Width - textWidth - textview.PaddingLeft - textview.PaddingRight - (int)margin.Right - 4;
                 if (xPos < (int)margin.Left) {
                     xPos = (int)margin.Left;
                 }
@@ -174,7 +176,7 @@ namespace AiForms.Effects.Droid
             }
             else {
                 xPos = (int)margin.Left;
-                textview.Right = (int)margin.Left + rect.Width() + textview.PaddingLeft + textview.PaddingRight + 4;
+                textview.Right = (int)margin.Left + textWidth + textview.PaddingLeft + textview.PaddingRight + 4;
                 if (textview.Right >= v.Width) {
                     textview.Right = v.Width - (int)margin.Right;
                 }
@@ -189,6 +191,8 @@ namespace AiForms.Effects.Droid
 
             textview.Top = yPos;
             textview.Bottom = yPos + height;
+
+            textview.Text = textview.Text; // HACK: For some reason, Invalidate is not work. Use reassign text instead of.
         }
 
         internal class ContainerOnLayoutChangeListener : Java.Lang.Object, Android.Views.View.IOnLayoutChangeListener

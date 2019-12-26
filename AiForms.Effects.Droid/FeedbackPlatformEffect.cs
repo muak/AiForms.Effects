@@ -28,7 +28,11 @@ namespace AiForms.Effects.Droid
             typeof(Xamarin.Forms.AbsoluteLayout),
             typeof(Grid),
             typeof(Xamarin.Forms.RelativeLayout),
-            typeof(StackLayout)
+            typeof(StackLayout),
+            typeof(Xamarin.Forms.Button),
+            typeof(Xamarin.Forms.Image),
+            typeof(Xamarin.Forms.BoxView),
+            typeof(Xamarin.Forms.Label),
         };
 
         private Android.Views.View _view;
@@ -142,7 +146,7 @@ namespace AiForms.Effects.Droid
                 PlaySound();
             }
 
-            _view.DispatchTouchEvent(e.Event);
+            _view?.DispatchTouchEvent(e.Event);
 
             e.Handled = false;
         }
