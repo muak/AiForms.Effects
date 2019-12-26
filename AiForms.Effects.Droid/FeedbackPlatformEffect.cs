@@ -142,7 +142,7 @@ namespace AiForms.Effects.Droid
                 PlaySound();
             }
 
-            _view.DispatchTouchEvent(e.Event);
+            _view?.DispatchTouchEvent(e.Event);
 
             e.Handled = false;
         }
