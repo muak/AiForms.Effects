@@ -759,6 +759,10 @@ viewをタップするとPickerが表示され、日付を選択すると、そ�
 
 * [GitHub Sponsors](https://github.com/sponsors/muak)
 
+## 謝辞
+
+* [boze0904](https://github.com/boze0904)
+
 ## License
 
 MIT Licensed.

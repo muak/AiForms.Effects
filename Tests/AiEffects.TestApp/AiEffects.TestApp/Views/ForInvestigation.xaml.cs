@@ -11,5 +11,15 @@ namespace AiEffects.TestApp.Views
         {
             InitializeComponent();
         }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+        }
+
+        void ToolbarItem_Clicked(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
     }
 }

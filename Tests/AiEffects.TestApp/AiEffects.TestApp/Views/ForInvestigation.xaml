@@ -3,16 +3,21 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
-    x:Class="AiEffects.TestApp.Views.ForInvestigation">
+    x:Class="AiEffects.TestApp.Views.ForInvestigation"
+    x:Name="me">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Go" Command="{Binding GoCommand}" />
+        <ToolbarItem Text="Go" Clicked="ToolbarItem_Clicked" />
     </ContentPage.ToolbarItems>
     
-    <StackLayout>
-        <Label Text="Hoge" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White"
-               ef:Border.Width="3" ef:Border.Color="Red"
-               ef:Border.Radius="4" BackgroundColor="{Binding BackColor.Value}"
-       />
-    </StackLayout>
+    <CollectionView ItemsSource="{Binding ItemsSource}">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="1" />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Label Text="{Binding}" ef:AddCommand.Command="{Binding BindingContext.CellCommand,Source={x:Reference me}}" />
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

@@ -160,7 +160,7 @@ namespace AiForms.Effects.Droid
             if (IsAttached)
             {
                 var toRemove = Element.Effects.OfType<AiRoutingEffectBase>().FirstOrDefault(x => x.EffectId == ResolveId);
-                Device.BeginInvokeOnMainThread(() => Element.Effects.Remove(toRemove));
+                Device.BeginInvokeOnMainThread(() => Element?.Effects.Remove(toRemove));
             }
         }
 
