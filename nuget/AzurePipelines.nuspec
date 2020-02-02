@@ -19,6 +19,7 @@
 
 ## Bug fixes
 
+* Android – Fixed null exception when popping a page. #54
 * AddText – Fixed the end of characters is sometimes omitted #48.
 * Feedback – Fixed Android OnOverlayTouch crash #49.
 
