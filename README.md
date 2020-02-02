@@ -784,6 +784,10 @@ This is a subscription.
 
 * [GitHub Sponsors](https://github.com/sponsors/muak)
 
+## Special Thanks
+
+* [boze0904](https://github.com/boze0904)
+
 ## License
 
 MIT Licensed.
