@@ -10,37 +10,27 @@ namespace AiEffects.TestApp.ViewModels
     public class ForInvestigationViewModel
     {
         public ReactivePropertySlim<Color> BackColor { get; } = new ReactivePropertySlim<Color>();
-        public List<string> ItemsSource { get; set; } = new List<string>();
-
+        
         public ReactiveCommand GoCommand { get; set; } = new ReactiveCommand();
 
-        public ReactiveCommand CellCommand { get; set; } = new ReactiveCommand();
+        public ReactiveCommand HogeCommand { get; set; } 
+
+        public ReactivePropertySlim<bool> CanExecute { get; } = new ReactivePropertySlim<bool>();
 
         public ForInvestigationViewModel(INavigationService navigationService)
         {
             BackColor.Value = Color.Blue;
-
-            ItemsSource.Add("ABC");
-            ItemsSource.Add("CC");
-            ItemsSource.Add("DD");
-            ItemsSource.Add("EEE");
-            ItemsSource.Add("FFF");
-            ItemsSource.Add("GADSFS");
-            ItemsSource.Add("HDSGDG");
-            ItemsSource.Add("IGDG");
-            ItemsSource.Add("YYUY");
-            ItemsSource.Add("XXX");
+          
 
             var toggle = false;
             GoCommand.Subscribe(async _ =>
             {
-                //BackColor.Value = toggle ? Color.Blue : Color.Green;
-                //toggle = !toggle;
-                //await navigationService.NavigateAsync("MainPage",null,true);
-                await navigationService.GoBackAsync();
+                CanExecute.Value = !CanExecute.Value;
             });
 
-            CellCommand.Subscribe(_ =>
+            HogeCommand = CanExecute.ToReactiveCommand();
+
+            HogeCommand.Subscribe(_ =>
             {
                 Debug.WriteLine("Cell Tap!");
             });

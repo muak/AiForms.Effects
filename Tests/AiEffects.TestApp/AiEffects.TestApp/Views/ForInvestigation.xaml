@@ -7,17 +7,13 @@
     x:Name="me">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Go" Clicked="ToolbarItem_Clicked" />
+        <ToolbarItem Text="Go" Command="{Binding GoCommand}" />
     </ContentPage.ToolbarItems>
     
-    <CollectionView ItemsSource="{Binding ItemsSource}">
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="1" />
-        </CollectionView.ItemsLayout>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Label Text="{Binding}" ef:AddCommand.Command="{Binding BindingContext.CellCommand,Source={x:Reference me}}" />
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+    <ContentView ef:AddCommand.Command="{Binding HogeCommand}"
+                 ef:AddCommand.EffectColor="Red"
+                 ef:AddCommand.SyncCanExecute="True"
+                 BackgroundColor="Blue">
+        <Label Text="Hoge" />
+    </ContentView>
 </ContentPage>

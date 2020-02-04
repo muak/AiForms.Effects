@@ -180,7 +180,7 @@ namespace AiForms.Effects.Droid
             _enableSound = GetEnableSound();
         }
 
-        void UpdateIsEnabled()
+        protected void UpdateIsEnabled()
         {
             if(!IsClickable)
             {

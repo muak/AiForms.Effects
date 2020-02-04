@@ -58,12 +58,13 @@ namespace AiForms.Effects.Droid
 
             _view.Clickable = true;
             _view.LongClickable = true;
-
+                        
             UpdateSyncCanExecute();
             UpdateCommandParameter();
             UpdateLongCommandParameter();
+            UpdateIsEnabled();
 
-            _view.Touch += _view_Touch;
+            _view.Touch += _view_Touch;            
         }
 
         protected override void OnDetachedOverride()
