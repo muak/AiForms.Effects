@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    x:Class="AiEffects.TestApp.Views.GradientPage">
+
+    <ContentPage.Resources>
+		<ResourceDictionary>
+			<Style TargetType="Button">
+				<Setter Property="FontSize" Value="9" />
+				<Setter Property="HeightRequest">
+					<Setter.Value>
+						<OnPlatform x:TypeArguments="x:Double" iOS="25" Android="34" />
+					</Setter.Value>
+				</Setter>
+				<Setter Property="BackgroundColor" Value="#95C25A" />
+				<Setter Property="TextColor" Value="#FFFFFF" />
+			</Style>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+    	<StackLayout Orientation="Horizontal" Spacing="0"> 
+		    <StackLayout Orientation="Vertical" VerticalOptions="Start" WidthRequest="70">
+			    <Label Text="Effect" />
+			    <Switch IsToggled="{Binding EffectOn.Value}" />
+                <Button Text="2Color" Command="{Binding ChangeColorsCommand}" CommandParameter="2" />
+                <Button Text="3Color" Command="{Binding ChangeColorsCommand}" CommandParameter="3" />
+
+			    <Button Text="LeftRight" Command="{Binding ChangeOrientationCommand}" CommandParameter="0" />
+                <Button Text="BL-TR" Command="{Binding ChangeOrientationCommand}" CommandParameter="45" />
+                <Button Text="BottomTop" Command="{Binding ChangeOrientationCommand}" CommandParameter="90" />
+                <Button Text="BR-TL" Command="{Binding ChangeOrientationCommand}" CommandParameter="135" />
+                <Button Text="RightLeft" Command="{Binding ChangeOrientationCommand}" CommandParameter="180" />
+                <Button Text="TR-BL" Command="{Binding ChangeOrientationCommand}" CommandParameter="225" />
+                <Button Text="TopBottom" Command="{Binding ChangeOrientationCommand}" CommandParameter="270" />
+                <Button Text="TL-BR" Command="{Binding ChangeOrientationCommand}" CommandParameter="315" />
+		    </StackLayout>
+		<ScrollView VerticalOptions="FillAndExpand">
+		<StackLayout Margin="10">
+            <BoxView Color="Green"  BackgroundColor="Olive"
+				ef:Gradient.Colors="Red,Yellow,#800000FF"
+				ef:Gradient.Orientation="RightLeft"				
+				/> 
+			<ActivityIndicator AutomationId="ActivityIndicator" IsVisible="true" IsRunning="true" 
+				ef:Gradient.On="{Binding EffectOn.Value}" 
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				 /> 
+				
+			<BoxView Color="Green"  AutomationId="BoxView" BackgroundColor="Olive"
+				ef:Gradient.On="{Binding EffectOn.Value}" 
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+				 
+			<Button Text="Button"  AutomationId="Button"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<DatePicker  AutomationId="DatePicker" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<Editor  Text="Editor" AutomationId="Editor" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<Entry Text="Entry"  AutomationId="Entry" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<Image Source="sample" HeightRequest="30"  AutomationId="Image" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+				
+			<Label Text="Label" AutomationId="Label" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}" 
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<ListView HeightRequest="20" BackgroundColor="Green" AutomationId="ListView"
+				ef:Gradient.On="{Binding EffectOn.Value}" 
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<Picker Title="Picker"  AutomationId="Picker" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<ProgressBar Progress="0.5" AutomationId="ProgressBar" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}" 
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<SearchBar AutomationId="SearchBar" HeightRequest="25" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}" 
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				 /> 
+
+			<Slider  AutomationId="Slider" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+				
+			<Stepper AutomationId="Stepper" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}"   
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<Switch AutomationId="Switch" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<TableView HeightRequest="20" BackgroundColor="Green" AutomationId="TableView"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<TimePicker  AutomationId="TimePicker" BackgroundColor="Silver"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<WebView Source="https://www.google.co.jp/" HeightRequest="60" BackgroundColor="Green" AutomationId="WebView"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+				 
+			<ContentPresenter HeightRequest="20" BackgroundColor="Blue" AutomationId="ContentPresenter"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<ContentView HeightRequest="20" BackgroundColor="Navy" AutomationId="ContentView"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<Frame  AutomationId="Frame"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<ScrollView HeightRequest="20" BackgroundColor="Green" AutomationId="ScrollView"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<TemplatedView HeightRequest="20" BackgroundColor="Blue" AutomationId="TemplatedView"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<AbsoluteLayout HeightRequest="20" BackgroundColor="Fuchsia" AutomationId="AbsoluteLayout"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<Grid HeightRequest="20" BackgroundColor="Maroon" AutomationId="Grid"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<RelativeLayout HeightRequest="20" BackgroundColor="Olive" AutomationId="RelativeLayout"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+				/> 
+
+			<StackLayout Orientation="Horizontal" AutomationId="StackLayout"
+				ef:Gradient.On="{Binding EffectOn.Value}"  
+				ef:Gradient.Colors="{Binding Colors.Value}"
+				ef:Gradient.Orientation="{Binding Orientation.Value}"
+				
+
+				> 
+				<Label Text="StackLayout" InputTransparent="true" />
+				<Image Source="sample" />
+			</StackLayout>
+		</StackLayout>
+		</ScrollView>
+	</StackLayout>
+</ContentPage>

@@ -15,7 +15,10 @@
             <sv:ButtonCell AutomationId="TriggerTest" Title="TriggerTest" Command="{Binding GotoTestCommand}" CommandParameter="TriggerTest" />
             <sv:ButtonCell AutomationId="ViewCell" Title="ViewCell" 
                 Command="{Binding GotoTestCommand}" CommandParameter="ViewCellPage" />
-            
+
+            <sv:ButtonCell AutomationId="GradientTest" Title="Gradient" 
+                Command="{Binding GotoTestCommand}" CommandParameter="GradientPage" />
+
             <sv:ButtonCell AutomationId="AddCommandTapTest" Title="AddCommand" 
                 Command="{Binding GotoTestCommand}" CommandParameter="AddCommandPage" />
             

@@ -5,10 +5,12 @@ AiForms.Effect は Android と iOS に特化することにより、標準のコ
 ![Build status](https://kamusoft.visualstudio.com/NugetCI/_apis/build/status/AiForms.Effects)
 
 ## 機能
+* [Gradient](#gradient)
+  * グラデーション背景を設定する。
 * [Floating](#floating)
-    * ページの前面の任意の場所に複数のフローティングな要素(FABなど)を配置します。
+    * ページの前面の任意の場所に複数のフローティングな要素(FABなど)を配置する。
 * [Feedback](#feedback)
-    * タッチフィードバック効果（色やシステム音）を追加。コマンドは含みません。
+    * タッチフィードバック効果（色やシステム音）を追加。コマンドは含まない。
 * [AddTouch](#addtouch)
     * 各種タッチイベントを追加
 * [SizeToFit](#sizetofit)
@@ -104,6 +106,33 @@ protected override void OnCreate(Bundle bundle) {
     AiForms.Effects.Droid.Effects.Init(); //need to write here
     ...
 }
+```
+
+## Gradient
+
+任意のレイアウト要素にグラデーション効果をつけるEffectです。
+レイアウト以外のコントロールにも使用できますが、完全ではありません。
+
+### Properties
+
+* On
+	* Effect On/Off (true is On)
+* Colors (trigger)
+	* グラデーションに使う色を設定します。
+	* Xamlではカンマ区切りで複数設定でき、順番にグラデーションに適用されます。
+	* c# では GradientColorsクラスのインスタンスを指定します。
+* Orientation
+	* グラデーションの方向を指定します。
+	* 8方向の指定が可能です。
+
+### 使い方
+
+```xml
+<ContentView 
+    ef:Gradient.Colors="Red,Yellow,#800000FF"
+    ef:Gradient.Orientation="RightLeft"	>
+    <Label Text="Abc" />			
+</ContentView>
 ```
 
 ## Floating

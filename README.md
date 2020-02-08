@@ -7,6 +7,8 @@ AiForms.Effects is the effects library that provides you with more flexible func
 ![Build status](https://kamusoft.visualstudio.com/NugetCI/_apis/build/status/AiForms.Effects)
 
 ## Features
+* [Gradient](#gradient)
+  * set a gradient background.
 * [Floating](#floating)
     * arrange some floating views (e.g. FAB) at any place over a page.
 * [Feedback](#feedback)
@@ -111,6 +113,33 @@ protected override void OnCreate(Bundle bundle) {
     AiForms.Effects.Droid.Effects.Init(); //need to write here
     ...
 }
+```
+
+## Gradient
+
+This is the effect that the gradient background is set to a Layout Element.
+Although It can be set to the controls except with Layouts, its implementation is not complete.
+
+### Properties
+
+* On
+	* Effect On/Off (true is On)
+* Colors (trigger)
+	* The colors of gradient.
+	* Can set multiple colors with comma-separated in Xaml.
+	* Specify the instance of the GradientColors class in c#.
+* Orientation
+	* Specify the direction for the gradient.
+	* Can select from 8 directions.
+
+### How to write with XAML
+
+```xml
+<ContentView 
+    ef:Gradient.Colors="Red,Yellow,#800000FF"
+    ef:Gradient.Orientation="RightLeft"	>
+    <Label Text="Abc" />			
+</ContentView>
 ```
 
 ## Floating
