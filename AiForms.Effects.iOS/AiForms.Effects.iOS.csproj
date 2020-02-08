@@ -28,6 +28,7 @@
     <MtouchLink></MtouchLink>
     <MtouchHttpClientHandler></MtouchHttpClientHandler>
     <MtouchTlsProvider></MtouchTlsProvider>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +44,7 @@
     <MtouchHttpClientHandler></MtouchHttpClientHandler>
     <MtouchTlsProvider></MtouchTlsProvider>
     <NoWarn>1591</NoWarn>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -89,6 +91,7 @@
     <Compile Include="FeedbackPlatformEffect.cs" />
     <Compile Include="FloatingPlatformEffect.cs" />
     <Compile Include="PlatformUtility.cs" />
+    <Compile Include="GradientPlatformEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AiForms.Effects\AiForms.Effects.csproj">

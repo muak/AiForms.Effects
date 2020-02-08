@@ -13,16 +13,9 @@
         <description>Xamarin.Forms Effects(add Border / add placeholder / add Text / add Command / add NumberPicker, TimePicker and DatePicker / alter color for switch and slider / alter LineHeight of Label and Editor / Button to flat / Size to fit for Label / add touch events / Floating / Feedback) for iOS / Android</description>
         <summary></summary>
         <releaseNotes>
-## Changes
+## New fueature
 
-* Feedback – On Android, a button is now ringed a sound. #50
-
-## Bug fixes
-
-* AddCommand – Fixed AddCommand.SyncCanExecute does not work on Android #53
-* Android – Fixed null exception when popping a page. #54
-* AddText – Fixed the end of characters is sometimes omitted #48.
-* Feedback – Fixed Android OnOverlayTouch crash #49.
+* Gradient – the effect that the gradient background is set to a Layout Element.
 
         </releaseNotes>
         <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect Border TimePicker DatePicker Placeholder Color SizeToFit TouchEvents Floating</tags>
