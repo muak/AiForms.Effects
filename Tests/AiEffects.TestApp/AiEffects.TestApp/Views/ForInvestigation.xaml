@@ -10,10 +10,9 @@
         <ToolbarItem Text="Go" Command="{Binding GoCommand}" />
     </ContentPage.ToolbarItems>
     
-    <ContentView ef:AddCommand.Command="{Binding HogeCommand}"
-                 ef:AddCommand.EffectColor="Red"
-                 ef:AddCommand.SyncCanExecute="True"
-                 BackgroundColor="Blue">
-        <Label Text="Hoge" />
-    </ContentView>
+    <StackLayout>
+        <Switch IsToggled="{Binding On.Value}" />
+        <Entry Text="fuga" ef:Border.Width="{Binding Width.Value}" BackgroundColor="Silver" ef:Border.Color="{Binding Color.Value}"
+ef:Border.Radius="{Binding Radius.Value}" ef:Border.On="{Binding On.Value}" /> 
+    </StackLayout>
 </ContentPage>
