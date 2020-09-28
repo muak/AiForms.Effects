@@ -1,7 +1,9 @@
 ﻿using System;
 using AiForms.Effects;
 using AiForms.Effects.Droid;
+using Android.Content.Res;
 using Android.Graphics.Drawables;
+using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -17,13 +19,20 @@ namespace AiForms.Effects.Droid
         int _width;
         float _radius;
         Drawable _orgDrawable;
+        Drawable _orgTextBackground;
 
         protected override void OnAttachedOverride()
         {
             _view = Container ?? Control;
-
+            
             _border = new GradientDrawable();
             _orgDrawable = _view.Background;
+            if(Control is FormsEditTextBase editText)
+            {
+                _orgTextBackground = editText.Background;
+                // hide underline.
+                editText.Background = null;
+            }
 
             UpdateRadius();
             UpdateWidth();
@@ -34,7 +43,23 @@ namespace AiForms.Effects.Droid
         protected override void OnDetachedOverride()
         {
             if (!IsDisposed) {    // Check disposed
-                _view.Background = _orgDrawable;
+                if(Control is FormsEditTextBase editText)
+                {
+                    editText.Background = _orgTextBackground;                    
+                }
+
+                if(Element is Label label)
+                {
+                    (_view as FormsTextView).SetBackgroundColor(label.BackgroundColor.ToAndroid());
+                }
+                else if(Element is Image image)
+                {
+                    (_view as ImageView).SetBackgroundColor(image.BackgroundColor.ToAndroid());
+                }
+                else
+                {
+                    _view.Background = _orgDrawable;
+                }                
 
                 _view.SetPadding(0, 0, 0, 0);
                 _view.ClipToOutline = false;
@@ -43,6 +68,8 @@ namespace AiForms.Effects.Droid
             }
             _border?.Dispose();
             _border = null;
+            _orgDrawable = null;
+            _orgTextBackground = null;
             _view = null;
             System.Diagnostics.Debug.WriteLine($"{this.GetType().FullName} Detached completely");
         }
@@ -82,7 +109,7 @@ namespace AiForms.Effects.Droid
 
         void UpdateWidth()
         {
-            _width = (int)_view.Context.ToPixels(Border.GetWidth(Element));
+            _width = (int)_view.Context.ToPixels(Border.GetWidth(Element) ?? 0);
         }
 
         void UpdateColor()
@@ -110,7 +137,7 @@ namespace AiForms.Effects.Droid
             _view.SetPadding(_width, _width, _width, _width);
             _view.ClipToOutline = true; //not to overflow children
 
-            _view.SetBackground(_border);
+            _view.SetBackground(_border);            
         }
 
         void UpdateBackgroundColor()

@@ -331,7 +331,7 @@ When specifying their width 0, it is possible that hide border.
 * On
 	* Effect On/Off (true is On)
 * Width (trigger)
-	* Border width (default 0)
+	* Border width (default null)
 * Color
 	* Border color (default transparent)
 * Radius (trigger)

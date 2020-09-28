@@ -317,7 +317,7 @@ Entry・Picker・DatePicker・TimePickerはiOSではデフォルトで罫線を�
 * On
 	* Effect On/Off (true is On)
 * Width (trigger)
-	* Border width (default 0)
+	* Border width (default null)
 * Color
 	* Border color (default transparent)
 * Radius (trigger)

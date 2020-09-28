@@ -79,9 +79,9 @@ namespace AiForms.Effects
         public static readonly BindableProperty WidthProperty =
             BindableProperty.CreateAttached(
                 "Width",
-                typeof(double),
+                typeof(double?),
                 typeof(Border),
-                default(double),
+                default(double?),
                 propertyChanged: AiRoutingEffectBase.AddEffectHandler<BorderRoutingEffect>
             );
 
@@ -90,7 +90,7 @@ namespace AiForms.Effects
         /// </summary>
         /// <param name="view">View.</param>
         /// <param name="value">Value.</param>
-        public static void SetWidth(BindableObject view, double value)
+        public static void SetWidth(BindableObject view, double? value)
         {
             view.SetValue(WidthProperty, value);
         }
@@ -100,9 +100,9 @@ namespace AiForms.Effects
         /// </summary>
         /// <returns>The width.</returns>
         /// <param name="view">View.</param>
-        public static double GetWidth(BindableObject view)
+        public static double? GetWidth(BindableObject view)
         {
-            return (double)view.GetValue(WidthProperty);
+            return (double?)view.GetValue(WidthProperty);
         }
 
         /// <summary>

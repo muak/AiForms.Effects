@@ -47,6 +47,8 @@ namespace AiForms.Effects.iOS
             if (hasBorderTypes.Any(x => x == Element.GetType())) {
                 var textfield = _view as UITextField;
                 textfield.BorderStyle = UITextBorderStyle.RoundedRect;
+                // restore the BackgroundColor, because it is sometimes lost.
+                textfield.BackgroundColor = (Element as VisualElement)?.BackgroundColor.ToUIColor();
             }
             _view.ClipsToBounds = _clipsToBounds;
             if(_view.Layer != null)
@@ -83,7 +85,7 @@ namespace AiForms.Effects.iOS
 
         void UpdateWidth()
         {
-            _view.Layer.BorderWidth = (float)Border.GetWidth(Element);
+            _view.Layer.BorderWidth = (float)(Border.GetWidth(Element) ?? 0);
         }
 
         void UpdateColor()
