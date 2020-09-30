@@ -1,9 +1,9 @@
 ﻿using System;
-using Android.Support.V7.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Graphics.Drawables;
 using Android.Content.Res;
+using AndroidX.AppCompat.Widget;
 
 namespace AiForms.Effects.Droid
 {

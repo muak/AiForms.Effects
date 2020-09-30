@@ -3,10 +3,10 @@ using AiForms.Effects.Droid;
 using Android.Animation;
 using Android.Content.Res;
 using Android.Graphics.Drawables;
-using Android.Support.V7.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using System;
+using AndroidX.AppCompat.Widget;
 
 [assembly: ExportEffect(typeof(ToFlatButtonPlatformEffect), nameof(ToFlatButton))]
 namespace AiForms.Effects.Droid

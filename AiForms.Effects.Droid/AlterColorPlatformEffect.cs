@@ -1,7 +1,7 @@
 ﻿using AiForms.Effects;
 using AiForms.Effects.Droid;
-using Android.Support.V7.Widget;
 using Android.Widget;
+using AndroidX.AppCompat.Widget;
 using Xamarin.Forms;
 
 [assembly: ExportEffect(typeof(AlterColorPlatformEffect), nameof(AlterColor))]

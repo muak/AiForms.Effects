@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <ReleaseVersion>0.0.5-pre</ReleaseVersion>
   </PropertyGroup>
 
@@ -9,7 +9,7 @@
     <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.0.0.396" />
     <PackageReference Include="ReactiveProperty" Version="4.2.2" />
-    <PackageReference Include="AiForms.SettingsView" Version="0.4.15" />
+    <PackageReference Include="AiForms.SettingsView" Version="1.2.26-pre" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AiForms.Effects\AiForms.Effects.csproj" />
