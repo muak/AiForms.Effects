@@ -24,9 +24,9 @@ namespace AiEffects.TestApp.iOS
             AiForms.Effects.iOS.Effects.Init();
             AiForms.Renderers.iOS.SettingsViewInit.Init();
 
-            #if ENABLE_TEST_CLOUD
-            Xamarin.Calabash.Start();
-            #endif
+            //#if ENABLE_TEST_CLOUD
+            //Xamarin.Calabash.Start();
+            //#endif
 
             LoadApplication(new App(new iOSInitializer()));
 

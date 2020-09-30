@@ -13,6 +13,10 @@
         <description>Xamarin.Forms Effects(add Border / add placeholder / add Text / add Command / add NumberPicker, TimePicker and DatePicker / alter color for switch and slider / alter LineHeight of Label and Editor / Button to flat / Size to fit for Label / add touch events / Floating / Feedback / Gradient) for iOS / Android</description>
         <summary></summary>
         <releaseNotes>
+## News
+
+Corresponded to iOS14 and AndroidX
+
 ## Bug fixes
 
 * Border – Specifying the Width property is not invoked effects.
