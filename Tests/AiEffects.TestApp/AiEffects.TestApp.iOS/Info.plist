@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>AiEffects.TestApp</string>
 	<key>CFBundleIdentifier</key>
-	<string>jp.kamusoft.aitestapp</string>
+	<string>jp.kamusoft.sample</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>

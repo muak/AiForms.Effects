@@ -77,7 +77,12 @@ namespace AiForms.Effects.iOS
             _view.UserInteractionEnabled = true;
             _view.SendSubviewToBack(_entry);
 
-            _picker = new UIDatePicker { Mode = UIDatePickerMode.Time, TimeZone = new Foundation.NSTimeZone("UTC"), PreferredDatePickerStyle = UIDatePickerStyle.Wheels };
+            _picker = new UIDatePicker { Mode = UIDatePickerMode.Time, TimeZone = new Foundation.NSTimeZone("UTC") };
+            if (UIDevice.CurrentDevice.CheckSystemVersion(14, 0))
+            {
+                _picker.PreferredDatePickerStyle = UIDatePickerStyle.Wheels;
+            }
+
             _title = new UILabel();
 
             var width = UIScreen.MainScreen.Bounds.Width;
