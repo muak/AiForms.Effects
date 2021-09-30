@@ -59,6 +59,12 @@ namespace AiForms.Effects.Droid
                     Android.Graphics.Color.Argb(76, 50, 50, 50)
             });
 
+            if(_orgTrack.Handle == IntPtr.Zero)
+            {
+                // already disposed return
+                return;
+            }
+
             _orgTrack.SetTintList(trackColors);
             _orgTrack.SetState(_track.GetState());
             _orgThumb.SetState(_thumb.GetState());
