@@ -19,29 +19,23 @@ Corresponded to iOS14 and AndroidX
 
 ## Bug fixes
 
-* Border – Specifying the Width property is not invoked effects.
-* Border – The BackgroundColor is sometimes lost.
-* Border – The input underline can't be hidden for Android(Entry,Editor etc).
-
-## New fueature
-
-* Gradient – the effect that the gradient background is set to a Layout Element.
+* Border is Corresponded to latest Xamarin.Forms.
 
         </releaseNotes>
         <tags>Xamarin.Forms Effects Command NumberPikcer LineHeight LineSpacing FlatButton Validation SoundEffect Border TimePicker DatePicker Placeholder Color SizeToFit TouchEvents Floating Gradient</tags>
         <language>en-US</language>
         <dependencies>
             <group targetFramework="netstandard2.0">
-                <dependency id="Xamarin.Forms" version="3.6.0.293080" />
+                <dependency id="Xamarin.Forms" version="5.0.0.2478" />
             </group>
             <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
-                <dependency id="Xamarin.Forms" version="3.6.0.293080" />
+                <dependency id="Xamarin.Forms" version="5.0.0.2478" />
             </group>
             <group targetFramework="MonoAndroid">
-                <dependency id="Xamarin.Forms" version="3.6.0.293080" />
+                <dependency id="Xamarin.Forms" version="5.0.0.2478" />
             </group>
             <group targetFramework="MonoTouch">
-                <dependency id="Xamarin.Forms" version="3.6.0.293080" />
+                <dependency id="Xamarin.Forms" version="5.0.0.2478" />
             </group>
         </dependencies>
     </metadata>
