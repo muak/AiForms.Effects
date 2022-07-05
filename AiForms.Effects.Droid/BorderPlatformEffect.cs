@@ -27,11 +27,11 @@ namespace AiForms.Effects.Droid
             
             _border = new GradientDrawable();
             _orgDrawable = _view.Background;
-            if(Control is FormsEditTextBase editText)
+            if(Control is FormsEditTextBase || Control is FormsAppCompatEditTextBase)
             {
-                _orgTextBackground = editText.Background;
+                _orgTextBackground = Control.Background;
                 // hide underline.
-                editText.Background = null;
+                Control.Background = null;
             }
 
             UpdateRadius();
@@ -43,14 +43,21 @@ namespace AiForms.Effects.Droid
         protected override void OnDetachedOverride()
         {
             if (!IsDisposed) {    // Check disposed
-                if(Control is FormsEditTextBase editText)
+                if(Control is FormsEditTextBase || Control is FormsAppCompatEditTextBase)
                 {
-                    editText.Background = _orgTextBackground;                    
+                    Control.Background = _orgTextBackground;                    
                 }
 
                 if(Element is Label label)
                 {
-                    (_view as FormsTextView).SetBackgroundColor(label.BackgroundColor.ToAndroid());
+                    if(_view is FormsTextView ftv)
+                    {
+                        ftv.SetBackgroundColor(label.BackgroundColor.ToAndroid());
+                    }
+                    else if(_view is FormsAppCompatTextView fatv)
+                    {
+                        fatv.SetBackgroundColor(label.BackgroundColor.ToAndroid());
+                    }
                 }
                 else if(Element is Image image)
                 {

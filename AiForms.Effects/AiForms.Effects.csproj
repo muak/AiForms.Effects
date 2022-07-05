@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Configurations>Release;Debug</Configurations>
+    <ReleaseVersion>0.0.5-pre</ReleaseVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -15,7 +16,7 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
   </ItemGroup>
   
   <ItemGroup>

@@ -8,12 +8,13 @@
     <OutputType>Library</OutputType>
     <RootNamespace>AiForms.Effects.Droid</RootNamespace>
     <AssemblyName>AiForms.Effects.Droid</AssemblyName>
-    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidTlsProvider></AndroidTlsProvider>
+    <ReleaseVersion>0.0.5-pre</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -85,54 +86,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AiForms.Effects\AiForms.Effects.csproj">
-      <Project>{4F678FB5-E08C-4490-91F3-E0349C7DE53A}</Project>
+      <Project>{14FCC004-FC52-4028-A5AE-228AFD6F6222}</Project>
       <Name>AiForms.Effects</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.Activity" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.Annotation" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat.Resources" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Arch.Core.Common" Version="2.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Arch.Core.Runtime" Version="2.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.AsyncLayoutInflater" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.Browser" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.CardView" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.Collection" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.CoordinatorLayout" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.CursorAdapter" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.CustomView" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.DocumentFile" Version="1.0.1" />
-    <PackageReference Include="Xamarin.AndroidX.DrawerLayout" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Interpolator" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.Core.UI" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.Core.Utils" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Common" Version="2.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core" Version="2.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime" Version="2.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel" Version="2.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Loader" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.LocalBroadcastManager" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.Media" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.MultiDex" Version="2.0.1" />
-    <PackageReference Include="Xamarin.AndroidX.Print" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.SavedState" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.SlidingPaneLayout" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.Transition" Version="1.2.0" />
-    <PackageReference Include="Xamarin.AndroidX.VectorDrawable" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.VectorDrawable.Animated" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.VersionedParcelable" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.ViewPager" Version="1.0.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0" />
+  <ItemGroup>    
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
