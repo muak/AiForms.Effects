@@ -1,5 +1,7 @@
 # AiForms.Effects for Xamarin.Forms
 
+[for .NET MAUI](https://github.com/muak/AiForms.Maui.Effects)
+
 AiForms.Effects is the effects library that provides you with more flexible functions than default by targetting only Android and iOS in a Xamarin.Forms project.
 
 [Japanese](./README-ja.md)
